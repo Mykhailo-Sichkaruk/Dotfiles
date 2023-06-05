@@ -1,0 +1,89 @@
+icons_format = "{icon}"
+
+[theme]
+theme = "srcery"
+[theme.overrides]
+separator = "|"
+separator_fg = "#ffffff"
+separator_bg = "#000000"
+
+[icons]
+icons = "awesome4"
+
+[[block]]
+block = "pomodoro"
+blocking_cmd = false
+
+[[block]]
+block = "dnf"
+interval = 1800
+format = " $icon $count.eng(w:1) updates available "
+format_singular = " $icon One update available "
+format_up_to_date = " $icon system up to date "
+critical_updates_regex = "(linux|linux-lts|linux-zen)"
+[[block.click]]
+button = "left"
+cmd = "dnf list -q --upgrades | tail -n +2 | rofi -dmenu"
+
+[[block]]
+block = "amd_gpu"
+device = "card1"
+format = " AMD $icon $utilization "
+format_alt = " $icon MEM: $vram_used_percents ($vram_used/$vram_total) "
+interval = 1
+
+[[block]]
+block = "nvidia_gpu"
+interval = 1
+gpu_id = 0
+format = " NVIDIA $icon $utilization $temperature $clocks "
+
+[[block]]
+block = "uptime"
+interval = 3600 # update every hour
+
+[[block]]
+block = "custom"
+command = "curl -s https://icanhazip.com"
+interval = 600
+
+[[block]]
+block = "cpu"
+format = " $icon $barchart $utilization " 
+
+[[block]]
+block = "disk_space"
+path = "/"
+info_type = "available"
+alert_unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+format = " $icon $available"
+
+[[block]]
+block = "memory"
+format = " $icon $mem_free"
+format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
+
+# [[block]]
+# block = "sound"
+# [[block.click]]
+# button = "left"
+# cmd = "pavucontrol"
+
+[[block]]
+block = "battery"
+driver = "sysfs"
+format = "$power $percentage {$time |}"
+full_format = "$power $percentage {$time |}"
+empty_format = "$power $percentage {$time |}"
+missing_format = "$power $percentage {$time |}"
+charging_format = "$power $icon $percentage {$time |}"
+not_charging_format = "$power $icon $percentage"
+info = 19
+
+[[block]]
+block = "time"
+interval = 5
+format = " $timestamp.datetime(f:'%a %d.%m %R') "
