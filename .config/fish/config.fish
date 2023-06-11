@@ -30,5 +30,9 @@ if status is-interactive
 
 end
 
+if test -f ~/.profile
+ bash -c 'source ~/.profile'
+end
+
 # thefuck --alias | source
 nvm use 20.0.0

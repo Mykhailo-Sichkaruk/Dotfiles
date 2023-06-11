@@ -16,40 +16,36 @@ blocking_cmd = false
 
 [[block]]
 block = "dnf"
-interval = 1800
-format = " $icon $count.eng(w:1) updates available "
-format_singular = " $icon One update available "
-format_up_to_date = " $icon system up to date "
-critical_updates_regex = "(linux|linux-lts|linux-zen)"
+interval = 60
+format = "$icon $count.eng(w:1) updates available"
+format_singular = "$icon One update available"
+format_up_to_date = "$icon system up to date"
+warning_updates_regex = "(linux|linux-lts|linux-zen|.)"
+critical_updates_regex = "(linux|linux-lts|linux-zen|.)"
 [[block.click]]
 button = "left"
-cmd = "dnf list -q --upgrades | tail -n +2 | rofi -dmenu"
+cmd = "dnf list --upgrades"
 
 [[block]]
 block = "amd_gpu"
 device = "card1"
-format = " AMD $icon $utilization "
-format_alt = " $icon MEM: $vram_used_percents ($vram_used/$vram_total) "
+# format = " AMD $icon $utilization "
+format = "AMD $icon $utilization $vram_used"
 interval = 1
 
 [[block]]
 block = "nvidia_gpu"
 interval = 1
 gpu_id = 0
-format = " NVIDIA $icon $utilization $temperature $clocks "
+format = "NVIDIA $icon $utilization $temperature $clocks"
 
 [[block]]
 block = "uptime"
-interval = 3600 # update every hour
-
-[[block]]
-block = "custom"
-command = "curl -s https://icanhazip.com"
-interval = 600
+interval = 60 # update every hour
 
 [[block]]
 block = "cpu"
-format = " $icon $barchart $utilization " 
+format = "$icon $barchart $utilization" 
 
 [[block]]
 block = "disk_space"
@@ -59,12 +55,12 @@ alert_unit = "GB"
 interval = 20
 warning = 20.0
 alert = 10.0
-format = " $icon $available"
+format = "$icon $available"
 
 [[block]]
 block = "memory"
-format = " $icon $mem_free"
-format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
+format = "$icon $mem_free"
+format_alt = "$icon_swap $swap_used_percents.eng(w:2)"
 
 # [[block]]
 # block = "sound"
@@ -76,14 +72,20 @@ format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
 block = "battery"
 driver = "sysfs"
 format = "$power $percentage {$time |}"
-full_format = "$power $percentage {$time |}"
-empty_format = "$power $percentage {$time |}"
-missing_format = "$power $percentage {$time |}"
-charging_format = "$power $icon $percentage {$time |}"
-not_charging_format = "$power $icon $percentage"
-info = 19
+full_format = "$icon $power $percentage {$time |}"
+empty_format = "$icon $power $percentage {$time |}"
+missing_format = "$icon $power $percentage {$time |}"
+charging_format = "$icon $power $percentage {$time |}"
+not_charging_format = "$icon $percentage {$time |}"
+ 
+[[block]]
+block = "custom"
+command = "bash /home/misha/.config/i3status-rust/power_mode.sh"
+json = true
+# command = "bash /home/misha/.config/i3status-rust/power_mode.sh"
+interval = 10
 
 [[block]]
 block = "time"
 interval = 5
-format = " $timestamp.datetime(f:'%a %d.%m %R') "
+format = " $timestamp.datetime(f:'%a %d.%m %H:%M:%S')"
