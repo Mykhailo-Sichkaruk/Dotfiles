@@ -4,7 +4,7 @@ set cache=full
 set clearhistoryinterval=1month
 set commandhist=all
 set containercolors=temp\d+~#fff
-set containernames=^https?://([a-zA-Z0-9]+\.)*youtube\.com.*~youtube~newtab
+set containernames=.*bing.com.*~bing
 set containershowname=always
 set containerstartuppage=s:usematching
 set darkreader
@@ -17,11 +17,11 @@ set darkreaderblocklist+=accounts.google
 set devtoolsposition=split
 set downloadmethod=confirm
 set favoritepages=
-set favoritepages+=https://github.com/FIIT-Databases/dbs23-findura-stv8-Sichkaruk-Mykhailo
 set favoritepages+=https://is.stuba.sk/auth/student/odevzdavarny.pl?studium=162822;obdobi=665
 set favoritepages+=https://mail.google.com/mail/u/0/h/
 set favoritepages+=https://www.phind.com/
-set favoritepages+=http://localhost/pgadmin4
+set favoritepages+=https://github.com/Mykhailo-Sichkaruk
+set favoritepages+=https://chat.openai.com/
 set guifontsize=16
 set mapsuggestposition=bottomleft
 set notificationforpermissions=allowed
@@ -33,7 +33,8 @@ set permissionopenexternal=allow
 set permissionpersistentstorage=allow
 set redirecttohttp
 set tabclosefocusright
-set useragent=%firefox
+set useragent=
+set useragent+='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.48'
 set windowtitle='%title - %app'
 
 " Mappings

@@ -22,7 +22,7 @@ M.dependencies = {
   'nvim-treesitter/nvim-treesitter-textobjects', --
   'RRethy/nvim-treesitter-textsubjects', --
   'romgrk/nvim-treesitter-context', --
-  -- 'JoosepAlviste/nvim-ts-context-commentstring'
+  'JoosepAlviste/nvim-ts-context-commentstring'
 }
 
 M.init = function()
@@ -74,7 +74,7 @@ M.config = function()
     indent = { enable = true },
 
     context_commentstring = {
-      enable = false,
+      enable = true,
       config = { fish = "# %s", scheme = ";; %s" }
     },
 

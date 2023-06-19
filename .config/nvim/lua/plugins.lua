@@ -1,9 +1,5 @@
 local M = {
-  {
-    'pantharshit00/vim-prisma',
-    lazy = false,
-  },
-  {
+  { 'pantharshit00/vim-prisma', lazy = false }, {
     'famiu/nvim-reload',
     lazy = false,
     config = function()
@@ -202,8 +198,8 @@ local M = {
           git_status = {
             symbols = {
               -- Change type
-              added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-              modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
+              added = "✚", -- or "✚", but this is redundant info if you use git_status_colors on the name
+              modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
               deleted = "✖", -- this can only be used in the git_status source
               renamed = "", -- this can only be used in the git_status source
               -- Status type
@@ -371,6 +367,7 @@ local M = {
   { 'willthbill/opener.nvim', lazy = false },
   { 'https://github.com/jose-elias-alvarez/typescript.nvim', lazy = false }, {
     'sbdchd/neoformat',
+    lazy = false,
     keys = { '<leader>F' },
     config = function()
       Map('n', '<leader>F', function()
@@ -417,6 +414,12 @@ local M = {
         exe = 'latexindent' --
         --
       }
+      vim.g.neoformat_javascriptreact_tsfmt = {
+        exe = 'tsfmt',
+        args = { '--baseDir', '.', '-r' },
+        replace = 1,
+      }
+      vim.g.neoformat_enabled_javascriptreact = { 'tsfmt' }
     end
   }, --
   { -- bar at the top
@@ -443,8 +446,8 @@ local M = {
     init = function()
       Map('n', 'gb', function() require("bufferline").pick_buffer() end)
 
-      Map('n', '<C-l>', function() require("bufferline").cycle(1) end)
-      Map('n', '<C-h>', function() require("bufferline").cycle(-1) end)
+      Map('n', '<A-l>', function() require("bufferline").cycle(1) end)
+      Map('n', '<A-h>', function() require("bufferline").cycle(-1) end)
       -- Map('n', '<Tab>', function() require("bufferline").cycle(1) end)
       -- Map('n', '<S-Tab>', function() require("bufferline").cycle(-1) end)
       -- Map('i', '<C-l>', function()

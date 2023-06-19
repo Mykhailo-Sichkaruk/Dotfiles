@@ -33,8 +33,8 @@ end
 vim.cmd("command! T lua StartTerminal()")
 
 Map('n', '<C-w>', ':lua MiniBufremove.delete(0, true) <cr>')
-Map('n', '<A-l>', function() vim.bo.iminsert = math.abs(vim.bo.iminsert - 1) end)
-Map('i', '<A-l>', '<C-^>')
+-- Map('n', '<A-l>', function() vim.bo.iminsert = math.abs(vim.bo.iminsert - 1) end)
+-- Map('i', '<A-l>', '<C-^>')
 Map('i', '<C-i>', '\t')
 -- Map('i', '<C-i>', function () vim.api.nvim_feedkeys('\t', 'i', true) end)
 -- Map('n', '<leader>F', Format)

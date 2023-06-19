@@ -32,5 +32,8 @@ export TEST_PROFILE="HAHA WHY ARE YOU HERE???"
 export NPM_GLOBAL="$HOME/.npm-global"
 export PATH="$NPM_GLOBAL/bin:$PATH"
 
+# Change keyboard layout 
+# setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"
+
 xset r rate 250 50
 xset b off
