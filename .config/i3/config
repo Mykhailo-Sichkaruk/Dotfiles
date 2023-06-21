@@ -200,10 +200,10 @@ bar {
         urgent_workspace #2f343a #000000 #ffffff
     }
 }
-client.focused          #000000 #3333ff #ffffff #ffffff   #000000
-client.focused_inactive #333333 #550000 #888888 #484e50   #5f676a
-client.unfocused        #333333 #000055 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.focused          #000000 #333333 #ffffff #ffffff   #000000
+client.focused_inactive #333333 #220000 #888888 #484e50   #5f676a
+client.unfocused        #333333 #000000 #888888 #292d2e   #222222
+client.urgent           #2f343a #400000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 # shutdown / restart / suspend...
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (CTRL+s) shutdown

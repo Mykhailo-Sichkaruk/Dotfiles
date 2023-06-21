@@ -1,7 +1,7 @@
 icons_format = "{icon}"
 
 [theme]
-theme = "srcery"
+theme = "plain"
 [theme.overrides]
 separator = "|"
 separator_fg = "#ffffff"
@@ -82,7 +82,6 @@ not_charging_format = "$icon $percentage {$time |}"
 block = "custom"
 command = "bash /home/misha/.config/i3status-rust/power_mode.sh"
 json = true
-# command = "bash /home/misha/.config/i3status-rust/power_mode.sh"
 interval = 10
 
 [[block]]
