@@ -83,6 +83,7 @@ interval = 10
 block = "bluetooth"
 mac = "B0:45:02:CF:BE:16"
 format = "$icon $available {$percentage|}"
+disconnected_format = "$icon"
 [block.battery_state]
 "0..20" = "critical"
 "21..65" = "warning"
