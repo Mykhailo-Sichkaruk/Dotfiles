@@ -430,7 +430,7 @@ local M = {
       local b = require("bufferline")
       b.setup {
         options = {
-          --      mappings = false,
+               -- mappings = false,
           diagnostics = "nvim_lsp",
           show_buffer_icons = true,
           show_buffer_close_icons = false,
@@ -438,8 +438,23 @@ local M = {
           always_show_bufferline = true
         },
         highlights = {
-          fill = { bg = '#21222C' },
-          buffer_selected = { bold = true, italic = false }
+          buffer_selected = { bg = '#333333' },
+          fill = {
+              fg = '#ffffff',
+              bg = '#000000',
+          },
+          background = {
+              fg = '#000000',
+              bg = '#000000'
+          },
+          tab = {
+              fg = '#ffffff',
+              bg = '#000000'
+          },
+          tab_selected = {
+              fg = '#ffffff',
+              bg = '#333333'
+          },
         }
       }
     end,
@@ -467,7 +482,7 @@ local M = {
   { -- indent blankline
     'lukas-reineke/indent-blankline.nvim',
     lazy = false,
-    enabled = true,
+    enabled = false,
     config = function()
       vim.g.indent_blankline_char = '▏'
       vim.g.indent_blankline_char_highlight_list = { "IndentLine" }
