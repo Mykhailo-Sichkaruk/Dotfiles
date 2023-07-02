@@ -28,15 +28,28 @@ set guifontsize=16
 set mapsuggestposition=bottomleft
 set notificationforpermissions=allowed
 set permissioncamera=ask
+set permissioncertificateerror=ask
+set permissionclipboardread=ask
 set permissiondisplaycapture=ask
+set permissiongeolocation=allow
+set permissionhid=allow
 set permissionmediadevices=allow
 set permissionmicrophone=ask
+set permissionmidi=ask
+set permissionmidisysex=ask
+set permissionnotifications=ask
 set permissionopenexternal=allow
 set permissionpersistentstorage=allow
+set permissionpointerlock=ask
+set permissionserial=allow
+set permissionunknown=ask
 set redirecttohttp
+set shell=alacritty
+set suspendtimeout=3000000
 set tabclosefocusright
 set useragent=
 set useragent+='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.48'
+set vimcommand=nvim
 set windowtitle='%title - %app'
 
 " Mappings
@@ -53,9 +66,10 @@ cmap <C-?> <Del>
 cmap <C-h> <BS>
 cmap <C-b> <Left>
 cmap <C-f> <Right>
-cmap <C-k> <S-End><BS>
+cmap <C-k> <commandHistoryNext>
 cmap <C-u> <S-Home><BS>
 cmap <C-w> <C-S-Left><BS>
+cmap <C-j> <commandHistoryPrevious>
 emap <C-S-Tab> <prevSuggestionSection>
 emap <C-Tab> <nextSuggestionSection>
 emap <C-e> <editWithVim>

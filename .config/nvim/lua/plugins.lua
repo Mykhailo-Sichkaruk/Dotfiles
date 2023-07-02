@@ -430,7 +430,6 @@ local M = {
       local b = require("bufferline")
       b.setup {
         options = {
-               -- mappings = false,
           diagnostics = "nvim_lsp",
           show_buffer_icons = true,
           show_buffer_close_icons = false,
@@ -438,13 +437,12 @@ local M = {
           always_show_bufferline = true
         },
         highlights = {
-          buffer_selected = { bg = '#333333' },
           fill = {
               fg = '#ffffff',
               bg = '#000000',
           },
           background = {
-              fg = '#000000',
+              fg = '#ffffff',
               bg = '#000000'
           },
           tab = {
@@ -454,6 +452,16 @@ local M = {
           tab_selected = {
               fg = '#ffffff',
               bg = '#333333'
+          },
+          buffer_visible = {
+              fg = '#ffffff',
+              bg = '#000000'
+          },
+          buffer_selected = {
+              fg = '#ffffff',
+              bg = '#333333',
+              bold = false,
+              italic = false,
           },
         }
       }
