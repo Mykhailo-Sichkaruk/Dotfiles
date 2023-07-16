@@ -16,7 +16,7 @@ blocking_cmd = false
 
 [[block]]
 block = "dnf"
-interval = 60
+interval = 3600
 format = "$icon $count.eng(w:1) updates available"
 format_singular = "$icon One update available"
 format_up_to_date = "$icon system up to date"
@@ -29,13 +29,12 @@ cmd = "dnf list --upgrades"
 [[block]]
 block = "amd_gpu"
 device = "card1"
-# format = " AMD $icon $utilization "
 format = "AMD $icon $utilization $vram_used"
-interval = 1
+interval = 10
 
 [[block]]
 block = "nvidia_gpu"
-interval = 1
+interval = 10
 gpu_id = 0
 format = "NVIDIA $icon $utilization $temperature $clocks"
 
@@ -45,6 +44,7 @@ format = "$icon $text"
 interval = 300
 
 [[block]]
+interval = 10
 block = "cpu"
 format = "$icon $barchart $utilization" 
 
@@ -53,17 +53,19 @@ block = "disk_space"
 path = "/"
 info_type = "available"
 alert_unit = "GB"
-interval = 20
+interval = 3600 
 warning = 20.0
 alert = 10.0
 format = "$icon $available"
 
 [[block]]
+interval = 10
 block = "memory"
 format = "$icon $mem_free"
 format_alt = "$icon_swap $swap_used_percents.eng(w:2)"
 
 [[block]]
+interval = 20
 block = "battery"
 driver = "sysfs"
 format = "$power $percentage{ $time|}"
@@ -82,7 +84,7 @@ interval = 10
 [[block]]
 block = "bluetooth"
 mac = "B0:45:02:CF:BE:16"
-format = "$icon $available {$percentage|}"
+format = "$icon {$percentage|}"
 disconnected_format = "$icon"
 [block.battery_state]
 "0..20" = "critical"

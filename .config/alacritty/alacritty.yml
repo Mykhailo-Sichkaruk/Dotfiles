@@ -5,7 +5,7 @@ window:
   padding: 
     x: 10
     y: 10
-  startup_mode: Fullscreen 
+  startup_mode: Windowed 
   dynamic_padding: true
     
 # Font configuration
