@@ -1,0 +1,24 @@
+set from = "misha0510@gmail.com"
+set realname = "Mykhailo Sichkaruk"
+set use_from = yes
+set my_pass = "`pass neomutt/misha0510`"
+
+# Gmail
+set imap_user = "misha0510@gmail.com"
+set smtp_url = "smtps://misha0510@gmail.com@smtp.gmail.com:465/"
+set smtp_authenticators = 'gssapi:login'
+set imap_pass = $my_pass
+set smtp_pass = $my_pass
+
+# Ensure TLS is enforced
+set ssl_starttls = yes
+set ssl_force_tls = yes
+set folder = "imaps://misha0510@gmail.com@imap.gmail.com:993/"
+
+account-hook $folder "set imap_user=misha0510@gmail.com"
+mailboxes "+-misha0510-" =Inbox =[Gmail]/Starred =[Gmail]/"Sent Mail" =[Gmail]/Spam =[Gmail]/Trash
+
+# Where to put the stuff
+set header_cache = "~/.config/neomutt/headers/misha0510/"
+set message_cachedir = "~/.config/neomutt/bodies/misha0510/"
+set certificate_file = "~/.config/neomutt/certificates/misha0510/"
