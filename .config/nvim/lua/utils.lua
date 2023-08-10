@@ -79,49 +79,33 @@ function OnAttach(client, bufnr)
       { name = 'copilot' }, { name = 'path' }, { name = 'nvim_lsp' },
       { name = 'luasnip' }
     },
-    mapping = {
-      ['<C-p>'] = cmp.mapping.select_prev_item(),
-      ['<C-n>'] = cmp.mapping.select_next_item(),
-      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-e>'] = cmp.mapping.close(),
-      ['<CR>'] = function(fallback)
+      ['<A-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<A-CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ['<A-Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
-          cmp.confirm()
-        else
-          fallback()
-        end
-      end,
-      ['<C-space>'] = function()
-        if cmp.visible() then
-          cmp.confirm()
-        else
-          cmp.complete()
-        end
-      end,
-      ['<A-o'] = function(fallback)
-        if cmp.visible() and not luasnip.in_snippet() then
           cmp.select_next_item()
-        elseif luasnip.expand_or_locally_jumpable() then
+        elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
         elseif has_words_before() then
           cmp.complete()
         else
           fallback()
         end
-      end,
-      ['<A-o>'] = function(fallback)
-        if cmp.visible() and not luasnip.in_snippet() then
+      end, { "i", "s" }),
+      ['<AS-Tab>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
           luasnip.jump(-1)
-        elseif has_words_before() then
-          cmp.complete()
         else
           fallback()
         end
-      end
-    },
+      end, { "i", "s" })
+    }),
     -- completion = { autocomplete = false },
     formatting = {
       format = lspkind.cmp_format({

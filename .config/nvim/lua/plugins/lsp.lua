@@ -1,6 +1,7 @@
 require('utils')
 
-local M = { -- Collection of configurations for built-in LSP client
+local M = {
+  -- Collection of configurations for built-in LSP client
   'neovim/nvim-lspconfig',
   event = { 'BufReadPost' },
   enabled = true
@@ -13,7 +14,7 @@ M.config = function()
   local root_pattern = nvim_lsp.util.root_pattern
 
   require("luasnip.loaders.from_snipmate").lazy_load(
-      { paths = { "./snippets" } })
+    { paths = { "./snippets" } })
 
   -- TODO: verify does it solves bug with random jumps on tab
   luasnip.config.set_config({
@@ -21,14 +22,41 @@ M.config = function()
     delete_check_events = 'InsertLeave'
   })
 
+  local ih = require("inlay-hints")
+
   require("typescript").setup({
-      disable_commands = false, -- prevent the plugin from creating Vim commands
-      debug = false, -- enable debug logging for commands
-      go_to_source_definition = {
-          fallback = true, -- fall back to standard LSP definition on failure
+    disable_commands = false, -- prevent the plugin from creating Vim commands
+    debug = false,            -- enable debug logging for commands
+    go_to_source_definition = {
+      fallback = true,        -- fall back to standard LSP definition on failure
+    },
+    on_attach = function(c, b)
+      ih.on_attach(c, b)
+    end,
+    settings = {
+      javascript = {
+        inlayHints = {
+          includeInlayEnumMemberValueHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayVariableTypeHints = true,
+        },
       },
-      server = { -- pass options to lspconfig's setup method
+      typescript = {
+        inlayHints = {
+          includeInlayEnumMemberValueHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayVariableTypeHints = true,
+        },
       },
+    },
   })
 
   local configs = require('lspconfig.configs')
@@ -72,7 +100,7 @@ M.config = function()
     }
   }
 
-  -- vim.g.rust_recommended_style = 0;
+  vim.g.rust_recommended_style = 0;
   nvim_lsp.eslint.setup({
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
@@ -206,17 +234,20 @@ M.init = function()
   Map('n', '<leader>rn', function() vim.lsp.buf.rename() end)
 
   local function open_local_docs(_, url)
-    if url == nil then print("nil") return end
+    if url == nil then
+      print("nil")
+      return
+    end
     vim.fn["netrw#BrowseX"](url["local"], 0)
   end
 
   Map('n', '<leader>rd', function()
     vim.lsp.buf_request(0, "experimental/externalDocs",
-                        vim.lsp.util.make_position_params(), open_local_docs)
+      vim.lsp.util.make_position_params(), open_local_docs)
   end)
   Map('v', '<leader>rd', function()
     vim.lsp.buf_request(0, "experimental/externalDocs",
-                        vim.lsp.util.make_position_params(), open_local_docs)
+      vim.lsp.util.make_position_params(), open_local_docs)
   end)
 
   -- Map('n', '<leader>ha', function () vim.lsp.buf.add_workspace_folder() end)
@@ -228,8 +259,8 @@ M.init = function()
   -- Map('n', '<A-k>', function () vim.lsp.buf.signature_help() end)
 end
 M.dependencies = {
-  'hrsh7th/nvim-cmp', --
-  'hrsh7th/cmp-path', --
+  'hrsh7th/nvim-cmp',     --
+  'hrsh7th/cmp-path',     --
   'hrsh7th/cmp-nvim-lsp', --
   'onsails/lspkind-nvim', --
   -- 'SmiteshP/nvim-navic',
@@ -238,28 +269,27 @@ M.dependencies = {
     dependencies = "saadparwaiz1/cmp_luasnip",
     build = "make install_jsregexp"
   }, {
-    'RishabhRD/nvim-lsputils',
-    enable = true,
-    dependencies = { 'RishabhRD/popfix' },
-    config = function()
-      vim.lsp.handlers['textDocument/codeAction'] =
-          require'lsputil.codeAction'.code_action_handler
-      vim.lsp.handlers['textDocument/references'] =
-          require'lsputil.locations'.references_handler
-      vim.lsp.handlers['textDocument/definition'] =
-          require'lsputil.locations'.definition_handler
-      vim.lsp.handlers['textDocument/declaration'] =
-          require'lsputil.locations'.declaration_handler
-      vim.lsp.handlers['textDocument/typeDefinition'] =
-          require'lsputil.locations'.typeDefinition_handler
-      vim.lsp.handlers['textDocument/implementation'] =
-          require'lsputil.locations'.implementation_handler
-      vim.lsp.handlers['textDocument/documentSymbol'] =
-          require'lsputil.symbols'.document_handler
-      vim.lsp.handlers['workspace/symbol'] =
-          require'lsputil.symbols'.workspace_handler
-    end
-  }
+  'RishabhRD/nvim-lsputils',
+  dependencies = { 'RishabhRD/popfix' },
+  config = function()
+    vim.lsp.handlers['textDocument/codeAction'] =
+        require 'lsputil.codeAction'.code_action_handler
+    vim.lsp.handlers['textDocument/references'] =
+        require 'lsputil.locations'.references_handler
+    vim.lsp.handlers['textDocument/definition'] =
+        require 'lsputil.locations'.definition_handler
+    vim.lsp.handlers['textDocument/declaration'] =
+        require 'lsputil.locations'.declaration_handler
+    vim.lsp.handlers['textDocument/typeDefinition'] =
+        require 'lsputil.locations'.typeDefinition_handler
+    vim.lsp.handlers['textDocument/implementation'] =
+        require 'lsputil.locations'.implementation_handler
+    vim.lsp.handlers['textDocument/documentSymbol'] =
+        require 'lsputil.symbols'.document_handler
+    vim.lsp.handlers['workspace/symbol'] =
+        require 'lsputil.symbols'.workspace_handler
+  end
+}
 }
 
 return M

@@ -9,7 +9,6 @@ function ToggleWrap()
     BMap('n', 'k', 'gk')
   end
 end
-
 -- TODO: not work
 function QuitNetrw()
   for i = 1, vim.fn.bufnr('$') do
@@ -38,8 +37,8 @@ Map('n', '<C-w>', ':lua MiniBufremove.delete(0, true) <cr>')
 Map('i', '<C-i>', '\t')
 -- Map('i', '<C-i>', function () vim.api.nvim_feedkeys('\t', 'i', true) end)
 -- Map('n', '<leader>F', Format)
--- Map('v', '<leader>F', Format)
-Map('v', '<leader>c', "!column -t -l2 -s= -o=<cr>")
+-- Map('v' '<leader>F', Format)
+-- Map('v', '<leader>c', "!column -t -l2 -s= -o=<cr>")
 
 Map('n', '<leader>pw', ToggleWrap)
 -- Map('n', '<leader>sc',
@@ -91,10 +90,13 @@ Map('n', '<leader>gp', function() vim.lsp.buf.format() end)
 if vim.env.TMUX == nil then Map('n', '<A-a>', ':silent !$TERM & disown<cr>') end
 
 Map('t', '<A-a>', '<C-\\><C-n>')
+
 -- Map('n', '\\\\', '<Esc>/Enter>"_c4l')
 
 Map('n', 'cd', ':cd ')
 
+Map('n', '<leader>d', ':DiffviewOpen<cr>')
+Map('n', '<leader>c', ':DiffviewClose<cr>')
 -- Cmd "inoremap <expr> <C-j>   pumvisible() ? '\\<C-n>' : '\\<C-j>'"
 -- Cmd "inoremap <expr> <-k>   pumvisible() ? '\\<C-p>' : '\\<C-k>'"
 -- Cmd "inoremap <expr> <Tab>   pumvisible() ? '\\<C-n>' : '\\<Tab>'"

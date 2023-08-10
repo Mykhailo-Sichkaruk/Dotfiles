@@ -20,6 +20,7 @@ set darkreaderblocklist+=https://www.reddit.com
 set devtoolsposition=split
 set downloadmethod=confirm
 set favoritepages=
+set favoritepages+=https://plato.stanford.edu/entries/logic-firstorder-emergence/#toc
 set favoritepages+=https://is.stuba.sk/auth/student/odevzdavarny.pl?studium=162822;obdobi=665
 set favoritepages+=https://www.phind.com/
 set favoritepages+=https://github.com/Mykhailo-Sichkaruk
@@ -30,6 +31,7 @@ set favoritepages+=https://www.profesia.sk/praca/volis-international/O4595739?se
 set favoritepages+=https://www.volis-international.com/kariera/junior-node-js-developer/
 set favoritepages+=https://mail.google.com/mail/u/0/#inbox
 set guifontsize=16
+set guihidetimeout=900000000000000
 set mapsuggestposition=bottomleft
 set notificationforpermissions=allowed
 set permissioncamera=ask
@@ -77,14 +79,19 @@ cmap <C-k> <commandHistoryNext>
 cmap <C-u> <S-Home><BS>
 cmap <C-w> <C-S-Left><BS>
 cmap <C-j> <commandHistoryPrevious>
+cmap J <p.scrollDown>
 emap <C-S-Tab> <prevSuggestionSection>
 emap <C-Tab> <nextSuggestionSection>
 emap <C-c> <p.copyText>
 emap <C-e> <editWithVim>
+emap J <p.scrollDown>
 fmap <C-c> <p.copyText>
+fmap J <p.scrollDown>
 imap <C-c> <p.copyText>
 imap <C-e> <editWithVim>
+imap J <p.scrollDown>
 mmap <C-c> <p.copyText>
+mmap J <p.scrollDown>
 nmap <C-l> <nextTab>
 nmap <C-p> <:pin>
 nmap = <zoomReset>
@@ -92,6 +99,8 @@ nunmap [
 nunmap ]
 nunmap {
 nunmap }
+nmap J <p.scrollDown>
+nmap K <p.scrollUp>
 nmap O <:tabnew><toExploreMode>
 nmap gU <openNewTabWithCurrentUrl><CR><toParentUrl>
 nmap gt <toCommandMode>buffer<Space>
@@ -141,6 +150,7 @@ pmap c <toNormalMode>
 pmap <Space> <p.startVisualSelect>
 smap <C-c> <p.copyText>
 smap <C-e> <editWithVim>
+smap J <p.scrollDown>
 vmap v <p.start>
 vmap <CR> <p.copyText>
 vmap <C-Space> <toNormalMode><p.start><p.startVisualSelect>

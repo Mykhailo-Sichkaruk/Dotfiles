@@ -1,26 +1,20 @@
 local M = {
+  { 'scrooloose/syntastic', lazy = false }, {
+    'simrat39/inlay-hints.nvim',
+    lazy = false,
+    enable = true,
+    config = function()
+      require("inlay-hints").setup({
+        only_current_line = true,
+        eol = { right_align = true }
+      })
+    end
+  }, { 'sindrets/diffview.nvim', lazy = false },
   { 'pantharshit00/vim-prisma', lazy = false }, {
     'famiu/nvim-reload',
     lazy = false,
     config = function()
       Map('n', '<leader>R', function() require('nvim-reload').Reload() end)
-    end
-  }, {
-    "Alexis12119/nightly.nvim",
-    lazy = false,
-    config = function()
-      local nightly = require('nightly')
-      nightly.setup({
-        color = "black", -- blue, green, or red
-        transparent = false,
-        styles = {
-          comments = { italic = false },
-          functions = { italic = false },
-          keywords = { italic = false },
-          variables = { italic = false }
-        },
-        highlights = { Normal = { bg = "#000000" } }
-      })
     end
   }, {
     'echasnovski/mini.bufremove',
@@ -37,7 +31,7 @@ local M = {
       lualine.setup {
         options = {
           icons_enabled = true,
-          theme = 'nightly',
+          theme = 'tokyonight',
           component_separators = { left = '', right = '' },
           section_separators = { left = '', right = '' },
           disabled_filetypes = { statusline = {}, winbar = {} },
@@ -71,10 +65,7 @@ local M = {
   }, {
     'gelguy/wilder.nvim',
     lazy = false,
-    dependencies = {
-      'romgrk/fzy-lua-native', 'kyazdani42/nvim-web-devicons'
-      -- 'liuchengxu/vim-clap'
-    },
+    dependencies = { 'romgrk/fzy-lua-native' },
     config = function()
       local wilder = require('wilder')
       wilder.setup({ modes = { ':', '/', '?' } })
@@ -105,15 +96,17 @@ local M = {
         })
       }))
     end
-  }, --
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
+  }, {
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = "v3.x",
     lazy = false,
+    enable = true,
     dependencies = {
-      "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim", {
+      "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim", {
         -- only needed if you want to use the commands with "_with_window_picker" suffix
         's1n7ax/nvim-window-picker',
+        tag = "v1.*",
         config = function()
           require'window-picker'.setup({
             autoselect_one = true,
@@ -136,7 +129,6 @@ local M = {
     config = function()
       -- Unless you are still migrating, remove the deprecated commands from v1.x
       vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-
       -- If you want icons for diagnostic errors, you'll need to define them somewhere:
       vim.fn.sign_define("DiagnosticSignError",
                          { text = " ", texthl = "DiagnosticSignError" })
@@ -148,7 +140,6 @@ local M = {
                          { text = "", texthl = "DiagnosticSignHint" })
       -- NOTE: this is changed from v1.x, which used the old style of highlight groups
       -- in the form "LspDiagnosticsSignWarning"
-
       require("neo-tree").setup({
         close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
         popup_border_style = "rounded",
@@ -156,7 +147,7 @@ local M = {
         enable_diagnostics = true,
         open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
         sort_case_insensitive = false, -- used when sorting files and directories in the tree
-        sort_function = nil, -- use a custom function for sorting files and directories in the tree 
+        sort_function = nil, -- use a custom function for sorting files and directories in the tree
         -- sort_function = function (a,b)
         --       if a.type == b.type then
         --           return a.path > b.path
@@ -191,7 +182,7 @@ local M = {
           },
           modified = { symbol = "[+]", highlight = "NeoTreeModified" },
           name = {
-            trailing_slash = false,
+            trailing_slash = true,
             use_git_status_colors = true,
             highlight = "NeoTreeFileName"
           },
@@ -201,21 +192,21 @@ local M = {
               added = "✚", -- or "✚", but this is redundant info if you use git_status_colors on the name
               modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
               deleted = "✖", -- this can only be used in the git_status source
-              renamed = "", -- this can only be used in the git_status source
+              renamed = "" -- this can only be used in the git_status source
               -- Status type
-              untracked = "",
-              ignored = "",
-              unstaged = "",
-              staged = "",
-              conflict = ""
+              -- untracked = "",
+              -- ignored = "",
+              -- unstaged = "",
+              -- staged = "",
+              -- conflict = ""
             }
           }
         },
-        -- A list of functions, each representing a global custom command
-        -- that will be available in all sources (if not overridden in `opts[source_name].commands`)
-        -- see `:h neo-tree-global-custom-commands`
-        commands = {},
-
+        --     -- A list of functions, each representing a global custom command
+        --     -- that will be available in all sources (if not overridden in `opts[source_name].commands`)
+        --     -- see `:h neo-tree-global-custom-commands`
+        --     commands = {},
+        --
         window = {
           position = "left",
           width = 30,
@@ -223,13 +214,14 @@ local M = {
           mappings = {
             ["<space>"] = {
               "toggle_node",
-              nowait = false -- disable `nowait` if you have existing combos starting with this char that you want to use 
+              nowait = false -- disable `nowait` if you have existing combos starting with this char that you want to use
             },
             ["<2-LeftMouse>"] = "open",
             ["<cr>"] = "open",
+            ["l"] = "open",
             ["<esc>"] = "revert_preview",
             ["P"] = { "toggle_preview", config = { use_float = true } },
-            ["l"] = "focus_preview",
+            -- ["l"] = "focus_preview",
             ["S"] = "open_split",
             ["s"] = "open_vsplit",
             -- ["S"] = "split_with_window_picker",
@@ -297,7 +289,7 @@ local M = {
               -- ".null-ls_*",
             }
           },
-          follow_current_file = false, -- This will find and focus the file in the active buffer every
+          follow_current_file = true, -- This will find and focus the file in the active buffer every
           -- time the current file is changed while the tree is open.
           group_empty_dirs = false, -- when true, empty folders will be grouped together
           hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
@@ -321,14 +313,14 @@ local M = {
               ["[g"] = "prev_git_modified",
               ["]g"] = "next_git_modified"
             },
-            fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
+            fuzzy_finder_mappings = {
+              -- define keymaps for filter popup window in fuzzy_finder_mode
               ["<down>"] = "move_cursor_down",
               ["<C-n>"] = "move_cursor_down",
               ["<up>"] = "move_cursor_up",
               ["<C-p>"] = "move_cursor_up"
             }
           },
-
           commands = {} -- Add a custom command or override a global one using the same function name
         },
         buffers = {
@@ -351,7 +343,7 @@ local M = {
               ["A"] = "git_add_all",
               ["gu"] = "git_unstage_file",
               ["ga"] = "git_add_file",
-              ["gr"] = "git_revert_file",
+              -- ["gr"] = "git_revert_file",
               ["gc"] = "git_commit",
               ["gp"] = "git_push",
               ["gg"] = "git_commit_and_push"
@@ -360,8 +352,8 @@ local M = {
         }
       })
 
-      vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
-      vim.cmd([[nnoremap g\ :Neotree git_status<cr>]])
+      vim.cmd([[nnoremap \  :Neotree reveal<cr>]])
+      vim.cmd([[nnoremap g\ :Neotree git_status reveal<cr>]])
     end
   }, { 'nvim-lua/plenary.nvim', lazy = false },
   { 'willthbill/opener.nvim', lazy = false },
@@ -417,15 +409,15 @@ local M = {
       vim.g.neoformat_javascriptreact_tsfmt = {
         exe = 'tsfmt',
         args = { '--baseDir', '.', '-r' },
-        replace = 1,
+        replace = 1
       }
       vim.g.neoformat_enabled_javascriptreact = { 'tsfmt' }
     end
-  }, --
-  { -- bar at the top
+  }, {
+    -- bar at the top
     'akinsho/nvim-bufferline.lua',
     lazy = false,
-    dependencies = 'kyazdani42/nvim-web-devicons',
+    -- dependencies = 'kyazdani42/nvim-web-devicons',
     config = function()
       local b = require("bufferline")
       b.setup {
@@ -437,32 +429,17 @@ local M = {
           always_show_bufferline = true
         },
         highlights = {
-          fill = {
-              fg = '#ffffff',
-              bg = '#000000',
-          },
-          background = {
-              fg = '#ffffff',
-              bg = '#000000'
-          },
-          tab = {
-              fg = '#ffffff',
-              bg = '#000000'
-          },
-          tab_selected = {
-              fg = '#ffffff',
-              bg = '#333333'
-          },
-          buffer_visible = {
-              fg = '#ffffff',
-              bg = '#000000'
-          },
+          fill = { fg = '#ffffff', bg = '#000000' },
+          background = { fg = '#ffffff', bg = '#000000' },
+          tab = { fg = '#ffffff', bg = '#000000' },
+          tab_selected = { fg = '#ffffff', bg = '#333333' },
+          buffer_visible = { fg = '#ffffff', bg = '#000000' },
           buffer_selected = {
-              fg = '#ffffff',
-              bg = '#333333',
-              bold = false,
-              italic = false,
-          },
+            fg = '#ffffff',
+            bg = '#333333',
+            bold = false,
+            italic = false
+          }
         }
       }
     end,
@@ -481,13 +458,13 @@ local M = {
       --   vim.cmd "stopinsert";
       --   require("bufferline").cycle(-1)
       -- end)
-      Map('n', '<S-h>', function() require("bufferline").move(-1) end)
-      Map('n', '<S-l>', function() require("bufferline").move(1) end)
-      Map('n', '<C-j>', '<cmd>tabn<cr>')
-      Map('n', '<C-k>', '<cmd>tabp<cr>')
+      Map('n', '<C-H>', function() require("bufferline").move(-1) end)
+      Map('n', '<C-L>', function() require("bufferline").move(1) end)
+      -- Map('n', '<C-j>', '<cmd>tabn<cr>')
+      -- Map('n', '<C-k>', '<cmd>tabp<cr>')
     end
-  }, --
-  { -- indent blankline
+  }, {
+    -- indent blankline
     'lukas-reineke/indent-blankline.nvim',
     lazy = false,
     enabled = false,
@@ -502,12 +479,14 @@ local M = {
       }
     end
   }, --
-  { -- highlights yank
+  {
+    -- highlights yank
     'machakann/vim-highlightedyank',
     lazy = false,
     config = function() vim.g.highlightedyank_highlight_duration = 250 end
   }, --
-  { -- colorize colors like this #01dd99
+  {
+    -- colorize colors like this #01dd99
     'norcalli/nvim-colorizer.lua',
     lazy = false,
     config = function()
@@ -542,8 +521,7 @@ local M = {
 
       vim.g.maplocalleader = ","
     end
-  }, --
-  {
+  }, {
     'terrortylor/nvim-comment',
     enabled = true,
     config = function()
@@ -569,8 +547,7 @@ local M = {
       Map('v', "<C-_>", ":CommentToggle<CR>")
     end,
     lazy = false
-  }, --
-  {
+  }, {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
@@ -579,10 +556,7 @@ local M = {
         -- Configuration here, or leave empty to use defaults
       })
     end
-  },
-
-  -- { 'jiangmiao/auto-pairs', config = function() vim.g.AutoPairsMapCh = false end }
-  {
+  }, {
     'windwp/nvim-autopairs',
     lazy = false,
     config = function()
@@ -602,9 +576,7 @@ local M = {
       Map('i', 'Э', 'Э')
       Map('i', 'Ё', 'Ё')
     end
-  }, --
-  { 'tversteeg/registers.nvim', lazy = false }, --
-  {
+  }, { 'tversteeg/registers.nvim', lazy = false }, {
     'phaazon/hop.nvim',
     name = 'hop',
     config = true,
@@ -616,8 +588,9 @@ local M = {
       Map("n", "<leader>f", function() require'hop'.hint_char1() end)
       Map("n", "<leader>s", function() require'hop'.hint_char2() end)
     end
-  }, -- use 'ray-x/lsp_signature.nvim'
-  { -- TODO: Am I using it?
+  }, {
+    -- TODO: Am I using it?
+    -- use 'ray-x/lsp_signature.nvim'
     "ahmedkhalf/project.nvim",
     lazy = false,
     config = function()
@@ -627,8 +600,9 @@ local M = {
         exclude_dirs = { "client" }
       }
     end
-  }, -- use 'jackguo380/vim-lsp-cxx-highlight'
-  { -- TODO: Doesn't work
+  }, {
+    -- use 'jackguo380/vim-lsp-cxx-highlight'
+    -- TODO: Doesn't work
     'simrat39/symbols-outline.nvim',
     keys = { '<leader>;' },
     cmd = { "SymbolsOutline" },
@@ -636,12 +610,11 @@ local M = {
       require("symbols-outline").setup()
       Map('n', '<leader>;', ':SymbolsOutline<CR>')
     end
-  }, --
-  {
+  }, {
     "folke/todo-comments.nvim",
     dependencies = "nvim-lua/plenary.nvim",
     lazy = false,
-    enabled = false,
+    enabled = true,
     config = function()
       vim.cmd "au BufReadPost,BufNewFile,BufRead * hi clear TODO"
       require("todo-comments").setup {
@@ -664,8 +637,8 @@ local M = {
         }
       }
     end
-  }, --
-  { -- xkbswitch TODO: doesn't work
+  }, {
+    -- xkbswitch TODO: doesn't work
     'lyokha/vim-xkbswitch',
     lazy = true,
     enabled = false,
@@ -673,8 +646,7 @@ local M = {
       vim.g.XkbSwitchEnabled = 1
       vim.g.XkbSwitchIMappings = { 'ru', 'sk(qwerty)', 'ua' }
     end
-  }, --
-  { 'folke/neodev.nvim', ft = { 'lua' }, config = true }, {
+  }, { 'folke/neodev.nvim', ft = { 'lua' }, config = true }, {
     'luochen1990/rainbow',
     lazy = false,
     enabled = true,
@@ -701,8 +673,7 @@ local M = {
         }
       }
     end
-  }, --
-  {
+  }, {
     'mhinz/vim-startify',
     lazy = false,
     enabled = true,
@@ -714,12 +685,7 @@ local M = {
       vim.g.startify_fortune_use_unicode = 1
       -- vim.g.startify_custom_header = 'startify#pad(startify#fortune#boxed())'
     end
-  } --
-  --
-  --[[ use {
-    'andweeb/presence.nvim',
-    config = function() require("presence"):setup({}) end
-  } ]]
+  }
 }
 
 return M

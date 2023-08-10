@@ -1,9 +1,11 @@
-local COPILOT_CMP = false 
+local COPILOT_CMP = false
 
 local copilot = {
   "zbirenbaum/copilot.lua",
+  lazy = false,
+  enable = true,
   cmd = "Copilot",
-  event = "InsertEnter",
+  -- event = "InsertEnter",
 }
 
 copilot.config = function()
@@ -11,14 +13,14 @@ copilot.config = function()
   require("copilot").setup({
     panel = {
       enabled = COPILOT_CMP,
-      auto_refresh = false,
-      keymap = {
-        jump_prev = "[[",
-        jump_next = "]]",
-        accept = "<CR>",
-        refresh = "gr",
-        open = "<C-CR>"
-      },
+      auto_refresh = true,
+      -- keymap = {
+      --   jump_prev = "[[",
+      --   jump_next = "]]",
+      --   accept = "<CR>",
+      --   refresh = "gr",
+      --   open = "<C-CR>"
+      -- },
       layout = {
         position = "bottom", -- | top | left | right
         ratio = 0.4
@@ -46,7 +48,7 @@ copilot.config = function()
       hgcommit = false,
       svn = false,
       cvs = false,
-      ["."] = false
+      ["."] = false,
     },
     copilot_node_command = 'node', -- Node.js version must be > 16.x
     server_opts_overrides = {}
