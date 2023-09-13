@@ -102,6 +102,7 @@ M.config = function()
 
   vim.g.rust_recommended_style = 0;
   nvim_lsp.eslint.setup({
+    root_dir = nvim_lsp.util.root_pattern(".eslintrc.json", ".eslintrc", ".eslintrc.js"),
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
       vim.api.nvim_create_autocmd("BufWritePre", {

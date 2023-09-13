@@ -279,7 +279,7 @@ local M = {
               -- "*/src/*/tsconfig.json",
             },
             always_show = { -- remains visible even if other settings would normally hide it
-              ".env", ".eslintrc.json"
+              ".env", ".eslintrc.json", ".eslintrc"
             },
             never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
               -- ".DS_Store",
@@ -395,6 +395,7 @@ local M = {
         replace = 0,
         stdin = 1
       }
+      vim.g.neoformat_try_node_exe = 1
       vim.g.neoformat_lua_luaformatter = {
         exe = 'lua-format',
         args = {
@@ -406,12 +407,27 @@ local M = {
         exe = 'latexindent' --
         --
       }
-      vim.g.neoformat_javascriptreact_tsfmt = {
-        exe = 'tsfmt',
-        args = { '--baseDir', '.', '-r' },
-        replace = 1
+      vim.g.neoformat_typescript_prettier = {
+        exe = 'prettier',
+        args = { '--write', '--config', "./prettierrc.json", vim.fn.expand('%:p') },
+        replace = 1,
+        try_node_exe = 1
       }
-      vim.g.neoformat_enabled_javascriptreact = { 'tsfmt' }
+      vim.g.neoformat_enabled_typescript = { 'prettier' }
+      vim.g.neoformat_typescriptreact_prettier = {
+        exe = 'prettier',
+        args = { '--write', '--config', "./prettierrc.json", vim.fn.expand('%:p') },
+        replace = 1,
+        try_node_exe = 1
+      }
+      vim.g.neoformat_enabled_typescriptreact = { 'prettier' }
+      vim.g.neoformat_javascriptreact_prettier = {
+        exe = 'prettier',
+        args = { '--write', '--config', "./prettierrc.json", vim.fn.expand('%:p') },
+        replace = 1,
+        try_node_exe = 1
+      }
+      vim.g.neoformat_enabled_javascriptreact = { 'prettier' }
     end
   }, {
     -- bar at the top
