@@ -12,11 +12,11 @@
 " Command used to edit files in various contexts.  The default is vim.
 " If you would like to use another vi clone such as Elvis or Vile
 " you will need to change this setting.
-" set vicmd=nvim
-if executable('vim')
-    set vicmd=vim
-elseif executable('nvim')
+set vicmd=nvim
+if executable('nvim')
     set vicmd=nvim
+elseif executable('vim')
+    set vicmd=vim
 elseif executable('elvis')
     set vicmd=elvis\ -G\ termcap
 elseif executable('vile')
@@ -25,6 +25,7 @@ elseif $EDITOR != ''
     echo 'Note: using `'.$EDITOR.'` as an editor'
     let &vicmd = $EDITOR
 endif
+
 
 " This makes vifm perform file operations on its own instead of relying on
 " standard utilities like `cp`.  While using `cp` and alike is a more universal
@@ -278,7 +279,7 @@ filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
         \ {View in shotwell}
         \ shotwell,
 fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
-         \ identify %f
+         \ tiv -h 500 -w 900 %f
 
 " OpenRaster
 filextype *.ora
@@ -406,7 +407,7 @@ filextype */
 " fileviewer *.c,*.h highlight -O ansi -s dante %c
 "
 " Or leave it for automatic detection
-" fileviewer *[^/] pygmentize -O style=monokai -f console256 -g
+fileviewer *[^/] pygmentize -O style=paraiso-dark -f console256 -g
 
 " Displaying pictures in terminal
 fileviewer *.jpg,*.png shellpic %c
@@ -459,6 +460,10 @@ endif
 
 " Open file in the background using its default program
 nnoremap gb :file &<cr>l
+
+" Scroll preview
+nnoremap J  <C-w>w5j<C-w>w
+nnoremap K  <C-w>w5k<C-w>w
 
 " Interaction with system clipboard
 if has('win')
@@ -558,12 +563,15 @@ nnoremap <c-u> <c-w>x
 " let $VIFM_SERVER_NAME = v:servername
 
 " Activate screen/tmux support
-" screen!
+screen!
+
 
 " ------------------------------------------------------------------------------
 " Icon decorations example
 " ------------------------------------------------------------------------------
-filextype {*.sh,*.txt,.*,*.html,*.tpl,*.htm,*.css,*.ts,*.scss,*.vue,*.json}
-    \ {Open with nvim in terminal}
-    \ nvim %c;
+" filextype {*.sh,*.txt,.*,*.html,*.tpl,*.htm,*.css,*.ts,*.scss,*.vue,*.json}
+"    \ {Open with nvim in terminal}
+"   \ nvim %c;
 " https://github.com/cirala/vifm_devicons
+
+source /home/misha/.config/vifm/favicons.vifm
