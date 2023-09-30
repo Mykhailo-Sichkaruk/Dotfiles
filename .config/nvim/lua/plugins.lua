@@ -353,6 +353,7 @@ local M = {
       })
 
       vim.cmd([[nnoremap \  :Neotree reveal<cr>]])
+      vim.cmd([[nnoremap <leader>\  :Neotree close<cr>]])
       vim.cmd([[nnoremap g\ :Neotree git_status reveal<cr>]])
     end
   }, { 'nvim-lua/plenary.nvim', lazy = false },
