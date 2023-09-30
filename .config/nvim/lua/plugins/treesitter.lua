@@ -17,13 +17,12 @@ local M = {
 }
 
 M.dependencies = {
-  'HiPhish/nvim-ts-rainbow2',
+  'https://gitlab.com/HiPhish/rainbow-delimiters.nvim',
   'nvim-treesitter/nvim-treesitter-textobjects', --
   'RRethy/nvim-treesitter-textsubjects',         --
   'romgrk/nvim-treesitter-context',              --
   'JoosepAlviste/nvim-ts-context-commentstring'
 }
-
 M.init = function()
   local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
   parser_config.typst = {
@@ -33,27 +32,21 @@ M.init = function()
       generate_requires_npm = true,
       requires_generate_from_grammar = true
     },
-    -- install_info = {
-    --   url = "https://github.com/SeniorMars/tree-sitter-typst",
-    --   branch = "main",
-    --   files = { "src/parser.c", "src/scanner.c" },
-    --   generate_requires_npm = true,
-    --   requires_generate_from_grammar = false
-    -- },
     filetype = "typst"
   }
 end
 
 M.config = function()
   -- local enabled = function() return vim.api.nvim_buf_line_count(0) < 50000 end
+  --
   local treesitter = require('nvim-treesitter.configs')
 
   treesitter.setup {
     ensure_installed = {
-      'javascript', 'typescript', 'rust', 'lua', 'java', 'c', 'cpp',
+      'javascript', 'typescript', 'rust', 'lua', 'java', 'c', 'cpp', 'tsx', 'vue'
     },
 
-    highlight = { enable = true, additional_vim_regex_highlighting = false },
+    highlight = { enable = true, additional_vim_regex_highlighting = true },
 
     incremental_selection = {
       enable = true,
@@ -66,8 +59,8 @@ M.config = function()
 
     rainbow = {
       enable = true,
-      query = 'rainbow-parens',
-      strategy = require('ts-rainbow').strategy.global,
+      query = 'rainbow-delimiters',
+      strategy = require('rainbow-delimiters').strategy.global,
     },
 
     indent = { enable = true },
@@ -113,6 +106,27 @@ M.config = function()
       enable = true,
       keymaps = { ['.'] = 'textsubjects-smart', [';'] = 'textsubjects-big' }
     }
+  }
+
+  local rainbow_delimiters = require 'rainbow-delimiters'
+  vim.g.rainbow_delimiters = {
+      strategy = {
+          [''] = rainbow_delimiters.strategy['global'],
+      },
+      query = {
+          [''] = 'rainbow-delimiters',
+          tsx = 'rainbow-delimiters-react',
+      },
+      highlight = {
+          'RainbowDelimiterRed',
+          'RainbowDelimiterYellow',
+          'RainbowDelimiterBlue',
+          'RainbowDelimiterOrange',
+          'RainbowDelimiterGreen',
+          'RainbowDelimiterViolet',
+          'RainbowDelimiterCyan',
+      },
+      blacklist = {'c', 'cpp'},
   }
   vim.opt.foldmethod = 'expr'
   vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
