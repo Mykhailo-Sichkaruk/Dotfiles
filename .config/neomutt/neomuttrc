@@ -58,6 +58,9 @@ bind index k previous-entry
 bind pager j next-line
 bind pager k previous-line
 
+bind pager h exit
+bind index l display-message
+
 bind attach,index,pager \CD next-page
 bind attach,index,pager \CU previous-page
 bind pager g top
