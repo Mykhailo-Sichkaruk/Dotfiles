@@ -43,7 +43,7 @@ M.config = function()
 
   treesitter.setup {
     ensure_installed = {
-      'javascript', 'typescript', 'rust', 'lua', 'java', 'c', 'cpp', 'tsx', 'vue'
+      'javascript', 'typescript', 'rust', 'lua', 'java', 'c', 'cpp', 'tsx', 'vue', 
     },
 
     highlight = { enable = true, additional_vim_regex_highlighting = true },
@@ -126,7 +126,7 @@ M.config = function()
           'RainbowDelimiterViolet',
           'RainbowDelimiterCyan',
       },
-      blacklist = {'c', 'cpp'},
+      -- blacklist = {'c', 'cpp', 'cc'},
   }
   vim.opt.foldmethod = 'expr'
   vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'

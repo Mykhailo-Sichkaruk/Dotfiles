@@ -1,4 +1,37 @@
 local M = {
+  {
+    'nvimtools/none-ls.nvim',
+    lazy = false,
+    enable = true,
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.diagnostics.eslint,
+          null_ls.builtins.completion.spell,
+          null_ls.builtins.diagnostics.yamllint,
+          null_ls.builtins.diagnostics.hadolint,
+          null_ls.builtins.diagnostics.misspell,
+          null_ls.builtins.formatting.buf,
+          null_ls.builtins.diagnostics.protolint,
+          null_ls.builtins.diagnostics.checkmake,
+        }
+      })
+    end
+  }, {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  }, { 'anott03/nvim-lspinstall', lazy = false }, {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts) require'lsp_signature'.setup(opts) end
+  }, { 'RishabhRD/popfix', lazy = false },
+  { 'RishabhRD/nvim-lsputils', lazy = false }, -- {
+  --   'quick-lint/quick-lint-js',
+  --   lazy = false
+  -- },
   { 'scrooloose/syntastic', lazy = false }, {
     'simrat39/inlay-hints.nvim',
     lazy = false,
@@ -106,7 +139,7 @@ local M = {
       "MunifTanjim/nui.nvim", {
         -- only needed if you want to use the commands with "_with_window_picker" suffix
         's1n7ax/nvim-window-picker',
-        tag = "v1.*",
+        -- tag = "v1.*",
         config = function()
           require'window-picker'.setup({
             autoselect_one = true,
@@ -410,21 +443,27 @@ local M = {
       }
       vim.g.neoformat_typescript_prettier = {
         exe = 'prettier',
-        args = { '--write', '--config', "./prettierrc.json", vim.fn.expand('%:p') },
+        args = {
+          '--write', '--config', "./prettierrc.json", vim.fn.expand('%:p')
+        },
         replace = 1,
         try_node_exe = 1
       }
       vim.g.neoformat_enabled_typescript = { 'prettier' }
       vim.g.neoformat_typescriptreact_prettier = {
         exe = 'prettier',
-        args = { '--write', '--config', "./prettierrc.json", vim.fn.expand('%:p') },
+        args = {
+          '--write', '--config', "./prettierrc.json", vim.fn.expand('%:p')
+        },
         replace = 1,
         try_node_exe = 1
       }
       vim.g.neoformat_enabled_typescriptreact = { 'prettier' }
       vim.g.neoformat_javascriptreact_prettier = {
         exe = 'prettier',
-        args = { '--write', '--config', "./prettierrc.json", vim.fn.expand('%:p') },
+        args = {
+          '--write', '--config', "./prettierrc.json", vim.fn.expand('%:p')
+        },
         replace = 1,
         try_node_exe = 1
       }
@@ -511,7 +550,7 @@ local M = {
         '*',
         css = { css = true },
         scss = { scc = true }
-      }, { names = false })
+      }, { names = true })
     end
   }, --
   {
@@ -606,8 +645,6 @@ local M = {
       Map("n", "<leader>s", function() require'hop'.hint_char2() end)
     end
   }, {
-    -- TODO: Am I using it?
-    -- use 'ray-x/lsp_signature.nvim'
     "ahmedkhalf/project.nvim",
     lazy = false,
     config = function()
@@ -635,7 +672,7 @@ local M = {
     config = function()
       vim.cmd "au BufReadPost,BufNewFile,BufRead * hi clear TODO"
       require("todo-comments").setup {
-        signs = false,
+        signs = true,
         keywords = {
           FIX = {
             icon = " ",
@@ -645,13 +682,57 @@ local M = {
           TODO = { icon = " ", color = "info" },
           HACK = {
             icon = " ",
-            color = "warning",
+            color = "#ffa000",
             alt = { "FUCK", "SHIT", "BAD" }
           },
           WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
           PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-          NOTE = { icon = " ", color = "hint", alt = { "INFO", "SAFETY" } }
+          NOTE = { icon = " ", color = "hint", alt = { "INFO", "SAFETY" } },
+          WHERE_AM_I_GOING_WITH_THIS = {
+            icon = "!",
+            color = "error",
+            alt = { "WTF", "WAIGWT" }
+          }
+        },
+        merge_keywords = true, -- when true, custom keywords will be merged with the defaults
+        pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
+        comments_only = true, -- uses treesitter to match keywords in comments only
+        max_line_len = 400, -- ignore lines longer than this
+        exclude = {}, -- list of file types to exclude highlighting
+        -- list of named colors where we try to extract the guifg from the
+        -- list of highlight groups or use the hex color if hl not found as a fallback
+        highlight = {
+          multiline = false, -- enable multine todo comments
+          multiline_pattern = "^.", -- lua pattern to match the next multiline from the start of the matched keyword
+          multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
+          before = "", -- "fg" or "bg" or empty
+          keyword = "wide", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
+          after = "fg", -- "fg" or "bg" or empty
+          pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
+          comments_only = true, -- uses treesitter to match keywords in comments only
+          max_line_len = 400, -- ignore lines longer than this
+          exclude = {} -- list of file types to exclude highlighting
+        },
+        colors = {
+          error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
+          warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
+          info = { "DiagnosticInfo", "#2563EB" },
+          hint = { "DiagnosticHint", "#10B981" },
+          default = { "Identifier", "#7C3AED" },
+          test = { "Identifier", "#FF00FF" }
+        },
+        search = {
+          command = "rg",
+          args = {
+            "--color=never", "--no-heading", "--with-filename", "--line-number",
+            "--column"
+          },
+          -- regex that will be used to match keywords.
+          -- don't replace the (KEYWORDS) placeholder
+          pattern = [[\b(KEYWORDS):]] -- ripgrep regex
+          -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
         }
+
       }
     end
   }, {

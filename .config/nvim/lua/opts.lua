@@ -19,7 +19,8 @@ vim.cmd [[
   augroup END
 ]]
 
-vim.opt.fileencoding = 'utf-8'
+vim.g.c_syntax_for_h = 1
+vim.opt.fileencoding = 'utf-16'
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -28,7 +29,7 @@ vim.opt.mouse = 'a'
 vim.opt.clipboard = 'unnamed'
 
 vim.opt.spell = false
-vim.opt.spelllang = 'en_us,ru_yo'
+vim.opt.spelllang = 'en_us'
 vim.opt.spellsuggest = "best,9"
 vim.opt.iminsert = 0
 vim.opt.imsearch = -1
@@ -56,6 +57,7 @@ vim.g.mapleader = ' '
 
 vim.opt.guifont = "fira-code font 11"
 
+vim.g.skip_ts_context_commentstring_module = true 
 vim.g.netrw_fastbrowse = 0
 -- vim.g.netrw_browsex_viewer = os.getenv("BROWSER") or "qutebrowser"
 

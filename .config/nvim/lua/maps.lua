@@ -101,3 +101,4 @@ Map('n', '<leader>c', ':DiffviewClose<cr>')
 -- Cmd "inoremap <expr> <-k>   pumvisible() ? '\\<C-p>' : '\\<C-k>'"
 -- Cmd "inoremap <expr> <Tab>   pumvisible() ? '\\<C-n>' : '\\<Tab>'"
 -- Cmd "inoremap <expr> <S-Tab> pumvisible() ? '\\<C-p>' : '\\<S-Tab>'"
+Map('n', '<leader>t', ':Telescope<cr>')

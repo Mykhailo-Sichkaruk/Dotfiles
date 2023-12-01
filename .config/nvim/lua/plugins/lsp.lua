@@ -4,7 +4,8 @@ local M = {
   -- Collection of configurations for built-in LSP client
   'neovim/nvim-lspconfig',
   event = { 'BufReadPost' },
-  enabled = true
+  enabled = true,
+  branch = "master",
 }
 
 M.config = function()
@@ -13,8 +14,9 @@ M.config = function()
   local on_attach = OnAttach
   local root_pattern = nvim_lsp.util.root_pattern
 
+  nvim_lsp.dockerls.setup({})
   require("luasnip.loaders.from_snipmate").lazy_load(
-    { paths = { "./snippets" } })
+      { paths = { "./snippets" } })
 
   -- TODO: verify does it solves bug with random jumps on tab
   luasnip.config.set_config({
@@ -22,41 +24,44 @@ M.config = function()
     delete_check_events = 'InsertLeave'
   })
 
+  nvim_lsp.bufls.setup {}
+
   local ih = require("inlay-hints")
+  -- require("docker")
 
   require("typescript").setup({
     disable_commands = false, -- prevent the plugin from creating Vim commands
-    debug = false,            -- enable debug logging for commands
+    debug = false, -- enable debug logging for commands
     go_to_source_definition = {
-      fallback = true,        -- fall back to standard LSP definition on failure
-    },
-    on_attach = function(c, b)
-      ih.on_attach(c, b)
-    end,
-    settings = {
-      javascript = {
-        inlayHints = {
-          includeInlayEnumMemberValueHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayFunctionParameterTypeHints = true,
-          includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-          includeInlayPropertyDeclarationTypeHints = true,
-          includeInlayVariableTypeHints = true,
-        },
-      },
-      typescript = {
-        inlayHints = {
-          includeInlayEnumMemberValueHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayFunctionParameterTypeHints = true,
-          includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-          includeInlayPropertyDeclarationTypeHints = true,
-          includeInlayVariableTypeHints = true,
-        },
-      },
-    },
+      fallback = true -- fall back to standard LSP definition on failure
+    }
+    -- on_attach = function(c, b)
+    --   ih.on_attach(c, b)
+    -- end,
+    -- settings = {
+    -- javascript = {
+    --   inlayHints = {
+    --     includeInlayEnumMemberValueHints = true,
+    --     includeInlayFunctionLikeReturnTypeHints = true,
+    --     includeInlayFunctionParameterTypeHints = true,
+    --     includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+    --     includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+    --     includeInlayPropertyDeclarationTypeHints = true,
+    --     includeInlayVariableTypeHints = true,
+    --   },
+    -- },
+    -- typescript = {
+    --   inlayHints = {
+    --     includeInlayEnumMemberValueHints = true,
+    --     includeInlayFunctionLikeReturnTypeHints = true,
+    --     includeInlayFunctionParameterTypeHints = true,
+    --     includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+    --     includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+    --     includeInlayPropertyDeclarationTypeHints = true,
+    --     includeInlayVariableTypeHints = true,
+    --   },
+    -- },
+    -- },
   })
 
   local configs = require('lspconfig.configs')
@@ -75,12 +80,13 @@ M.config = function()
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-  capabilities.offsetEncoding = { "utf-16" }
+  capabilities.offsetEncoding = 'utf-16'
+  capabilities.general = { positionEncodings = { 'utf-16' } }
   capabilities.experimental = { localDocs = true }
 
   local servers = {
-    "bashls", "yamlls", "jsonls", "gopls", "cssls", "pyright",
-    "html", "cmake", "vuels", "vimls",
+    "bashls", "yamlls", "jsonls", "gopls", "cssls", "pyright", "html", "cmake",
+    "vuels", "vimls"
   }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
@@ -95,21 +101,20 @@ M.config = function()
     capabilities = capabilities,
     settings = {
       -- exportPdf = "onType"
-      exportPdf = "onSave",
+      exportPdf = "onSave"
       -- exportPdf = "never",
     }
   }
 
   vim.g.rust_recommended_style = 0;
   nvim_lsp.eslint.setup({
-    root_dir = nvim_lsp.util.root_pattern(".eslintrc.json", ".eslintrc", ".eslintrc.js"),
+    root_dir = nvim_lsp.util.root_pattern(".eslintrc.json", ".eslintrc",
+                                          ".eslintrc.js"),
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        buffer = bufnr,
-        command = "EslintFixAll",
-      })
-    end,
+      vim.api.nvim_create_autocmd("BufWritePre",
+                                  { buffer = bufnr, command = "EslintFixAll" })
+    end
   })
 
   vim.g.rust_recommended_style = 1;
@@ -139,26 +144,29 @@ M.config = function()
     -- settings = {},
   }
 
-  nvim_lsp.ccls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { "ccls" },
-    filetypes = { "cpp", "objc", "objcpp" },
-    single_file_support = true,
-    init_options = {
-      compilationDatabaseDirectory = "build",
-      index = { threads = 0 },
-      cache = { directory = os.getenv("XDG_CACHE_HOME") .. "/ccls" },
-      clang = {
-        extraArgs = {
-          "-std=c++20", "-Wall", "-Wextra", "-Wno-logical-op-parentheses"
-        },
-        -- extraArgs = { "-Wall", "-Wextra", "-Wno-logical-op-parentheses" },
-        excludeArgs = { "-frounding-math" }
-      },
-      client = { snippetSupport = true }
-    }
-  }
+  -- nvim_lsp.ccls.setup {
+  --   root_dir = root_pattern('WORKSPACE', '.git'),
+  --   offset_encoding = 'utf-16',
+  --   offsetEncoding = 'utf-16',
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  --   cmd = { "ccls" },
+  --   filetypes = { "cpp", "objc", "objcpp" },
+  --   single_file_support = true,
+  --   init_options = {
+  --     compilationDatabaseDirectory = "build",
+  --     index = { threads = 0 },
+  --     cache = { directory = os.getenv("XDG_CACHE_HOME") .. "/ccls" },
+  --     clang = {
+  --       extraArgs = {
+  --         "-std=c++20", "-Wall", "-Wextra", "-Wno-logical-op-parentheses"
+  --       },
+  --       -- extraArgs = { "-Wall", "-Wextra", "-Wno-logical-op-parentheses" },
+  --       excludeArgs = { "-frounding-math" }
+  --     },
+  --     client = { snippetSupport = true }
+  --   }
+  -- }
 
   nvim_lsp.texlab.setup {
     capabilities = capabilities,
@@ -178,26 +186,51 @@ M.config = function()
     on_attach = on_attach
   }
 
-  nvim_lsp.sumneko_lua.setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {
-      Lua = {
-        diagnostics = { globals = { 'vim' } },
-        completion = { callSnippet = "Replace" }
-      }
-    }
-  })
+  nvim_lsp.lua_ls.setup {}
+  -- nvim_lsp.lua_ls.setup {
+  --   on_init = function(client)
+  --     local path = client.workspace_folders[1].name
+  --     if not vim.loop.fs_stat(path .. '/.luarc.json') and
+  --         not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+  --       client.config.settings = vim.tbl_deep_extend('force',
+  --                                                    client.config.settings, {
+  --         Lua = {
+  --           runtime = {
+  --             -- Tell the language server which version of Lua you're using
+  --             -- (most likely LuaJIT in the case of Neovim)
+  --             version = 'LuaJIT'
+  --           },
+  --           -- Make the server aware of Neovim runtime files
+  --           workspace = {
+  --             checkThirdParty = false,
+  --             library = {
+  --               vim.env.VIMRUNTIME
+  --               -- "${3rd}/luv/library"
+  --               -- "${3rd}/busted/library",
+  --             }
+  --             -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+  --             -- library = vim.api.nvim_get_runtime_file("", true)
+  --           }
+  --         }
+  --       })
+  -- 
+  --       client.notify("workspace/didChangeConfiguration",
+  --                     { settings = client.config.settings })
+  --     end
+  --     return true
+  --   end
+  -- }
+
 
   nvim_lsp.clangd.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    filetypes = { "c" },
+    filetypes = { "c", "cpp" },
     cmd = {
-      'clangd', '--header-insertion=never', '--suggest-missing-includes',
-      '--background-index', '-j=8', '--cross-file-rename',
-      '--pch-storage=memory', '--clang-tidy', -- '-std=c++17',
-      '--clang-tidy-checks=-clang-analyzer-*,bugprone-*,misc-*,-misc-non-private-member-variables-in-classes,performance-*,-performance-no-automatic-move,modernize-use-*,-modernize-use-nodiscard,-modernize-use-trailing-return-type'
+      'clangd'
+      -- '--background-index', '-j=8', '--cross-file-rename',
+      -- '--pch-storage=memory', '--clang-tidy',
+      -- '--clang-tidy-checks=-clang-analyzer-*,bugprone-*,misc-*,-misc-non-private-member-variables-in-classes,performance-*,-performance-no-automatic-move,modernize-use-*,-modernize-use-nodiscard,-modernize-use-trailing-return-type'
     },
     -- on_init = require'clangd_nvim'.on_init,
     -- callbacks = lsp_status.extensions.clangd.setup(),
@@ -205,14 +238,15 @@ M.config = function()
       clangdFileStatus = true,
       usePlaceholders = true,
       completeUnimported = true
-    }
+    },
+    offset_encoding = "utf-16"
   }
 
-  -- nvim_lsp.emmet_ls.setup({
-  --  on_attach = on_attach,
-  --  capabilities = capabilities,
-  --   filetypes = { "html", "css", "typescriptreact", "javascriptreact" }
-  -- })
+  nvim_lsp.emmet_ls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { "html", "css", "typescriptreact", "javascriptreact" }
+  })
 end
 
 M.init = function()
@@ -244,11 +278,11 @@ M.init = function()
 
   Map('n', '<leader>rd', function()
     vim.lsp.buf_request(0, "experimental/externalDocs",
-      vim.lsp.util.make_position_params(), open_local_docs)
+                        vim.lsp.util.make_position_params(), open_local_docs)
   end)
   Map('v', '<leader>rd', function()
     vim.lsp.buf_request(0, "experimental/externalDocs",
-      vim.lsp.util.make_position_params(), open_local_docs)
+                        vim.lsp.util.make_position_params(), open_local_docs)
   end)
 
   -- Map('n', '<leader>ha', function () vim.lsp.buf.add_workspace_folder() end)
@@ -260,8 +294,8 @@ M.init = function()
   -- Map('n', '<A-k>', function () vim.lsp.buf.signature_help() end)
 end
 M.dependencies = {
-  'hrsh7th/nvim-cmp',     --
-  'hrsh7th/cmp-path',     --
+  'hrsh7th/nvim-cmp', --
+  'hrsh7th/cmp-path', --
   'hrsh7th/cmp-nvim-lsp', --
   'onsails/lspkind-nvim', --
   -- 'SmiteshP/nvim-navic',
@@ -270,27 +304,27 @@ M.dependencies = {
     dependencies = "saadparwaiz1/cmp_luasnip",
     build = "make install_jsregexp"
   }, {
-  'RishabhRD/nvim-lsputils',
-  dependencies = { 'RishabhRD/popfix' },
-  config = function()
-    vim.lsp.handlers['textDocument/codeAction'] =
-        require 'lsputil.codeAction'.code_action_handler
-    vim.lsp.handlers['textDocument/references'] =
-        require 'lsputil.locations'.references_handler
-    vim.lsp.handlers['textDocument/definition'] =
-        require 'lsputil.locations'.definition_handler
-    vim.lsp.handlers['textDocument/declaration'] =
-        require 'lsputil.locations'.declaration_handler
-    vim.lsp.handlers['textDocument/typeDefinition'] =
-        require 'lsputil.locations'.typeDefinition_handler
-    vim.lsp.handlers['textDocument/implementation'] =
-        require 'lsputil.locations'.implementation_handler
-    vim.lsp.handlers['textDocument/documentSymbol'] =
-        require 'lsputil.symbols'.document_handler
-    vim.lsp.handlers['workspace/symbol'] =
-        require 'lsputil.symbols'.workspace_handler
-  end
-}
+    'RishabhRD/nvim-lsputils',
+    dependencies = { 'RishabhRD/popfix' },
+    config = function()
+      vim.lsp.handlers['textDocument/codeAction'] =
+          require'lsputil.codeAction'.code_action_handler
+      vim.lsp.handlers['textDocument/references'] =
+          require'lsputil.locations'.references_handler
+      vim.lsp.handlers['textDocument/definition'] =
+          require'lsputil.locations'.definition_handler
+      vim.lsp.handlers['textDocument/declaration'] =
+          require'lsputil.locations'.declaration_handler
+      vim.lsp.handlers['textDocument/typeDefinition'] =
+          require'lsputil.locations'.typeDefinition_handler
+      vim.lsp.handlers['textDocument/implementation'] =
+          require'lsputil.locations'.implementation_handler
+      vim.lsp.handlers['textDocument/documentSymbol'] =
+          require'lsputil.symbols'.document_handler
+      vim.lsp.handlers['workspace/symbol'] =
+          require'lsputil.symbols'.workspace_handler
+    end
+  }
 }
 
 return M
