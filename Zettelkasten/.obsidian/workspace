@@ -1,0 +1,114 @@
+{
+  "main": {
+    "id": "b9990ff0bc20c961",
+    "type": "split",
+    "children": [
+      {
+        "id": "7f177e9cc47198b6",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Zetten/Activity log.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "da441cce287de5a5",
+    "type": "split",
+    "children": [
+      {
+        "id": "104c9cdccffefa58",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d89c552d9e97518b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "6e0f213c50b34757",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "95cf83dd8a06f4de",
+    "type": "split",
+    "children": [
+      {
+        "id": "4e36828483d911a2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9666aa0d29cb7eab",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Zetten/Activity log.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "ed7db4db28516389",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "7f177e9cc47198b6",
+  "lastOpenFiles": [
+    "Zetten/Questions for the teacher.md",
+    "Zetten/Untitled.md",
+    "Zetten/Knowledge structure.md",
+    "Zetten/Browser flow 2.0.md",
+    "Zetten/Auto zettelkasten complete.md",
+    "Zetten/Tab Branch on search.md",
+    "Templates/Idea.md",
+    "Zetten/Generators.md",
+    "Zetten/AI learns blind input.md",
+    "Zetten/Types of skills.md"
+  ]
+}

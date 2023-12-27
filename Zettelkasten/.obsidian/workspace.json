@@ -1,0 +1,159 @@
+{
+  "main": {
+    "id": "b9990ff0bc20c961",
+    "type": "split",
+    "children": [
+      {
+        "id": "b50184be88c3770b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7f177e9cc47198b6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Zettel/BT - Emergence of Microservice Architecture.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "da441cce287de5a5",
+    "type": "split",
+    "children": [
+      {
+        "id": "104c9cdccffefa58",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d89c552d9e97518b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "6e0f213c50b34757",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "0f3b986ee2cfd920",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "95cf83dd8a06f4de",
+    "type": "split",
+    "children": [
+      {
+        "id": "4e36828483d911a2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9666aa0d29cb7eab",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Zettel/BT - Emergence of Microservice Architecture.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "ed7db4db28516389",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "markdown-importer:Open format converter": false,
+      "obsidian-to-anki-plugin:Obsidian_to_Anki - Scan Vault": false,
+      "templater-obsidian:Templater": false
+    }
+  },
+  "active": "7f177e9cc47198b6",
+  "lastOpenFiles": [
+    "Attachments/Simple_Interest.png",
+    "Attachments/File-server Architecture.drawio.svg",
+    "Templates/Idea.md",
+    "Zetten/Creating a study material is much like a programming.md",
+    "Zetten/Ideas.md",
+    "Zetten/AI learns blind input.md",
+    "Zetten/Activity log-MSichkaruk.md",
+    "Zetten/Jokes nature.md",
+    "Zetten/Knowledge structure.md",
+    "Zetten/Tab Branch on search.md",
+    "Zetten/Questions for the teacher.md",
+    "Zetten/Methods organization idea.md",
+    "Zetten/How to listen and hear.md",
+    "Zetten/Explain connections.md",
+    "Zetten/Data Science Diagram.md",
+    "Zetten/Declarations for remembering.md",
+    "Zetten/Abstraction Quote.md",
+    "Zetten/Quotes.md",
+    "Zetten/Zettenkasten similar to web.md",
+    "Zetten/Search 2.0.md",
+    "Zetten/Types of skills.md",
+    "Zetten/Activity log.md",
+    "Zetten/Auto zettelkasten complete.md",
+    "Zetten/Bitcoin address reuse after spending.md",
+    "Zetten/Browser flow 2.0.md",
+    "Zetten/Untitled.md",
+    "Zetten/Generators.md"
+  ]
+}

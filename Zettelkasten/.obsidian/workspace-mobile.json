@@ -1,0 +1,125 @@
+{
+  "main": {
+    "id": "b9990ff0bc20c961",
+    "type": "split",
+    "children": [
+      {
+        "id": "700724acdea2a86f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7f177e9cc47198b6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Zettel/MSOFT.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1d3cbc6589fca7a2",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "e592f8769bbf688a",
+        "type": "leaf",
+        "state": {
+          "type": "file-explorer",
+          "state": {
+            "sortOrder": "alphabetical"
+          }
+        }
+      },
+      {
+        "id": "ddd1bd7ff960a99c",
+        "type": "leaf",
+        "state": {
+          "type": "search",
+          "state": {
+            "query": "",
+            "matchingCase": false,
+            "explainSearch": false,
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical"
+          }
+        }
+      },
+      {
+        "id": "11034c0476107bb8",
+        "type": "leaf",
+        "state": {
+          "type": "tag",
+          "state": {
+            "sortOrder": "frequency",
+            "useHierarchy": true
+          }
+        }
+      },
+      {
+        "id": "15e500f6e3ff518d",
+        "type": "leaf",
+        "state": {
+          "type": "bookmarks",
+          "state": {}
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "right": {
+    "id": "dc192dc5c4748a64",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "e260facee6ae94ee",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "Zettel/MSOFT.md",
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "showSearch": false,
+            "searchQuery": "",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
+          }
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "markdown-importer:Open format converter": false
+    }
+  },
+  "active": "7f177e9cc47198b6",
+  "lastOpenFiles": [
+    "Zetten/Questions for the teacher.md",
+    "Zetten/Untitled.md",
+    "Zetten/Knowledge structure.md",
+    "Zetten/Browser flow 2.0.md",
+    "Zetten/Auto zettelkasten complete.md",
+    "Zetten/Tab Branch on search.md",
+    "Templates/Idea.md",
+    "Zetten/Generators.md",
+    "Zetten/AI learns blind input.md",
+    "Zetten/Types of skills.md"
+  ]
+}
