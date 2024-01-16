@@ -1,0 +1,16 @@
+{
+    "version": "1.9.7",
+    "addonlistControls": {
+        "theme": {
+            "sort": "name"
+        }
+    },
+    "drawerStates": {
+        "settings": {
+            "addons": false,
+            "editor": false,
+            "developer": false,
+            "window": true
+        }
+    }
+}
