@@ -1,5 +1,15 @@
 local M = {
   {
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("refactoring").setup()
+    end,
+  },
+  { 'puremourning/vimspector', lazy = false }, {
     'nvimtools/none-ls.nvim',
     lazy = false,
     enable = true,
@@ -9,13 +19,19 @@ local M = {
       null_ls.setup({
         sources = {
           null_ls.builtins.diagnostics.eslint,
-          null_ls.builtins.completion.spell,
+          -- null_ls.builtins.completion.spell,
           null_ls.builtins.diagnostics.yamllint,
           null_ls.builtins.diagnostics.hadolint,
           null_ls.builtins.diagnostics.misspell,
           null_ls.builtins.formatting.buf,
           null_ls.builtins.diagnostics.protolint,
+          null_ls.builtins.diagnostics.gccdiag,
           null_ls.builtins.diagnostics.checkmake,
+          null_ls.builtins.diagnostics.cppcheck,
+          null_ls.builtins.diagnostics.cpplint,
+          null_ls.builtins.diagnostics.clazy,
+          null_ls.builtins.diagnostics.clang_check,
+          -- ull_ls.builtins.code_actions.refactoring,
         }
       })
     end
@@ -408,6 +424,20 @@ local M = {
         vim.api.nvim_feedkeys(cmd, 'n', true)
       end)
       vim.g.latexindent_opt = "-m"
+      vim.g.neoformat_enabled_cpp = { 'clangformat' }
+      vim.g.neoformat_cpp_clangformat = {
+        exe = 'clang-format',
+        args = {
+          '--style="{BasedOnStyle: Google, IndentWidth: 2, ColumnLimit: 100}"'
+        },
+        stdin = 1
+      }
+      vim.g.neoformat_markdown_remark = {
+        exe = 'prettier',
+        args = { '--prose-wrap=always', '--stdin-filepath', '"%:p"' },
+        stdin = 1,
+        try_node_exe = 1
+      }
       vim.g.neoformat_markdown_remark = {
         exe = 'prettier',
         args = { '--prose-wrap=always', '--stdin-filepath', '"%:p"' },

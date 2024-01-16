@@ -35,4 +35,14 @@ if test -f ~/.profile
 end
 
 # thefuck --alias | source
-nvm use 20.0.0
+nvm use v20.9.0
+set -x PATH /home/misha/.nvm/versions/node/v20.9.0/bin /home/misha/.npm-global/bin /usr/local/go/bin /home/misha/.cargo/bin /home/misha/.local/bin /home/misha/bin /usr/local/bin /usr/bin /bin /sbin /usr/sbin $PATH
+alias suposle="sudo"
+
+
+# pnpm
+set -gx PNPM_HOME "/home/misha/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end

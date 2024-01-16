@@ -1,6 +1,5 @@
 function ToggleWrap()
-  if vim.wo.wrap then
-    vim.wo.wrap = false
+  if vim.wo.wrap then vim.wo.wrap = false
     vim.api.nvim_buf_del_keymap(0, 'n', 'j')
     vim.api.nvim_buf_del_keymap(0, 'n', 'k')
   else
@@ -93,8 +92,9 @@ Map('t', '<A-a>', '<C-\\><C-n>')
 
 -- Map('n', '\\\\', '<Esc>/Enter>"_c4l')
 
-Map('n', 'cd', ':cd ')
 
+Map('n', 'cd', ':cd ')
+Map('n', '<leader>b', ':VimspectorBreakpoints<cr>')
 Map('n', '<leader>d', ':DiffviewOpen<cr>')
 Map('n', '<leader>c', ':DiffviewClose<cr>')
 -- Cmd "inoremap <expr> <C-j>   pumvisible() ? '\\<C-n>' : '\\<C-j>'"

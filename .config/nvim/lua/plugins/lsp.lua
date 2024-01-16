@@ -5,7 +5,7 @@ local M = {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPost' },
   enabled = true,
-  branch = "master",
+  branch = "master"
 }
 
 M.config = function()
@@ -17,7 +17,7 @@ M.config = function()
   nvim_lsp.dockerls.setup({})
   require("luasnip.loaders.from_snipmate").lazy_load(
       { paths = { "./snippets" } })
-
+  
   -- TODO: verify does it solves bug with random jumps on tab
   luasnip.config.set_config({
     region_check_events = 'InsertEnter',
@@ -25,6 +25,7 @@ M.config = function()
   })
 
   nvim_lsp.bufls.setup {}
+  nvim_lsp.asm_lsp.setup({ filetypes = { "asm", "vmasm" } })
 
   local ih = require("inlay-hints")
   -- require("docker")
@@ -186,51 +187,46 @@ M.config = function()
     on_attach = on_attach
   }
 
-  nvim_lsp.lua_ls.setup {}
-  -- nvim_lsp.lua_ls.setup {
-  --   on_init = function(client)
-  --     local path = client.workspace_folders[1].name
-  --     if not vim.loop.fs_stat(path .. '/.luarc.json') and
-  --         not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
-  --       client.config.settings = vim.tbl_deep_extend('force',
-  --                                                    client.config.settings, {
-  --         Lua = {
-  --           runtime = {
-  --             -- Tell the language server which version of Lua you're using
-  --             -- (most likely LuaJIT in the case of Neovim)
-  --             version = 'LuaJIT'
-  --           },
-  --           -- Make the server aware of Neovim runtime files
-  --           workspace = {
-  --             checkThirdParty = false,
-  --             library = {
-  --               vim.env.VIMRUNTIME
-  --               -- "${3rd}/luv/library"
-  --               -- "${3rd}/busted/library",
-  --             }
-  --             -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-  --             -- library = vim.api.nvim_get_runtime_file("", true)
-  --           }
-  --         }
-  --       })
-  -- 
-  --       client.notify("workspace/didChangeConfiguration",
-  --                     { settings = client.config.settings })
-  --     end
-  --     return true
-  --   end
-  -- }
-
+  nvim_lsp.lua_ls.setup {
+    on_init = function(client)
+      local path = client.workspace_folders[1].name
+      if not vim.loop.fs_stat(path .. '/.luarc.json') and
+          not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+        client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
+          Lua = {
+            runtime = {
+              -- Tell the language server which version of Lua you're using
+              -- (most likely LuaJIT in the case of Neovim)
+              version = 'LuaJIT'
+            },
+            -- Make the server aware of Neovim runtime files
+            workspace = {
+              checkThirdParty = false,
+              library = {
+                vim.env.VIMRUNTIME
+                "${3rd}/luv/library"
+                "${3rd}/busted/library",
+              }, 
+              -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+              library = vim.api.nvim_get_runtime_file("", true)
+            }
+          }
+        })
+  
+        client.notify("workspace/didChangeConfiguration",
+                      { settings = client.config.settings })
+      end
+      return true
+    end
+  }
 
   nvim_lsp.clangd.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     filetypes = { "c", "cpp" },
     cmd = {
-      'clangd'
-      -- '--background-index', '-j=8', '--cross-file-rename',
-      -- '--pch-storage=memory', '--clang-tidy',
-      -- '--clang-tidy-checks=-clang-analyzer-*,bugprone-*,misc-*,-misc-non-private-member-variables-in-classes,performance-*,-performance-no-automatic-move,modernize-use-*,-modernize-use-nodiscard,-modernize-use-trailing-return-type'
+      'clangd', "--clang-tidy", "--fallback-style=llvm",
+      '--clang-tidy-checks=-clang-analyzer-*,bugprone-*,misc-*,-misc-non-private-member-variables-in-classes,performance-*,-performance-no-automatic-move,modernize-use-*,-modernize-use-nodiscard,-modernize-use-trailing-return-type'
     },
     -- on_init = require'clangd_nvim'.on_init,
     -- callbacks = lsp_status.extensions.clangd.setup(),
@@ -247,6 +243,8 @@ M.config = function()
     capabilities = capabilities,
     filetypes = { "html", "css", "typescriptreact", "javascriptreact" }
   })
+
+  nvim_lsp.luau_lsp.setup({})
 end
 
 M.init = function()
@@ -301,7 +299,7 @@ M.dependencies = {
   -- 'SmiteshP/nvim-navic',
   {
     "L3MON4D3/LuaSnip",
-    dependencies = "saadparwaiz1/cmp_luasnip",
+    -- dependencies = "saadparwaiz1/cmp_luasnip",
     build = "make install_jsregexp"
   }, {
     'RishabhRD/nvim-lsputils',

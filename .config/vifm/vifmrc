@@ -187,6 +187,7 @@ command! reload :write | restart full
 "        \ vim %c,
 " Pdf
 filextype {*.pdf},<application/pdf> zathura %c %i, apvlv %c, xpdf %c
+filextype {*.epub},<application/epub> zathura %f
 fileviewer {*.pdf},<application/pdf> pdftotext -nopgbrk %c -
 
 " PostScript
@@ -202,6 +203,11 @@ filextype {*.djvu},<image/vnd.djvu>
         \ zathura %f,
         \ {View in apvlv}
         \ apvlv %f,
+
+" Zip
+filetype *.zip
+   \ {Unzip with unzip command}
+   \ unzip %s -d "unzip"
 
 " Midi
 filetype {*.mid,*.kar}
@@ -239,7 +245,7 @@ fileviewer {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
 " Web
 filextype {*.xhtml,*.html,*.htm},<text/html>
         \ {Open with qutebrowser}
-        \ qutebrowser %f %i,
+        \ vieb %f %i,
         \ {Open with firefox}
         \ firefox %f &,
 filetype {*.xhtml,*.html,*.htm},<text/html> links, lynx
@@ -273,7 +279,7 @@ filextype {.blend}
         \ blender %c,
 filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
         \ {View in sxiv}
-        \ xdg-open %f,
+        \ vimiv %f,
         \ {View in gpicview}
         \ gpicview %c,
         \ {View in shotwell}
@@ -323,15 +329,16 @@ fileviewer {*.torrent},<application/x-bittorrent>
          \ transmission-show %c
 
 " FuseZipMount
-filetype {*.zip,*.jar,*.war,*.ear,*.oxt,*.apkg},
-        \<application/zip,application/java-archive>
-       \ {Mount with fuse-zip}
-       \ FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINATION_DIR,
-       \ {View contents}
-       \ unzip -l %f | less,
-       \ {Extract here}
-       \ unzip %c,
-fileviewer *.zip,*.jar,*.war,*.ear,*.oxt unzip -l %f
+" filetype {*.zip,*.jar,*.war,*.ear,*.oxt,*.apkg},
+"       \<application/zip,application/java-archive>
+"       \ {Mount with fuse-zip}
+"       \ FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINATION_DIR,
+"       \ {View contents}
+"       \ unzip -l %f | less,
+"       \ {Extract here}
+"       \ unzip %c,
+
+" fileviewer *.zip,*.jar,*.war,*.ear,*.oxt unzip -l %f
 
 " ArchiveMount
 filetype {*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz,*.tar.zst,
@@ -400,8 +407,8 @@ filextype */
 " Explicitly set highlight type for some extensions
 "
 " 256-color terminal
-" fileviewer *.[ch],*.[ch]pp highlight -O xterm256 -s dante --syntax c %c
-" fileviewer Makefile,Makefile.* highlight -O xterm256 -s dante --syntax make %c
+ fileviewer *.[ch],*.[ch]pp highlight -O xterm256 -s dante --syntax c %c
+ fileviewer Makefile,Makefile.* highlight -O xterm256 -s dante --syntax make %c
 "
 " 16-color terminal
 " fileviewer *.c,*.h highlight -O ansi -s dante %c

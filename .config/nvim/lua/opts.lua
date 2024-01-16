@@ -12,7 +12,14 @@ vim.opt.scrolloff = 3
 
 vim.cmd "au BufRead,BufNewFile *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4"
 vim.cmd "au BufRead,BufNewFile *.rs setlocal tabstop=4 softtabstop=4 shiftwidth=4"
-
+vim.cmd [[
+augroup makefile_settings
+  autocmd!
+  autocmd FileType make set noexpandtab
+  autocmd FileType make set tabstop=4
+  autocmd FileType make set shiftwidth=4
+augroup END
+]]
 vim.cmd [[
   augroup DisableSyntaxOnLargeFiles 
   autocmd!
@@ -46,6 +53,9 @@ vim.opt.cmdheight = 0
 
 -- vim.opt.loaded_perl_provider = 0
 
+-- let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+-- vim.opt.vimspector_enable_mappings = 'VISUAL_STUDIO'
+vim.g.vimspector_enable_mappings = 'VISUAL_STUDIO'
 vim.opt.list = false
 
 vim.opt.termguicolors = true
