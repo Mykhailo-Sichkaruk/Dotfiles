@@ -31,7 +31,8 @@ local M = {
           null_ls.builtins.diagnostics.cpplint,
           null_ls.builtins.diagnostics.clazy,
           null_ls.builtins.diagnostics.clang_check,
-          -- ull_ls.builtins.code_actions.refactoring,
+           -- ull_ls.builtins.code_actions.refactoring,
+          null_ls.builtins.diagnostics.jsonlint
         }
       })
     end
