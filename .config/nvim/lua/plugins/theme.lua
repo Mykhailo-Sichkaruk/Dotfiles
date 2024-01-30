@@ -29,8 +29,9 @@ local M = {
         colors.bg_dark = "#222222"
         colors.bg_float = "#000000"
         colors.bg_highlight = "#333333"
+        colors.fg_highlight = "#ff0000"
         colors.bg_popup = "#000000"
-        colors.bg_search = "#000000"
+        colors.bg_search = "#880000"
         colors.bg_sidebar = "#000000"
         colors.bg_statusline = "#000000"
         colors.bg_visual = "#333333"
@@ -42,8 +43,19 @@ local M = {
         hl.DiagnosticUnnecessary = {
           fg = "#ffffff"
         }
+        hl.ScrollbarSearch = {
+          bg = "#ff0000",
+          fg = "#ff0000"
+        }
+        hl.IncSearch = {
+          bg = "#bbbbbb",
+          fg = "#000000"
+        }
+        Search = {
+          bg = "#3d59a1",
+          fg = "#ff0000"
+        }
       end,
-
     })
     vim.cmd [[ 
       colorscheme tokyonight-night

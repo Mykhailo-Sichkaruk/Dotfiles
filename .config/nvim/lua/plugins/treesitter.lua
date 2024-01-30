@@ -43,7 +43,7 @@ M.config = function()
 
   treesitter.setup {
     ensure_installed = {
-      'javascript', 'typescript', 'rust', 'lua', 'java', 'c', 'cpp', 'tsx', 'vue', 
+      'javascript', 'typescript', 'rust', 'lua', 'java', 'c', 'cpp', 'tsx', 'vue', 'html' 
     },
 
     highlight = { enable = true, additional_vim_regex_highlighting = true },

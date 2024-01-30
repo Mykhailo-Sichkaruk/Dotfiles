@@ -30,7 +30,7 @@ end
 
 vim.cmd("command! T lua StartTerminal()")
 
-Map('n', '<C-w>', ':lua MiniBufremove.delete(0, true) <cr>')
+Map('n', '<A-w>', ':lua MiniBufremove.delete(0, true) <cr>')
 -- Map('n', '<A-l>', function() vim.bo.iminsert = math.abs(vim.bo.iminsert - 1) end)
 -- Map('i', '<A-l>', '<C-^>')
 Map('i', '<C-i>', '\t')
@@ -56,9 +56,9 @@ Map('v', '<leader>p', '"+p')
 Map('n', '<C-u>', '<C-u>zz');
 Map('n', '<C-d>', '<C-d>zz');
 
-Map('n', 'n', 'nzz');
-Map('n', 'N', 'Nzz');
-
+-- Map('n', 'n', 'nzz');
+-- Map('n', 'N', 'Nzz');
+-- 
 Map('n', 'gF', ':e <cfile><cr>')
 
 Map('n', '<leader>w', ':w!<cr>')
@@ -101,4 +101,8 @@ Map('n', '<leader>c', ':DiffviewClose<cr>')
 -- Cmd "inoremap <expr> <-k>   pumvisible() ? '\\<C-p>' : '\\<C-k>'"
 -- Cmd "inoremap <expr> <Tab>   pumvisible() ? '\\<C-n>' : '\\<Tab>'"
 -- Cmd "inoremap <expr> <S-Tab> pumvisible() ? '\\<C-p>' : '\\<S-Tab>'"
-Map('n', '<leader>t', ':Telescope<cr>')
+Map('n', '<leader>te', ':Telescope<cr>')
+Map('n', '<leader>tg', ':Telescope live_grep<cr>')
+Map('n', '<leader>o', ':DevdocsOpen<cr>')
+Map('n', '<leader>o', ':DevdocsOpen<cr>')
+Map('n', '<leader>o', ':DevdocsOpen<cr>')

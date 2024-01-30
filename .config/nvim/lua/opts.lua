@@ -93,3 +93,17 @@ vim.filetype.add({
 })
 
 vim.cmd "command! W :w!"
+
+vim.api.nvim_create_autocmd("TermOpen", {
+    pattern = "*",
+    callback = function()
+        vim.cmd("startinsert")  -- Start in insert mode
+    end
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "term://*",
+    callback = function()
+        vim.cmd("stopinsert")  -- Switch to normal mode when entering the buffer
+    end
+})

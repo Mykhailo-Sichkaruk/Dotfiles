@@ -1,15 +1,150 @@
 local M = {
-  {
-    "ThePrimeagen/refactoring.nvim",
+  { 'tzachar/highlight-undo.nvim', opts = {} }, {
+    'sudormrfbin/cheatsheet.nvim',
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = function()
-      require("refactoring").setup()
+      'nvim-telescope/telescope.nvim', 'nvim-lua/popup.nvim',
+      'nvim-lua/plenary.nvim'
+    }
+  }, {
+    "tris203/hawtkeys.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
+    config = {
+      -- an empty table will work for default config
+      --- if you use functions, or whichkey, or lazy to map keys
+      --- then please see the API below for options
+    }
+  }, {
+    'anuvyklack/pretty-fold.nvim',
+    config = {
+      sections = {
+        left = { 'content' },
+        right = {
+          ' ', 'number_of_folded_lines', ': ', 'percentage', ' ',
+          function(config) return config.fill_char:rep(3) end
+        }
+      },
+      fill_char = '•',
+      remove_fold_markers = true,
+      -- Keep the indentation of the content of the fold string.
+      keep_indentation = true,
+      -- Possible values:
+      -- "delete" : Delete all comment signs from the fold string.
+      -- "spaces" : Replace all comment signs with equal number of spaces.
+      -- false    : Do nothing with comment signs.
+      process_comment_signs = 'spaces',
+      -- Comment signs additional to the value of `&commentstring` option.
+      comment_signs = {},
+      -- List of patterns that will be removed from content foldtext section.
+      stop_words = {
+        '@brief%s*' -- (for C++) Remove '@brief' and all spaces after.
+      },
+      add_close_pattern = true, -- true, 'last_line' or false
+      matchup_patterns = {
+        { '{', '}' }, { '%(', ')' }, -- % to escape lua pattern char
+        { '%[', ']' } -- % to escape lua pattern char
+      },
+
+      ft_ignore = { 'neorg' }
+    }
+  }, {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
     end,
-  },
-  { 'puremourning/vimspector', lazy = false }, {
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  }, {
+    "m4xshen/hardtime.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    opts = {
+      max_time = 2000,
+      max_count = 4,
+      disabled_filetypes = {
+        "Outline", "NvimTree", "TelescopePrompt", "aerial", "alpha",
+        "checkhealth", "dapui-repl", "dapui_breakpoints", "dapui_console",
+        "dapui_scopes", "dapui_stacks", "dapui_watches", "DressingInput",
+        "DressingSelect", "help", "lazy", "NeogitStatus", "NeogitLogView",
+        "mason", "neotest-summary", "minifiles", "neo-tree", "neo-tree-popup",
+        "netrw", "noice", "notify", "prompt", "qf", "oil", "undotree"
+      }
+    }
+  }, {
+    "luckasRanarison/nvim-devdocs",
+    dependencies = {
+      "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim",
+      "nvim-treesitter/nvim-treesitter"
+    },
+    lazy = false,
+    enable = true,
+    config = true,
+    cmd = {
+      "DevdocsFetch", "DevdocsInstall", "DevdocsUninstall", "DevdocsOpen",
+      "DevdocsOpenFloat", "DevdocsOpenCurrent", "DevdocsOpenCurrentFloat",
+      "DevdocsUpdate", "DevdocsUpdateAll"
+    },
+    event = "VeryLazy",
+    opts = {
+      dir_path = vim.fn.stdpath("data") .. "/devdocs", -- installation directory
+      telescope = {}, -- passed to the telescope picker
+      filetypes = {
+        scss = "sass",
+        javascript = { "node", "javascript", "npm" },
+        typescript = { "node", "javascript", "typescript", "npm" }
+      },
+      float_win = { -- passed to nvim_open_win(), see :h api-floatwin
+        relative = "editor",
+        height = 500,
+        width = 800,
+        border = "rounded"
+      },
+      wrap = true, -- text wrap, only applies to floating window
+      previewer_cmd = "glow", -- for example: "glow"
+      cmd_args = { "-w", "80", "-s", "dark", "-p" },
+      cmd_ignore = {}, -- ignore cmd rendering for the listed docs
+      picker_cmd = true, -- use cmd previewer in picker preview
+      picker_cmd_args = { "-w", "80", "-s", "dark", "-p" },
+      ensure_installed = {
+        "node", "javascript", "typescript", "npm", "sass", "css", "html",
+        "lua-5.4", "cpp", "go", "python-3.12", "jsdoc", "git"
+      }, -- get automatically installed
+      mappings = { open_in_browser = "m" },
+      after_open = function(bufnr) end -- callback that runs after the Devdocs window is opened. Devdocs buffer ID will be passed in
+    }
+  }, { 'rcarriga/nvim-notify', lazy = false }, {
+    'antonk52/bad-practices.nvim',
+    lazy = false,
+    enable = true,
+    config = function()
+      local bad_practices = require("bad_practices")
+      bad_practices.setup({
+        most_splits = 3, -- how many splits are considered a good practice(default: 3)
+        most_tabs = 3, -- how many tabs are considered a good practice(default: 3)
+        max_hjkl = 10 -- how many times you can spam hjkl keys in a row(default: 10)
+      })
+    end
+  }, {
+    'gaborvecsei/usage-tracker.nvim',
+    lazy = false,
+    config = function()
+      require('usage-tracker').setup({
+        keep_eventlog_days = 14,
+        cleanup_freq_days = 7,
+        event_wait_period_in_sec = 5,
+        inactivity_threshold_in_min = 5,
+        inactivity_check_freq_in_sec = 5,
+        verbose = 0
+      })
+    end
+  }, {
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
+    config = function() require("refactoring").setup() end
+  }, { 'puremourning/vimspector', lazy = false }, {
     'nvimtools/none-ls.nvim',
     lazy = false,
     enable = true,
@@ -31,8 +166,14 @@ local M = {
           null_ls.builtins.diagnostics.cpplint,
           null_ls.builtins.diagnostics.clazy,
           null_ls.builtins.diagnostics.clang_check,
-           -- ull_ls.builtins.code_actions.refactoring,
-          null_ls.builtins.diagnostics.jsonlint
+          null_ls.builtins.code_actions.refactoring,
+          null_ls.builtins.diagnostics.jsonlint,
+          null_ls.builtins.formatting.cmake_format,
+          null_ls.builtins.diagnostics.cmake_lint,
+          null_ls.builtins.formatting.gersemi,
+          null_ls.builtins.diagnostics.dotenv_linter,
+          null_ls.builtins.formatting.fixjson, null_ls.builtins.hover.printenv,
+          null_ls.builtins.formatting.json_tool, null_ls.builtins.formatting.jq
         }
       })
     end
@@ -535,8 +676,6 @@ local M = {
 
       Map('n', '<A-l>', function() require("bufferline").cycle(1) end)
       Map('n', '<A-h>', function() require("bufferline").cycle(-1) end)
-      -- Map('n', '<Tab>', function() require("bufferline").cycle(1) end)
-      -- Map('n', '<S-Tab>', function() require("bufferline").cycle(-1) end)
       -- Map('i', '<C-l>', function()
       --   vim.cmd "stopinsert";
       --   require("bufferline").cycle(1)
@@ -630,8 +769,8 @@ local M = {
         -- Hook function to call before commenting takes place
         hook = nil
       })
-      Map('n', "<C-_>", ":CommentToggle<CR>")
-      Map('v', "<C-_>", ":CommentToggle<CR>")
+      Map('n', "<C-/>", ":CommentToggle<CR>")
+      Map('v', "<C-/>", ":CommentToggle<CR>")
     end,
     lazy = false
   }, {
@@ -686,14 +825,15 @@ local M = {
       }
     end
   }, {
-    -- use 'jackguo380/vim-lsp-cxx-highlight'
-    -- TODO: Doesn't work
-    'simrat39/symbols-outline.nvim',
-    keys = { '<leader>;' },
-    cmd = { "SymbolsOutline" },
+    "hedyhli/outline.nvim",
     config = function()
-      require("symbols-outline").setup()
-      Map('n', '<leader>;', ':SymbolsOutline<CR>')
+      -- Example mapping to toggle outline
+      vim.keymap.set("n", "<leader>;", "<cmd>Outline<CR>",
+                     { desc = "Toggle Outline" })
+
+      require("outline").setup {
+        -- Your setup opts here (leave empty to use defaults)
+      }
     end
   }, {
     "folke/todo-comments.nvim",
