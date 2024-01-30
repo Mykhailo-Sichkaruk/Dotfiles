@@ -190,6 +190,8 @@ filextype {*.pdf},<application/pdf> zathura %c %i, apvlv %c, xpdf %c
 filextype {*.epub},<application/epub> zathura %f
 fileviewer {*.pdf},<application/pdf> pdftotext -nopgbrk %c -
 
+fileviewer {*.md},<application/md> mdv %c
+
 " PostScript
 filextype {*.ps,*.eps,*.ps.gz},<application/postscript>
         \ {View in zathura}
@@ -207,7 +209,7 @@ filextype {*.djvu},<image/vnd.djvu>
 " Zip
 filetype *.zip
    \ {Unzip with unzip command}
-   \ unzip %s -d "unzip"
+   \ unzip %f 
 
 " Midi
 filetype {*.mid,*.kar}
@@ -338,7 +340,7 @@ fileviewer {*.torrent},<application/x-bittorrent>
 "       \ {Extract here}
 "       \ unzip %c,
 
-" fileviewer *.zip,*.jar,*.war,*.ear,*.oxt unzip -l %f
+fileviewer *.zip,*.jar,*.war,*.ear,*.oxt unzip -l %f
 
 " ArchiveMount
 filetype {*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz,*.tar.zst,
