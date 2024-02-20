@@ -1,0 +1,186 @@
+" Options
+set adblocker=update
+set cache=full
+set clearhistoryinterval=1month
+set commandhist=all
+set containercolors=
+set containercolors+=temp\d+~#fff
+set containernames=
+set containernames+=.*bing.com.*~bing
+set containershowname=always
+set containerstartuppage=s:usematching
+set darkreader
+set darkreaderbg=#000000
+set darkreaderblocklist=
+set darkreaderblocklist+=https://github.com
+set darkreaderblocklist+=https://duckduckgo.com
+set darkreaderblocklist+=github.com
+set darkreaderblocklist+=bing.com
+set darkreaderblocklist+=accounts.google
+set darkreaderblocklist+=cloud.google
+set darkreaderblocklist+=chat.openapi
+set darkreaderblocklist+=https://www.reddit.com
+set darkreaderblocklist+=https://getpino.io/
+set darkreaderblocklist+=https://sparxsystems.com/
+set darkreaderblocklist+=https://wiki.gnome.org/
+set darkreaderblocklist+=https://dictionary.cambridge.org/
+set darkreaderblocklist+=https://www.phind.com/
+set darkreaderblocklist+=https://www.figma.com/
+set darkreaderblocklist+=https://en.wikipedia.org
+set darkreaderblocklist+=https://translate.google.com/
+set darkreaderblocklist+=https://askubuntu.com/
+set darkreaderblocklist+=https://chat.openai.com/
+set darkreaderblocklist+=https://www.zerogpt.com/
+set darkreaderblocklist+=https://gptzero.me/
+set darkreaderblocklist+=https://docs.google.com/
+set darkreaderblocklist+=https://myaccount.google.com
+set darkreaderblocklist+=https://www.grammarly.com/
+set darkreaderbrightness=150
+set darkreadergrayscale=10
+set devtoolsposition=split
+set dialogconfirm=notifyblock
+set downloadmethod=confirm
+set downloadpath=~/Downloads/
+set favoritepages=
+set favoritepages+=https://plato.stanford.edu/entries/logic-firstorder-emergence/#toc
+set favoritepages+=https://www.phind.com/
+set favoritepages+=https://github.com/Mykhailo-Sichkaruk
+set favoritepages+=https://chat.openai.com/
+set favoritepages+=https://en.wikipedia.org/wiki/Entity–attribute–value_model
+set favoritepages+=https://react.dev/learn/adding-interactivity
+set favoritepages+=https://www.profesia.sk/praca/volis-international/O4595739?search_id=b8871301-01dd-40ea-b1e5-e7bf10723a15
+set favoritepages+=https://www.volis-international.com/kariera/junior-node-js-developer/
+set favoritepages+=https://mail.google.com/mail/u/0/#inbox
+set favoritepages+=https://scholar.google.com/
+set favoritepages+=https://is.stuba.sk/auth/student/odevzdavarny.pl
+set guifontsize=16
+set guihidetimeout=900000000000000
+set mapsuggestposition=bottomleft
+set modifiers=
+set notificationforpermissions=allowed
+set permissioncamera=ask
+set permissioncertificateerror=ask
+set permissionclipboardread=allow
+set permissiondisplaycapture=ask
+set permissiongeolocation=allow
+set permissionhid=allow
+set permissionmediadevices=allow
+set permissionmicrophone=allow
+set permissionmidi=ask
+set permissionmidisysex=ask
+set permissionnotifications=ask
+set permissionopenexternal=allow
+set permissionpersistentstorage=allow
+set permissionpointerlock=ask
+set permissionscreenwakelock=allow
+set permissionsensors=allow
+set permissionserial=allow
+set permissionunknown=ask
+set permissionusb=allow
+set redirecttohttp
+set shell=alacritty
+set sponsorblockcategories={"sponsor":"lime","intro":"cyan","outro":"blue","interaction":"red","selfpromo":"yellow","music_offtopic":""}
+set suggesttopsites=0
+set suspendtimeout=3000000
+set suspendtimeoutignore=
+set suspendtimeoutignore+=ga//
+set userscript
+set userstyle
+set vimcommand=nvim
+set windowtitle=""""""""'%app""""""""
+
+" Mappings
+map <A-h> <previousTab>
+map <A-l> <nextTab>
+cmap <C-c> <p.copyText>
+cmap <C-a> <Home>
+cmap <C-e> <editWithVim>
+cmap <A-f> <C-Right>
+cmap <A-b> <C-Left>
+cmap <A-d> <C-S-Right><BS>
+cmap <A-BS> <C-S-Left><BS>
+cmap <C-?> <Del>
+cmap <C-h> <BS>
+cmap <C-b> <Left>
+cmap <C-f> <Right>
+cmap <C-k> <commandHistoryNext>
+cmap <C-u> <S-Home><BS>
+cmap <C-w> <C-S-Left><BS>
+cmap <C-j> <commandHistoryPrevious>
+emap <C-S-Tab> <prevSuggestionSection>
+emap <C-Tab> <nextSuggestionSection>
+emap <C-c> <p.copyText>
+emap <C-e> <editWithVim>
+fmap <C-c> <p.copyText>
+imap <C-c> <p.copyText>
+imap <C-e> <editWithVim>
+mmap <C-c> <p.copyText>
+nmap <C-l> <nextTab>
+nmap <C-p> <:pin>
+nmap = <zoomReset>
+nunmap [
+nunmap ]
+nunmap {
+nunmap }
+nmap J <p.scrollDown>
+nmap K <p.scrollUp>
+nmap O <:tabnew><toExploreMode>
+nmap gU <openNewTabWithCurrentUrl><CR><toParentUrl>
+nmap gt <toCommandMode>buffer<Space>
+nunmap p
+nmap <A-1> <:b 0>
+nmap <A-2> <:b 1>
+nmap <A-3> <:b 2>
+nmap <A-4> <:b 3>
+nmap <A-5> <:b 4>
+nmap <A-6> <:b 5>
+nmap <A-7> <:b 6>
+nmap <A-8> <:b 7>
+nmap <A-9> <:b 8>
+nmap <C-S-PageDown> <moveTabBackward>
+nmap <C-S-PageUp> <moveTabForward>
+nmap <C-Tab> <:buffer #>
+nmap Sh <:history>
+nmap Ss <:help>
+nmap <C-A-p> <:print>
+nmap ZQ <:quit>
+nmap gd <:write>
+nmap [[ <previousPage>
+nmap ]] <nextPage>
+nmap {{ <previousPageNewTab>
+nmap }} <nextPageNewTab>
+nmap g0 <:b 0>
+nmap g^ <:b -1>
+nmap g$ <:b -1>
+nmap <C-^> <:buffer #>
+nmap ga <:tabnew>
+nmap gC <openNewTabWithCurrentUrl><CR>
+nmap gJ <moveTabForward>
+nmap gK <moveTabBackward>
+nmap co <:lclose><:rclose>
+nmap <C-s> <stopLoadingPage>
+nmap o <toExploreMode><BS>
+nmap go <toExploreMode><End>
+nmap pp <openFromClipboard>
+nmap Pp <:tabnew><openFromClipboard>
+nmap sk <toCommandMode>map<Space>
+nmap ss <toCommandMode>set<Space>
+nmap <C-h> <previousTab>
+nmap <A-z> <:buffer #>
+pmap H <p.scrollLeft>
+pmap L <p.scrollRight>
+pmap e <p.moveFastRight>
+pmap c <toNormalMode>
+pmap <Space> <p.startVisualSelect>
+smap <C-c> <p.copyText>
+smap <C-e> <editWithVim>
+vmap J <scrollDown>
+vmap v <p.start>
+vmap <CR> <p.copyText>
+vmap <C-Space> <toNormalMode><p.start><p.startVisualSelect>
+
+" Commands
+colorscheme black
+
+" Viebrc generated by Vieb
+" vim: ft=vim

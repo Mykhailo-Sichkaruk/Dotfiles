@@ -1,0 +1,375 @@
+# Created February 2012
+# Xfce-who from Xfce
+# Original theme from Olivier Fourdan <fourdan@xfce.org>
+# Released under the GPL license
+gtk-icon-sizes	= "gtk-button=16,16" # This makes button icons smaller.
+gtk-menu-popup-delay	= 1 # Makes menus pop up faster! Set to 1 instead of 0 to avoid any bugs.
+style "default"
+{
+    GtkWidget::focus-line-width                  = 1
+    GtkWidget::focus_padding                     = 0
+    GtkWidget::interior_focus                    = 0
+    GtkWidget::internal_padding                  = 0
+
+    GtkButton::child_displacement_x              = 0
+    GtkButton::child_displacement_y              = 1
+    GtkButton::default_border                    = {0, 0, 0, 0}
+    GtkButton::default_outside_border            = {0, 0, 0, 0}
+    GtkButton::focus-line-pattern                = "\0"
+
+    GtkButtonBox::child_internal_pad_x           = 0
+    GtkButtonBox::child_internal_pad_y           = 0
+    GtkButtonBox::child_min_heigth               = 0
+    GtkButtonBox::child_min_width                = 0
+
+    GtkCheckButton::indicator_size               = 12
+    GtkCheckButton::focus-line-pattern           = "\1\1"
+
+    GtkEntry::focus-line-pattern                 = "\0"
+
+    GtkRadioButton::indicator_size               = 12
+    GtkRadioButton::focus-line-pattern           = "\1\1"
+
+    GtkExpander::expander-size                   = 11
+    GtkExpander::expander_spacing                = 0
+
+    GtkMenuBar::internal-padding                 = 0
+
+    GtkMenu::horizontal-padding                  = 0
+    GtkMenu::vertical-padding                    = 0
+
+    GtkMenuItem::internal_padding                = 2
+    GtkMenuItem::selected_shadow_type            = etched-in
+
+    GtkOptionMenu::indicator_size                = {0, 0}
+    GtkOptionMenu::indicator_spacing             = {0, 0, 0, 0}
+
+    GtkPaned::handle_full_size                   = 1
+    GtkPaned::handle_size                        = 3
+
+    GtkRange::slider_width                       = 10
+    GtkRange::stepper_size                       = 0
+    GtkRange::stepper_spacing                    = 1
+    GtkRange::stepper_spacing                    = 1
+    GtkRange::trough_border                      = 0
+    GtkRange::trough-border                      = 0
+
+    GtkScale::trough-side-details                = 1
+    GtkScale::value_spacing                      = 0
+
+    GtkScrollbar::has_backward_stepper           = 1
+    GtkScrollbar::min_slider_length              = 20
+
+    GtkScrolledWindow::scrollbar_spacing         = 0
+
+    GtkTextView::focus-line-pattern              = "\0"
+
+    GtkToolbar::internal-padding                 = 0
+    GtkToolbar::space-size                       = 10
+    GtkTreeView::expander-size                   = 11
+
+    GtkTreeView::horizontal-separator            = 0
+    GtkTreeView::vertical-separator              = 0
+    
+    GtkRange::arrow-scaling                      = 0.6
+
+    ExoIconBar::focus_padding                    = 1
+
+    xthickness = 3
+    ythickness = 3
+    
+
+  fg[NORMAL]        = "#6B6B6B" # Metacity and mouseover, Most text
+  fg[PRELIGHT]      = "#9C9C9C" # text on buttons (hover)
+  fg[ACTIVE]        = "#5c5c5c" # text on unfocused tabs
+  fg[SELECTED]      = "#9C9C9C" # selected text on lists
+  fg[INSENSITIVE]   = "#000000" # greyed "unused" text
+
+  bg[NORMAL]		= "#000000" # entire background
+  bg[PRELIGHT]		= "#181818" # button prelights
+  bg[ACTIVE]		= "#181818" # selected taskbar items
+  bg[SELECTED]		= "#181818" # tab border, checkbutton and radiobutton
+  bg[INSENSITIVE]	= "#000000" # greyed buttons
+
+  base[NORMAL]		= "#000000" # window background
+  base[PRELIGHT]	= "#181818" # menubar outline colour
+  base[ACTIVE]		= "#181818" # Menu active item in inactive window
+  base[SELECTED]	= "#181818" # Menu active item in active window
+  base[INSENSITIVE]	= "#000000" # greyed sliders
+
+  text[NORMAL]		= "#6b6b6b" # text in general
+  text[PRELIGHT]	= "#c0c0c0" # hover text (on buttons)
+  text[ACTIVE]		= "#9C9C9C" # Active text in inactive window
+  text[SELECTED]	= "#9C9C9C" # Active text in active window
+  text[INSENSITIVE]	= "#0E0E0E" # greyed text
+
+    engine "xfce"
+    {
+        smooth_edge = true
+        boxfill
+        {
+            fill_style = plain
+        }
+    }
+}
+
+style "gradient" = "default"
+{
+    engine "xfce"
+    {
+        smooth_edge = true
+        grip_style = none
+        boxfill
+        {
+            fill_style = gradient
+            orientation = vertical
+            shade_start = 1.10
+            shade_end = 0.90
+        }
+    }
+}
+
+style "menu" = "gradient"
+{
+  
+    engine "xfce"
+    {
+        smooth_edge = true
+        boxfill
+        {
+            fill_style = plain
+            orientation = vertical
+            shade_start = 1.10
+            shade_end = 0.90
+        }
+    }
+}
+
+style "menuitem" = "menu"
+{
+    xthickness = 1
+    ythickness = 2
+
+    engine "xfce"
+    {
+        smooth_edge = true
+        boxfill
+        {
+            fill_style = plain
+            orientation = vertical
+            shade_start = 0.90
+            shade_end = 1.10
+        }
+    }
+}
+
+style "menubar" = "menu"
+{
+    xthickness = 1
+    ythickness = 2
+
+    engine "xfce"
+    {
+        smooth_edge = true
+        boxfill
+        {
+            fill_style = gradient
+            orientation = vertical
+            shade_start = 1.00
+            shade_end = 0.90
+        }
+    }
+}
+
+style "pager" = "gradient"
+{
+    xthickness = 0
+    ythickness = 0
+
+
+    engine "xfce"
+    {
+        smooth_edge = true
+    }
+}
+
+style "button" = "default"
+{
+    engine "xfce"
+    {
+        smooth_edge = true
+        grip_style = none
+        boxfill
+        {
+            fill_style = gradient
+            orientation = vertical
+            shade_start = 1.10
+            shade_end = 0.90
+        }
+    }
+}
+
+style "notebook" = "default"
+{
+    xthickness = 1
+    ythickness = 1
+
+}
+
+style "scrollbar" = "default"
+{
+
+  bg[NORMAL]		= "#181818" # entire background
+  bg[PRELIGHT]		= "#3D3D3D" # button prelights
+  bg[ACTIVE]		= "#000000" # selected taskbar items
+  bg[SELECTED]		= "#000000" # tab border, checkbutton and radiobutton
+
+    engine "xfce"
+    {
+        smooth_edge = true
+        grip_style = none
+        boxfill
+        {
+            fill_style = gradient
+            orientation = automatic
+            shade_start = 1.10
+            shade_end = 0.90
+        }
+    }
+}
+
+style "scale" = "scrollbar"
+{
+    engine "xfce"
+    {
+        smooth_edge = true
+        grip_style = none
+        boxfill
+        {
+            fill_style = gradient
+            orientation = automatic
+            shade_start = 1.10
+            shade_end = 0.90
+        }
+    }
+}
+
+style "progress" = "gradient"
+{
+    xthickness = 0
+    ythickness = 0
+
+
+    engine "xfce"
+    {
+        smooth_edge = true
+        grip_style = none
+        boxfill
+        {
+            fill_style = gradient
+            orientation = automatic
+            shade_start = 1.10
+            shade_end = 0.90
+        }
+    }
+}
+
+style "handlebox" = "default"
+{
+    engine "xfce"
+    {
+        smooth_edge = true
+        grip_style = none
+        boxfill
+        {
+            fill_style = plain
+        }
+    }
+}
+
+
+style "titlebar" = "default"
+{
+    bg[SELECTED]      = "#000000"
+    fg[SELECTED]      = "#000000"
+    bg[INSENSITIVE]   = "#000000"
+    fg[INSENSITIVE]   = "#8A8A8A"
+}
+
+
+style "panel-color" {
+  
+
+}
+widget "*PanelWidget*" style "panel-color"
+widget "*PanelApplet*" style "panel-color"
+widget "*Panel*" style "panel-color"
+widget_class "*Panel*" style "panel-color"
+class "*Panel*" style "panel-color"
+class "*Tray*" style "panel-color"
+class "*tray*" style "panel-color"
+
+
+widget_class "*"                   style "default"
+
+widget_class "*GtkTree*"           style "gradient"
+class "*GtkTree*"                  style "gradient"
+widget_class "*GtkCTree*"          style "gradient"
+class "*GtkCTree*"                 style "gradient"
+widget_class "*GtkList*"           style "gradient"
+class "*GtkList*"                  style "gradient"
+widget_class "*GtkCList*"          style "gradient"
+class "*GtkCList*"                 style "gradient"
+widget_class "*Entry*"             style "gradient"
+class "*Entry*"                    style "gradient"
+widget_class "*Text*"              style "gradient"
+class "*Text*"                     style "gradient"
+widget_class "*Pager*"             style "pager"
+class "*Pager*"                    style "pager"
+
+widget_class "*Menu*"              style "menu"
+#class "*Menu*"                     style "menu"
+
+widget_class "*MenuItem*"          style "menuitem"
+class "*MenuItem*"                 style "menuitem"
+
+widget_class "*BonoboDockItem"     style "menubar"
+class "*BonoboDockItem"            style "menubar"
+widget_class "*ToolBar"            style "menubar"
+class "*ToolBar"                   style "menubar"
+widget_class "*MenuBar*"           style "menubar"
+class "*MenuBar*"                  style "menubar"
+
+widget_class "*HandleBox*"         style "handlebox"
+
+widget_class "*Button*"            style "button"
+class "*Button*"                   style "button"
+widget_class "*button*"            style "button"
+class "*button*"                   style "button"
+widget_class "*OptionMenu*"        style "button"
+class "*OptionMenu*"               style "button"
+
+widget_class "*.GtkNotebook"       style "notebook"
+class "*.GtkNotebook"              style "notebook"
+
+widget_class "*GtkVScrollbar*"     style "scrollbar"
+class "*GtkVScrollbar*"            style "scrollbar"
+widget_class "*GtkHScrollbar*"     style "scrollbar"
+class "*GtkHScrollbar*"            style "scrollbar"
+
+widget_class "*GtkHScale*"         style "scale"
+class "*GtkHScale*"                style "scale"
+widget_class "*GtkVScale*"         style "scale"
+class "*GtkVScale*"                style "scale"
+
+widget_class "*GtkProgress*"       style "progress"
+class "*GtkProgress*"              style "progress"
+
+widget "gtk-tooltips*"             style "tooltips"
+
+widget_class "*.Collection"        style "rox"
+
+widget "xfwm"                      style "titlebar"
+widget "xfwm4-tabwin*"             style "titlebar"
+class "MetaFrames"                 style "titlebar"
+widget_class "MetaFrames"          style "titlebar"
