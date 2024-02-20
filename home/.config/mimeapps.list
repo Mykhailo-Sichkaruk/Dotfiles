@@ -1,0 +1,8 @@
+
+[Default Applications]
+text/html=vieb.desktop
+x-scheme-handler/http=vieb.desktop
+x-scheme-handler/https=vieb.desktop
+x-scheme-handler/about=vieb.desktop
+x-scheme-handler/unknown=vieb.desktop
+inode/directory=vifm.desktop

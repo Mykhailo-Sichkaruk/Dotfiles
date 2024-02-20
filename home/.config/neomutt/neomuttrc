@@ -1,0 +1,69 @@
+# https://seniormars.github.io/posts/neomutt/#mailcap
+# https://hispagatos.org/post/neomutt-gpg-howto/
+# https://github.com/SeniorMars/dotfiles/blob/master/.config/mutt/muttrc
+source ~/.config/neomutt/color.rc
+source ~/.config/neomutt/gpg.rc
+set mailcap_path= "~/.config/neomutt/mailcap"
+
+# source "~/.config/neomutt/misha0510.rc"
+# folder-hook $folder 'source ~/.config/neomutt/misha0510.rc'
+# 
+# source "~/.config/neomutt/mykhailo_sichkaruk.rc"
+# folder-hook $folder 'source ~/.config/neomutt/mykhailo_sichkaruk.rc'
+# 
+# source "~/.config/neomutt/mykhailo_sichkaruk_school.rc"
+# folder-hook $folder 'source ~/.config/neomutt/mykhailo_sichkaruk_school.rc'
+
+set mbox_type = Maildir
+set folder = "~/mail"
+source ~/.neomutt/mailboxes
+
+set mail_check_stats
+set color_directcolor = yes
+
+bind index,pager J sidebar-next
+bind index,pager K sidebar-prev
+bind index,pager L sidebar-open
+bind attach <return> view-mailcap
+
+# Sort by newest conversation first.
+set charset = "utf-8"
+set uncollapse_jump
+set sort_re
+set sort = reverse-threads
+set sort_aux = last-date-received
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set send_charset = "utf-8:iso-8859-1:us-ascii"
+set crypt_opportunistic_encrypt = no
+
+#sidebar
+set sidebar_visible # disable by default
+set sidebar_short_path
+set sidebar_folder_indent
+set sidebar_format = "%B %* [%?N?%N / ?%S]"
+set mail_check_stats
+
+bind editor <Tab> complete-query
+
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+macro index A \
+    "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
+    "mark all new as read"
+
+bind index j next-entry
+bind index k previous-entry
+bind pager j next-line
+bind pager k previous-line
+
+bind pager h exit
+bind index l display-message
+
+bind attach,index,pager \CD next-page
+bind attach,index,pager \CU previous-page
+bind pager g top
+bind pager G bottom
+bind attach,index g first-entry
+bind attach,index G last-entry
