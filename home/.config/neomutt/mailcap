@@ -1,0 +1,11 @@
+video/*; setsid mpv --quiet %s &; copiousoutput
+audio/*; mpv %s ;
+application/pgp-encrypted; gpg -d '%s'; copiousoutput;
+application/pgp-keys; gpg --import '%s'; copiousoutput;
+application/x-subrip; $editor %s ;
+image/png; feh %s ;
+
+text/html; vieb %s; nametemplate=%s.html; copiousoutput; 
+text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -dump -width=1024 %s; nametemplate=%s.html; copiousoutput;
+text/plain; cat %s; copiousoutput
+application/pdf; zathura %s --fork; test=test -n "$display"; needsterminal;

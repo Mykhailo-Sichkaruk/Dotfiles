@@ -1,0 +1,80 @@
+# offlineimaprc for use with gmail
+
+# you can also use this to sync via cron:
+# https://raw.githubusercontent.com/sadsfae/misc-scripts/master/shell/mailsync.sh
+# https://wiki.archlinux.org/title/OfflineIMAP
+[general]
+maxsyncaccounts = 3
+accounts = misha0510, mykhailo_sichkaruk, mykhailo_sichkaruk_school
+pythonfile = ~/.config/offlineimap/pass.py
+
+[mbnames]
+enabled = yes
+filename = ~/.neomutt/mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
+[Account misha0510]
+localrepository = Local_misha0510
+remoterepository = Remote_misha0510
+autorefresh = 5
+
+[Repository Remote_misha0510]
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = misha0510@gmail.com
+remotepasseval = get_pass("misha0510")
+ssl = yes
+starttls = no
+sslcacertfile = /etc/ssl/certs/ca-bundle.crt
+ssl_version=tls1_2
+keepalive = 350
+holdconnectionopen = yes
+
+[Repository Local_misha0510]
+type = Maildir
+localfolders = ~/mail/misha0510
+
+[Account mykhailo_sichkaruk]
+localrepository = Local_mykhailo_sichkaruk
+remoterepository = Remote_mykhailo_sichkaruk
+autorefresh = 5
+
+[Repository Remote_mykhailo_sichkaruk]
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = mykhailo.sichkaruk@gmail.com
+remotepasseval = get_pass("mykhailo.sichkaruk")
+ssl = yes
+starttls = no
+sslcacertfile = /etc/ssl/certs/ca-bundle.crt
+ssl_version=tls1_2
+keepalive = 350
+holdconnectionopen = yes
+
+[Repository Local_mykhailo_sichkaruk]
+type = Maildir
+localfolders = ~/mail/mykhailo_sichkaruk
+
+[Account mykhailo_sichkaruk_school]
+localrepository = Local_mykhailo_sichkaruk_school
+remoterepository = Remote_mykhailo_sichkaruk_school
+autorefresh = 5
+
+[Repository Remote_mykhailo_sichkaruk_school]
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = mykhailo.sichkaruk.school@gmail.com
+remotepasseval = get_pass("mykhailo.sichkaruk.school")
+ssl = yes
+starttls = no
+sslcacertfile = /etc/ssl/certs/ca-bundle.crt
+ssl_version=tls1_2
+keepalive = 350
+holdconnectionopen = yes
+
+[Repository Local_mykhailo_sichkaruk_school]
+type = Maildir
+localfolders = ~/mail/mykhailo_sichkaruk_school
