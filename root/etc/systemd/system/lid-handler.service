@@ -3,7 +3,7 @@ Description=Handle lid close events
 
 [Service]
 Type=simple
-ExecStart=~/Scripts/handle_lid_close.sh
+ExecStart=~/.config/scripts/handle_lid_close.sh
 
 [Install]
 WantedBy=multi-user.target
