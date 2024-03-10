@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+current_file=~/.pomodoro/current
+line=$(cat $current_file) # Read the entire line
+
+# Extract the values
+description=$(echo $line | grep -o 'description="[^"]*' | cut -d'"' -f2)
+duration=$(echo $line | grep -o 'duration=[^ ]*' | cut -d'=' -f2)
+tags=$(echo $line | grep -o 'tags=[^ ]*' | cut -d'=' -f2)
+echo "sleep 0 && [ -s $current_file ] && notify-send 'Pomodoro: $description' 'Session started'" | at now
+echo "sleep ($duration)m && [ -s $current_file ] && notify-send 'Pomodoro: $description' 'Session finished'" | at now

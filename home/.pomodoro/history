@@ -1,0 +1,4 @@
+2024-03-10T16:44:16+01:00 duration=25
+2024-03-10T16:47:28+01:00 description="Setup otel-collector and jaeger" duration=25 tags=gtw
+2024-03-10T17:24:17+01:00 description="Setup otel-collector and jaeger" duration=25 tags=gtw
+2024-03-10T19:05:03+01:00 description="Setup otel-collector and jaeger" duration=25 tags=gtw
