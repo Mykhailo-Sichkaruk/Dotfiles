@@ -135,7 +135,7 @@ M.config = function()
       nodePath = "node_modules/",
       onIgnoredFiles = "on",
       problems = { shortenToSingleLine = false },
-      quiet = true,
+      quiet = false,
       rulesCustomizations = {},
       run = "onSave",
       useESLintClass = true,
