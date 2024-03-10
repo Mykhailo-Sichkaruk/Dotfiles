@@ -675,7 +675,7 @@ local M = {
           '--write', '--config', "./prettierrc.json", vim.fn.expand('%:p')
         },
         replace = 1,
-        try_node_exe = 1
+        try_node_exe = 1,
       }
       vim.g.neoformat_enabled_typescriptreact = { 'prettier' }
       vim.g.neoformat_javascriptreact_prettier = {
