@@ -1,11 +1,18 @@
 #!/usr/bin/env bash
 
 current_file=~/.pomodoro/current
+job_file=~/.pomodoro/at_job_id
 line=$(cat $current_file) # Read the entire line
 
 # Extract the values
 description=$(echo $line | grep -o 'description="[^"]*' | cut -d'"' -f2)
 duration=$(echo $line | grep -o 'duration=[^ ]*' | cut -d'=' -f2)
 tags=$(echo $line | grep -o 'tags=[^ ]*' | cut -d'=' -f2)
-echo "sleep 0 && [ -s $current_file ] && notify-send 'Pomodoro: $description' 'Session started'" | at now
-echo "sleep ($duration)m && [ -s $current_file ] && notify-send 'Pomodoro: $description' 'Session finished'" | at now
+
+# Schedule the start notification immediately
+echo "[ -s $current_file ] && notify-send 'Pomodoro: $description' 'Session started'" | at now
+
+# Schedule the finish notification and store the job ID
+finish_job_id=$(echo "sleep ${duration}m && [ -s $current_file ] && notify-send 'Pomodoro: $description' 'Session finished'" | at now 2>&1 | awk '{print $2}')
+echo $finish_job_id > $job_file
+
