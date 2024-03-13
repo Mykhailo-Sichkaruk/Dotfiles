@@ -1,4 +1,5 @@
 local M = {
+  {'akinsho/git-conflict.nvim', version = "*", config = true},
   { "https://github.com/mfussenegger/nvim-dap", lazy = false },
   { "https://github.com/mfussenegger/nvim-jdtls", lazy = false },
   { "IndianBoy42/tree-sitter-just", lazy = false },
