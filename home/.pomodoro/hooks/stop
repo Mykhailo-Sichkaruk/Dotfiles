@@ -2,8 +2,17 @@
 
 job_file=~/.pomodoro/at_job_id
 
-if [ -f $job_file ]; then
+current_file=~/.pomodoro/current
+line=$(cat $current_file) # Read the entire line
+description=$(echo $line | grep -o 'description="[^"]*' | cut -d'"' -f2)
+duration=$(echo $line | grep -o 'duration=[^ ]*' | cut -d'=' -f2)
+tags=$(echo $line | grep -o 'tags=[^ ]*' | cut -d'=' -f2)
+
+notify-send "Pomodoro" "Session stopped. $description" -u critical -t 5000
+
+if  [ -f $job_file ]; then
     job_id=$(cat $job_file)
     atrm $job_id
     rm $job_file
 fi
+

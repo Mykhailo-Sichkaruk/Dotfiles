@@ -1,5 +1,8 @@
 local M = {
-  {'akinsho/git-conflict.nvim', version = "*", config = true},
+  {
+    'kevinhwang91/nvim-bqf',
+    lazy = false,
+  }, { 'akinsho/git-conflict.nvim', version = "*", config = true },
   { "https://github.com/mfussenegger/nvim-dap", lazy = false },
   { "https://github.com/mfussenegger/nvim-jdtls", lazy = false },
   { "IndianBoy42/tree-sitter-just", lazy = false },
@@ -676,7 +679,7 @@ local M = {
           '--write', '--config', "./prettierrc.json", vim.fn.expand('%:p')
         },
         replace = 1,
-        try_node_exe = 1,
+        try_node_exe = 1
       }
       vim.g.neoformat_enabled_typescriptreact = { 'prettier' }
       vim.g.neoformat_javascriptreact_prettier = {
@@ -690,9 +693,7 @@ local M = {
       vim.g.neoformat_enabled_javascriptreact = { 'prettier' }
       vim.g.neoformat_json_prettier = {
         exe = 'prettier',
-        args = {
-          '--write', vim.fn.expand('%:p')
-        },
+        args = { '--write', vim.fn.expand('%:p') },
         replace = 1,
         try_node_exe = 1
       }
