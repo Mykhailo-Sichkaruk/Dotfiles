@@ -26,16 +26,31 @@ if status is-interactive
   alias ...="cd ../.."
   alias ....="cd ../../.."
   alias .....="cd ../../../.."
-  alias config="git --git-dir=$HOME/.config/ --work-tree=$HOME"
-
+  alias git_clown="git clone"
 end
 
 if test -f ~/.profile
  bash -c 'source ~/.profile'
 end
 
-set -x PATH /home/ms/.cargo/bin /home/ms/.local/bin /home/ms/bin /usr/local/bin /usr/bin /bin /sbin /usr/sbin $PATH
+if test -f /etc/profile
+ bash -c 'source /etc/profile'
+end
+
+set -x PATH /home/ms/.cargo/bin /home/ms/.local/bin /home/ms/bin /usr/local/bin /usr/local/sbin /usr/bin /bin /sbin /usr/sbin $PATH
 set -x PATH "$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 set -x PATH "$HOME/.local/bin:$PATH"
+
 set XDG_DOWNLOAD_DIR /home/ms/Downloads
 set SHELL /usr/bin/fish
+set TERMINAL /usr/bin/alacritty
+set GTK_THEME BlackAndWhite
+# fenv + rye: source "$HOME/.rye/env"
+if status --is-interactive
+  # source /etc/profile
+  fenv source /etc/profile
+end
+# rye end
+
+zoxide init fish | source
+eval "$(zoxide init --cmd cd fish)"

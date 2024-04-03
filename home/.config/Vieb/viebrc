@@ -54,6 +54,8 @@ set favoritepages+=https://mail.google.com/mail/u/0/#inbox
 set favoritepages+=https://scholar.google.com/
 set favoritepages+=https://is.stuba.sk/auth/student/odevzdavarny.pl
 set guifontsize=16
+set guifullscreennavbar=always
+set guifullscreentabbar=always
 set guihidetimeout=900000000000000
 set mapsuggestposition=bottomleft
 set modifiers=
@@ -87,7 +89,7 @@ set suspendtimeoutignore+=ga//
 set userscript
 set userstyle
 set vimcommand=nvim
-set windowtitle=""""""""'%app""""""""
+set windowtitle="""""""""'%app"""""""""
 
 " Mappings
 map <A-h> <previousTab>

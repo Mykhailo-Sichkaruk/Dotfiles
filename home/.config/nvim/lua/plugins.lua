@@ -1,4 +1,8 @@
 local M = {
+  { "https://github.com/mfussenegger/nvim-dap", lazy = false },
+  { "https://github.com/mfussenegger/nvim-jdtls", lazy = false },
+  { "IndianBoy42/tree-sitter-just", lazy = false },
+  { "NoahTheDuke/vim-just", ft = { "just" }, lazy = false },
   { "https://github.com/roxma/nvim-yarp", lazy = false },
   { 'tzachar/highlight-undo.nvim', opts = {} }, {
     'sudormrfbin/cheatsheet.nvim',
@@ -178,26 +182,26 @@ local M = {
       local null_ls = require("null-ls")
       null_ls.setup({
         sources = {
-          null_ls.builtins.diagnostics.eslint,
           -- null_ls.builtins.completion.spell,
           null_ls.builtins.diagnostics.yamllint,
           null_ls.builtins.diagnostics.hadolint,
-          null_ls.builtins.diagnostics.misspell,
           null_ls.builtins.formatting.buf,
           null_ls.builtins.diagnostics.protolint,
           null_ls.builtins.diagnostics.gccdiag,
           null_ls.builtins.diagnostics.checkmake,
           null_ls.builtins.diagnostics.cppcheck,
-          null_ls.builtins.diagnostics.cpplint,
-          null_ls.builtins.diagnostics.clang_check,
+          -- null_ls.builtins.diagnostics.cpplint,
+          -- null_ls.builtins.diagnostics.clang_check,
           null_ls.builtins.code_actions.refactoring,
-          null_ls.builtins.diagnostics.jsonlint,
+          -- null_ls.builtins.diagnostics.jsonlint,
           null_ls.builtins.formatting.cmake_format,
           null_ls.builtins.diagnostics.cmake_lint,
           null_ls.builtins.formatting.gersemi,
           null_ls.builtins.diagnostics.dotenv_linter,
-          null_ls.builtins.formatting.fixjson, null_ls.builtins.hover.printenv,
-          null_ls.builtins.formatting.json_tool, null_ls.builtins.formatting.jq
+          -- null_ls.builtins.formatting.fixjson, 
+          null_ls.builtins.hover.printenv
+          -- null_ls.builtins.formatting.json_tool, 
+          -- null_ls.builtins.formatting.jq
         }
       })
     end
@@ -615,14 +619,8 @@ local M = {
       }
       vim.g.neoformat_enabled_asm = { 'asmfmt' }
       vim.g.neoformat_enabled_nasm = { 'asmfmt' }
-      vim.g.neoformat_nasm_asmfmt = {
-        exe = 'asmfmt',
-        stdin = 1
-      }
-      vim.g.neoformat_asm_asmfmt = {
-        exe = 'asmfmt',
-        stdin = 1
-      }
+      vim.g.neoformat_nasm_asmfmt = { exe = 'asmfmt', stdin = 1 }
+      vim.g.neoformat_asm_asmfmt = { exe = 'asmfmt', stdin = 1 }
       vim.g.neoformat_markdown_remark = {
         exe = 'prettier',
         args = { '--prose-wrap=always', '--stdin-filepath', '"%:p"' },
@@ -689,6 +687,15 @@ local M = {
         try_node_exe = 1
       }
       vim.g.neoformat_enabled_javascriptreact = { 'prettier' }
+      vim.g.neoformat_json_prettier = {
+        exe = 'prettier',
+        args = {
+          '--write', vim.fn.expand('%:p')
+        },
+        replace = 1,
+        try_node_exe = 1
+      }
+      vim.g.neoformat_enabled_json = { 'prettier' }
     end
   }, {
     -- bar at the top
@@ -843,10 +850,11 @@ local M = {
   }, { 'tversteeg/registers.nvim', lazy = false }, {
     'phaazon/hop.nvim',
     name = 'hop',
-    config = true,
+    config = { keys = 'asdfghjkl;eiurtcxm,' },
     init = function()
       -- Map("n", "<leader>h", function() require'hop'.hint_words() end)
       -- Map("n", "<leader>k", function() require'hop'.hint_lines() end)
+      Map("n", "<leader>k", function() require'hop'.hint_anywhere() end)
       Map("n", "<leader>l", function() require'hop'.hint_words() end)
       Map("n", "<leader>j", function() require'hop'.hint_lines() end)
       Map("n", "<leader>f", function() require'hop'.hint_char1() end)
