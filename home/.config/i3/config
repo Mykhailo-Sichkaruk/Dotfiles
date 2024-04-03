@@ -18,7 +18,7 @@ set $i3lockwall i3lock -t -c 000000 -u
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 
-font pango: DejaVu Sans Mono, FontAwesome 12
+font pango: DejaVu Sans Mono, FontAwesome6 12
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 
@@ -58,6 +58,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+m exec --no-startup-id alacritty -e neomutt
 bindsym $mod+n exec --no-startup-id alacritty -e vifm
 bindsym $mod+colon exec --no-startup-id bash ~/.pomodoro/send_notify_about_status.sh
+bindsym $mod+Shift+question exec pomodoro cancel
 bindsym $mod+d exec --no-startup-id rofi -no-lazy-grab -show drun; 
 bindsym $mod+p exec --no-startup-id ~/.config/scripts/pairFreeBuds.sh
 

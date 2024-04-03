@@ -26,7 +26,8 @@ if status is-interactive
   alias ...="cd ../.."
   alias ....="cd ../../.."
   alias .....="cd ../../../.."
-  alias git_clown="git clone"
+  alias gitclown="git clone"
+  alias pst="pomodoro start" 
 end
 
 if test -f ~/.profile
