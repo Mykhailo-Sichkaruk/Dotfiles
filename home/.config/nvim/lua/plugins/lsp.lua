@@ -28,7 +28,7 @@ M.config = function()
   nvim_lsp.asm_lsp.setup({
     cmd = { "asm-lsp" },
     filetypes = { "asm", "vmasm", "nasm" },
-    root_dir = root_pattern(".git", ".gitmodules", ".hg", ".bzr", ".svn"),
+    root_dir = root_pattern(".git", ".gitmodules", ".hg", ".bzr", ".svn")
   })
 
   local ih = require("inlay-hints")
@@ -101,6 +101,15 @@ M.config = function()
     }
   end
 
+  nvim_lsp.jsonls.setup {
+    commands = {
+      Format = {
+        function()
+          vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
+        end
+      }
+    }
+  }
   nvim_lsp.typst.setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -162,7 +171,7 @@ M.config = function()
   nvim_lsp.java_language_server.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    cmd = { "java-language-server" },
+    cmd = { "/home/ms/java-language-server/dist/lang_server_linux.sh" },
     filetypes = { "java" }
     -- settings = {},
   }
