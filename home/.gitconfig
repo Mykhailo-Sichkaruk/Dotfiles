@@ -20,3 +20,5 @@
 	editor = nvim
 [safe]
 	directory = /
+[http]
+	postBuffer = 924288000
