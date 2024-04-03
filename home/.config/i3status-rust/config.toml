@@ -8,15 +8,13 @@ separator_fg = "#ffffff"
 separator_bg = "#000000"
 
 [icons]
-icons = "awesome4"
+icons = "awesome6"
 
 [[block]]
+format="$icon{ $message|}"
 block = "pomodoro"
+notify_cmd = "notify-send '{msg}'"
 blocking_cmd = false
-
-[[block.click]]
-button = "left"
-cmd = "dnf list --upgrades"
 
 [[block]]
 block = "amd_gpu"
@@ -24,11 +22,11 @@ device = "card1"
 format = "AMD $icon $utilization $vram_used"
 interval = 20
 
-[[block]]
-block = "nvidia_gpu"
-interval = 20
-gpu_id = 0
-format = "NVIDIA { $icon $utilization $temperature $clocks |}"
+# [[block]]
+# block = "nvidia_gpu"
+# interval = 20
+# gpu_id = 0
+# format = "NVIDIA { $icon $utilization $temperature $clocks |}"
 
 [[block]]
 block = "uptime"

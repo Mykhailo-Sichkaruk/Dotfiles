@@ -10,7 +10,7 @@
     },
     "customcss": {
         "customcss": true,
-        "liveUpdate": true,
+        "liveUpdate": false,
         "openAction": "settings"
     },
     "editor": {
