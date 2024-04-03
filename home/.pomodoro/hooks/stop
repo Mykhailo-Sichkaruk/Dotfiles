@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+job_file=~/.pomodoro/at_job_id
+
+if [ -f $job_file ]; then
+    job_id=$(cat $job_file)
+    atrm $job_id
+    rm $job_file
+fi
