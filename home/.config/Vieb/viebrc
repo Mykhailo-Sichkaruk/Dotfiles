@@ -89,7 +89,7 @@ set suspendtimeoutignore+=ga//
 set userscript
 set userstyle
 set vimcommand=nvim
-set windowtitle="""""""""'%app"""""""""
+set windowtitle="""""""""""'%app"""""""""""
 
 " Mappings
 map <A-h> <previousTab>
