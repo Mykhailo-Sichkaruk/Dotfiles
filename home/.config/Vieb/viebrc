@@ -35,6 +35,10 @@ set darkreaderblocklist+=https://gptzero.me/
 set darkreaderblocklist+=https://docs.google.com/
 set darkreaderblocklist+=https://myaccount.google.com
 set darkreaderblocklist+=https://www.grammarly.com/
+set darkreaderblocklist+=https://www.semanticscholar.org/
+set darkreaderblocklist+=https://myaccount.google.com/
+set darkreaderblocklist+=https://myaccount.google.com/
+set darkreaderblocklist+=https://myaccount.google.com
 set darkreaderbrightness=150
 set darkreadergrayscale=10
 set devtoolsposition=split
@@ -70,7 +74,7 @@ set permissionmediadevices=allow
 set permissionmicrophone=allow
 set permissionmidi=ask
 set permissionmidisysex=ask
-set permissionnotifications=ask
+set permissionnotifications=allow
 set permissionopenexternal=allow
 set permissionpersistentstorage=allow
 set permissionpointerlock=ask
@@ -89,7 +93,7 @@ set suspendtimeoutignore+=ga//
 set userscript
 set userstyle
 set vimcommand=nvim
-set windowtitle="""""""""""'%app"""""""""""
+set windowtitle="VIEB"
 
 " Mappings
 map <A-h> <previousTab>
