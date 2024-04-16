@@ -31,7 +31,6 @@ M.config = function()
     root_dir = root_pattern(".git", ".gitmodules", ".hg", ".bzr", ".svn")
   })
 
-  local ih = require("inlay-hints")
   -- require("docker")
 
   require("typescript").setup({
@@ -40,33 +39,6 @@ M.config = function()
     go_to_source_definition = {
       fallback = true -- fall back to standard LSP definition on failure
     }
-    -- on_attach = function(c, b)
-    --   ih.on_attach(c, b)
-    -- end,
-    -- settings = {
-    -- javascript = {
-    --   inlayHints = {
-    --     includeInlayEnumMemberValueHints = true,
-    --     includeInlayFunctionLikeReturnTypeHints = true,
-    --     includeInlayFunctionParameterTypeHints = true,
-    --     includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-    --     includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-    --     includeInlayPropertyDeclarationTypeHints = true,
-    --     includeInlayVariableTypeHints = true,
-    --   },
-    -- },
-    -- typescript = {
-    --   inlayHints = {
-    --     includeInlayEnumMemberValueHints = true,
-    --     includeInlayFunctionLikeReturnTypeHints = true,
-    --     includeInlayFunctionParameterTypeHints = true,
-    --     includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-    --     includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-    --     includeInlayPropertyDeclarationTypeHints = true,
-    --     includeInlayVariableTypeHints = true,
-    --   },
-    -- },
-    -- },
   })
 
   local configs = require('lspconfig.configs')
@@ -176,30 +148,6 @@ M.config = function()
     -- settings = {},
   }
 
-  -- nvim_lsp.ccls.setup {
-  --   root_dir = root_pattern('WORKSPACE', '.git'),
-  --   offset_encoding = 'utf-16',
-  --   offsetEncoding = 'utf-16',
-  --   on_attach = on_attach,
-  --   capabilities = capabilities,
-  --   cmd = { "ccls" },
-  --   filetypes = { "cpp", "objc", "objcpp" },
-  --   single_file_support = true,
-  --   init_options = {
-  --     compilationDatabaseDirectory = "build",
-  --     index = { threads = 0 },
-  --     cache = { directory = os.getenv("XDG_CACHE_HOME") .. "/ccls" },
-  --     clang = {
-  --       extraArgs = {
-  --         "-std=c++20", "-Wall", "-Wextra", "-Wno-logical-op-parentheses"
-  --       },
-  --       -- extraArgs = { "-Wall", "-Wextra", "-Wno-logical-op-parentheses" },
-  --       excludeArgs = { "-frounding-math" }
-  --     },
-  --     client = { snippetSupport = true }
-  --   }
-  -- }
-
   nvim_lsp.texlab.setup {
     capabilities = capabilities,
     settings = {
@@ -253,10 +201,13 @@ M.config = function()
   nvim_lsp.clangd.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    filetypes = { "c", "cpp" },
+    filetypes = { "cpp", "c" },
     cmd = {
-      'clangd', "--clang-tidy", "--fallback-style=llvm",
-      '--clang-tidy-checks=-clang-analyzer-*,bugprone-*,misc-*,-misc-non-private-member-variables-in-classes,performance-*,-performance-no-automatic-move,modernize-use-*,-modernize-use-nodiscard,-modernize-use-trailing-return-type'
+      'clangd', '--header-insertion=never', '--suggest-missing-includes',
+      '--background-index', '-j=8', '--cross-file-rename',
+      '--pch-storage=memory', '--clang-tidy', --'-std=c11',
+      '--clang-tidy-checks=-clang-analyzer-*,bugprone-*,misc-*,-misc-non-private-member-variables-in-classes,performance-*,-performance-no-automatic-move,modernize-use-*,-modernize-use-nodiscard,-modernize-use-trailing-return-type',
+      -- '--compile-commands-dir=build'
     },
     -- on_init = require'clangd_nvim'.on_init,
     -- callbacks = lsp_status.extensions.clangd.setup(),
@@ -268,6 +219,26 @@ M.config = function()
     offset_encoding = "utf-16"
   }
 
+  nvim_lsp.ccls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "ccls" },
+    filetypes = { "c", "cpp", "objc", "objcpp" },
+    single_file_support = true,
+    init_options = {
+      compilationDatabaseDirectory = "build",
+      index = { threads = 0 },
+      cache = { directory = os.getenv("XDG_CACHE_HOME") .. "/ccls" },
+      clang = {
+        extraArgs = {
+          "-std=c++23", "-Wall", "-Wextra", "-Wno-logical-op-parentheses", "--std=c17"
+        },
+        -- extraArgs = { "-Wall", "-Wextra", "-Wno-logical-op-parentheses" },
+        excludeArgs = { "-frounding-math" }
+      },
+      client = { snippetSupport = true }
+    }
+  }
   nvim_lsp.emmet_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
