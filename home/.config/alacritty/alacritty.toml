@@ -42,7 +42,7 @@ blinking = "Always"
 size = 9
 
 [font.normal]
-family = "ProFont Nerd Font"
+family = "FiraCode Nerd Font Mono"
 style = "Regular"
 
 [[keyboard.bindings]]

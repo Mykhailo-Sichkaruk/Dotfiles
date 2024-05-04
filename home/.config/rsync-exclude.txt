@@ -1,0 +1,7 @@
+node_modules/
+.cache/
+*cache*/
+**/*.tmp
+**/*.log
+*Cache*/
+__pycache__/

@@ -51,7 +51,6 @@ if status --is-interactive
   # source /etc/profile
   fenv source /etc/profile
 end
-# rye end
 
-zoxide init fish | source
+# zoxide init fish | source
 eval "$(zoxide init --cmd cd fish)"

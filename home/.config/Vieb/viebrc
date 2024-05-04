@@ -93,7 +93,7 @@ set suspendtimeoutignore+=ga//
 set userscript
 set userstyle
 set vimcommand=nvim
-set windowtitle="VIEB"
+set windowtitle="'"VIEB"'"
 
 " Mappings
 map <A-h> <previousTab>
@@ -123,6 +123,7 @@ imap <C-e> <editWithVim>
 mmap <C-c> <p.copyText>
 nmap <C-l> <nextTab>
 nmap <C-p> <:pin>
+nunmap <Esc>
 nmap = <zoomReset>
 nunmap [
 nunmap ]

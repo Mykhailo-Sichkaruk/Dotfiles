@@ -48,7 +48,7 @@ vim.opt.wrap = false
 vim.opt.showmode = false
 vim.opt.signcolumn = 'no'
 vim.opt.cursorline = true
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 -- vim.opt.colorcolumn = "81,101"
 
 -- vim.opt.loaded_perl_provider = 0
