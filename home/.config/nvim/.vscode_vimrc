@@ -1,0 +1,33 @@
+nmap <silent> <leader>y "+y
+vmap <silent> <leader>y "+y
+nmap <silent> <leader>p "+p
+vmap <silent> <leader>p "+p
+nmap <silent> <leader>d "+d
+vmap <silent> <leader>d "+d
+nmap <silent> <leader>dd "+dd
+vmap <silent> <leader>dd "+dd
+
+nmap <C-H> :bn<CR>
+nmap <tab> :bn<CR>
+
+map <leader>s <leader><leader>s
+map <leader>f <leader><leader>f
+map <leader>F <leader><leader>F
+map <leader>t <leader><leader>t
+map <leader>T <leader><leader>T
+map <leader>w <leader><leader>w # Collides with camelcase plug
+map <leader>b <leader><leader>b # Collides with camelcase plug
+map <leader>l <leader><leader>l
+map <leader>h <leader><leader>h
+map <leader>e <leader><leader>e # Collides with camelcase plug
+map <leader>ge <leader><leader>ge
+map <leader>j <leader><leader>j
+map <leader>k <leader><leader>k
+map <leader>/ <leader><leader>/
+map <leader>bdt <leader><leader>bdt
+map <leader>bdw <leader><leader>bdw
+map <leader>bde <leader><leader>bde
+map <leader>bdj <leader><leader>bdj
+map <leader>j <leader><leader>j
+let g:EasyMotion_smartcase = 0
+
