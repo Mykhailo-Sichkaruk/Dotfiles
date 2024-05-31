@@ -1,9 +1,0 @@
-[Unit]
-Description=Handle lid close events
-
-[Service]
-Type=simple
-ExecStart=~/.config/scripts/handle_lid_close.sh
-
-[Install]
-WantedBy=multi-user.target
