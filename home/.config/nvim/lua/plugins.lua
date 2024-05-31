@@ -1,8 +1,6 @@
 local M = {
-  {
-    'kevinhwang91/nvim-bqf',
-    lazy = false,
-  }, { 'akinsho/git-conflict.nvim', version = "*", config = true },
+  { 'kevinhwang91/nvim-bqf', lazy = false },
+  { 'akinsho/git-conflict.nvim', version = "*", config = true },
   { "https://github.com/mfussenegger/nvim-dap", lazy = false },
   { "https://github.com/mfussenegger/nvim-jdtls", lazy = false },
   { "IndianBoy42/tree-sitter-just", lazy = false },
@@ -510,14 +508,14 @@ local M = {
             hide_gitignored = true,
             hide_hidden = true, -- only works on Windows for hidden files/directories
             hide_by_name = {
-              -- "node_modules"
+              "node_modules"
             },
             hide_by_pattern = { -- uses glob style patterns
               -- "*.meta",
               -- "*/src/*/tsconfig.json",
             },
             always_show = { -- remains visible even if other settings would normally hide it
-              ".env", ".eslintrc.json", ".eslintrc"
+              ".env", ".eslintrc.json", "eslint.config.js",
             },
             never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
               -- ".DS_Store",
@@ -911,6 +909,11 @@ local M = {
             icon = "!",
             color = "error",
             alt = { "WTF", "WAIGWT" }
+          },
+          ASSUMPTION = {
+            icon = "__",
+            color = "error",
+            alt = { "AXIOM", "ASSUME" }
           }
         },
         merge_keywords = true, -- when true, custom keywords will be merged with the defaults

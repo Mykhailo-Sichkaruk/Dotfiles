@@ -95,14 +95,15 @@ M.config = function()
   vim.g.rust_recommended_style = 0;
   nvim_lsp.eslint.setup({
     root_dir = nvim_lsp.util.root_pattern(".eslintrc.json", ".eslintrc",
-                                          ".eslintrc.js"),
+                                          ".eslintrc.js", "eslint.config.js"),
     settings = {
       codeAction = {
         disableRuleComment = { enable = true, location = "separateLine" },
         showDocumentation = { enable = true }
       },
       codeActionOnSave = { enable = true, mode = "all" },
-      experimental = { useFlatConfig = false },
+      experimental = { useFlatConfig = true },
+      useFlatConfig = true,
       format = true,
       nodePath = "node_modules/",
       onIgnoredFiles = "on",
@@ -110,7 +111,7 @@ M.config = function()
       quiet = false,
       rulesCustomizations = {},
       run = "onSave",
-      useESLintClass = true,
+      useESLintClass = false,
       validate = "on",
       workingDirectory = { mode = "auto" }
     },
