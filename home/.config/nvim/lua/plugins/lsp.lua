@@ -102,7 +102,7 @@ M.config = function()
         showDocumentation = { enable = true }
       },
       codeActionOnSave = { enable = true, mode = "all" },
-      experimental = { useFlatConfig = true },
+      experimental = { useFlatConfig = false },
       useFlatConfig = true,
       format = true,
       nodePath = "node_modules/",
