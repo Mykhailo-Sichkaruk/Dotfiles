@@ -42,7 +42,8 @@ set darkreaderblocklist+=https://myaccount.google.com
 set darkreaderbrightness=150
 set darkreadergrayscale=10
 set devtoolsposition=split
-set dialogconfirm=notifyblock
+set dialogalert=notifyshow
+set dialogconfirm=notifyshow
 set downloadmethod=confirm
 set downloadpath=~/Downloads/
 set favoritepages=
@@ -63,6 +64,7 @@ set guifullscreentabbar=always
 set guihidetimeout=900000000000000
 set mapsuggestposition=bottomleft
 set modifiers=
+set nativenotification=always
 set notificationforpermissions=allowed
 set permissioncamera=ask
 set permissioncertificateerror=ask
@@ -93,11 +95,13 @@ set suspendtimeoutignore+=ga//
 set userscript
 set userstyle
 set vimcommand=nvim
-set windowtitle="'"VIEB"'"
+set windowtitle=""'"VIEB"'""
 
 " Mappings
 map <A-h> <previousTab>
 map <A-l> <nextTab>
+cmap <C-j> <commandHistoryPrevious>
+cmap <C-k> <commandHistoryNext>
 cmap <C-c> <p.copyText>
 cmap <C-a> <Home>
 cmap <C-e> <editWithVim>
@@ -109,10 +113,8 @@ cmap <C-?> <Del>
 cmap <C-h> <BS>
 cmap <C-b> <Left>
 cmap <C-f> <Right>
-cmap <C-k> <commandHistoryNext>
 cmap <C-u> <S-Home><BS>
 cmap <C-w> <C-S-Left><BS>
-cmap <C-j> <commandHistoryPrevious>
 emap <C-S-Tab> <prevSuggestionSection>
 emap <C-Tab> <nextSuggestionSection>
 emap <C-c> <p.copyText>
