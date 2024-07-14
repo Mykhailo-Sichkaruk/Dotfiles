@@ -52,5 +52,7 @@ if status --is-interactive
   fenv source /etc/profile
 end
 
+nvm use latest -s
+
 # zoxide init fish | source
 eval "$(zoxide init --cmd cd fish)"
