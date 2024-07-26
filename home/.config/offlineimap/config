@@ -4,8 +4,8 @@
 # https://raw.githubusercontent.com/sadsfae/misc-scripts/master/shell/mailsync.sh
 # https://wiki.archlinux.org/title/OfflineIMAP
 [general]
-maxsyncaccounts = 3
-accounts = misha0510, mykhailo_sichkaruk, mykhailo_sichkaruk_school
+maxsyncaccounts = 4
+accounts = misha0510, mykhailo_sichkaruk, mykhailo_sichkaruk_school, mykhailo@xclbr
 pythonfile = ~/.config/offlineimap/pass.py
 
 [mbnames]
@@ -15,6 +15,7 @@ header = "mailboxes "
 peritem = "+%(accountname)s/%(foldername)s"
 sep = " "
 footer = "\n"
+posthookk = ~/.config/offlineimap/notify.sh
 
 [Account misha0510]
 localrepository = Local_misha0510
@@ -78,3 +79,24 @@ holdconnectionopen = yes
 [Repository Local_mykhailo_sichkaruk_school]
 type = Maildir
 localfolders = ~/mail/mykhailo_sichkaruk_school
+
+[Account mykhailo@xclbr]
+localrepository = Local_mykhailo@xclbr
+remoterepository = Remote_mykhailo@xclbr
+autorefresh = 5
+
+[Repository Remote_mykhailo@xclbr]
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = mykhailo@xclbr.com
+remotepasseval = get_pass("mykhailo@xclbr")
+ssl = yes
+starttls = no
+sslcacertfile = /etc/ssl/certs/ca-bundle.crt
+ssl_version=tls1_2
+keepalive = 350
+holdconnectionopen = yes
+
+[Repository Local_mykhailo@xclbr]
+type = Maildir
+localfolders = ~/mail/mykhailo@xclbr
