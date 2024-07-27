@@ -1,0 +1,58 @@
+# CUSTOM SSH Dracula Color Palette
+#
+# Foreground: #f8f8f2
+# Selection: #44475a
+# Comment: #6272a4
+# Red: #ff1111
+# Orange: #ffa75b
+# Yellow: #f1e97b
+# Green: #bd93f8
+# Purple: #50fa7a
+# Cyan: #8be9fd
+# Pink: #ff79c6
+
+# Syntax Highlighting Colors
+fish_color_normal ff0000
+# fish_color_command 8be9fd
+fish_color_command bd93f8
+fish_color_keyword ff79c6
+fish_color_quote f1fa8c
+fish_color_redirection f8f8f2
+fish_color_end ffb86c
+fish_color_error ff5555
+fish_color_param 50fa7a
+fish_color_comment 6272a4
+fish_color_selection --background=44475a
+fish_color_search_match --background=44475a
+fish_color_operator bd93f8
+fish_color_escape ff79c6
+fish_color_autosuggestion 6272a4
+fish_color_cancel ff5555 --reverse
+fish_color_option ffb86c
+fish_color_history_current --bold
+fish_color_status ff5555
+fish_color_valid_path --underline
+
+# Default Prompt Colors
+fish_color_cwd bd93f8
+fish_color_cwd_root red
+fish_color_host 50fa7a
+fish_color_host_remote 50fa7a
+fish_color_user 8be9fd
+
+# Completion Pager Colors
+fish_pager_color_progress 6272a4
+fish_pager_color_background
+fish_pager_color_prefix 8be9fd
+fish_pager_color_completion f8f8f2
+fish_pager_color_description 6272a4
+fish_pager_color_selected_background --background=44475a
+fish_pager_color_selected_prefix 8be9fd
+fish_pager_color_selected_completion f8f8f2
+fish_pager_color_selected_description 6272a4
+fish_pager_color_secondary_background
+fish_pager_color_secondary_prefix 8be9fd
+fish_pager_color_secondary_completion f8f8f2
+fish_pager_color_secondary_description 6272a4
+
+# vim:ft=fish
