@@ -1,24 +1,24 @@
 [credential "https://github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+  helper = 
+  helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+  helper = 
+  helper = !/usr/bin/gh auth git-credential
 [user]
-	name = Mykhailo Sichkaruk
-	email = mykhailo.sichkaruk@gmail.com
-	signingkey = 900337E08F88C22A
+  name = Mykhailo Sichkaruk
+  email = mykhailo.sichkaruk@gmail.com
+  signingKey = 958B80A929ADC9E1
 [core]
-	editor = nvim
+  editor = nvim
 [commit]
-	gpgsign = true
+  gpgsign = true
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [diff]
-	tool = vimdiff
+  tool = vimdiff
 [sequence]
-	editor = nvim
+  editor = nvim
 [safe]
-	directory = /
+  directory = /
 [http]
-	postBuffer = 924288000
+  postBuffer = 924288000
