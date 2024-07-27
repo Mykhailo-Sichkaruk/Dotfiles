@@ -7,6 +7,68 @@ local M = {
   { "NoahTheDuke/vim-just", ft = { "just" }, lazy = false },
   { "https://github.com/roxma/nvim-yarp", lazy = false },
   { 'tzachar/highlight-undo.nvim', opts = {} }, {
+    "amitds1997/remote-nvim.nvim",
+    version = "*", -- Pin to GitHub releases
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- For standard functions
+      "MunifTanjim/nui.nvim", -- To build the plugin UI
+      "nvim-telescope/telescope.nvim" -- For picking b/w different remote methods
+    },
+    config = true
+  }, {
+    'lewis6991/gitsigns.nvim',
+    branch = 'main',
+    lazy = false,
+    config = function()
+      require('gitsigns').setup({
+        signs = {
+          add = { text = '┃' },
+          change = { text = '┃' },
+          delete = { text = '_' },
+          topdelete = { text = '‾' },
+          changedelete = { text = '~' },
+          untracked = { text = '┆' }
+        },
+        -- signs_staged = {
+        --   add = { text = '┃' },
+        --   change = { text = '┃' },
+        --   delete = { text = '_' },
+        --   topdelete = { text = '‾' },
+        --   changedelete = { text = '~' },
+        --   untracked = { text = '┆' }
+        -- },
+        -- signs_staged_enable = true,
+        signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+        numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+        linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+        word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+        watch_gitdir = { follow_files = true },
+        auto_attach = true,
+        attach_to_untracked = true,
+        current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+        current_line_blame_opts = {
+          virt_text = true,
+          virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+          delay = 1000,
+          ignore_whitespace = false,
+          virt_text_priority = 100
+        },
+        current_line_blame_formatter = '<author>, <author_time:%R> - <summary>',
+        sign_priority = 6,
+        update_debounce = 100,
+        status_formatter = nil, -- Use default
+        max_file_length = 40000, -- Disable if file is longer than this (in lines)
+        preview_config = {
+          -- Options passed to nvim_open_win
+          border = 'single',
+          style = 'minimal',
+          relative = 'cursor',
+          row = 0,
+          col = 1
+        }
+      })
+    end
+  }, {
     'sudormrfbin/cheatsheet.nvim',
     dependencies = {
       'nvim-telescope/telescope.nvim', 'nvim-lua/popup.nvim',
@@ -507,15 +569,13 @@ local M = {
             hide_dotfiles = true,
             hide_gitignored = true,
             hide_hidden = true, -- only works on Windows for hidden files/directories
-            hide_by_name = {
-              "node_modules"
-            },
+            hide_by_name = { "node_modules" },
             hide_by_pattern = { -- uses glob style patterns
               -- "*.meta",
               -- "*/src/*/tsconfig.json",
             },
             always_show = { -- remains visible even if other settings would normally hide it
-              ".env", ".eslintrc.json", "eslint.config.js",
+              ".env", ".eslintrc.json", "eslint.config.js"
             },
             never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
               -- ".DS_Store",
@@ -525,7 +585,7 @@ local M = {
               -- ".null-ls_*",
             }
           },
-          follow_current_file = true, -- This will find and focus the file in the active buffer every
+          follow_current_file = { enabled = true },
           -- time the current file is changed while the tree is open.
           group_empty_dirs = false, -- when true, empty folders will be grouped together
           hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
@@ -560,7 +620,7 @@ local M = {
           commands = {} -- Add a custom command or override a global one using the same function name
         },
         buffers = {
-          follow_current_file = true, -- This will find and focus the file in the active buffer every
+          follow_current_file = { enabled = true },
           -- time the current file is changed while the tree is open.
           group_empty_dirs = true, -- when true, empty folders will be grouped together
           show_unloaded = true,

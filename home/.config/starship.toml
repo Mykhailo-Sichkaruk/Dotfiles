@@ -108,7 +108,7 @@ style = "bold purple"
 truncation_length = 1000
 truncation_symbol = "…"
 only_attached = false
-ignore_matches= []
+ignore_branches = []
 disabled = false
 
 [fossil_branch]
