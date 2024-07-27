@@ -220,26 +220,26 @@ M.config = function()
     offset_encoding = "utf-16"
   }
 
-  nvim_lsp.ccls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { "ccls" },
-    filetypes = { "c", "cpp", "objc", "objcpp" },
-    single_file_support = true,
-    init_options = {
-      compilationDatabaseDirectory = "build",
-      index = { threads = 0 },
-      cache = { directory = os.getenv("XDG_CACHE_HOME") .. "/ccls" },
-      clang = {
-        extraArgs = {
-          "-std=c++23", "-Wall", "-Wextra", "-Wno-logical-op-parentheses", "--std=c17"
-        },
-        -- extraArgs = { "-Wall", "-Wextra", "-Wno-logical-op-parentheses" },
-        excludeArgs = { "-frounding-math" }
-      },
-      client = { snippetSupport = true }
-    }
-  }
+  -- nvim_lsp.ccls.setup {
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  --   cmd = { "ccls" },
+  --   filetypes = { "c", "cpp", "objc", "objcpp" },
+  --   single_file_support = true,
+  --   init_options = {
+  --     compilationDatabaseDirectory = "build",
+  --     index = { threads = 0 },
+  --     cache = { directory = os.getenv("XDG_CACHE_HOME") .. "/ccls" },
+  --     clang = {
+  --       extraArgs = {
+  --         "-std=c++23", "-Wall", "-Wextra", "-Wno-logical-op-parentheses", "--std=c17"
+  --       },
+  --       -- extraArgs = { "-Wall", "-Wextra", "-Wno-logical-op-parentheses" },
+  --       excludeArgs = { "-frounding-math" }
+  --     },
+  --     client = { snippetSupport = true }
+  --   kj}
+  -- }
   nvim_lsp.emmet_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,

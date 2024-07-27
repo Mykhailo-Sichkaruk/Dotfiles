@@ -38,11 +38,13 @@ if test -f /etc/profile
  bash -c 'source /etc/profile'
 end
 
-set -x PATH /home/ms/.cargo/bin /home/ms/.local/bin /home/ms/bin /usr/local/bin /usr/local/sbin /usr/bin /bin /sbin /usr/sbin $PATH
+set -x PATH ~/.cargo/bin ~/.local/bin ~//bin /usr/local/bin /usr/local/sbin /usr/bin /bin /sbin /usr/sbin $PATH
 set -x PATH "$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 set -x PATH "$HOME/.local/bin:$PATH"
+set -Ux fish_user_paths $HOME/.nix-profile/bin $fish_user_paths
 
-set XDG_DOWNLOAD_DIR /home/ms/Downloads
+
+set XDG_DOWNLOAD_DIR ~/Downloads
 set SHELL /usr/bin/fish
 set TERMINAL /usr/bin/alacritty
 set GTK_THEME BlackAndWhite

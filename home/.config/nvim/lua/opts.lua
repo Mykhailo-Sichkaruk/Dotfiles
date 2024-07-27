@@ -85,9 +85,6 @@ vim.filetype.add({
     ['.env'] = "config",
     ['.env.example'] = "config",
     ['.prettierrc'] = "json"
-    -- ['rkt'] = "scheme",
-    -- ['rktl'] = "scheme",
-    -- ['rktd'] = "scheme",
   }
 
 })
