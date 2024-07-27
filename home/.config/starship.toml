@@ -101,6 +101,24 @@ ssh_only = true
 format = '@[$localipv4](bold blue) '
 disabled = false
 
+[git_branch]
+format = "[$symbol$branch]($style)"
+symbol = " "
+style = "bold purple"
+truncation_length = 1000
+truncation_symbol = "…"
+only_attached = false
+ignore_matches= []
+disabled = false
+
+[fossil_branch]
+format = "[$symbol$branch]($style)"
+symbol = " "
+style = "bold purple"
+truncation_length = 1000
+truncation_symbol = "…"
+disabled = false
+
 [username]
 style_user = 'white bold'
 style_root = 'black bold'
@@ -141,12 +159,6 @@ symbol = " "
 
 [fennel]
 symbol = " "
-
-[fossil_branch]
-symbol = " "
-
-[git_branch]
-symbol = " "
 
 [golang]
 symbol = " "
