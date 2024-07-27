@@ -55,6 +55,8 @@ if status --is-interactive
 end
 
 nvm use latest -s
+starship init fish | source
+
 
 # zoxide init fish | source
 eval "$(zoxide init --cmd cd fish)"
