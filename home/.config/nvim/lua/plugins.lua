@@ -14,7 +14,23 @@ local M = {
       "MunifTanjim/nui.nvim", -- To build the plugin UI
       "nvim-telescope/telescope.nvim" -- For picking b/w different remote methods
     },
-    config = true
+    config = function()
+      require("remote-nvim").setup({
+        client_callback = function(port, workspace_config)
+          local cmd =
+              ("alacritty -e nvim --server localhost:%s --remote-ui"):format(
+                  port)
+          vim.fn.jobstart(cmd, {
+            detach = true,
+            on_exit = function(job_id, exit_code, event_type)
+              -- This function will be called when the job exits
+              print("Client", job_id, "exited with code", exit_code,
+                    "Event type:", event_type)
+            end
+          })
+        end
+      })
+    end
   }, {
     'lewis6991/gitsigns.nvim',
     branch = 'main',
@@ -65,7 +81,56 @@ local M = {
           relative = 'cursor',
           row = 0,
           col = 1
-        }
+        },
+        on_attach = function(bufnr)
+          local gitsigns = require('gitsigns')
+
+          local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+          end
+
+          -- Navigation
+          map('n', ']c', function()
+            if vim.wo.diff then
+              vim.cmd.normal({ ']c', bang = true })
+            else
+              gitsigns.nav_hunk('next')
+            end
+          end)
+
+          map('n', '[c', function()
+            if vim.wo.diff then
+              vim.cmd.normal({ '[c', bang = true })
+            else
+              gitsigns.nav_hunk('prev')
+            end
+          end)
+
+          -- Actions
+          map('n', '<leader>hs', gitsigns.stage_hunk)
+          map('n', '<leader>hr', gitsigns.reset_hunk)
+          map('v', '<leader>hs', function()
+            gitsigns.stage_hunk { vim.fn.line('.'), vim.fn.line('v') }
+          end)
+          map('v', '<leader>hr', function()
+            gitsigns.reset_hunk { vim.fn.line('.'), vim.fn.line('v') }
+          end)
+          map('n', '<leader>hS', gitsigns.stage_buffer)
+          map('n', '<leader>hu', gitsigns.undo_stage_hunk)
+          map('n', '<leader>hR', gitsigns.reset_buffer)
+          map('n', '<leader>hp', gitsigns.preview_hunk)
+          map('n', '<leader>hb',
+              function() gitsigns.blame_line { full = true } end)
+          map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
+          map('n', '<leader>hd', gitsigns.diffthis)
+          map('n', '<leader>hD', function() gitsigns.diffthis('~') end)
+          map('n', '<leader>td', gitsigns.toggle_deleted)
+
+          -- Text object
+          map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+        end
       })
     end
   }, {
@@ -680,6 +745,7 @@ local M = {
         stdin = 1
       }
       vim.g.neoformat_enabled_asm = { 'asmfmt' }
+      vim.g.neoformat_enabled_json = { 'prettier' }
       vim.g.neoformat_enabled_nasm = { 'asmfmt' }
       vim.g.neoformat_nasm_asmfmt = { exe = 'asmfmt', stdin = 1 }
       vim.g.neoformat_asm_asmfmt = { exe = 'asmfmt', stdin = 1 }
@@ -949,7 +1015,8 @@ local M = {
     config = function()
       vim.cmd "au BufReadPost,BufNewFile,BufRead * hi clear TODO"
       require("todo-comments").setup {
-        signs = true,
+        signs = false,
+        signs_priority = 8,
         keywords = {
           FIX = {
             icon = " ",
