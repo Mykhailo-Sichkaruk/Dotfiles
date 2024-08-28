@@ -103,7 +103,7 @@ M.config = function()
       },
       codeActionOnSave = { enable = true, mode = "all" },
       experimental = { useFlatConfig = false },
-      useFlatConfig = true,
+      useFlatConfig = false,
       format = true,
       nodePath = "node_modules/",
       onIgnoredFiles = "on",

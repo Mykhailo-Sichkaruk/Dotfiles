@@ -39,6 +39,7 @@ set darkreaderblocklist+=https://www.semanticscholar.org/
 set darkreaderblocklist+=https://myaccount.google.com/
 set darkreaderblocklist+=https://myaccount.google.com/
 set darkreaderblocklist+=https://myaccount.google.com
+set darkreaderblocklist+=https://www.bottomupcs.com
 set darkreaderbrightness=150
 set darkreadergrayscale=10
 set devtoolsposition=split
@@ -95,7 +96,7 @@ set suspendtimeoutignore+=ga//
 set userscript
 set userstyle
 set vimcommand=nvim
-set windowtitle=""'"VIEB"'""
+set windowtitle="""'"VIEB"'"""
 
 " Mappings
 map <A-h> <previousTab>

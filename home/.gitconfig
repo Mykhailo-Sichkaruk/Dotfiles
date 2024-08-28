@@ -7,7 +7,7 @@
 [user]
   name = Mykhailo Sichkaruk
   email = mykhailo.sichkaruk@gmail.com
-  signingKey = 958B80A929ADC9E1
+  signingKey = 900337E08F88C22A
 [core]
   editor = nvim
 [commit]
