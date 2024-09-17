@@ -2,6 +2,7 @@
 
 with pkgs;
 [
+  gh                # Github CLI
   neovim            # Text editor
   nodejs            # JavaScript runtime
   python3           # Python programming language
