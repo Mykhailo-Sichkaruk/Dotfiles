@@ -27,6 +27,8 @@ export GTK_THEME="BlackAndWhite"
 export NPM_GLOBAL="$HOME/.npm-global"
 export PATH="$NPM_GLOBAL/bin:$PATH"
 
+export LC_ALL=en_US.UTF-8
+
 xset r rate 250 50
 xset b off
 numlockx on
