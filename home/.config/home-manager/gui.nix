@@ -1,26 +1,26 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { config.allowUnfree = true; } }:
 
 with pkgs;
 let
   shellConfig = import ./shell.nix {};
 in shellConfig ++ [
-  visual-studio-code-bin # Visual Studio Code IDE
+  # alacritty         # Terminal emulator
+  mysql-workbench   # MySQL database design and management tool
+  i3                # Tiling window manager
+  i3status-rust    # i3 status bar
+  youtube-music     # Music streaming service
+  vscode            # Code editor
   obs-studio        # Open Broadcaster Software
-  qt6-base          # Core Qt framework
-  lm_sensors        # CLI hardware monitoring tool
-  texinfo           # GNU documentation tool
+  # qt6-base          # Core Qt framework
   discord           # Chat and collaboration platform
   pipewire          # Audio and video server
-  slack-desktop     # Collaboration platform for teams
-  electron          # Desktop application framework
+  slack#             Collaboration platform for teams
   telegram-desktop  # Telegram client
-  xorg-server-xephyr # Nested X server
-  xorg-server-xnest # Nested X server
+  # xorg-server-xephyr # Nested X server
+  # xorg-server-xnest # Nested X server
   youtube-music     # Music streaming service
-  youtube-dl        # Video downloader
   dbeaver           # Database manager
-  drawio-desktop    # Diagramming tool
-  telegram-desktop  # Telegram client
+  drawio            # Diagramming tool
   mpv               # Video player
   neomutt           # Email client
   gtkmm4            # C++ bindings for GTK+4
@@ -29,14 +29,13 @@ in shellConfig ++ [
   ffmpeg            # Multimedia framework
   obsidian          # Note-taking software
   pdftk             # PDF toolkit
-  vimiv             # Image viewer and Vim-like interface
-  drawio-desktop    # Diagramming tool
+  vimiv-qt             # Image viewer and Vim-like interface
   neomutt           # Email client
   ripgrep           # CLI search tool
   wayland           # Display server protocol
   gtk4              # Toolkit for creating GUIs
   imagemagick       # Image processing tools
-  zathura-djvu      # DjVu file viewer
+  zathura           # PDF / DJVU file viewer
   vlc               # Media player
   gnome-keyring     # GNOME's password management tool
   calc              # Calculator application
