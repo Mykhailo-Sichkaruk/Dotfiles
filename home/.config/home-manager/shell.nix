@@ -10,7 +10,7 @@ with pkgs;
   zip              # Compression tool
   starship         # Shell prompt
   zoxide            # Directory navigation tool
-  gh                # GitHub CLI
+  # gh                # GitHub CLI
   tlp               # Power management tool
   neovim            # Text editor
   # nodejs            # JavaScript runtime
