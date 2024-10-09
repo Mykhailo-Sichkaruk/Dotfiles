@@ -343,5 +343,5 @@ x = 10
 y = 10
 
 [shell]
-program = "/usr/bin/fish"
+program = "fish"
 args = ["-l"]

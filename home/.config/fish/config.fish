@@ -59,8 +59,6 @@ end
 nvm use latest -s
 starship init fish | source
 
-set -x LC_ALL en_US.UTF-8
-
 source ~/.config/fish/functions/forget_last_command.fish
 
 fish_vi_key_bindings

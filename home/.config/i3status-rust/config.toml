@@ -73,7 +73,7 @@ interval = 20
 
 [[block]]
 block = "bluetooth"
-mac = "28:6F:40:41:3F:6D"
+mac = "40:72:18:BD:17:14"
 format = "$icon {$percentage|}"
 disconnected_format = "$icon"
 [block.battery_state]
