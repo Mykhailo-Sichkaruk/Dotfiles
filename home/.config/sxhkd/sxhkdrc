@@ -43,7 +43,7 @@
 # super + {_,shift} + apostrophe
 #   useus splatmoji {type,copy}
 # 
-brightness control
+# brightness control
 XF86MonBrightness{Up,Down}
   light -{A,U} 10 
  

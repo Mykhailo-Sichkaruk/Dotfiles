@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the MAC address of your Bluetooth headphones
-headphones_mac="28:6F:40:41:3F:6D"
+headphones_mac="40:72:18:BD:17:14"
 
 # Check if Bluetooth is enabled
 if [[ $(bluetoothctl show | grep "Powered: yes") ]]; then
