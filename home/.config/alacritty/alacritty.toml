@@ -342,6 +342,8 @@ lines = 37
 x = 10
 y = 10
 
-[shell]
+[terminal]
+
+[terminal.shell]
 program = "fish"
 args = ["-l"]
