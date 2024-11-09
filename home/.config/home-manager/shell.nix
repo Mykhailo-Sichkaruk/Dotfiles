@@ -66,9 +66,9 @@ with pkgs;
   texinfo           # Info documentation system
   findutils         # File search tools
   tree              # Directory listing tool
-  pipewire          # Audio/video server
   fish              # Shell with user-friendly features
   speedtest-cli     # Internet speed test tool
   tldr              # Simplified man pages
+  nixd
 ]
 
