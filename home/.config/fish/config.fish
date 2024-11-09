@@ -47,8 +47,8 @@ set -Ux fish_user_paths $HOME/.nix-profile/bin $fish_user_paths
 
 
 set XDG_DOWNLOAD_DIR ~/Downloads
-set SHELL /usr/bin/fish
-set TERMINAL /usr/bin/alacritty
+set SHELL fish
+set TERMINAL alacritty
 set GTK_THEME BlackAndWhite
 # fenv + rye: source "$HOME/.rye/env"
 if status --is-interactive
