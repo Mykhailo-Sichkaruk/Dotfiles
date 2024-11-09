@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 
 let
-  myGlibcLocales = pkgs.glibcLocales.override {
-    locales = [ "en_US.UTF-8" ];
-  };
   # Import shell configuration
   shellConfig = import ./shell.nix {};
 
@@ -17,17 +14,15 @@ in
 
   # Define the packages to be installed
   home.packages = shellConfig ++ [
-    # pkgs.xorg.xserver  # Xorg server from Nix
-    # pkgs.xorg.xinit    # If you use `startx` or `xinit` to start i3
     pkgs.rofi
+    pkgs.keepassxc
     pkgs.neomutt
     pkgs.sxhkd           # Simple X hotkey daemon
     pkgs.pulsemixer    # PulseAudio mixer
     pkgs.easyeffects
     pkgs.vifm
     pkgs.mysql-workbench
-    # pkgs.i3
-    # pkgs.i3status-rust
+    pkgs.spice-vdagent
     pkgs.youtube-music  # Install YouTube Music here
     pkgs.vscode
     pkgs.obs-studio
@@ -51,11 +46,38 @@ in
     pkgs.glibcLocales
     pkgs.nerdfonts
     pkgs.alacritty
+    pkgs.dex
+    pkgs.offlineimap
+    pkgs.i3lock
+    pkgs.dunst
   ];
 
-  home.sessionVariables = {
-    LC_ALL = "en_US.UTF-8";
-    LANG = "en_US.UTF-8";
+#xsession.windowManager.i3 = {
+#   enable = true;
+#   config = {
+#     bars = [
+#     { 
+#       position = "bottom";
+#j     statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config.toml";
+#     }
+#     ];
+#   };
+# };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+        "text/html" = "vieb.desktop";
+        "x-scheme-handler/http" = "vieb.desktop";
+        "x-scheme-handler/https" = "vieb.desktop";
+        "x-scheme-handler/about" = "vieb.desktop";
+        "x-scheme-handler/unknown" = "vieb.desktop";
+        #"text/html" = "${pkgs.vieb}/bin/vieb";
+        #"x-scheme-handler/http" = "${pkgs.vieb}/bin/vieb";
+        #"x-scheme-handler/https" = "${pkgs.vieb}/bin/vieb";
+        #"x-scheme-handler/about" = "${pkgs.vieb}/bin/vieb";
+        #"x-scheme-handler/unknown" = "${pkgs.vieb}/bin/vieb";
+    };
   };
   # Add the external GUI config (which includes the YouTube Music desktop entry)
   imports = [
