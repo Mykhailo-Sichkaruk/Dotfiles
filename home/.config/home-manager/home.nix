@@ -22,7 +22,7 @@ in
     pkgs.easyeffects
     pkgs.vifm
     pkgs.mysql-workbench
-    pkgs.spice-vdagent
+    #pkgs.spice-vdagent
     pkgs.youtube-music  # Install YouTube Music here
     pkgs.vscode
     pkgs.obs-studio
@@ -50,6 +50,8 @@ in
     pkgs.offlineimap
     pkgs.i3lock
     pkgs.dunst
+    pkgs.xclip
+    pkgs.oh-my-fish
   ];
 
 #xsession.windowManager.i3 = {
@@ -63,6 +65,58 @@ in
 #     ];
 #   };
 # };
+  
+  programs = {
+    fish = {
+      enable = true;
+      interactiveShellInit = ''
+        set fish_cursor_insert line
+        set fish_greeting
+        fish_config theme choose "Dracula Official"
+        function fish_mode_prompt; end
+        alias e="eza -ab --group-directories-first --icons"
+        alias ex="eza -ab --group-directories-first --icons -lTL 1 --no-time --git --no-user"
+        alias ls="ls --color -L"
+        alias la="eza"
+        alias l="ex"
+        alias h="history 1 | grep"
+        alias rm="rm -rf"
+        alias cp="cp -r"
+        alias ..="cd .."
+        alias ...="cd ../.."
+        alias ....="cd ../../.."
+        alias .....="cd ../../../.."
+        alias cls="clear"
+        alias gitclown="git clone"
+
+        bind -k nul -M insert accept-autosuggestion
+        bind \cg forget_last_command
+        bind --mode insert \cg forget_last_command
+
+        starship init fish | source
+        fish_vi_key_bindings
+        eval "$(zoxide init --cmd cd fish)"
+      '';
+      plugins = [
+          { 
+            name = "grc"; 
+            src = pkgs.fishPlugins.grc.src; 
+          }
+          {
+            name = "z";
+            src = pkgs.fishPlugins.z.src; 
+          }
+          {
+            name = "fzf-fish";
+            src = pkgs.fishPlugins.fzf-fish.src;
+          }
+          {
+            name = "plugin-git";
+            src = pkgs.fishPlugins.plugin-git.src;
+          }
+      ];
+    };
+  };
 
   xdg.mimeApps = {
     enable = true;
