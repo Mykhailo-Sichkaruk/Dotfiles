@@ -8,3 +8,49 @@
 **/vifminfo.json
 **/betterdiscord.asar
 **/fish_variables
+**/*Cache*
+**/Service Worker/
+**/IndexedDB/
+**/node_modules/
+**/Local Storage/
+home/.local
+**/logs
+**/favicons
+**/Partitions
+**/Session Storage
+**/SessionStorage
+**/Shared Dictionary
+**/Dictionaries
+**/SharedStorage
+**/Shared Storage
+**/TransportSecurity
+**/WebStorage
+**/Conversions
+**/Conversions-journal
+**/databases
+**/globalStorage
+**/Crashpad
+**/Network Persistent State
+**/YouTube Music/shared_proto_db
+**/YouTube Music/TarnsportSecurity
+**/YouTube Music/Service Worker/
+**/YouTube Music/VideoDecodeStats
+**/YouTube Music/Crashpad
+**/Trust Tokens
+**/Trust Tokens-journal
+**/Cookies*
+# Vieb
+**/Vieb/windowstate
+**/Vieb/tabs
+**/Vieb/SingletonSocket
+**/Vieb/SingletonLock
+**/Vieb/SingletonCookie
+**/Vieb/hist
+**/Vieb/explorehist
+**/Vieb/SharedStorage-wal
+# Obsidian
+**/obsidian.log
+**/obsidian-1.7.5.asar
+# VsCode
+**/Code/code.lock
+**/Code/machineid
