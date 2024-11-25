@@ -48,9 +48,15 @@ home/.local
 **/Vieb/hist
 **/Vieb/explorehist
 **/Vieb/SharedStorage-wal
+**/Vieb/settings
+**/Vieb/Preferences
+**/Vieb/blocklists
 # Obsidian
 **/obsidian.log
 **/obsidian-1.7.5.asar
 # VsCode
 **/Code/code.lock
 **/Code/machineid
+home/.ssh/
+home/fish/conf\.d/
+home/.config/fish/conf.d
