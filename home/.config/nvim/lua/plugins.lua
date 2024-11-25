@@ -822,6 +822,11 @@ local M = {
         try_node_exe = 1
       }
       vim.g.neoformat_enabled_json = { 'prettier' }
+      vim.g.neoformat_enabled_nix = { 'nixfmt' }
+      vim.g.neoformat_nix_nixfmt = {
+        exe = 'nixfmt',
+        stdin = 1
+      }
     end
   }, {
     -- bar at the top

@@ -18,7 +18,7 @@ icons = "awesome6"
 
 [[block]]
 block = "amd_gpu"
-device = "card1"
+device = "card2"
 format = "AMD $icon $utilization $vram_used"
 interval = 20
 
@@ -46,7 +46,17 @@ alert_unit = "GB"
 interval = 3600 
 warning = 20.0
 alert = 10.0
-format = "$icon $available"
+format = "/home $icon $available"
+
+[[block]]
+block = "disk_space"
+path = "/"
+info_type = "available"
+alert_unit = "GB"
+interval = 3600 
+warning = 20.0
+alert = 10.0
+format = "/$icon $available"
 
 [[block]]
 interval = 20
@@ -65,16 +75,16 @@ missing_format = "$icon $power $percentage{ $time|}"
 charging_format = "$icon $power $percentage{ $time|}"
 not_charging_format = "$icon $percentage{ $time|}"
  
-[[block]]
-block = "custom"
-command = "bash ~/.config/i3status-rust/power_mode.sh"
-json = true
-interval = 20
+# [[block]]
+# block = "custom"
+# command = "bash ~/.config/i3status-rust/power_mode.sh"
+# json = true
+# interval = 20
 
 [[block]]
 block = "bluetooth"
 mac = "40:72:18:BD:17:14"
-format = "$icon {$percentage|}"
+format = "$icon {$percentage |}"
 disconnected_format = "$icon"
 [block.battery_state]
 "0..20" = "critical"
