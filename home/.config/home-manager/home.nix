@@ -2,7 +2,7 @@
 
 let
   # Import shell configuration
-  shellConfig = import ./shell.nix {};
+  shellConfig = import ./shell.nix { };
 
   # Import GUI configuration
   youtubeMusicConfig = import ./programs/gui.nix { inherit pkgs; };
@@ -13,59 +13,53 @@ in
   home.stateVersion = "24.05";
 
   # Define the packages to be installed
-  home.packages = shellConfig ++ [
-    pkgs.rofi
-    pkgs.keepassxc
-    pkgs.neomutt
-    pkgs.sxhkd           # Simple X hotkey daemon
-    pkgs.pulsemixer    # PulseAudio mixer
-    pkgs.easyeffects
-    pkgs.vifm
-    pkgs.mysql-workbench
-    #pkgs.spice-vdagent
-    pkgs.youtube-music  # Install YouTube Music here
-    pkgs.vscode
-    pkgs.obs-studio
-    pkgs.discord
-    pkgs.betterdiscordctl
-    pkgs.pipewire
-    pkgs.slack
-    pkgs.telegram-desktop
-    pkgs.dbeaver-bin
-    pkgs.drawio
-    pkgs.mpv
-    pkgs.obsidian
-    pkgs.vimiv-qt
-    pkgs.zathura
-    pkgs.calc
-    pkgs.vieb
-    pkgs.google-chrome
-    pkgs.peek
-    pkgs.kooha
-    pkgs.mpv               # Media player
-    pkgs.glibcLocales
-    pkgs.nerdfonts
-    pkgs.alacritty
-    pkgs.dex
-    pkgs.offlineimap
-    pkgs.i3lock
-    pkgs.dunst
-    pkgs.xclip
-    pkgs.oh-my-fish
-  ];
+  home.packages =
+    shellConfig
+    ++ (with pkgs; [
+      safe-rm
+      rofi
+      keepassxc
+      neomutt
+      sxhkd # Simple X hotkey daemon
+      pulsemixer # PulseAudio mixer
+      easyeffects
+      vifm
+      mysql-workbench
+      spice-vdagent
+      youtube-music # Install YouTube Music here
+      vscode
+      obs-studio
+      discord
+      betterdiscordctl
+      pipewire
+      slack
+      telegram-desktop
+      dbeaver-bin
+      drawio
+      mpv
+      obsidian
+      vimiv-qt
+      zathura
+      calc
+      vieb
+      google-chrome
+      peek
+      kooha
+      mpv # Media player
+      glibcLocales
+      nerdfonts
+      alacritty
+      dex
+      offlineimap
+      i3lock
+      dunst
+      xclip
+      oh-my-fish
+      syncthing
+      nix-du
+      insomnia
+    ]);
 
-#xsession.windowManager.i3 = {
-#   enable = true;
-#   config = {
-#     bars = [
-#     { 
-#       position = "bottom";
-#j     statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config.toml";
-#     }
-#     ];
-#   };
-# };
-  
   programs = {
     fish = {
       enable = true;
@@ -98,22 +92,22 @@ in
         eval "$(zoxide init --cmd cd fish)"
       '';
       plugins = [
-          { 
-            name = "grc"; 
-            src = pkgs.fishPlugins.grc.src; 
-          }
-          {
-            name = "z";
-            src = pkgs.fishPlugins.z.src; 
-          }
-          {
-            name = "fzf-fish";
-            src = pkgs.fishPlugins.fzf-fish.src;
-          }
-          {
-            name = "plugin-git";
-            src = pkgs.fishPlugins.plugin-git.src;
-          }
+        {
+          name = "grc";
+          src = pkgs.fishPlugins.grc.src;
+        }
+        {
+          name = "z";
+          src = pkgs.fishPlugins.z.src;
+        }
+        {
+          name = "fzf-fish";
+          src = pkgs.fishPlugins.fzf-fish.src;
+        }
+        {
+          name = "plugin-git";
+          src = pkgs.fishPlugins.plugin-git.src;
+        }
       ];
     };
   };
@@ -121,22 +115,27 @@ in
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-        "text/html" = "vieb.desktop";
-        "x-scheme-handler/http" = "vieb.desktop";
-        "x-scheme-handler/https" = "vieb.desktop";
-        "x-scheme-handler/about" = "vieb.desktop";
-        "x-scheme-handler/unknown" = "vieb.desktop";
-        #"text/html" = "${pkgs.vieb}/bin/vieb";
-        #"x-scheme-handler/http" = "${pkgs.vieb}/bin/vieb";
-        #"x-scheme-handler/https" = "${pkgs.vieb}/bin/vieb";
-        #"x-scheme-handler/about" = "${pkgs.vieb}/bin/vieb";
-        #"x-scheme-handler/unknown" = "${pkgs.vieb}/bin/vieb";
+      "text/html" = "vieb.desktop";
+      "x-scheme-handler/http" = "vieb.desktop";
+      "x-scheme-handler/https" = "vieb.desktop";
+      "x-scheme-handler/about" = "vieb.desktop";
+      "x-scheme-handler/unknown" = "vieb.desktop";
     };
   };
+
   # Add the external GUI config (which includes the YouTube Music desktop entry)
-  imports = [
-    ./programs/gui.nix
-  ];
+  imports = [ ./programs/gui.nix ];
+
+  services.syncthing = {
+    enable = true;
+    # Still not in the stable version
+    #guiAddress = "127.0.0.1:8384";
+    #settings.folders = {
+    #    "/home/ms/Sync" = {
+    #      id = "laptop_phone";
+    #    };
+    #  };
+  };
 
   # Let Home Manager manage itself
   programs.home-manager.enable = true;

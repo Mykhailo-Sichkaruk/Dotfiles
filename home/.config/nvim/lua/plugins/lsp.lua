@@ -141,13 +141,13 @@ M.config = function()
     }
   }
 
-  nvim_lsp.java_language_server.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { "/home/ms/java-language-server/dist/lang_server_linux.sh" },
-    filetypes = { "java" }
-    -- settings = {},
-  }
+  -- nvim_lsp.java_language_server.setup {
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  --   cmd = { "/home/ms/java-language-server/dist/lang_server_linux.sh" },
+  --   filetypes = { "java" }
+  --   -- settings = {},
+  -- }
 
   nvim_lsp.texlab.setup {
     capabilities = capabilities,
@@ -247,6 +247,15 @@ M.config = function()
   })
 
   nvim_lsp.luau_lsp.setup({})
+  nvim_lsp.nixd.setup({
+    settings = {
+        nixd = {
+           formatting = {
+              command = { "nixfmt" },
+           },
+        },
+     },
+  })
 end
 
 M.init = function()
