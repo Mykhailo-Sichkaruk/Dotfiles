@@ -17,6 +17,11 @@ icons = "awesome6"
 # blocking_cmd = false
 
 [[block]]
+block = "net"
+format = "$icon {$signal_strength $ssid $frequency|Wired} $ip $device"
+interval = 10
+
+[[block]]
 block = "amd_gpu"
 device = "card2"
 format = "AMD $icon $utilization $vram_used"
@@ -40,16 +45,6 @@ format = "$icon $barchart $utilization"
 
 [[block]]
 block = "disk_space"
-path = "/home/"
-info_type = "available"
-alert_unit = "GB"
-interval = 3600 
-warning = 20.0
-alert = 10.0
-format = "/home $icon $available"
-
-[[block]]
-block = "disk_space"
 path = "/"
 info_type = "available"
 alert_unit = "GB"
@@ -57,6 +52,16 @@ interval = 3600
 warning = 20.0
 alert = 10.0
 format = "/$icon $available"
+
+[[block]]
+block = "disk_space"
+path = "/home/"
+info_type = "available"
+alert_unit = "GB"
+interval = 3600 
+warning = 20.0
+alert = 10.0
+format = "$icon $available"
 
 [[block]]
 interval = 20

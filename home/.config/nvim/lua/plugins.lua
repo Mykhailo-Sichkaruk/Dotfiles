@@ -1,12 +1,42 @@
 local M = {
+  -- { 'echasnovski/mini.icons', version = false },
+  -- { 'echasnovski/mini.nvim', version = false },
   { 'kevinhwang91/nvim-bqf', lazy = false },
   { 'akinsho/git-conflict.nvim', version = "*", config = true },
   { "https://github.com/mfussenegger/nvim-dap", lazy = false },
   { "https://github.com/mfussenegger/nvim-jdtls", lazy = false },
   { "IndianBoy42/tree-sitter-just", lazy = false },
   { "NoahTheDuke/vim-just", ft = { "just" }, lazy = false },
-  { "https://github.com/roxma/nvim-yarp", lazy = false },
-  { 'tzachar/highlight-undo.nvim', opts = {} }, {
+  { "https://github.com/roxma/nvim-yarp", lazy = false }, {
+    'numToStr/Comment.nvim',
+    lazy = false,
+    config = function()
+      require('Comment').setup({
+        ---LHS of toggle mappings in NORMAL mode
+        toggler = {
+          ---Line-comment toggle keymap
+          line = '<C-/>',
+          ---Block-comment toggle keymap
+          block = '<C-/>'
+        },
+        ---LHS of operator-pending mappings in NORMAL and VISUAL mode
+        opleader = {
+          ---Line-comment keymap
+          line = '<C-/>',
+          ---Block-comment keymap
+          block = '<C-/>'
+        },
+        ---Enable keybindings
+        ---NOTE: If given `false` then the plugin won't create any mappings
+        mappings = {
+          ---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
+          basic = true,
+          ---Extra mapping; `gco`, `gcO`, `gcA`
+          extra = false
+        }
+      })
+    end
+  }, { 'tzachar/highlight-undo.nvim', opts = {} }, {
     "amitds1997/remote-nvim.nvim",
     version = "*", -- Pin to GitHub releases
     dependencies = {
@@ -311,24 +341,27 @@ local M = {
       local null_ls = require("null-ls")
       null_ls.setup({
         sources = {
-          -- null_ls.builtins.completion.spell,
+          null_ls.builtins.code_actions.refactoring,
+          -- TODO: open issue that order of statixs affects their work
+          null_ls.builtins.diagnostics.statix,
+          null_ls.builtins.code_actions.statix, null_ls.builtins.hover.printenv,
+          null_ls.builtins.completion.spell, null_ls.builtins.formatting.buf,
+          null_ls.builtins.formatting.cmake_format,
           null_ls.builtins.diagnostics.yamllint,
           null_ls.builtins.diagnostics.hadolint,
-          null_ls.builtins.formatting.buf,
           null_ls.builtins.diagnostics.protolint,
-          null_ls.builtins.diagnostics.gccdiag,
+          -- null_ls.builtins.diagnostics.gccdiag,
           null_ls.builtins.diagnostics.checkmake,
           null_ls.builtins.diagnostics.cppcheck,
-          -- null_ls.builtins.diagnostics.cpplint,
-          -- null_ls.builtins.diagnostics.clang_check,
-          null_ls.builtins.code_actions.refactoring,
-          -- null_ls.builtins.diagnostics.jsonlint,
-          null_ls.builtins.formatting.cmake_format,
+          null_ls.builtins.diagnostics.cpplint,
           null_ls.builtins.diagnostics.cmake_lint,
-          null_ls.builtins.formatting.gersemi,
           null_ls.builtins.diagnostics.dotenv_linter,
+          null_ls.builtins.diagnostics.deadnix,
+          null_ls.builtins.diagnostics.editorconfig_checker,
+          null_ls.builtins.diagnostics.gitlint
+          -- null_ls.builtins.diagnostics.clang_check,
+          -- null_ls.builtins.diagnostics.jsonlint,
           -- null_ls.builtins.formatting.fixjson, 
-          null_ls.builtins.hover.printenv
           -- null_ls.builtins.formatting.json_tool, 
           -- null_ls.builtins.formatting.jq
         }
@@ -422,42 +455,6 @@ local M = {
     config = function()
       local wilder = require('wilder')
       wilder.setup({ modes = { ':', '/', '?' } })
-
-      wilder.set_option('pipeline', {
-        wilder.branch(wilder.python_file_finder_pipeline({
-          file_command = function(_, arg)
-            if arg ~= nil and arg[0] == '.' then
-              return { 'fd', '-tf', '-H' }
-            end
-            return { 'fd', '-tf' } -- fd -tf -I
-          end,
-          dir_command = function(_, arg)
-            if arg ~= nil and arg[0] == '.' then
-              return { 'fd', '-td', '-H' }
-            end
-            return { 'fd', '-td' }
-          end,
-          -- filters = { 'fuzzy_filter', 'difflib_sorter' },
-          -- filters = { 'clap_filter' },
-          path = function()
-            local filename = vim.api.nvim_buf_get_name(0)
-            return RootPattern(".git", ".project_root", "LICENSE", "Cargo.toml",
-                               "package.json", "init.lua", "README.md")(filename) or
-                       vim.loop.os_homedir()
-          end
-        }), wilder.cmdline_pipeline(), wilder.python_search_pipeline())
-      })
-
-      wilder.set_option('renderer', wilder.renderer_mux({
-        [':'] = wilder.popupmenu_renderer({
-          highlighter = wilder.lua_fzy_highlighter(),
-          left = { ' ', wilder.popupmenu_devicons() },
-          right = { ' ', wilder.popupmenu_scrollbar() }
-        }),
-        ['/'] = wilder.wildmenu_renderer({
-          highlighter = wilder.lua_fzy_highlighter()
-        })
-      }))
     end
   }, {
     'nvim-neo-tree/neo-tree.nvim',
@@ -776,7 +773,7 @@ local M = {
         replace = 0,
         stdin = 1
       }
-      vim.g.neoformat_try_node_exe = 1
+      vim.g.neoformat_try_node_exe = 1;
       vim.g.neoformat_lua_luaformatter = {
         exe = 'lua-format',
         args = {
@@ -796,7 +793,12 @@ local M = {
         replace = 1,
         try_node_exe = 1
       }
-      vim.g.neoformat_enabled_typescript = { 'prettier' }
+      vim.g.neoformat_typescript_deno_fmt = {
+        exe = 'deno',
+        args = { 'fmt' },
+        replace = 1
+      }
+      vim.g.neoformat_enabled_typescript = { 'prettier', 'deno_fmt' }
       vim.g.neoformat_typescriptreact_prettier = {
         exe = 'prettier',
         args = {
@@ -823,10 +825,7 @@ local M = {
       }
       vim.g.neoformat_enabled_json = { 'prettier' }
       vim.g.neoformat_enabled_nix = { 'nixfmt' }
-      vim.g.neoformat_nix_nixfmt = {
-        exe = 'nixfmt',
-        stdin = 1
-      }
+      vim.g.neoformat_nix_nixfmt = { exe = 'nixfmt', stdin = 1 }
     end
   }, {
     -- bar at the top
@@ -925,7 +924,7 @@ local M = {
     end
   }, {
     'terrortylor/nvim-comment',
-    enabled = true,
+    enabled = false,
     config = function()
       require('nvim_comment').setup({
         -- Linters prefer comment and line to have a space in between markers
