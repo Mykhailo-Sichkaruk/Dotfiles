@@ -1,48 +1,3 @@
-# super + alt + space
-#   xsel -p | xsel -b
-# 
-# # close/kill window
-# super + {_,ctrl} + c
-#   xdo {close,kill}
-# 
-# ctrl + alt + t
-#   alacritty
-# 
-# # switch layout
-# super + space
-#   switch-layout
-# 
-# #super + alt + space
-# #  xkb-switch -s ua
-# 
-# # copyq clipboard toggle
-# super + y
-#   copyq toggle
-# 
-# # change background
-# super + n
-#   nitrogen --random --set-zoom-fill $WALLPAPERS_DIR
-# 
-# # run rofi
-# super + d
-#   rofi -show-icons -modi run,drun -show drun
-# 
-# # browse config files
-# # super + g
-# #   useus $SCRIPT_DIR/rofi/cfg
-# 
-# # calculator
-# super + equal
-#   rofi -show calc -modi calc -no-show-match -no-sort
-# 
-# # unicode symbols picker
-# super + alt + apostrophe
-#   unipicker --command "rofi -dmenu -p 'unicode'" --copy-command "xclip -sel clip"
-# 
-# emoji picker (shift to copy mode)
-# super + {_,shift} + apostrophe
-#   useus splatmoji {type,copy}
-# 
 # brightness control
 XF86MonBrightness{Up,Down}
   light -{A,U} 10 
@@ -74,36 +29,6 @@ XF86AudioPause
 Print
   flameshot gui
 
-# ctrl + Print
-#   flameshot full
-# 
-# # Print
-# #   scrot '/tmp/%F_%T_$wx$h.png' --line color="#a0ff60",width=3 \
-# #     -q 100 -s -f -z -e 'xclip -selection clipboard -target image/png -i $f'
-# 
-# # ctrl + Print
-# #   scrot '/tmp/%F_%T_$wx$h.png' --line color="#a0ff60",width=3 \
-# #     -q 100 -f -z -e 'xclip -selection clipboard -target image/png -i $f'
-# 
-# # start keepassxs
-# super + alt + p
-#   keepassxc
-# 
-# # system control
-# # super + shift + Escape
-# #   useus $SCRIPT_DIR/rofi/system
-# 
-# # restart sxhkd
-# # super + shift + c
-# #   pkill -usr1 -x sxhkd
-# 
-# ### --- bspwm keybindings --- ###
-# 
-# # logout
-# super + F4
-#   pkill -KILL -u $USER
-# 
-# # move to next/previous desktop with current node
-# super + shift + {comma,period}
-# 	id=$(bspc query -N -n); bspc node -d {prev,next}.local; bspc node -f ${id}
-# 
+ctrl + Print
+   flameshot full
+

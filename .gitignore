@@ -41,6 +41,9 @@ home/.local
 **/Cookies*
 # Vieb
 **/Vieb/windowstate
+**/Vieb/recordings
+**/Vieb/quickmarks
+**/Vieb/dls
 **/Vieb/tabs
 **/Vieb/SingletonSocket
 **/Vieb/SingletonLock
