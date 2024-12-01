@@ -8,6 +8,9 @@
     exec = "youtube-music"; # Make sure this is the correct command
     icon = "youtube-music"; # Optionally set an icon
     comment = "Music streaming service";
-    categories = [ "AudioVideo" "Music" ];
+    categories = [
+      "AudioVideo"
+      "Music"
+    ];
   };
 }

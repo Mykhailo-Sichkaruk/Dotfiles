@@ -1,66 +1,73 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   # Import shell configuration
   shellConfig = import ./shell.nix { };
-
-  # Import GUI configuration
-  youtubeMusicConfig = import ./programs/gui.nix { inherit pkgs; };
 in
 {
-  home.username = "ms";
-  home.homeDirectory = "/home/ms";
-  home.stateVersion = "24.05";
+  # Add the external GUI config (which includes the YouTube Music desktop entry)
+  imports = [ ./programs/gui.nix ];
 
-  # Define the packages to be installed
-  home.packages =
-    shellConfig
-    ++ (with pkgs; [
-      safe-rm
-      rofi
-      keepassxc
-      neomutt
-      sxhkd # Simple X hotkey daemon
-      pulsemixer # PulseAudio mixer
-      easyeffects
-      vifm
-      mysql-workbench
-      spice-vdagent
-      youtube-music # Install YouTube Music here
-      vscode
-      obs-studio
-      discord
-      betterdiscordctl
-      pipewire
-      slack
-      telegram-desktop
-      dbeaver-bin
-      drawio
-      mpv
-      obsidian
-      vimiv-qt
-      zathura
-      calc
-      vieb
-      google-chrome
-      peek
-      kooha
-      mpv # Media player
-      glibcLocales
-      nerdfonts
-      alacritty
-      dex
-      offlineimap
-      i3lock
-      dunst
-      xclip
-      oh-my-fish
-      syncthing
-      nix-du
-      insomnia
-    ]);
+  home = {
+    username = "ms";
+    homeDirectory = "/home/ms";
+    stateVersion = "24.11";
+    packages =
+      shellConfig
+      ++ (with pkgs; [
+        safe-rm
+        rofi
+        keepassxc
+        neomutt
+        sxhkd
+        pulsemixer
+        easyeffects
+        vifm
+        mysql-workbench
+        spice-vdagent
+        youtube-music
+        vscode
+        obs-studio
+        discord
+        betterdiscordctl
+        pipewire
+        slack
+        telegram-desktop
+        dbeaver-bin
+        drawio
+        mpv
+        obsidian
+        vimiv-qt
+        zathura
+        calc
+        vieb
+        google-chrome
+        peek
+        mpv # Media player
+        nerdfonts
+        alacritty
+        dex
+        offlineimap
+        i3lock
+        dunst
+        xclip
+        oh-my-fish
+        syncthing
+        nix-du
+        insomnia
+        flameshot
+        light
+        playerctl
+        keepmenu
+      ]);
+  };
 
   programs = {
+    # Let Home Manager manage itself
+    home-manager.enable = true;
+    alacritty = {
+      enable = true;
+    };
     fish = {
       enable = true;
       interactiveShellInit = ''
@@ -68,6 +75,7 @@ in
         set fish_greeting
         fish_config theme choose "Dracula Official"
         function fish_mode_prompt; end
+        alias rm="safe-rm"
         alias e="eza -ab --group-directories-first --icons"
         alias ex="eza -ab --group-directories-first --icons -lTL 1 --no-time --git --no-user"
         alias ls="ls --color -L"
@@ -94,19 +102,19 @@ in
       plugins = [
         {
           name = "grc";
-          src = pkgs.fishPlugins.grc.src;
+          inherit (pkgs.fishPlugins.grc) src;
         }
         {
           name = "z";
-          src = pkgs.fishPlugins.z.src;
+          inherit (pkgs.fishPlugins.z) src;
         }
         {
           name = "fzf-fish";
-          src = pkgs.fishPlugins.fzf-fish.src;
+          inherit (pkgs.fishPlugins.fzf-fish) src;
         }
         {
           name = "plugin-git";
-          src = pkgs.fishPlugins.plugin-git.src;
+          inherit (pkgs.fishPlugins.plugin-git) src;
         }
       ];
     };
@@ -123,20 +131,17 @@ in
     };
   };
 
-  # Add the external GUI config (which includes the YouTube Music desktop entry)
-  imports = [ ./programs/gui.nix ];
-
   services.syncthing = {
     enable = true;
     # Still not in the stable version
-    #guiAddress = "127.0.0.1:8384";
-    #settings.folders = {
-    #    "/home/ms/Sync" = {
-    #      id = "laptop_phone";
-    #    };
-    #  };
+    /*
+      guiAddress = "127.0.0.1:8384";
+      settings.folders = {
+          "/home/ms/Sync" = {
+            id = "laptop_phone";
+          };
+        };
+    */
   };
 
-  # Let Home Manager manage itself
-  programs.home-manager.enable = true;
 }
