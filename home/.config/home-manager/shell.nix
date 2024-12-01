@@ -2,13 +2,16 @@
   pkgs ? import <nixpkgs> { },
 }:
 
-with pkgs;
-[
-  rsync # File synchronization tool
-  stow # Symlink farm manager
-  ncdu # Disk usage analyzer with an ncurses interface
-  eza # Easy aliasing tool
-  zip # Compression tool
+let
+  nixConfig = import ./programs/nvim.nix { inherit pkgs; };
+in
+nixConfig
+++ (with pkgs; [
+  rsync
+  stow
+  ncdu
+  eza
+  zip
   starship # Shell prompt
   zoxide # Directory navigation tool
   gh # GitHub CLI
@@ -16,30 +19,6 @@ with pkgs;
   neovim # Text editor
   nodejs # JavaScript runtime
   python3 # Python programming language
-  go # Go programming language
-  rust-analyzer # Rust language server
-  cargo # Rust package manager
-  cmake # Build system generator
-  yamllint # YAML linter
-  hadolint # Dockerfile linter
-  gcc # GNU Compiler Collection
-  buf # Protobuf tool
-  protolint # Protobuf linter
-  checkmake # Makefile linter
-  cppcheck # C++ static analysis tool
-  cpplint
-  cmake-format # Formatter for CMake files
-  dotenv-linter # Linter for `.env` files
-  lua # Scripting language
-  rustfmt # Rust code formatter
-  astyle # Code formatter
-  prettierd # Code formatter daemon
-  asmfmt # Assembler code formatter
-  clang-tools # Clang tools like `clang-tidy`
-  ccls # C/C++/Obj-C language server
-  typst # Fast markup-based typesetting
-  typst-lsp # Language server for Typst
-  shellcheck # Shell script analysis tool
   fd # A simple, fast file search tool
   ripgrep # Line-oriented search tool
   tmux # Terminal multiplexer
@@ -70,8 +49,4 @@ with pkgs;
   fishPlugins.grc
   fishPlugins.z
   fishPlugins.plugin-git
-  nixd
-  nixfmt-rfc-style
-  lua-language-server
-  luajitPackages.luarocks
-]
+])
