@@ -34,6 +34,7 @@ exec --no-startup-id xautolock -time 10 -locker $i3lockwall -detectsleep
 
 exec --no-startup-id offlineimap 
 exec dex -ae i3
+exec --no-startup-id sxhkd
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
