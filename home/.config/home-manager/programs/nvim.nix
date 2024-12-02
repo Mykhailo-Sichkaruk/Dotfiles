@@ -47,4 +47,6 @@ with pkgs;
   tree-sitter
   mercurial
   vscode-langservers-extracted
+  vimPlugins.wilder-nvim
+  markdownlint-cli
 ]

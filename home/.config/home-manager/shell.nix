@@ -49,4 +49,6 @@ nixConfig
   fishPlugins.grc
   fishPlugins.z
   fishPlugins.plugin-git
+  microsoft-edge
+  opera
 ])
