@@ -2,11 +2,12 @@
 
 let
   # Import shell configuration
-  shellConfig = import ./shell.nix { };
+  shellConfig = import ./programs/shell.nix { inherit pkgs; };
 in
 {
   # Add the external GUI config (which includes the YouTube Music desktop entry)
   imports = [ ./programs/gui.nix ];
+  nixpkgs.config.allowUnfree = true;
 
   home = {
     username = "ms";
@@ -15,16 +16,13 @@ in
     packages =
       shellConfig
       ++ (with pkgs; [
-        safe-rm
         rofi
         keepassxc
         neomutt
         sxhkd
         pulsemixer
         easyeffects
-        vifm
         mysql-workbench
-        spice-vdagent
         youtube-music
         vscode
         obs-studio
@@ -39,21 +37,13 @@ in
         obsidian
         vimiv-qt
         zathura
-        calc
         vieb
         google-chrome
         peek
-        mpv # Media player
-        nerdfonts
+        mpv
         alacritty
-        dex
-        offlineimap
         i3lock
         dunst
-        xclip
-        oh-my-fish
-        syncthing
-        nix-du
         insomnia
         flameshot
         light
