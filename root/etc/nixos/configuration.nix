@@ -6,6 +6,14 @@
 
 {
   nixpkgs.config.allowUnfree = true;
+  nix = {
+    optimise.automatic = true;
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
+
   imports = [
     ./hardware-configuration.nix
     <home-manager/nixos>
@@ -51,7 +59,7 @@
       "1.1.1.1"
     ];
     interfaces."wlo1" = {
-      macAddress = "00:1A:1E:66:4b:15";
+      macAddress = "00:1A:1E:66:4b:a5";
     };
     supplicant.wlo1 = {
       configFile.path = "/etc/wpa_supplicant/wpa_supplicant.conf";
@@ -183,7 +191,6 @@
     };
   };
 
-  nix.optimise.automatic = true;
   programs = {
     fish.enable = true;
     gnupg.agent = {

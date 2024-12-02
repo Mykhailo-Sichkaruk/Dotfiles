@@ -343,6 +343,7 @@ local M = {
         sources = {
           null_ls.builtins.code_actions.refactoring,
           -- TODO: open issue that order of statixs affects their work
+          null_ls.builtins.diagnostics.deadnix,
           null_ls.builtins.diagnostics.statix,
           null_ls.builtins.code_actions.statix, null_ls.builtins.hover.printenv,
           null_ls.builtins.completion.spell, null_ls.builtins.formatting.buf,
@@ -356,7 +357,6 @@ local M = {
           null_ls.builtins.diagnostics.cpplint,
           null_ls.builtins.diagnostics.cmake_lint,
           null_ls.builtins.diagnostics.dotenv_linter,
-          null_ls.builtins.diagnostics.deadnix,
           null_ls.builtins.diagnostics.editorconfig_checker,
           null_ls.builtins.diagnostics.gitlint
           -- null_ls.builtins.diagnostics.clang_check,
@@ -442,19 +442,6 @@ local M = {
         inactive_winbar = {},
         extensions = {}
       }
-    end
-  }, {
-    'gelguy/wilder.nvim',
-    lazy = false,
-    dependencies = {
-      'romgrk/fzy-lua-native'
-      -- 'kyazdani42/nvim-web-devicons'
-      -- 'liuchengxu/vim-clap'
-    },
-    build = function() vim.cmd [[ UpdateRemotePlugins ]] end,
-    config = function()
-      local wilder = require('wilder')
-      wilder.setup({ modes = { ':', '/', '?' } })
     end
   }, {
     'nvim-neo-tree/neo-tree.nvim',

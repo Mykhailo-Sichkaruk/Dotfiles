@@ -24,22 +24,14 @@ M.config = function()
     delete_check_events = 'InsertLeave'
   })
 
-  nvim_lsp.bufls.setup {}
+  nvim_lsp.buf_ls.setup {}
   nvim_lsp.asm_lsp.setup({
     cmd = { "asm-lsp" },
     filetypes = { "asm", "vmasm", "nasm" },
     root_dir = root_pattern(".git", ".gitmodules", ".hg", ".bzr", ".svn")
   })
 
-  -- require("docker")
-
-  require("typescript").setup({
-    disable_commands = false, -- prevent the plugin from creating Vim commands
-    debug = false, -- enable debug logging for commands
-    go_to_source_definition = {
-      fallback = true -- fall back to standard LSP definition on failure
-    }
-  })
+  nvim_lsp.ts_ls.setup({});
 
   local configs = require('lspconfig.configs')
   if not configs.typst then
@@ -206,8 +198,8 @@ M.config = function()
     cmd = {
       'clangd', '--header-insertion=never', '--suggest-missing-includes',
       '--background-index', '-j=8', '--cross-file-rename',
-      '--pch-storage=memory', '--clang-tidy', --'-std=c11',
-      '--clang-tidy-checks=-clang-analyzer-*,bugprone-*,misc-*,-misc-non-private-member-variables-in-classes,performance-*,-performance-no-automatic-move,modernize-use-*,-modernize-use-nodiscard,-modernize-use-trailing-return-type',
+      '--pch-storage=memory', '--clang-tidy', -- '-std=c11',
+      '--clang-tidy-checks=-clang-analyzer-*,bugprone-*,misc-*,-misc-non-private-member-variables-in-classes,performance-*,-performance-no-automatic-move,modernize-use-*,-modernize-use-nodiscard,-modernize-use-trailing-return-type'
       -- '--compile-commands-dir=build'
     },
     -- on_init = require'clangd_nvim'.on_init,
@@ -248,13 +240,7 @@ M.config = function()
 
   nvim_lsp.luau_lsp.setup({})
   nvim_lsp.nixd.setup({
-    settings = {
-        nixd = {
-           formatting = {
-              command = { "nixfmt" },
-           },
-        },
-     },
+    settings = { nixd = { formatting = { command = { "nixfmt" } } } }
   })
 end
 
