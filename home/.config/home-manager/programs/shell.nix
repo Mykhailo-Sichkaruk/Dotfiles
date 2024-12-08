@@ -54,4 +54,5 @@ nixConfig
   nerdfonts
   dex
   offlineimap
+  ffmpeg
 ])
