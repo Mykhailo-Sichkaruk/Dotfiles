@@ -46,11 +46,16 @@ in
         dunst
         insomnia
         flameshot
-        light
         playerctl
         keepmenu
-        steam-unwrapped
       ]);
+  };
+
+  xsession = {
+    numlock.enable = true;
+    profileExtra = ''
+      xdotool key XF86TouchpadOff
+    '';
   };
 
   programs = {

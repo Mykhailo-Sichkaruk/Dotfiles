@@ -51,7 +51,6 @@ nixConfig
   oh-my-fish
   syncthing
   nix-du
-  nerdfonts
   dex
   offlineimap
   ffmpeg
