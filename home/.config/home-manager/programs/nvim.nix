@@ -47,4 +47,5 @@ with pkgs;
   vscode-langservers-extracted
   vimPlugins.wilder-nvim
   markdownlint-cli
+  bash-language-server
 ]

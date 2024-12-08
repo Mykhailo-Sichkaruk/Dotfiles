@@ -63,3 +63,4 @@ home/.local
 home/.ssh/
 home/fish/conf\.d/
 home/.config/fish/conf.d
+home/.gitconfig
