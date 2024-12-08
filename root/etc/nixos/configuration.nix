@@ -16,7 +16,7 @@
 
   imports = [
     ./hardware-configuration.nix
-    <home-manager/nixos>
+    ./tlp.nix
   ];
   home-manager.useGlobalPkgs = true;
 
@@ -184,6 +184,9 @@
       safe-rm
       rofi
       pulsemixer
+      nerdfonts
+      nh
+      xdotool
     ];
     variables = {
       RM = "safe-rm";
@@ -193,6 +196,7 @@
 
   programs = {
     fish.enable = true;
+    light.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
@@ -203,11 +207,18 @@
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     };
+    nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 4d --keep 3";
+      flake = "/home/ms/newDot/Dotfiles";
+    };
   };
   virtualisation.docker.enable = true;
 
+  fonts.packages = [ pkgs.nerdfonts ];
+  # fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   system = {
-    copySystemConfiguration = true;
     autoUpgrade = {
       enable = true;
       allowReboot = false;
