@@ -54,4 +54,8 @@ nixConfig
   dex
   offlineimap
   ffmpeg
+  unzip
+  steam-run
+  nix-ld
+  imagemagick
 ])
