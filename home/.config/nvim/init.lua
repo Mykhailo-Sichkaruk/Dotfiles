@@ -20,10 +20,11 @@ Map('n', '<leader>L', ':Lazy<CR>')
 
 require('lazy').setup('plugins', {
   concurrency = 16,
-  checker = { enabled = true, notify = false },
-  defaults = { lazy = false, version = "*" },
-  change_detection = { enabled = true, notify = false },
+  checker = { enabled = false, notify = false },
+  defaults = { lazy = true, version = "*" },
+  change_detection = { enabled = true, notify = true },
   performance = {
+    reset_packpath = true, -- reset the package path to improve startup time
     cache = {
       enabled = true,
       path = vim.fn.stdpath("cache") .. "/lazy/cache",
@@ -41,5 +42,9 @@ require('lazy').setup('plugins', {
         }
       }
     }
-  }
+  },
+  profiling = {
+    loader = false,
+    require = false,
+  },
 })

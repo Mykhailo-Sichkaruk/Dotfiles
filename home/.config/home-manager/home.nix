@@ -61,6 +61,7 @@ in
   programs = {
     # Let Home Manager manage itself
     home-manager.enable = true;
+    /* home-manager.backupFileExtension = "backup"; */
     alacritty = {
       enable = true;
     };

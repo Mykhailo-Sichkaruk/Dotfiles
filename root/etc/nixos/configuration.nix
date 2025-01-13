@@ -19,6 +19,7 @@
     ./tlp.nix
   ];
   home-manager.useGlobalPkgs = true;
+  home-manager.backupFileExtension = "backup";
 
   boot = {
     loader = {
@@ -47,16 +48,11 @@
   # Pick only one of the below networking options.
   networking = {
     hostName = "mykhailos_nixos"; # Define your hostname.
-    extraHosts = ''
-      10.2.0.10 dc01.local.sk.cloud
-      10.2.0.7  ca.xclbr.dev
-      127.0.0.1 dev.xclbr.local
-    '';
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
     networkmanager.enable = false; # Easiest to use and most distros use this by default.
     nameservers = [
-      "8.8.8.8"
       "1.1.1.1"
+      "8.8.8.8"
     ];
     interfaces."wlo1" = {
       macAddress = "00:1A:1E:66:4b:a5";
