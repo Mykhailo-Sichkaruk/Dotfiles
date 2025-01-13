@@ -28,7 +28,7 @@
         ];
       };
 
-      homeManagerConfigurations.username = home-manager.lib.homeManagerConfiguration {
+      homeManagerConfigurations.ms = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
           ./home/.config/home-manager/home.nix

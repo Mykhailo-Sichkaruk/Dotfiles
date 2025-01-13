@@ -1,15 +1,17 @@
 local M = {
   -- { 'echasnovski/mini.icons', version = false },
   -- { 'echasnovski/mini.nvim', version = false },
-  { 'kevinhwang91/nvim-bqf', lazy = false },
+  { 'kevinhwang91/nvim-bqf' },
   { 'akinsho/git-conflict.nvim', version = "*", config = true },
-  { "https://github.com/mfussenegger/nvim-dap", lazy = false },
-  { "https://github.com/mfussenegger/nvim-jdtls", lazy = false },
-  { "IndianBoy42/tree-sitter-just", lazy = false },
-  { "NoahTheDuke/vim-just", ft = { "just" }, lazy = false },
-  { "https://github.com/roxma/nvim-yarp", lazy = false }, {
+  { "https://github.com/mfussenegger/nvim-dap" },
+  { "https://github.com/mfussenegger/nvim-jdtls" },
+  { "IndianBoy42/tree-sitter-just" },
+  { "NoahTheDuke/vim-just", ft = { "just" } },
+  { "https://github.com/roxma/nvim-yarp" }, {
     'numToStr/Comment.nvim',
-    lazy = false,
+    keys = {
+      { "<C-/>", mode = { "n", "v" } } -- Specify the keys for NORMAL and VISUAL modes
+    },
     config = function()
       require('Comment').setup({
         ---LHS of toggle mappings in NORMAL mode
@@ -65,6 +67,7 @@ local M = {
     'lewis6991/gitsigns.nvim',
     branch = 'main',
     lazy = false,
+
     config = function()
       require('gitsigns').setup({
         signs = {
@@ -216,7 +219,7 @@ local M = {
     opts = {}
   }, {
     "m4xshen/hardtime.nvim",
-    lazy = false,
+
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
     opts = {
       max_time = 2000,
@@ -250,7 +253,7 @@ local M = {
       "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim",
       "nvim-treesitter/nvim-treesitter"
     },
-    lazy = false,
+
     config = true,
     cmd = {
       "DevdocsFetch", "DevdocsInstall", "DevdocsUninstall", "DevdocsOpen",
@@ -303,9 +306,9 @@ local M = {
         end
       end
     }
-  }, { 'rcarriga/nvim-notify', lazy = false }, {
+  }, { 'rcarriga/nvim-notify' }, {
     'antonk52/bad-practices.nvim',
-    lazy = false,
+
     enable = true,
     config = function()
       local bad_practices = require("bad_practices")
@@ -317,7 +320,7 @@ local M = {
     end
   }, {
     'gaborvecsei/usage-tracker.nvim',
-    lazy = false,
+
     config = function()
       require('usage-tracker').setup({
         keep_eventlog_days = 14,
@@ -332,9 +335,9 @@ local M = {
     "ThePrimeagen/refactoring.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
     config = function() require("refactoring").setup() end
-  }, { 'puremourning/vimspector', lazy = false }, {
+  }, { 'puremourning/vimspector' }, {
     'nvimtools/none-ls.nvim',
-    lazy = false,
+
     enable = true,
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
@@ -370,19 +373,18 @@ local M = {
   }, {
     'nvim-telescope/telescope-fzf-native.nvim',
     build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-  }, { 'anott03/nvim-lspinstall', lazy = false }, {
+  }, { 'anott03/nvim-lspinstall' }, {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
     opts = {},
     config = function(_, opts) require'lsp_signature'.setup(opts) end
-  }, { 'RishabhRD/popfix', lazy = false },
-  { 'RishabhRD/nvim-lsputils', lazy = false }, -- {
+  }, { 'RishabhRD/popfix' }, { 'RishabhRD/nvim-lsputils' }, -- {
   --   'quick-lint/quick-lint-js',
-  --   lazy = false
+  --   
   -- },
-  { 'scrooloose/syntastic', lazy = false }, {
+  { 'scrooloose/syntastic' }, {
     'simrat39/inlay-hints.nvim',
-    lazy = false,
+
     enable = true,
     config = function()
       require("inlay-hints").setup({
@@ -390,23 +392,24 @@ local M = {
         eol = { right_align = true }
       })
     end
-  }, { 'sindrets/diffview.nvim', lazy = false },
-  { 'pantharshit00/vim-prisma', lazy = false }, {
+  }, { 'sindrets/diffview.nvim' }, { 'pantharshit00/vim-prisma' }, {
     'famiu/nvim-reload',
-    lazy = false,
+
     config = function()
       Map('n', '<leader>R', function() require('nvim-reload').Reload() end)
     end
   }, {
     'echasnovski/mini.bufremove',
     version = '*',
-    lazy = false,
+    keys = { { "<A-w>", mode = { "n", "v" } } },
+
     config = function()
       local bufremove = require('mini.bufremove')
       bufremove.setup({})
     end
   }, {
     'nvim-lualine/lualine.nvim',
+    lazy = false,
     config = function()
       local lualine = require('lualine')
       lualine.setup {
@@ -444,10 +447,13 @@ local M = {
       }
     end
   }, {
-    'nvim-neo-tree/neo-tree.nvim',
+    "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
-    lazy = false,
-    enable = true,
+    lazy = true,
+    enabled = true,
+    keys = {
+      { "<leader>\\", "toggle" }, { "\\", "toggle" }, { "g\\", "git_status" }
+    },
     dependencies = {
       "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim", {
@@ -701,11 +707,10 @@ local M = {
       vim.cmd([[nnoremap <leader>\  :Neotree close<cr>]])
       vim.cmd([[nnoremap g\ :Neotree git_status reveal<cr>]])
     end
-  }, { 'nvim-lua/plenary.nvim', lazy = false },
-  { 'willthbill/opener.nvim', lazy = false },
-  { 'https://github.com/jose-elias-alvarez/typescript.nvim', lazy = false }, {
+  }, { 'nvim-lua/plenary.nvim' }, { 'willthbill/opener.nvim' },
+  { 'https://github.com/jose-elias-alvarez/typescript.nvim' }, {
     'sbdchd/neoformat',
-    lazy = false,
+
     keys = { '<leader>F' },
     config = function()
       Map('n', '<leader>F', function()
@@ -854,7 +859,7 @@ local M = {
   }, {
     -- indent blankline
     'lukas-reineke/indent-blankline.nvim',
-    lazy = false,
+
     enabled = false,
     config = function()
       vim.g.indent_blankline_char = '▏'
@@ -870,13 +875,13 @@ local M = {
   {
     -- highlights yank
     'machakann/vim-highlightedyank',
-    lazy = false,
+
     config = function() vim.g.highlightedyank_highlight_duration = 250 end
   }, --
   {
     -- colorize colors like this #01dd99
     'norcalli/nvim-colorizer.lua',
-    lazy = false,
+
     config = function()
       require('colorizer').setup({
         '*',
@@ -910,32 +915,6 @@ local M = {
       vim.g.maplocalleader = ","
     end
   }, {
-    'terrortylor/nvim-comment',
-    enabled = false,
-    config = function()
-      require('nvim_comment').setup({
-        -- Linters prefer comment and line to have a space in between markers
-        marker_padding = true,
-        -- should comment out empty or whitespace only lines
-        comment_empty = true,
-        -- trim empty comment whitespace
-        comment_empty_trim_whitespace = false,
-        -- Should key mappings be created
-        create_mappings = true,
-        -- Normal mode mapping left hand side
-        line_mapping = "gcc",
-        -- Visual/Operator mapping left hand side
-        operator_mapping = "gc",
-        -- text object mapping, comment chunk,,
-        comment_chunk_text_object = "ic",
-        -- Hook function to call before commenting takes place
-        hook = nil
-      })
-      Map('n', "<C-/>", ":CommentToggle<CR>")
-      Map('v', "<C-/>", ":CommentToggle<CR>")
-    end,
-    lazy = false
-  }, {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
@@ -946,7 +925,7 @@ local M = {
     end
   }, {
     'windwp/nvim-autopairs',
-    lazy = false,
+
     config = function()
       require('nvim-autopairs').setup({})
       -- local Rule = require('nvim-autopairs.rule')
@@ -964,7 +943,7 @@ local M = {
       Map('i', 'Э', 'Э')
       Map('i', 'Ё', 'Ё')
     end
-  }, { 'tversteeg/registers.nvim', lazy = false }, {
+  }, { 'tversteeg/registers.nvim' }, {
     'phaazon/hop.nvim',
     name = 'hop',
     config = { keys = 'asdfghjkl;eiurtcxm,' },
@@ -979,7 +958,7 @@ local M = {
     end
   }, {
     "ahmedkhalf/project.nvim",
-    lazy = false,
+
     config = function()
       require("project_nvim").setup {
         patterns = { ".git", "Makefile", "package.json", "init.lua" },
@@ -1001,7 +980,7 @@ local M = {
   }, {
     "folke/todo-comments.nvim",
     dependencies = "nvim-lua/plenary.nvim",
-    lazy = false,
+
     enabled = true,
     config = function()
       vim.cmd "au BufReadPost,BufNewFile,BufRead * hi clear TODO"
@@ -1086,7 +1065,7 @@ local M = {
     end
   }, { 'folke/neodev.nvim', ft = { 'lua' }, config = true }, {
     'luochen1990/rainbow',
-    lazy = false,
+
     enabled = true,
     config = function()
       vim.g.rainbow_active = 1;
@@ -1113,7 +1092,7 @@ local M = {
     end
   }, {
     'mhinz/vim-startify',
-    lazy = false,
+
     enabled = true,
     config = function()
       vim.g.startify_lists = {
