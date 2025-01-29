@@ -1,7 +1,6 @@
 local M = {
-  -- { 'echasnovski/mini.icons', version = false },
-  -- { 'echasnovski/mini.nvim', version = false },
-  { 'kevinhwang91/nvim-bqf' },
+  { 'echasnovski/mini.icons', version = false },
+  { 'echasnovski/mini.nvim', version = false }, { 'kevinhwang91/nvim-bqf' },
   { 'akinsho/git-conflict.nvim', version = "*", config = true },
   { "https://github.com/mfussenegger/nvim-dap" },
   { "https://github.com/mfussenegger/nvim-jdtls" },
@@ -39,31 +38,6 @@ local M = {
       })
     end
   }, { 'tzachar/highlight-undo.nvim', opts = {} }, {
-    "amitds1997/remote-nvim.nvim",
-    version = "*", -- Pin to GitHub releases
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- For standard functions
-      "MunifTanjim/nui.nvim", -- To build the plugin UI
-      "nvim-telescope/telescope.nvim" -- For picking b/w different remote methods
-    },
-    config = function()
-      require("remote-nvim").setup({
-        client_callback = function(port, workspace_config)
-          local cmd =
-              ("alacritty -e nvim --server localhost:%s --remote-ui"):format(
-                  port)
-          vim.fn.jobstart(cmd, {
-            detach = true,
-            on_exit = function(job_id, exit_code, event_type)
-              -- This function will be called when the job exits
-              print("Client", job_id, "exited with code", exit_code,
-                    "Event type:", event_type)
-            end
-          })
-        end
-      })
-    end
-  }, {
     'lewis6991/gitsigns.nvim',
     branch = 'main',
     lazy = false,
@@ -168,6 +142,8 @@ local M = {
     end
   }, {
     'sudormrfbin/cheatsheet.nvim',
+    enable = true,
+    lazy = false,
     dependencies = {
       'nvim-telescope/telescope.nvim', 'nvim-lua/popup.nvim',
       'nvim-lua/plenary.nvim'
@@ -249,6 +225,7 @@ local M = {
     }
   }, {
     "luckasRanarison/nvim-devdocs",
+    keys = { { "<leader>o", "<cmd>DevdocsOpen<cr>", desc = "Open Devdocs" } },
     dependencies = {
       "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim",
       "nvim-treesitter/nvim-treesitter"
@@ -337,6 +314,13 @@ local M = {
     config = function() require("refactoring").setup() end
   }, { 'puremourning/vimspector' }, {
     'nvimtools/none-ls.nvim',
+    keys = {
+      {
+        "<leader>b",
+        "<cmd>VimspectorBreakpoints<cr>",
+        desc = "Open Vimspector breakpoints"
+      }
+    },
 
     enable = true,
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -372,6 +356,13 @@ local M = {
     end
   }, {
     'nvim-telescope/telescope-fzf-native.nvim',
+    keys = {
+      { "<leader>te", "<cmd>Telescope<cr>", desc = "Open Telescope" }, {
+        "<leader>tg",
+        "<cmd>Telescope live_grep<cr>",
+        desc = "Open Telescope live_grep"
+      }
+    },
     build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   }, { 'anott03/nvim-lspinstall' }, {
     "ray-x/lsp_signature.nvim",
@@ -392,16 +383,37 @@ local M = {
         eol = { right_align = true }
       })
     end
-  }, { 'sindrets/diffview.nvim' }, { 'pantharshit00/vim-prisma' }, {
-    'famiu/nvim-reload',
-
-    config = function()
-      Map('n', '<leader>R', function() require('nvim-reload').Reload() end)
-    end
   }, {
+    'sindrets/diffview.nvim',
+    keys = {
+      {
+        "<leader>D",
+        "<cmd>DiffviewOpen<cr>",
+        desc = "Open git diff view",
+        mode = { "n", "v" }
+      }, {
+        "<leader>c",
+        "<cmd>DiffviewClose<cr>",
+        desc = "Close git diff view",
+        mode = { "n", "v" }
+      }
+    },
+    config = function()
+      require('diffview').setup({
+        diff_binaries = false -- Show diffs for binaries
+      })
+    end
+  }, { 'pantharshit00/vim-prisma' }, { 'famiu/nvim-reload' }, {
     'echasnovski/mini.bufremove',
     version = '*',
-    keys = { { "<A-w>", mode = { "n", "v" } } },
+    keys = {
+      {
+        "<A-w>",
+        "<cmd>lua MiniBufremove.delete(0, true) <cr>",
+        mode = { "n", "v" }
+      },
+      desc = "Delete crrently opened buffer"
+    },
 
     config = function()
       local bufremove = require('mini.bufremove')
@@ -711,19 +723,27 @@ local M = {
   { 'https://github.com/jose-elias-alvarez/typescript.nvim' }, {
     'sbdchd/neoformat',
 
-    keys = { '<leader>F' },
+    keys = {
+      {
+        "<leader>F",
+        function()
+          vim.cmd("silent Neoformat")
+          vim.cmd("write")
+        end,
+        mode = "n",
+        desc = "Format current buffer"
+      }, {
+        "<leader>F",
+        function()
+          local cmd = vim.api.nvim_replace_termcodes(
+                          ':<C-U>silent \'<,\'>Neoformat<CR>', true, false, true)
+          vim.api.nvim_feedkeys(cmd, 'n', true)
+        end,
+        mode = "v",
+        desc = "Format selected text"
+      }
+    },
     config = function()
-      Map('n', '<leader>F', function()
-        vim.cmd [[
-          silent Neoformat
-          write
-        ]];
-      end)
-      Map('v', '<leader>F', function()
-        local cmd = vim.api.nvim_replace_termcodes(
-                        ':<C-U>silent \'<,\'>Neoformat<CR>', true, false, true);
-        vim.api.nvim_feedkeys(cmd, 'n', true)
-      end)
       vim.g.latexindent_opt = "-m"
       vim.g.neoformat_enabled_cpp = { 'clangformat' }
       vim.g.neoformat_cpp_clangformat = {
@@ -779,9 +799,7 @@ local M = {
       }
       vim.g.neoformat_typescript_prettier = {
         exe = 'prettier',
-        args = {
-          '--write', '--config', "./prettierrc.json", vim.fn.expand('%:p')
-        },
+        args = { vim.fn.expand('%:p') },
         replace = 1,
         try_node_exe = 1
       }
@@ -793,25 +811,21 @@ local M = {
       vim.g.neoformat_enabled_typescript = { 'prettier', 'deno_fmt' }
       vim.g.neoformat_typescriptreact_prettier = {
         exe = 'prettier',
-        args = {
-          '--write', '--config', "./prettierrc.json", vim.fn.expand('%:p')
-        },
+        args = { vim.fn.expand('%:p') },
         replace = 1,
         try_node_exe = 1
       }
       vim.g.neoformat_enabled_typescriptreact = { 'prettier' }
       vim.g.neoformat_javascriptreact_prettier = {
         exe = 'prettier',
-        args = {
-          '--write', '--config', "./prettierrc.json", vim.fn.expand('%:p')
-        },
+        args = { vim.fn.expand('%:p') },
         replace = 1,
         try_node_exe = 1
       }
       vim.g.neoformat_enabled_javascriptreact = { 'prettier' }
       vim.g.neoformat_json_prettier = {
         exe = 'prettier',
-        args = { '--write', vim.fn.expand('%:p') },
+        args = { vim.fn.expand('%:p') },
         replace = 1,
         try_node_exe = 1
       }
@@ -823,7 +837,12 @@ local M = {
     -- bar at the top
     'akinsho/nvim-bufferline.lua',
     version = '*',
-    lazy = false,
+    keys = {
+      { "gb", "pick_buffer" }, { "<A-l>", "<cmd>BufferLineCycleNext<CR>" },
+      { "<A-h>", "<cmd>BufferLineCyclePrev<CR>" },
+      { "<A-j>", "<cmd>BufferLineMovePrev<CR>" },
+      { "<A-k>", "<cmd>BufferLineMoveNext" }
+    },
     config = function()
       local b = require("bufferline")
       b.setup {
@@ -848,13 +867,6 @@ local M = {
           }
         }
       }
-    end,
-    init = function()
-      Map('n', 'gb', function() require("bufferline").pick_buffer() end)
-      Map('n', '<A-l>', function() require("bufferline").cycle(1) end)
-      Map('n', '<A-h>', function() require("bufferline").cycle(-1) end)
-      Map('n', '<A-j>', function() require("bufferline").move(-1) end)
-      Map('n', '<A-k>', function() require("bufferline").move(1) end)
     end
   }, {
     -- indent blankline
@@ -889,31 +901,6 @@ local M = {
         scss = { scc = true }
       }, { names = true })
     end
-  }, --
-  {
-    'lervag/vimtex',
-    ft = { "tex", "bib" },
-    dependencies = { 'KeitaNakamura/tex-conceal.vim', 'godlygeek/tabular' },
-    config = function()
-      vim.cmd "filetype plugin indent on"
-      vim.cmd "syntax enable"
-      Map('n', '<leader>vp', ':w<cr> :VimtexCompile<cr>')
-
-      vim.g.tex_flavor = 'latex'
-      vim.g.vimtex_quickfix_mode = 0
-      vim.g.vimtex_format_enabled = true
-      -- vim.opt.conceallevel=1
-      vim.g.tex_conceal = 'abdmg'
-      vim.g.vimtex_view_method = 'zathura'
-
-      vim.g.vimtex_view_general_viewer = 'okular'
-      vim.g.vimtex_view_general_options = '--unique file:@pdf\\#src:@line@tex'
-
-      vim.g.vimtex_compiler_method = 'latexrun'
-      vim.g.vimtex_syntax_enabled = 0
-
-      vim.g.maplocalleader = ","
-    end
   }, {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -946,16 +933,14 @@ local M = {
   }, { 'tversteeg/registers.nvim' }, {
     'phaazon/hop.nvim',
     name = 'hop',
+    keys = {
+      { "<leader>k", "<cmd>lua require'hop'.hint_lines()<cr>" },
+      { "<leader>l", "<cmd>lua require'hop'.hint_words()<cr>" },
+      { "<leader>j", "<cmd>lua require'hop'.hint_lines()<cr>" },
+      { "<leader>f", "<cmd>lua require'hop'.hint_char1()<cr>" },
+      { "<leader>s", "<cmd>lua require'hop'.hint_char2()<cr>" }
+    },
     config = { keys = 'asdfghjkl;eiurtcxm,' },
-    init = function()
-      -- Map("n", "<leader>h", function() require'hop'.hint_words() end)
-      -- Map("n", "<leader>k", function() require'hop'.hint_lines() end)
-      Map("n", "<leader>k", function() require'hop'.hint_anywhere() end)
-      Map("n", "<leader>l", function() require'hop'.hint_words() end)
-      Map("n", "<leader>j", function() require'hop'.hint_lines() end)
-      Map("n", "<leader>f", function() require'hop'.hint_char1() end)
-      Map("n", "<leader>s", function() require'hop'.hint_char2() end)
-    end
   }, {
     "ahmedkhalf/project.nvim",
 
@@ -968,6 +953,7 @@ local M = {
     end
   }, {
     "hedyhli/outline.nvim",
+    keys = { { "<leader>;", "<cmd>Outline<CR>" } },
     config = function()
       -- Example mapping to toggle outline
       vim.keymap.set("n", "<leader>;", "<cmd>Outline<CR>",
@@ -981,7 +967,7 @@ local M = {
     "folke/todo-comments.nvim",
     dependencies = "nvim-lua/plenary.nvim",
 
-    enabled = true,
+    lazy = false,
     config = function()
       vim.cmd "au BufReadPost,BufNewFile,BufRead * hi clear TODO"
       require("todo-comments").setup {

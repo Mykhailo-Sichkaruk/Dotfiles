@@ -22,7 +22,7 @@ in
         sxhkd
         pulsemixer
         easyeffects
-        mysql-workbench
+        /* mysql-workbench */
         youtube-music
         vscode
         discord
@@ -43,10 +43,12 @@ in
         alacritty
         i3lock
         dunst
-        insomnia
+        /* insomnia */
         flameshot
         playerctl
         keepmenu
+        /* libreoffice */
+        /* gimp */
       ]);
   };
 
