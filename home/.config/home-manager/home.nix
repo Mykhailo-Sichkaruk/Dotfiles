@@ -22,10 +22,10 @@ in
         sxhkd
         pulsemixer
         easyeffects
-        mysql-workbench
+        /* mysql-workbench */
         youtube-music
         vscode
-        obs-studio
+        /* obs-studio */
         discord
         betterdiscordctl
         pipewire
@@ -44,10 +44,12 @@ in
         alacritty
         i3lock
         dunst
-        insomnia
+        /* insomnia */
         flameshot
         playerctl
         keepmenu
+        /* libreoffice */
+        /* gimp */
       ]);
   };
 

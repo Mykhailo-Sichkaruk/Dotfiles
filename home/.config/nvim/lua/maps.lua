@@ -20,7 +20,6 @@ end
 
 vim.cmd("command! T lua StartTerminal()")
 
-Map('n', '<A-w>', ':lua MiniBufremove.delete(0, true) <cr>')
 -- Map('n', '<A-l>', function() vim.bo.iminsert = math.abs(vim.bo.iminsert - 1) end)
 -- Map('i', '<A-l>', '<C-^>')
 Map('i', '<C-i>', '\t')
@@ -83,17 +82,9 @@ if vim.env.TMUX == nil then Map('n', '<A-a>', ':silent !$TERM & disown<cr>') end
 
 Map('t', '<A-a>', '<C-\\><C-n>')
 
--- Map('n', '\\\\', '<Esc>/Enter>"_c4l')
-
 
 Map('n', 'cd', ':cd ')
-Map('n', '<leader>b', ':VimspectorBreakpoints<cr>')
-Map('n', '<leader>d', ':DiffviewOpen<cr>')
-Map('n', '<leader>c', ':DiffviewClose<cr>')
 -- Cmd "inoremap <expr> <C-j>   pumvisible() ? '\\<C-n>' : '\\<C-j>'"
 -- Cmd "inoremap <expr> <-k>   pumvisible() ? '\\<C-p>' : '\\<C-k>'"
 -- Cmd "inoremap <expr> <Tab>   pumvisible() ? '\\<C-n>' : '\\<Tab>'"
 -- Cmd "inoremap <expr> <S-Tab> pumvisible() ? '\\<C-p>' : '\\<S-Tab>'"
-Map('n', '<leader>te', ':Telescope<cr>')
-Map('n', '<leader>tg', ':Telescope live_grep<cr>')
-Map('n', '<leader>o', ':DevdocsOpen<cr>')

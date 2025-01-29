@@ -94,11 +94,11 @@ M.config = function()
         showDocumentation = { enable = true }
       },
       codeActionOnSave = { enable = true, mode = "all" },
-      experimental = { useFlatConfig = false },
-      useFlatConfig = false,
+      experimental = { useFlatConfig = true },
+      useFlatConfig = true,
       format = true,
       nodePath = "node_modules/",
-      onIgnoredFiles = "on",
+      onIgnoredFiles = "off",
       problems = { shortenToSingleLine = false },
       quiet = false,
       rulesCustomizations = {},
@@ -252,7 +252,7 @@ M.init = function()
   Map('n', '<F2>', function() vim.lsp.buf.rename() end)
   Map('n', '<leader>a', function() vim.lsp.buf.code_action() end)
   Map('v', '<leader>a', function() vim.lsp.buf.code_action() end)
-  Map('n', '<leader>D', function() vim.lsp.buf.type_definition() end)
+  --[[ Map('n', '<leader>D', function() vim.lsp.buf.type_definition() end) -- I dont know why do we need this to it's commented out  ]]
 
   Map('n', '<leader>e', function() vim.diagnostic.open_float() end)
   Map('n', '[d', function() vim.diagnostic.goto_prev() end)

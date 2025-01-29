@@ -2,16 +2,19 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
   nix = {
     optimise.automatic = true;
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    settings = {
+      cores = 7;
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
   };
 
   imports = [
@@ -180,7 +183,6 @@
       safe-rm
       rofi
       pulsemixer
-      nerdfonts
       nh
       xdotool
     ];
@@ -213,7 +215,7 @@
   virtualisation.docker.enable = true;
 
   fonts.packages = [ pkgs.nerdfonts ];
-  # fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  /* fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts); */
   system = {
     autoUpgrade = {
       enable = true;
