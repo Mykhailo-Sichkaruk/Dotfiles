@@ -50,4 +50,5 @@ with pkgs;
   bash-language-server
   dockerfile-language-server-nodejs
   glow
+  yaml-language-server
 ]
