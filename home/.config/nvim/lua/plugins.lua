@@ -40,8 +40,54 @@ local M = {
   }, { 'tzachar/highlight-undo.nvim', opts = {} }, {
     'lewis6991/gitsigns.nvim',
     branch = 'main',
-    lazy = false,
 
+    keys = {
+      {
+        "<leader>hs",
+        "<cmd>lua require('gitsigns').stage_hunk()<cr>",
+        desc = "Stage hunk"
+      }, {
+        "<leader>hr",
+        "<cmd>lua require('gitsigns').reset_hunk()<cr>",
+        desc = "Reset hunk"
+      }, {
+        "<leader>hS",
+        "<cmd>lua require('gitsigns').stage_buffer()<cr>",
+        desc = "Stage buffer"
+      }, {
+        "<leader>hu",
+        "<cmd>lua require('gitsigns').undo_stage_hunk()<cr>",
+        desc = "Undo stage hunk"
+      }, {
+        "<leader>hR",
+        "<cmd>lua require('gitsigns').reset_buffer()<cr>",
+        desc = "Reset buffer"
+      }, {
+        "<leader>hp",
+        "<cmd>lua require('gitsigns').preview_hunk()<cr>",
+        desc = "Preview hunk"
+      }, {
+        "<leader>hb",
+        "<cmd>lua require('gitsigns').blame_line(true)<cr>",
+        desc = "Blame line"
+      }, {
+        "<leader>tb",
+        "<cmd>lua require('gitsigns').toggle_current_line_blame()<cr>",
+        desc = "Toggle current line blame"
+      }, {
+        "<leader>hd",
+        "<cmd>lua require('gitsigns').diffthis()<cr>",
+        desc = "Diff this"
+      }, {
+        "<leader>hD",
+        "<cmd>lua require('gitsigns').diffthis('HEAD')<cr>",
+        desc = "Diff this HEAD"
+      }, {
+        "<leader>td",
+        "<cmd>lua require('gitsigns').toggle_deleted()<cr>",
+        desc = "Toggle deleted"
+      }
+    },
     config = function()
       require('gitsigns').setup({
         signs = {
@@ -71,7 +117,7 @@ local M = {
         current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
         current_line_blame_opts = {
           virt_text = true,
-          virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+          virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
           delay = 1000,
           ignore_whitespace = false,
           virt_text_priority = 100
@@ -114,26 +160,6 @@ local M = {
               gitsigns.nav_hunk('prev')
             end
           end)
-
-          -- Actions
-          map('n', '<leader>hs', gitsigns.stage_hunk)
-          map('n', '<leader>hr', gitsigns.reset_hunk)
-          map('v', '<leader>hs', function()
-            gitsigns.stage_hunk { vim.fn.line('.'), vim.fn.line('v') }
-          end)
-          map('v', '<leader>hr', function()
-            gitsigns.reset_hunk { vim.fn.line('.'), vim.fn.line('v') }
-          end)
-          map('n', '<leader>hS', gitsigns.stage_buffer)
-          map('n', '<leader>hu', gitsigns.undo_stage_hunk)
-          map('n', '<leader>hR', gitsigns.reset_buffer)
-          map('n', '<leader>hp', gitsigns.preview_hunk)
-          map('n', '<leader>hb',
-              function() gitsigns.blame_line { full = true } end)
-          map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
-          map('n', '<leader>hd', gitsigns.diffthis)
-          map('n', '<leader>hD', function() gitsigns.diffthis('~') end)
-          map('n', '<leader>td', gitsigns.toggle_deleted)
 
           -- Text object
           map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
@@ -940,7 +966,7 @@ local M = {
       { "<leader>f", "<cmd>lua require'hop'.hint_char1()<cr>" },
       { "<leader>s", "<cmd>lua require'hop'.hint_char2()<cr>" }
     },
-    config = { keys = 'asdfghjkl;eiurtcxm,' },
+    config = { keys = 'asdfghjkl;eiurtcxm,' }
   }, {
     "ahmedkhalf/project.nvim",
 
