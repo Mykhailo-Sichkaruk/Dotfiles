@@ -15,7 +15,7 @@ nixConfig
   gh
   tlp
   neovim
-  /* nodejs_23 */
+  # nodejs_23
   python3
   fd
   ripgrep
@@ -45,7 +45,7 @@ nixConfig
   fishPlugins.grc
   fishPlugins.z
   fishPlugins.plugin-git
-  /* git-filter-repo */
+  # git-filter-repo
   vifm
   xclip
   oh-my-fish
@@ -57,6 +57,6 @@ nixConfig
   unzip
   steam-run
   nix-ld
-  /* imagemagick */
+  # imagemagick
   pnpm
 ])
