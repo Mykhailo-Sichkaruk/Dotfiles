@@ -21,16 +21,12 @@ in
         neomutt
         sxhkd
         pulsemixer
-        easyeffects
-        /* mysql-workbench */
         youtube-music
         vscode
         discord
         betterdiscordctl
         pipewire
-        slack
         telegram-desktop
-        dbeaver-bin
         drawio
         mpv
         obsidian
@@ -38,17 +34,15 @@ in
         zathura
         vieb
         google-chrome
-        peek
         mpv
         alacritty
         i3lock
         dunst
-        /* insomnia */
         flameshot
         playerctl
-        keepmenu
-        /* libreoffice */
-        /* gimp */
+        # keepmenu
+        # libreoffice
+        # gimp
       ]);
   };
 
@@ -62,7 +56,7 @@ in
   programs = {
     # Let Home Manager manage itself
     home-manager.enable = true;
-    /* home-manager.backupFileExtension = "backup"; */
+    # home-manager.backupFileExtension = "backup";
     alacritty = {
       enable = true;
     };
