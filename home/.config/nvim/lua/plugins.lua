@@ -825,9 +825,9 @@ local M = {
       }
       vim.g.neoformat_typescript_prettier = {
         exe = 'prettier',
-        args = { vim.fn.expand('%:p') },
-        replace = 1,
-        try_node_exe = 1
+        args = { '--cache' },
+        replace = 0,
+        try_node_exe = 0
       }
       vim.g.neoformat_typescript_deno_fmt = {
         exe = 'deno',
@@ -837,23 +837,23 @@ local M = {
       vim.g.neoformat_enabled_typescript = { 'prettier', 'deno_fmt' }
       vim.g.neoformat_typescriptreact_prettier = {
         exe = 'prettier',
-        args = { vim.fn.expand('%:p') },
-        replace = 1,
-        try_node_exe = 1
+        args = { '--cache' },
+        replace = 0,
+        try_node_exe = 0
       }
       vim.g.neoformat_enabled_typescriptreact = { 'prettier' }
       vim.g.neoformat_javascriptreact_prettier = {
         exe = 'prettier',
-        args = { vim.fn.expand('%:p') },
-        replace = 1,
-        try_node_exe = 1
+        args = { '--cache' },
+        replace = 0,
+        try_node_exe = 0
       }
       vim.g.neoformat_enabled_javascriptreact = { 'prettier' }
       vim.g.neoformat_json_prettier = {
         exe = 'prettier',
-        args = { vim.fn.expand('%:p') },
-        replace = 1,
-        try_node_exe = 1
+        args = { '--cache' },
+        replace = 0,
+        try_node_exe = 0
       }
       vim.g.neoformat_enabled_json = { 'prettier' }
       vim.g.neoformat_enabled_nix = { 'nixfmt' }
