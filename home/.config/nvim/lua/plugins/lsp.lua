@@ -14,7 +14,11 @@ M.config = function()
   local on_attach = OnAttach
   local root_pattern = nvim_lsp.util.root_pattern
 
-  nvim_lsp.dockerls.setup({})
+  nvim_lsp.protols.setup { on_attach = on_attach }
+  nvim_lsp.dockerls.setup {}
+  nvim_lsp.docker_compose_language_service.setup {}
+
+  nvim_lsp.buf_ls.setup {}
   require("luasnip.loaders.from_snipmate").lazy_load(
       { paths = { "./snippets" } })
 
@@ -24,7 +28,6 @@ M.config = function()
     delete_check_events = 'InsertLeave'
   })
 
-  nvim_lsp.buf_ls.setup {}
   nvim_lsp.asm_lsp.setup({
     cmd = { "asm-lsp" },
     filetypes = { "asm", "vmasm", "nasm" },
@@ -239,6 +242,7 @@ M.config = function()
   nvim_lsp.nixd.setup({
     settings = { nixd = { formatting = { command = { "nixfmt" } } } }
   })
+  nvim_lsp.helm_ls.setup {}
 end
 
 M.init = function()

@@ -59,4 +59,6 @@ nixConfig
   nix-ld
   # imagemagick
   pnpm
+  zgrviewer
+  graphviz
 ])

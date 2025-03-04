@@ -85,17 +85,19 @@ vim.filetype.add({
     ['.env'] = "config",
     ['.env.example'] = "config",
     ['.prettierrc'] = "json"
+  },
+  pattern = {
+    ["compose.*%.ya?ml"] = "yaml.docker-compose",
+    ["docker%-compose.*%.ya?ml"] = "yaml.docker-compose",
+    [".*/templates/.*%.ya?ml"] = "helm"
   }
-
 })
 
 vim.cmd "command! W :w!"
 
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "*",
-  callback = function()
-    vim.cmd("setlocal list buflisted")
-  end,
+  callback = function() vim.cmd("setlocal list buflisted") end
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
