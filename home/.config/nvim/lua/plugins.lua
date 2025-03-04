@@ -12,20 +12,21 @@ local M = {
       { "<C-/>", mode = { "n", "v" } } -- Specify the keys for NORMAL and VISUAL modes
     },
     config = function()
+      require('Comment.ft')({ 'yaml', { '#%s', '#%s' } }); -- Add missing commentstring for yaml
       require('Comment').setup({
         ---LHS of toggle mappings in NORMAL mode
         toggler = {
           ---Line-comment toggle keymap
           line = '<C-/>',
           ---Block-comment toggle keymap
-          block = '<C-/>'
+          block = '<C-;>'
         },
         ---LHS of operator-pending mappings in NORMAL and VISUAL mode
         opleader = {
           ---Line-comment keymap
           line = '<C-/>',
           ---Block-comment keymap
-          block = '<C-/>'
+          block = '<C-;>'
         },
         ---Enable keybindings
         ---NOTE: If given `false` then the plugin won't create any mappings
@@ -825,16 +826,16 @@ local M = {
       }
       vim.g.neoformat_typescript_prettier = {
         exe = 'prettier',
-        args = { '--cache' },
-        replace = 0,
-        try_node_exe = 0
+        args = { '--cache', '--write' },
+        replace = 1,
+        try_node_exe = 1
       }
-      vim.g.neoformat_typescript_deno_fmt = {
-        exe = 'deno',
-        args = { 'fmt' },
-        replace = 1
-      }
-      vim.g.neoformat_enabled_typescript = { 'prettier', 'deno_fmt' }
+      -- vim.g.neoformat_typescript_deno_fmt = {
+      --   exe = 'deno',
+      --   args = { 'fmt' },
+      --   replace = 1
+      -- }
+      vim.g.neoformat_enabled_typescript = { 'prettier', --[[ 'deno_fmt' ]] }
       vim.g.neoformat_typescriptreact_prettier = {
         exe = 'prettier',
         args = { '--cache' },
@@ -858,6 +859,14 @@ local M = {
       vim.g.neoformat_enabled_json = { 'prettier' }
       vim.g.neoformat_enabled_nix = { 'nixfmt' }
       vim.g.neoformat_nix_nixfmt = { exe = 'nixfmt', stdin = 1 }
+      vim.g.neoformat_enabled_proto = { 'buf' }
+      vim.g.neoformat_proto_buf = {
+        exe = 'buf',
+        args = { 'format', '-w' },
+        replace = 1,
+        stdin = 0,
+        stderr = 1
+      }
     end
   }, {
     -- bar at the top

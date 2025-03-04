@@ -32,7 +32,7 @@
         inherit pkgs;
         modules = [
           ./home/.config/home-manager/home.nix
-        ];
+         ];
       };
 
     };

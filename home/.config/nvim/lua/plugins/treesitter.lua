@@ -18,9 +18,8 @@ local M = {
 
 M.dependencies = {
   'https://gitlab.com/HiPhish/rainbow-delimiters.nvim',
-  'nvim-treesitter/nvim-treesitter-textobjects', 
-  'RRethy/nvim-treesitter-textsubjects', 
-  'romgrk/nvim-treesitter-context', 
+  'nvim-treesitter/nvim-treesitter-textobjects',
+  'RRethy/nvim-treesitter-textsubjects', 'romgrk/nvim-treesitter-context',
   'JoosepAlviste/nvim-ts-context-commentstring'
 }
 M.init = function()
@@ -44,7 +43,8 @@ M.config = function()
   treesitter.setup {
     ensure_installed = {
       'javascript', 'typescript', 'rust', 'lua', 'java', 'c', 'cpp', 'tsx',
-      'vue', 'html', 'sql'
+      'vue', 'html', 'sql', 'proto', 'dockerfile', 'bash', 'json', 'yaml',
+      'gitignore', 'jsonc', 'prisma', 'helm'
     },
 
     highlight = { enable = true, additional_vim_regex_highlighting = true },
@@ -75,7 +75,7 @@ M.config = function()
 
     textobjects = {
       select = {
-        enable = true,
+        enable = true
         -- Commented becauser of https://github.com/nvim-treesitter/nvim-treesitter-textobjects/issues/557
         -- keymaps = {
         --   ["af"] = "@function.outer",

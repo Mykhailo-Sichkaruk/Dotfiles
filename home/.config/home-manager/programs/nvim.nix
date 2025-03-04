@@ -1,5 +1,4 @@
 { pkgs }:
-
 with pkgs;
 [
   astyle
@@ -51,4 +50,9 @@ with pkgs;
   dockerfile-language-server-nodejs
   glow
   yaml-language-server
+  protols
+  buf
+  docker-compose-language-service
+  emmet-ls
+  helm-ls
 ]
