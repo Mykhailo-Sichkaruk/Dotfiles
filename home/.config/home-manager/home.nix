@@ -40,6 +40,7 @@ in
         dunst
         flameshot
         playerctl
+        skypeforlinux
         # keepmenu
         # libreoffice
         # gimp
@@ -75,7 +76,7 @@ in
         alias l="ex"
         alias h="history 1 | grep"
         alias rm="rm -rf"
-        alias cp="cp -r"
+        alias cp="cp -r"ergo tableergo table
         alias ..="cd .."
         alias ...="cd ../.."
         alias ....="cd ../../.."

@@ -43,8 +43,6 @@ require('lazy').setup('plugins', {
       }
     }
   },
-  profiling = {
-    loader = false,
-    require = false,
-  },
+  profiling = { loader = false, require = false }
 })
+
