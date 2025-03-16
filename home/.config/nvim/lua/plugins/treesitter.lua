@@ -44,7 +44,7 @@ M.config = function()
     ensure_installed = {
       'javascript', 'typescript', 'rust', 'lua', 'java', 'c', 'cpp', 'tsx',
       'vue', 'html', 'sql', 'proto', 'dockerfile', 'bash', 'json', 'yaml',
-      'gitignore', 'jsonc', 'prisma', 'helm'
+      'gitignore', 'jsonc', 'prisma', 'helm', 'gitcommit', 'diff', 'git_rebase'
     },
 
     highlight = { enable = true, additional_vim_regex_highlighting = true },
