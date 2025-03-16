@@ -41,7 +41,7 @@ local M = {
   }, { 'tzachar/highlight-undo.nvim', opts = {} }, {
     'lewis6991/gitsigns.nvim',
     branch = 'main',
-
+    lazy = false,
     keys = {
       {
         "<leader>hs",
@@ -214,7 +214,6 @@ local M = {
     }
   }, {
     "folke/which-key.nvim",
-    event = "VeryLazy",
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
@@ -257,14 +256,12 @@ local M = {
       "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim",
       "nvim-treesitter/nvim-treesitter"
     },
-
     config = true,
     cmd = {
       "DevdocsFetch", "DevdocsInstall", "DevdocsUninstall", "DevdocsOpen",
       "DevdocsOpenFloat", "DevdocsOpenCurrent", "DevdocsOpenCurrentFloat",
       "DevdocsUpdate", "DevdocsUpdateAll"
     },
-    event = "VeryLazy",
     opts = {
       dir_path = vim.fn.stdpath("data") .. "/devdocs", -- installation directory
       telescope = {}, -- passed to the telescope picker
@@ -312,8 +309,6 @@ local M = {
     }
   }, { 'rcarriga/nvim-notify' }, {
     'antonk52/bad-practices.nvim',
-
-    enable = true,
     config = function()
       local bad_practices = require("bad_practices")
       bad_practices.setup({
@@ -324,7 +319,6 @@ local M = {
     end
   }, {
     'gaborvecsei/usage-tracker.nvim',
-
     config = function()
       require('usage-tracker').setup({
         keep_eventlog_days = 14,
@@ -393,7 +387,6 @@ local M = {
     build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   }, { 'anott03/nvim-lspinstall' }, {
     "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
     opts = {},
     config = function(_, opts) require'lsp_signature'.setup(opts) end
   }, { 'RishabhRD/popfix' }, { 'RishabhRD/nvim-lsputils' }, -- {
@@ -488,8 +481,7 @@ local M = {
   }, {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
-    lazy = true,
-    enabled = true,
+    lazy = false,
     keys = {
       { "<leader>\\", "toggle" }, { "\\", "toggle" }, { "g\\", "git_status" }
     },
@@ -749,7 +741,6 @@ local M = {
   }, { 'nvim-lua/plenary.nvim' }, { 'willthbill/opener.nvim' },
   { 'https://github.com/jose-elias-alvarez/typescript.nvim' }, {
     'sbdchd/neoformat',
-
     keys = {
       {
         "<leader>F",
@@ -835,7 +826,7 @@ local M = {
       --   args = { 'fmt' },
       --   replace = 1
       -- }
-      vim.g.neoformat_enabled_typescript = { 'prettier', --[[ 'deno_fmt' ]] }
+      vim.g.neoformat_enabled_typescript = { 'prettier' --[[ 'deno_fmt' ]]  }
       vim.g.neoformat_typescriptreact_prettier = {
         exe = 'prettier',
         args = { '--cache' },
@@ -857,6 +848,13 @@ local M = {
         try_node_exe = 0
       }
       vim.g.neoformat_enabled_json = { 'prettier' }
+      vim.g.neoformat_jsonc_prettier = {
+        exe = 'prettier',
+        args = { '--cache' },
+        replace = 0,
+        try_node_exe = 0
+      }
+      vim.g.neoformat_enabled_jsonc = { 'prettier' }
       vim.g.neoformat_enabled_nix = { 'nixfmt' }
       vim.g.neoformat_nix_nixfmt = { exe = 'nixfmt', stdin = 1 }
       vim.g.neoformat_enabled_proto = { 'buf' }
@@ -872,6 +870,7 @@ local M = {
     -- bar at the top
     'akinsho/nvim-bufferline.lua',
     version = '*',
+    lazy = false,
     keys = {
       { "gb", "pick_buffer" }, { "<A-l>", "<cmd>BufferLineCycleNext<CR>" },
       { "<A-h>", "<cmd>BufferLineCyclePrev<CR>" },
@@ -938,8 +937,8 @@ local M = {
     end
   }, {
     "kylechui/nvim-surround",
+    lazy = false,
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
     config = function()
       require("nvim-surround").setup({
         -- Configuration here, or leave empty to use defaults
@@ -1001,7 +1000,6 @@ local M = {
   }, {
     "folke/todo-comments.nvim",
     dependencies = "nvim-lua/plenary.nvim",
-
     lazy = false,
     config = function()
       vim.cmd "au BufReadPost,BufNewFile,BufRead * hi clear TODO"
@@ -1075,19 +1073,8 @@ local M = {
 
       }
     end
-  }, {
-    -- xkbswitch TODO: doesn't work
-    'lyokha/vim-xkbswitch',
-    lazy = true,
-    enabled = false,
-    config = function()
-      vim.g.XkbSwitchEnabled = 1
-      vim.g.XkbSwitchIMappings = { 'ru', 'sk(qwerty)', 'ua' }
-    end
   }, { 'folke/neodev.nvim', ft = { 'lua' }, config = true }, {
     'luochen1990/rainbow',
-
-    enabled = true,
     config = function()
       vim.g.rainbow_active = 1;
       vim.g.grainbow_conf = {
