@@ -41,6 +41,8 @@ in
         flameshot
         playerctl
         skypeforlinux
+        comma
+        nix-index
         # keepmenu
         # libreoffice
         # gimp

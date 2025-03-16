@@ -53,6 +53,9 @@
     hostName = "mykhailos_nixos"; # Define your hostname.
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
     networkmanager.enable = false; # Easiest to use and most distros use this by default.
+    extraHosts = ''
+      192.168.49.2  myserver.com
+    '';
     nameservers = [
       "1.1.1.1"
       "8.8.8.8"
@@ -69,16 +72,9 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [
-        8888
-        8889
-        8000
         80
         443
-        4443
-        3000
-        3001
         22
-        2222
       ];
     };
   };
@@ -145,8 +141,10 @@
     pcscd.enable = true;
   };
 
-  security.polkit.enable = true;
-  security.rtkit.enable = true;
+  security = {
+    polkit.enable = true;
+    rtkit.enable = true;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ms = {
@@ -159,7 +157,6 @@
       "render"
       "transmission"
       "input"
-      "docker"
     ]; # Enable ‘sudo’ for the user.
     packages = [ ];
     shell = pkgs.fish;
@@ -215,7 +212,7 @@
   virtualisation.docker.enable = true;
 
   fonts.packages = [ pkgs.nerdfonts ];
-  /* fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts); */
+  # fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   system = {
     autoUpgrade = {
       enable = true;
