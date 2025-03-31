@@ -16,12 +16,14 @@ in
     packages =
       shellConfig
       ++ (with pkgs; [
+        nvtopPackages.full
         rofi
         keepassxc
         neomutt
         sxhkd
         pulsemixer
         youtube-music
+        yt-dlp
         vscode
         discord
         betterdiscordctl
