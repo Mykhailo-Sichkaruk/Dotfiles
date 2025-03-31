@@ -13,7 +13,7 @@
   outputs =
     { nixpkgs, home-manager, ... }:
     let
-      system = "x86_64-linux"; # Change if on a different platform (aarch64-linux, etc.)
+      system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
     in
     {
@@ -32,8 +32,7 @@
         inherit pkgs;
         modules = [
           ./home/.config/home-manager/home.nix
-         ];
+        ];
       };
-
     };
 }

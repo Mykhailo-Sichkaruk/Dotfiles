@@ -29,9 +29,9 @@ interval = 20
 
 # [[block]]
 # block = "nvidia_gpu"
-# interval = 20
+# interval = 2
 # gpu_id = 0
-# format = "NVIDIA { $icon $utilization $temperature $clocks |}"
+# format = "NVIDIA { $icon $memory $utilization $temperature $clocks |}"
 
 [[block]]
 block = "uptime"
