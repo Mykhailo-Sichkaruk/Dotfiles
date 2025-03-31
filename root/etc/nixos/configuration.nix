@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -47,7 +47,6 @@
     fsType = "vfat";
   };
 
-  # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   networking = {
     hostName = "mykhailos_nixos"; # Define your hostname.
@@ -89,8 +88,8 @@
     useXkbConfig = true; # use xkb.options in tty.
   };
 
-  # Enable the X11 windowing system.
   services = {
+    fstrim.enable = true;
     displayManager = {
       defaultSession = "none+i3";
       logToFile = true;
@@ -105,11 +104,11 @@
       lidSwitchExternalPower = "hibernate";
     };
     xserver = {
+      videoDrivers = [ "modesetting" ];
       xkb.layout = "us,ua";
       xkb.options = "caps:escape,grp:alt_shift_toggle";
       autoRepeatInterval = 50;
       autoRepeatDelay = 250;
-      # videoDrivers = [ "nvidia" ];
       enable = true;
 
       desktopManager = {
@@ -165,6 +164,7 @@
 
   environment = {
     systemPackages = with pkgs; [
+      cachix
       pinentry-tty
       pass
       gnupg
