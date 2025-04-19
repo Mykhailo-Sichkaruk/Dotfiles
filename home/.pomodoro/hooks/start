@@ -13,6 +13,6 @@ tags=$(echo $line | grep -o 'tags=[^ ]*' | cut -d'=' -f2)
 echo "[ -s $current_file ] && notify-send 'Pomodoro: $description' 'Session started'" | at now
 
 # Schedule the finish notification and store the job ID
-finish_job_id=$(echo "sleep ${duration}m && [ -s $current_file ] && notify-send 'Pomodoro: $description' 'Session finished'" | at now 2>&1 | awk '{print $2}')
+finish_job_id=$(echo "sleep ${duration}m && [ -s $current_file ] && notify-send 'Pomodoro: $description' 'Session finished'" | at now 2>&1)
 echo $finish_job_id > $job_file
 

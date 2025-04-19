@@ -16,6 +16,10 @@ in
     packages =
       shellConfig
       ++ (with pkgs; [
+        anki
+        at
+        libnotify
+        openpomodoro-cli
         nvtopPackages.full
         rofi
         keepassxc
@@ -24,7 +28,6 @@ in
         pulsemixer
         youtube-music
         yt-dlp
-        vscode
         discord
         betterdiscordctl
         pipewire
@@ -59,7 +62,16 @@ in
   };
 
   programs = {
-    # Let Home Manager manage itself
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+    };
+    i3status-rust = {
+      enable = true;
+    };
     home-manager.enable = true;
     # home-manager.backupFileExtension = "backup";
     alacritty = {
@@ -80,7 +92,7 @@ in
         alias l="ex"
         alias h="history 1 | grep"
         alias rm="rm -rf"
-        alias cp="cp -r"ergo tableergo table
+        alias cp="cp -r"
         alias ..="cd .."
         alias ...="cd ../.."
         alias ....="cd ../../.."

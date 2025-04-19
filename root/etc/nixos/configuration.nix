@@ -89,6 +89,9 @@
   };
 
   services = {
+    atd = {
+      enable = true;
+    };
     fstrim.enable = true;
     displayManager = {
       defaultSession = "none+i3";
