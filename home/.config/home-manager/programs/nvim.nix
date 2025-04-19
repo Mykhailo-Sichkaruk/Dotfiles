@@ -1,6 +1,7 @@
 { pkgs }:
 with pkgs;
 [
+  marksman
   astyle
   cpplint
   cmake-format
@@ -37,7 +38,6 @@ with pkgs;
   luajitPackages.luarocks
   nodePackages.typescript-language-server
   deno
-  neovim
   nodejs_23
   python3
   ruby

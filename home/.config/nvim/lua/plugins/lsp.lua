@@ -238,6 +238,7 @@ M.config = function()
     filetypes = { "html", "css", "typescriptreact", "javascriptreact" }
   })
 
+  nvim_lsp.marksman.setup{}
   nvim_lsp.luau_lsp.setup({})
   nvim_lsp.nixd.setup({
     settings = { nixd = { formatting = { command = { "nixfmt" } } } }

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run the 'pomodoro status' command and save the output
-POMODORO_STATUS=$(pomodoro status)
+POMODORO_STATUS=$(openpomodoro-cli status)
 
 # Check if Pomodoro time is 0 or status is empty
 if [[ "$POMODORO_STATUS" == \!* ]] || [[ -z "$POMODORO_STATUS" ]]; then
