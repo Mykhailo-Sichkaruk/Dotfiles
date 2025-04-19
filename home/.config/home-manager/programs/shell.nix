@@ -14,7 +14,6 @@ nixConfig
   zoxide
   gh
   tlp
-  neovim
   # nodejs_23
   python3
   fd

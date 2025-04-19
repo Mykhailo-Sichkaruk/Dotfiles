@@ -5,8 +5,22 @@ local M = {
   { "https://github.com/mfussenegger/nvim-dap" },
   { "https://github.com/mfussenegger/nvim-jdtls" },
   { "IndianBoy42/tree-sitter-just" },
-  { "NoahTheDuke/vim-just", ft = { "just" } },
-  { "https://github.com/roxma/nvim-yarp" }, {
+  { "NoahTheDuke/vim-just", ft = { "just" } }, {
+    "epwalsh/obsidian.nvim",
+    version = "*", -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = "markdown",
+    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    -- event = {
+    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+    --   -- refer to `:h file-pattern` for more examples
+    --   "BufReadPre path/to/my-vault/*.md",
+    --   "BufNewFile path/to/my-vault/*.md",
+    -- },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = { workspaces = { { name = "personal", path = "~/Zettelkasten" } } }
+  }, { "https://github.com/roxma/nvim-yarp" }, {
     'numToStr/Comment.nvim',
     keys = {
       { "<C-/>", mode = { "n", "v" } } -- Specify the keys for NORMAL and VISUAL modes
@@ -382,7 +396,7 @@ local M = {
         "<leader>tg",
         "<cmd>Telescope live_grep<cr>",
         desc = "Open Telescope live_grep"
-      }
+      }, { "<leader>tf", "<cmd>Telescope fd<cr>", desc = "Open Telescode fd" }
     },
     build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   }, { 'anott03/nvim-lspinstall' }, {
