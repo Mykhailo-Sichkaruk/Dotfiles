@@ -2,32 +2,32 @@
 with pkgs;
 [
   marksman
-  astyle
-  cpplint
-  cmake-format
+  # astyle
+  # cpplint
+  # cmake-format
   deadnix
   dotenv-linter
   lua
-  rustfmt
+  # rustfmt
   prettierd
   nodePackages_latest.prettier
-  asmfmt
-  clang-tools
+  # asmfmt
+  # clang-tools
   ccls
   typst
-  typst-lsp
+  tinymist
   shellcheck
-  go
-  rust-analyzer
-  cargo
-  cmake
+  # go
+  # rust-analyzer
+  # cargo
+  # cmake
   yamllint
   hadolint
-  gcc
+  # gcc
   buf
   protolint
-  checkmake
-  cppcheck
+  # checkmake
+  # cppcheck
   editorconfig-checker
   gitlint
   statix
@@ -37,8 +37,8 @@ with pkgs;
   lua-language-server
   luajitPackages.luarocks
   nodePackages.typescript-language-server
-  deno
-  nodejs_23
+  # deno
+  nodejs
   python3
   ruby
   tree-sitter

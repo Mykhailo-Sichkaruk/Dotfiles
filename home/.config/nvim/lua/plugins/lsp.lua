@@ -14,6 +14,23 @@ M.config = function()
   local on_attach = OnAttach
   local root_pattern = nvim_lsp.util.root_pattern
 
+  nvim_lsp.protols.setup{};
+  nvim_lsp.ts_ls.setup({
+    init_options = {
+      plugins = {
+        {
+          name = "@vue/typescript-plugin",
+          location = ".//node_modules/@vue/typescript-plugin",
+          languages = {"javascript", "typescript", "vue"},
+        },
+      },
+    },
+    filetypes = {
+      "javascript",
+      "typescript",
+      "vue",
+    },
+  })
   nvim_lsp.protols.setup { on_attach = on_attach }
   nvim_lsp.dockerls.setup {}
   nvim_lsp.docker_compose_language_service.setup {}
@@ -33,8 +50,6 @@ M.config = function()
     filetypes = { "asm", "vmasm", "nasm" },
     root_dir = root_pattern(".git", ".gitmodules", ".hg", ".bzr", ".svn")
   })
-
-  nvim_lsp.ts_ls.setup({});
 
   local configs = require('lspconfig.configs')
   if not configs.typst then
@@ -235,7 +250,7 @@ M.config = function()
   nvim_lsp.emmet_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
-    filetypes = { "html", "css", "typescriptreact", "javascriptreact" }
+    filetypes = { "html", "css", "typescriptreact", "javascriptreact", "vue" }
   })
 
   nvim_lsp.marksman.setup{}

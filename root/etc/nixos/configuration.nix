@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -54,6 +54,10 @@
     networkmanager.enable = false; # Easiest to use and most distros use this by default.
     extraHosts = ''
       192.168.49.2  myserver.com
+      # 192.168.49.2  test-runner.myserver.com
+      # 192.168.49.2  test-dashboard.myserver.com
+      # 192.168.49.2  prometheus.myserver.com
+      # 192.168.49.2  jaeger.myserver.com
     '';
     nameservers = [
       "1.1.1.1"
@@ -89,6 +93,14 @@
   };
 
   services = {
+    openvpn.servers = {
+      stubaVPN = {
+        autoStart = false;
+        config = ''
+          config /home/ms/Downloads/client.ovpn
+        '';
+      };
+    };
     atd = {
       enable = true;
     };
@@ -193,6 +205,7 @@
   };
 
   programs = {
+    openvpn3.enable = true;
     fish.enable = true;
     light.enable = true;
     gnupg.agent = {
@@ -214,13 +227,12 @@
   };
   virtualisation.docker.enable = true;
 
-  fonts.packages = [ pkgs.nerdfonts ];
-  # fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  fonts.packages = [ ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   system = {
     autoUpgrade = {
       enable = true;
       allowReboot = false;
     };
-    stateVersion = "24.11";
+    stateVersion = "25.05";
   };
 }

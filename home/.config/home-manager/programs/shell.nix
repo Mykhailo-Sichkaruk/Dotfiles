@@ -54,10 +54,7 @@ nixConfig
   offlineimap
   ffmpeg
   unzip
-  steam-run
   nix-ld
   # imagemagick
-  pnpm
   zgrviewer
-  graphviz
 ])
