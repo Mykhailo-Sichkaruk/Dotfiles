@@ -78,7 +78,8 @@ vim.filetype.add({
     fish = "fish",
     conf = "config",
     asm = "nasm",
-    md = "markdown"
+    md = "markdown",
+    puml = "plantuml",
   },
   filename = {
     ['.zshrc'] = "sh",

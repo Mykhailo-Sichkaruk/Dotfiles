@@ -12,45 +12,43 @@ in
   home = {
     username = "ms";
     homeDirectory = "/home/ms";
-    stateVersion = "24.11";
+    stateVersion = "25.05";
     packages =
       shellConfig
       ++ (with pkgs; [
-        anki
+        # anki
         at
         libnotify
-        openpomodoro-cli
-        nvtopPackages.full
+        # openpomodoro-cli
+        # nvtopPackages.full
         rofi
         keepassxc
         neomutt
         sxhkd
         pulsemixer
         youtube-music
-        yt-dlp
+        # yt-dlp
         discord
         betterdiscordctl
         pipewire
         telegram-desktop
-        drawio
-        mpv
+        # drawio
+        # mpv
         obsidian
-        vimiv-qt
+        # vimiv-qt
         zathura
         vieb
         google-chrome
-        mpv
+        # mpv
         alacritty
         i3lock
         dunst
         flameshot
         playerctl
-        skypeforlinux
         comma
         nix-index
-        # keepmenu
-        # libreoffice
-        # gimp
+        openvpn3
+        teams-for-linux
       ]);
   };
 
@@ -140,17 +138,19 @@ in
     };
   };
 
-  services.syncthing = {
-    enable = true;
-    # Still not in the stable version
-    /*
-      guiAddress = "127.0.0.1:8384";
-      settings.folders = {
-          "/home/ms/Sync" = {
-            id = "laptop_phone";
+  services = {
+    syncthing = {
+      enable = true;
+      # Still not in the stable version
+      /*
+        guiAddress = "127.0.0.1:8384";
+        settings.folders = {
+            "/home/ms/Sync" = {
+              id = "laptop_phone";
+            };
           };
-        };
-    */
+      */
+    };
   };
 
 }
