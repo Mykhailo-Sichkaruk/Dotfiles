@@ -1,4 +1,10 @@
 local M = {
+  -- { 'https://gitlab.com/itaranto/plantuml.nvim',
+  --   config = function()
+  --     require('plantuml').setup()
+  --   end,
+  --   ft = { 'plantuml' }
+  -- },
   { 'echasnovski/mini.icons', version = false },
   { 'echasnovski/mini.nvim', version = false }, { 'kevinhwang91/nvim-bqf' },
   { 'akinsho/git-conflict.nvim', version = "*", config = true },
@@ -26,7 +32,7 @@ local M = {
       { "<C-/>", mode = { "n", "v" } } -- Specify the keys for NORMAL and VISUAL modes
     },
     config = function()
-      require('Comment.ft')({ 'yaml', { '#%s', '#%s' } }); -- Add missing commentstring for yaml
+      require('Comment.ft')({ {'yaml', 'helm'}, { '#%s', '#%s' } }); -- Add missing commentstring for yaml
       require('Comment').setup({
         ---LHS of toggle mappings in NORMAL mode
         toggler = {

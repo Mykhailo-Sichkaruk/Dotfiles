@@ -21,3 +21,6 @@ To setup home run:
 ## Other
 > Assuming that dotfiles have been already linked
 
+bash trim-generations.sh 1 0 user && \
+sudo bash trim-generations.sh 1 0 system && \
+bash trim-generations.sh 1 0 home-manager 
