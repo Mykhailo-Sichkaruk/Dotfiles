@@ -17,9 +17,8 @@ in
       shellConfig
       ++ (with pkgs; [
         # anki
-        at
+        # at
         libnotify
-        # openpomodoro-cli
         # nvtopPackages.full
         rofi
         keepassxc
@@ -27,28 +26,28 @@ in
         sxhkd
         pulsemixer
         youtube-music
-        # yt-dlp
+        yt-dlp
         discord
-        betterdiscordctl
+        # betterdiscordctl
         pipewire
         telegram-desktop
-        # drawio
+        drawio
         # mpv
         obsidian
-        # vimiv-qt
+        vimiv-qt
         zathura
         vieb
         google-chrome
-        # mpv
         alacritty
         i3lock
         dunst
         flameshot
         playerctl
         comma
-        nix-index
-        openvpn3
-        teams-for-linux
+        # nix-index
+        # openvpn3
+        # teams-for-linux
+        newsboat
       ]);
   };
 
@@ -98,12 +97,12 @@ in
         alias cls="clear"
         alias gitclown="git clone"
 
-        bind -k nul -M insert accept-autosuggestion
+        fish_vi_key_bindings
+        bind ctrl-space -M insert accept-autosuggestion
         bind \cg forget_last_command
         bind --mode insert \cg forget_last_command
 
         starship init fish | source
-        fish_vi_key_bindings
         zoxide init --cmd cd fish | source
       '';
       plugins = [

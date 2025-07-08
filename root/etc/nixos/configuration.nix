@@ -53,11 +53,6 @@
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
     networkmanager.enable = false; # Easiest to use and most distros use this by default.
     extraHosts = ''
-      192.168.49.2  myserver.com
-      # 192.168.49.2  test-runner.myserver.com
-      # 192.168.49.2  test-dashboard.myserver.com
-      # 192.168.49.2  prometheus.myserver.com
-      # 192.168.49.2  jaeger.myserver.com
     '';
     nameservers = [
       "1.1.1.1"
@@ -180,7 +175,6 @@
   environment = {
     systemPackages = with pkgs; [
       cachix
-      pinentry-tty
       pass
       gnupg
       i3status-rust
@@ -197,6 +191,7 @@
       pulsemixer
       nh
       xdotool
+      man-pages
     ];
     variables = {
       RM = "safe-rm";

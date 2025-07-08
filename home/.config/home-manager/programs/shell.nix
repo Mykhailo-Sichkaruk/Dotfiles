@@ -14,13 +14,9 @@ nixConfig
   zoxide
   gh
   tlp
-  # nodejs_23
-  python3
   fd
   ripgrep
-  tmux
   vim
-  cargo
   jq
   docker
   curl
@@ -28,7 +24,6 @@ nixConfig
   powertop
   neofetch
   patch
-  ripgrep
   btop
   offlineimap
   bat
@@ -44,7 +39,6 @@ nixConfig
   fishPlugins.grc
   fishPlugins.z
   fishPlugins.plugin-git
-  # git-filter-repo
   vifm
   xclip
   oh-my-fish
@@ -55,6 +49,4 @@ nixConfig
   ffmpeg
   unzip
   nix-ld
-  # imagemagick
-  zgrviewer
 ])
