@@ -289,6 +289,9 @@ vmap J <scrollDown>
 vmap v <p.start>
 vmap <CR> <p.copyText>
 vmap <C-Space> <toNormalMode><p.start><p.startVisualSelect>
+" add website to favorites
+nmap af <:set favoritepages+=<useCurrentUrl>>
+nmap adb <:set darkreaderblocklist+=<useCurrentDomain>>
 
 " Commands
 colorscheme black

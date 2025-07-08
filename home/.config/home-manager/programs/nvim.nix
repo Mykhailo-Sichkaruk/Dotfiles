@@ -1,7 +1,7 @@
 { pkgs }:
 with pkgs;
 [
-  marksman
+  # marksman
   # astyle
   # cpplint
   # cmake-format
@@ -13,7 +13,7 @@ with pkgs;
   nodePackages_latest.prettier
   # asmfmt
   # clang-tools
-  ccls
+  # ccls
   typst
   tinymist
   shellcheck
@@ -24,8 +24,8 @@ with pkgs;
   yamllint
   hadolint
   # gcc
-  buf
-  protolint
+  # buf
+  # protolint
   # checkmake
   # cppcheck
   editorconfig-checker
@@ -40,9 +40,9 @@ with pkgs;
   # deno
   nodejs
   python3
-  ruby
+  # ruby
   tree-sitter
-  mercurial
+  # mercurial
   vscode-langservers-extracted
   vimPlugins.wilder-nvim
   markdownlint-cli
