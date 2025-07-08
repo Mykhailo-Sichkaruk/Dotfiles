@@ -11,5 +11,5 @@ SETUVAR Z_CMD:z
 SETUVAR Z_DATA:/home/ms/\x2elocal/share/z/data
 SETUVAR Z_DATA_DIR:/home/ms/\x2elocal/share/z
 SETUVAR Z_EXCLUDE:\x5e/home/ms\x24
-SETUVAR __fish_initialized:3400
+SETUVAR __fish_initialized:3800
 SETUVAR fish_key_bindings:fish_vi_key_bindings

@@ -1,0 +1,34 @@
+color background          white   black
+color listnormal          yellow   black
+color listfocus           yellow  blue   bold
+color listnormal_unread   white   black  bold
+color listfocus_unread    yellow  blue   
+color title               cyan  default   bold
+color info                cyan  blue   bold
+color hint-key            yellow  blue   bold
+color hint-keys-delimiter white   blue
+color hint-separator      white   blue   bold
+color hint-description    white   blue
+color article             white   black
+
+bind k everywhere up
+bind j everywhere down
+bind l everywhere open
+bind h everywhere quit
+bind space everywhere toggle-show-read-feeds
+
+# Show unread counts
+show-read-feeds yes
+feedlist-format "%4i %n%L%R"
+datetime-format "%F"
+
+# Sort articles by date
+article-sort-order date-asc
+feed-sort-order lastupdated
+
+# Save articles
+auto-reload yes
+reload-time 60
+save-path "~/News"
+browser vieb
+macro v pipe-to "urlview"

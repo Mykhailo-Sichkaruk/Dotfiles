@@ -480,7 +480,7 @@ if has('win')
     nnoremap yp :!echo %"d:gs!\!/! %i | clip<cr>
     " Yank path to current file to Windows clipboard with forward slashes
     nnoremap yf :!echo %"c:gs!\!/! %i | clip<cr>
-elseif $WAYLAND_DISPLAY
+elseif $WAYLAND_DISPLAY != ''
     if executable('wl-copy')
         " Yank current directory path into primary and selection clipboards
         nnoremap yd :!echo -n %d | wl-copy %i &&
@@ -488,8 +488,8 @@ elseif $WAYLAND_DISPLAY
         " Yank current file path into into primary and selection clipboards
         nnoremap yf :!echo -n %c:p | wl-copy %i &&
                     \ echo -n %c:p | wl-copy -p %i<cr>
-    endif
-elseif $DISPLAY
+    endif 
+elseif $DISPLAY != ''
     if executable('xclip')
         " Yank current directory path into the clipboard
         nnoremap yd :!echo %d | xclip %i<cr>
@@ -518,7 +518,7 @@ nnoremap A cw
 " Open console in current directory
 if $DISPLAY && executable('xterm')
     nnoremap ,t :!xterm &<cr>
-elseif $TERMINAL
+elseif $TERMINAL != ''
     nnoremap ,t :!$TERMINAL &<cr>
 endif
 
