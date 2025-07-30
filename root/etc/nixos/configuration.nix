@@ -200,6 +200,7 @@
   };
 
   programs = {
+    nix-ld.enable = true;
     openvpn3.enable = true;
     fish.enable = true;
     light.enable = true;

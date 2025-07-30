@@ -1,6 +1,7 @@
+#!/usr/bin/env xdg-open
 [Desktop Entry]
-Name=pulsemixer
-Comment= Simple mixer for PulseAudio
-Exec=/usr/bin/pulsemixer
+Version=1.0
 Terminal=true
 Type=Application
+Name=Pulsemixer
+Exec=pulsemixer
