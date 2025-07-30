@@ -19,6 +19,7 @@ in
         # anki
         # at
         libnotify
+        vscode
         # nvtopPackages.full
         rofi
         keepassxc
@@ -32,7 +33,7 @@ in
         pipewire
         telegram-desktop
         drawio
-        # mpv
+        mpv
         obsidian
         vimiv-qt
         zathura
@@ -48,6 +49,7 @@ in
         # openvpn3
         # teams-for-linux
         newsboat
+        obs-studio
       ]);
   };
 
@@ -96,6 +98,8 @@ in
         alias .....="cd ../../../.."
         alias cls="clear"
         alias gitclown="git clone"
+        abbr --add nd nix develop
+        abbr --add nr sudo nixos-rebuild switch --flake ~/newDot/Dotfiles/#MS_NixLaptop
 
         fish_vi_key_bindings
         bind ctrl-space -M insert accept-autosuggestion
