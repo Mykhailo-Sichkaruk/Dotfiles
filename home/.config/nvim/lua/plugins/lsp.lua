@@ -14,22 +14,18 @@ M.config = function()
   local on_attach = OnAttach
   local root_pattern = nvim_lsp.util.root_pattern
 
-  nvim_lsp.protols.setup{};
+  nvim_lsp.protols.setup {};
   nvim_lsp.ts_ls.setup({
     init_options = {
       plugins = {
         {
           name = "@vue/typescript-plugin",
           location = ".//node_modules/@vue/typescript-plugin",
-          languages = {"javascript", "typescript", "vue"},
-        },
-      },
+          languages = { "javascript", "typescript", "vue" }
+        }
+      }
     },
-    filetypes = {
-      "javascript",
-      "typescript",
-      "vue",
-    },
+    filetypes = { "javascript", "typescript", "vue" }
   })
   nvim_lsp.protols.setup { on_attach = on_attach }
   nvim_lsp.dockerls.setup {}
@@ -67,9 +63,9 @@ M.config = function()
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-  capabilities.offsetEncoding = 'utf-16'
-  capabilities.general = { positionEncodings = { 'utf-16' } }
-  capabilities.experimental = { localDocs = true }
+  -- capabilities.offsetEncoding = 'utf-16'
+  -- capabilities.general = { positionEncodings = { 'utf-16' } }
+  -- capabilities.experimental = { localDocs = true }
 
   local servers = {
     "bashls", "yamlls", "jsonls", "gopls", "cssls", "pyright", "html", "cmake",
@@ -102,7 +98,6 @@ M.config = function()
     }
   }
   nvim_lsp.sqlls.setup {};
-  vim.g.rust_recommended_style = 0;
   nvim_lsp.eslint.setup({
     root_dir = nvim_lsp.util.root_pattern(".eslintrc.json", ".eslintrc",
                                           ".eslintrc.js", "eslint.config.js"),
@@ -132,24 +127,16 @@ M.config = function()
     end
   })
 
-  vim.g.rust_recommended_style = 1;
-  nvim_lsp.rust_analyzer.setup {
-    on_attach = on_attach,
+  require('lspconfig').rust_analyzer.setup({
     capabilities = capabilities,
+    on_attach = on_attach,
+    cmd = { "/nix/store/8fn34bn5gawj6bl7v9vvv0rs9hxx60y3-rust-analyzer-2025-05-12/bin/rust-analyzer" },
     settings = {
+      cmd = { "aaaaa" },
       ['rust-analyzer'] = {
-        cargo = { allFeatures = true },
-        -- hoverActions = { linksInHover = true },
-        checkOnSave = {
-          allFeatures = true,
-          overrideCommand = {
-            'cargo', 'clippy', '--workspace', '--message-format=json',
-            '--all-targets', '--all-features'
-          }
-        }
       }
     }
-  }
+  })
 
   -- nvim_lsp.java_language_server.setup {
   --   on_attach = on_attach,
@@ -223,8 +210,8 @@ M.config = function()
       clangdFileStatus = true,
       usePlaceholders = true,
       completeUnimported = true
-    },
-    offset_encoding = "utf-16"
+    }
+    -- offset_encoding = "utf-16"
   }
 
   -- nvim_lsp.ccls.setup {
@@ -253,7 +240,7 @@ M.config = function()
     filetypes = { "html", "css", "typescriptreact", "javascriptreact", "vue" }
   })
 
-  nvim_lsp.marksman.setup{}
+  nvim_lsp.marksman.setup {}
   nvim_lsp.luau_lsp.setup({})
   nvim_lsp.nixd.setup({
     settings = { nixd = { formatting = { command = { "nixfmt" } } } }

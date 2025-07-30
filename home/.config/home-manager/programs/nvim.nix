@@ -5,25 +5,27 @@ with pkgs;
   # astyle
   # cpplint
   # cmake-format
+  zig
   deadnix
   dotenv-linter
   lua
-  # rustfmt
+  rustfmt
+  rust-analyzer
+  clippy
+  cargo
   prettierd
   nodePackages_latest.prettier
   # asmfmt
   # clang-tools
-  # ccls
+  ccls
   typst
   tinymist
   shellcheck
   # go
-  # rust-analyzer
-  # cargo
   # cmake
   yamllint
   hadolint
-  # gcc
+  gcc
   # buf
   # protolint
   # checkmake

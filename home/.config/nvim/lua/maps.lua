@@ -47,7 +47,6 @@ Map('n', '<C-d>', '<C-d>zz');
 
 -- Map('n', 'n', 'nzz');
 -- Map('n', 'N', 'Nzz');
--- 
 Map('n', 'gF', ':e <cfile><cr>')
 
 Map('n', '<leader>w', ':w!<cr>')
