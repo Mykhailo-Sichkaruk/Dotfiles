@@ -9,10 +9,10 @@ with pkgs;
   deadnix
   dotenv-linter
   lua
-  rustfmt
-  rust-analyzer
-  clippy
-  cargo
+  # rustfmt
+  # rust-analyzer
+  # clippy
+  # cargo
   prettierd
   nodePackages_latest.prettier
   # asmfmt
@@ -57,4 +57,5 @@ with pkgs;
   docker-compose-language-service
   emmet-ls
   helm-ls
+  vue-language-server
 ]

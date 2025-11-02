@@ -49,4 +49,5 @@ nixConfig
   ffmpeg
   unzip
   nix-ld
+  uv
 ])

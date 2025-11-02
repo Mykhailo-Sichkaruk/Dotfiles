@@ -1,15 +1,16 @@
-color background          white   black
-color listnormal          yellow   black
-color listfocus           yellow  blue   bold
-color listnormal_unread   white   black  bold
-color listfocus_unread    yellow  blue   
-color title               cyan  default   bold
-color info                cyan  blue   bold
-color hint-key            yellow  blue   bold
-color hint-keys-delimiter white   blue
-color hint-separator      white   blue   bold
-color hint-description    white   blue
-color article             white   black
+color background          white      black
+color listnormal          white      black 
+color listfocus           black      white
+color listnormal_unread   white      black     bold
+color listfocus_unread    black      white     bold 
+color title               white      black     bold
+color info                color251   white 
+color hint-key            color251   white 
+color hint-keys-delimiter color253   white 
+color hint-separator      color253   white
+color hint-description    color253   default
+color article             color253   default
+color end-of-text-marker  color253   default
 
 bind k everywhere up
 bind j everywhere down
@@ -19,12 +20,13 @@ bind space everywhere toggle-show-read-feeds
 
 # Show unread counts
 show-read-feeds yes
-feedlist-format "%4i %n%L%R"
+feedlist-format "%4i %7u %10T %t"
+articlelist-format "%4i %10D %5L %t"
 datetime-format "%F"
 
 # Sort articles by date
 article-sort-order date-asc
-feed-sort-order lastupdated
+feed-sort-order firsttag
 
 # Save articles
 auto-reload yes
