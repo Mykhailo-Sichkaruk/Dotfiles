@@ -5,6 +5,7 @@
   config,
   lib,
   modulesPath,
+  pkgs,
   ...
 }:
 
@@ -20,6 +21,9 @@
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.extraModulePackages = [ ];
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 100;
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/ffb7c1c3-8f4c-4a08-a077-5f5bcc4000bf";
@@ -50,15 +54,13 @@
       services.xserver.videoDrivers = [ "nvidia" ];
       hardware = {
         nvidia = {
-          modesetting.enable = true;
           open = false;
           package = config.boot.kernelPackages.nvidiaPackages.latest;
           prime = {
             offload = {
-              enable = false;
+              enable = true;
               enableOffloadCmd = false;
             };
-            sync.enable = true;
             amdgpuBusId = "PCI:0:5:0";
             nvidiaBusId = "PCI:0:1:0";
           };
@@ -68,7 +70,15 @@
   };
 
   hardware = {
-    graphics.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        ocl-icd
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+    };
     bluetooth = {
       enable = true; # enables support for Bluetooth
       powerOnBoot = true; # powers up the default Bluetooth controller on boot

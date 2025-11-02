@@ -2,7 +2,12 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  nixgl,
+  ...
+}:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -49,24 +54,45 @@
 
   # Pick only one of the below networking options.
   networking = {
+
     hostName = "mykhailos_nixos"; # Define your hostname.
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
     networkmanager.enable = false; # Easiest to use and most distros use this by default.
-    extraHosts = ''
-    '';
+    extraHosts = '''';
     nameservers = [
       "1.1.1.1"
       "8.8.8.8"
     ];
-    interfaces."wlo1" = {
-      macAddress = "00:1A:1E:66:4b:a5";
-    };
     supplicant.wlo1 = {
       configFile.path = "/etc/wpa_supplicant/wpa_supplicant.conf";
       configFile.writable = true;
       userControlled.enable = true;
     };
-    useDHCP = true;
+
+    useDHCP = false;
+    dhcpcd = {
+      enable = true;
+      extraConfig = ''
+        # Only manage real NICs
+        allowinterfaces en* eth* enx* wl* br-*
+        # denyinterfaces lo docker0 veth* br-* tap* tun* zt* tailscale*
+
+        # Prefer Ethernet (lower metric)
+        interface en*
+          metric 50
+        interface eth*
+          metric 50
+        interface enx*
+          metric 50
+        interface br*
+          metric 50
+
+        # Wi-Fi gets higher metric so it’s used only when ethernet is absent
+        interface wl*
+          metric 200
+      '';
+    };
+
     firewall = {
       enable = true;
       allowedTCPPorts = [
@@ -78,6 +104,7 @@
   };
 
   time.timeZone = "Europe/Bratislava";
+  systemd.network.wait-online.enable = false;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -88,6 +115,21 @@
   };
 
   services = {
+    zerotierone = {
+      enable = true;
+      joinNetworks = [
+        "65228d8d6d070ea3"
+      ];
+      port = 9993;
+    };
+    postgresql = {
+      enable = true;
+      ensureDatabases = [ "default" ];
+      authentication = pkgs.lib.mkOverride 10 ''
+        #type database  DBuser  auth-method
+        local all       all     trust
+      '';
+    };
     openvpn.servers = {
       stubaVPN = {
         autoStart = false;
@@ -114,7 +156,7 @@
       lidSwitchExternalPower = "hibernate";
     };
     xserver = {
-      videoDrivers = [ "modesetting" ];
+      videoDrivers = [ "amdgpu" ];
       xkb.layout = "us,ua";
       xkb.options = "caps:escape,grp:alt_shift_toggle";
       autoRepeatInterval = 50;
@@ -160,6 +202,7 @@
     home = "/home/ms";
     isNormalUser = true;
     extraGroups = [
+      "dialout"
       "wheel"
       "docker"
       "video"
@@ -174,6 +217,7 @@
 
   environment = {
     systemPackages = with pkgs; [
+
       cachix
       pass
       gnupg
@@ -186,20 +230,24 @@
       gh
       alacritty
       autorandr
-      safe-rm
       rofi
       pulsemixer
       nh
       xdotool
       man-pages
+      lenovo-legion
+      # libGL
+      docker_28
     ];
     variables = {
-      RM = "safe-rm";
+      # RM = "safe-rm";
       TERMINAL = "alacritty"; # Set Alacritty as the default terminal
     };
   };
 
   programs = {
+    appimage.enable = true;
+    appimage.binfmt = true;
     nix-ld.enable = true;
     openvpn3.enable = true;
     fish.enable = true;
@@ -223,7 +271,8 @@
   };
   virtualisation.docker.enable = true;
 
-  fonts.packages = [ ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  fonts.packages =
+    [ ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   system = {
     autoUpgrade = {
       enable = true;

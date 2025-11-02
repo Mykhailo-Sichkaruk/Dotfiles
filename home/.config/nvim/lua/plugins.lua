@@ -1,10 +1,4 @@
 local M = {
-  -- { 'https://gitlab.com/itaranto/plantuml.nvim',
-  --   config = function()
-  --     require('plantuml').setup()
-  --   end,
-  --   ft = { 'plantuml' }
-  -- },
   { 'echasnovski/mini.icons', version = false },
   { 'echasnovski/mini.nvim', version = false }, { 'kevinhwang91/nvim-bqf' },
   { 'akinsho/git-conflict.nvim', version = "*", config = true },
@@ -32,7 +26,7 @@ local M = {
       { "<C-/>", mode = { "n", "v" } } -- Specify the keys for NORMAL and VISUAL modes
     },
     config = function()
-      require('Comment.ft')({ {'yaml', 'helm'}, { '#%s', '#%s' } }); -- Add missing commentstring for yaml
+      require('Comment.ft')({ { 'yaml', 'helm' }, { '#%s', '#%s' } }); -- Add missing commentstring for yaml
       require('Comment').setup({
         ---LHS of toggle mappings in NORMAL mode
         toggler = {
@@ -782,6 +776,8 @@ local M = {
       }
     },
     config = function()
+      vim.g.neoformat_verbose = 1
+      vim.g.neoformat_only_msg_on_error = 1
       vim.g.latexindent_opt = "-m"
       vim.g.neoformat_enabled_cpp = { 'clangformat' }
       vim.g.neoformat_cpp_clangformat = {
@@ -837,9 +833,10 @@ local M = {
       }
       vim.g.neoformat_typescript_prettier = {
         exe = 'prettier',
-        args = { '--cache', '--write' },
+        args = { '--write' },
         replace = 1,
-        try_node_exe = 1
+        no_append = 1,
+        stdin = 1
       }
       -- vim.g.neoformat_typescript_deno_fmt = {
       --   exe = 'deno',
@@ -849,8 +846,7 @@ local M = {
       vim.g.neoformat_enabled_typescript = { 'prettier' --[[ 'deno_fmt' ]]  }
       vim.g.neoformat_typescriptreact_prettier = {
         exe = 'prettier',
-        args = { '--cache' },
-        replace = 0,
+        replace = 1,
         try_node_exe = 0
       }
       vim.g.neoformat_enabled_typescriptreact = { 'prettier' }
