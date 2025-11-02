@@ -1,16 +1,14 @@
-https://nodejs.org/en/feed/blog.xml
-https://v8.dev/blog.atom
+https://nodejs.org/en/feed/blog.xml "~Node.js Official blog" nodejs js ts
+https://cprss.s3.amazonaws.com/javascriptweekly.com.xml "~JavaScript Weekly" js
+https://v8.dev/blog.atom "~v8" js
 https://bcantrill.dtrace.org/index.xml
 https://nullprogram.com/feed/
-https://drewdevault.com/blog/index.xml
-https://hookrace.net/blog/feed/
-https://davidwalsh.name/feed https://code.dblock.org/feed.xml https://danluu.com/atom.xml
+https://drewdevault.com/blog/index.xml https://hookrace.net/blog/feed/ https://davidwalsh.name/feed https://code.dblock.org/feed.xml https://danluu.com/atom.xml
 https://cprss.s3.amazonaws.com/nodeweekly.com.xml
 https://domenicoluciani.com/feed.xml
-https://hookrace.net/blog/feed/
 https://www.evanmiller.org/software.xml
 https://www.evanmiller.org/news.xml
-https://www.evanjones.ca/software/index.rss
+https://www.evanjones.ca/index.rss
 https://evanhahn.com/blog/index.xml
 https://ericlippert.com/feed/
 https://eli.thegreenplace.net/feeds/all.atom.xml
@@ -26,10 +24,10 @@ https://ieftimov.com/index.xml
 https://linuxblog.io/feed/
 https://jaketrent.com/post/feed.xml
 https://jvns.ca/atom.xml
-https://blog.reverberate.org/
+https://blog.reverberate.org/feed.xml
 https://www.jeremykun.com/index.xml
 https://preshing.com/feed
-https://jakewharton.com/blog/
+https://jakewharton.com/atom.xml
 https://lea.verou.me/feed.xml
 https://hazelweakly.me/atom.xml
 https://hoverbear.org/rss.xml 
@@ -40,7 +38,7 @@ http://blog.fogus.me/feed.xml
 https://blog.muffn.io/posts/index.xml
 https://blog.cryptographyengineering.com/feed/
 https://matt.might.net/articles/feed.rss
-https://maryrosecook.com/blog/
+https://maryrosecook.com/blog/feed.xml
 https://martinfowler.com/feed.atom
 https://blog.rinesi.com/feed/
 https://www.nateberkopec.com/feed.xml
@@ -56,3 +54,64 @@ http://feeds.feedburner.com/rtwilson/blog
 http://blog.cleancoder.com/atom.xml
 https://akrabat.com/feed/
 https://rachelbythebay.com/w/atom.xml
+https://www.cs.columbia.edu/~smb/blog/control/blog.xml
+https://muffinman.io/atom.xml
+http://feeds.feedburner.com/AdventuresInAutomation
+https://jelv.is/blog/rss.xml
+https://feeds.feedburner.com/TheDailyWtf
+https://tania.dev/rss.xml 
+https://www.yegor256.com/rss.xml
+https://una.im/rss.xml
+https://blog.rust-lang.org/feed.xml
+https://blog.ipfs.tech/index.xml
+https://go.dev/blog/feed.atom
+https://overreacted.io/rss.xml
+https://nesslabs.com/feed
+https://hacks.mozilla.org/feed/
+https://feeds.megaphone.fm/FSMI7575968096
+https://engineering.fb.com/feed/
+https://about.gitlab.com/atom.xml
+http://feeds.feedburner.com/GDBcode
+https://engineering.atspotify.com/feed
+https://blog.cloudflare.com/rss/
+https://engineering.fb.com/tag/instagram/feed/
+https://stripe.com/blog/feed.rss
+https://blog.x.com/engineering/en_us/blog.rss
+https://slack.engineering/feed/
+https://engineering.grab.com/feed.xml
+https://bigthink.com/feed/
+https://newsboat.org/news.atom
+https://brooker.co.za/blog/rss.xml
+https://www.tunetheweb.com/rss.xml
+https://www.fiit.stuba.sk/dianie-na-fakulte/rss "~FIIT STU" study
+https://simonwillison.net/atom/everything/
+https://devenv.sh/feed_rss_created.xml 
+https://discourse.nixos.org/c/announcements/8.rss
+https://waxy.org/feed/ tech art business culture
+https://www.redhat.com/en/rss/blog linux opensource enterprise
+https://fedoramagazine.org/feed/ linux opensource 
+https://ubuntu.com/blog/feed linux opensource enterprise
+https://www.suse.com/c/feed linux opensource enterprise
+https://cloudblog.withgoogle.com/rss cloud google
+https://azure.microsoft.com/en-us/blog/feed/ cloud microsoft
+https://aws.amazon.com/blogs/aws/feed/ cloud amazon
+https://www.cncf.io/feed/ cloud opensource
+https://kubernetes.io/feed.xml cloud opensource
+https://www.linuxfoundation.org/blog/rss.xml linux opensource
+https://feed.infoq.com/Devops cloud devops news
+https://thenewstack.io/feed tech news
+https://news.ycombinator.com/rss tech startup
+https://blog.alexellis.io/rss/ independent devops cloud opensource
+https://www.devroom.io/feed.xml
+http://feeds.feedburner.com/EsnextNews news js
+https://lucumr.pocoo.org/feed.atom python
+https://ariya.io/index.xml
+https://chenhuijing.com/feed.xml
+https://dragan.rocks/feed.xml
+https://erikrunyon.com/feed.xml
+https://jsomers.net/blog/feed
+https://bun.com/rss.xml
+https://www.grepular.com/rss
+https://www.joelonsoftware.com/feed/
+https://use-the-index-luke.com/blog/feed
+https://chrisdown.name/feed.xml top systems-programming kerkel linux

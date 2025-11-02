@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, mcpNixos, ... }:
 
 let
   # Import shell configuration
@@ -16,6 +16,7 @@ in
     packages =
       shellConfig
       ++ (with pkgs; [
+
         # anki
         # at
         libnotify
@@ -47,10 +48,12 @@ in
         comma
         # nix-index
         # openvpn3
-        # teams-for-linux
+        teams-for-linux
         newsboat
         obs-studio
-      ]);
+        postgresql_17_jit
+      ]) ++ [
+      ];
   };
 
   xsession = {
