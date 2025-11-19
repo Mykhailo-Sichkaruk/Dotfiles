@@ -1,35 +1,33 @@
-{ pkgs }:
+{ pkgs, pkgs-unstable }:
 with pkgs;
 [
   # marksman
   # astyle
   # cpplint
   # cmake-format
-  zig
+  # zig
   deadnix
   dotenv-linter
   lua
-  # rustfmt
-  # rust-analyzer
-  # clippy
-  # cargo
   prettierd
   nodePackages_latest.prettier
   # asmfmt
   # clang-tools
-  ccls
-  typst
-  tinymist
+  # ccls
+  # typst
+  # tinymist
   shellcheck
   # go
   # cmake
   yamllint
-  hadolint
+  # hadolint
   gcc
+  gnumake
   # buf
   # protolint
   # checkmake
   # cppcheck
+  pkg-config
   editorconfig-checker
   gitlint
   statix
@@ -47,15 +45,22 @@ with pkgs;
   # mercurial
   vscode-langservers-extracted
   vimPlugins.wilder-nvim
-  markdownlint-cli
-  bash-language-server
-  dockerfile-language-server-nodejs
-  glow
+  # markdownlint-cli
+  # bash-language-server
+  # dockerfile-language-server-nodejs
+  # glow
   yaml-language-server
-  protols
-  buf
-  docker-compose-language-service
+  # protols
+  # buf
+  # docker-compose-language-service
   emmet-ls
-  helm-ls
-  vue-language-server
+  # helm-ls
+  # vue-language-server
+]
+++ [
+  pkgs-unstable.rustfmt
+  pkgs-unstable.rust-analyzer
+  pkgs-unstable.rustc
+  pkgs-unstable.clippy
+  pkgs-unstable.cargo
 ]
