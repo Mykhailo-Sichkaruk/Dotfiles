@@ -1,8 +1,8 @@
-{ pkgs }:
+{ pkgs, pkgs-unstable }:
 let
-  nixConfig = import ./nvim.nix { inherit pkgs; };
+  vimPackages = import ./nvim.nix { inherit pkgs; inherit pkgs-unstable; };
 in
-nixConfig
+vimPackages
 ++ (with pkgs; [
   safe-rm
   rsync

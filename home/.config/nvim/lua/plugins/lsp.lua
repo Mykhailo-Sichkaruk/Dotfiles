@@ -49,6 +49,7 @@ return {
       vim.lsp.enable("protols")
       vim.lsp.enable("docker_compose_language_service")
       vim.lsp.enable("buf_ls")
+      vim.lsp.enable("jsonls")
     end,
   },
 }

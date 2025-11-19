@@ -6,6 +6,7 @@
   pkgs,
   lib,
   nixgl,
+  config,
   ...
 }:
 
@@ -30,6 +31,7 @@
   home-manager.backupFileExtension = "backup";
 
   boot = {
+    extraModulePackages = [ config.boot.kernelPackages.lenovo-legion-module ];
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
@@ -122,14 +124,15 @@
       ];
       port = 9993;
     };
-    postgresql = {
-      enable = true;
-      ensureDatabases = [ "default" ];
-      authentication = pkgs.lib.mkOverride 10 ''
-        #type database  DBuser  auth-method
-        local all       all     trust
-      '';
-    };
+    # postgresql = {
+    #   enable = true;
+    #   ensureDatabases = [ "default" ];
+    #   extensions = [ "postgis" ];
+    #   authentication = pkgs.lib.mkOverride 10 ''
+    #     #type database  DBuser  auth-method
+    #     local all       all     trust
+    #   '';
+    # };
     openvpn.servers = {
       stubaVPN = {
         autoStart = false;
@@ -217,7 +220,7 @@
 
   environment = {
     systemPackages = with pkgs; [
-
+      gtk3
       cachix
       pass
       gnupg
@@ -236,12 +239,12 @@
       xdotool
       man-pages
       lenovo-legion
-      # libGL
       docker_28
     ];
     variables = {
       # RM = "safe-rm";
       TERMINAL = "alacritty"; # Set Alacritty as the default terminal
+      GSETTINGS_SCHEMA_DIR="${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/glib-2.0/schemas";
     };
   };
 
@@ -268,6 +271,7 @@
       clean.extraArgs = "--keep-since 4d --keep 3";
       flake = "/home/ms/newDot/Dotfiles";
     };
+    dconf.enable = true;
   };
   virtualisation.docker.enable = true;
 
