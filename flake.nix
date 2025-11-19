@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,18 +14,20 @@
   outputs =
     {
       nixpkgs,
+      nixpkgs-unstable,
       home-manager,
       nixgl,
       ...
     }:
     let
       system = "x86_64-linux";
-
       pkgs = import nixpkgs {
         inherit system;
         overlays = [ nixgl.overlay ];
       };
-
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+      };
     in
     {
       nixosConfigurations.MS_NixLaptop = nixpkgs.lib.nixosSystem {
@@ -33,6 +36,7 @@
           ./root/etc/nixos/configuration.nix
           home-manager.nixosModules.home-manager
           {
+            home-manager.extraSpecialArgs = { inherit pkgs-unstable; };  # <-- add this
             home-manager.users.ms = import ./home/.config/home-manager/home.nix;
           }
         ];
@@ -40,6 +44,7 @@
 
       homeManagerConfigurations.ms = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+        inherit pkgs-unstable;
         modules = [
           ./home/.config/home-manager/home.nix
         ];

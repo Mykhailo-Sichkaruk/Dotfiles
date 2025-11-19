@@ -80,11 +80,11 @@ missing_format = "$icon $power $percentage{ $time|}"
 charging_format = "$icon $power $percentage{ $time|}"
 not_charging_format = "$icon $percentage{ $time|}"
  
-# [[block]]
-# block = "custom"
-# command = "bash ~/.config/i3status-rust/power_mode.sh"
-# json = true
-# interval = 20
+[[block]]
+block = "custom"
+command = "bash ~/.config/i3status-rust/power_mode.sh"
+json = true
+interval = 20
 
 [[block]]
 block = "bluetooth"

@@ -1,8 +1,8 @@
-{ pkgs, mcpNixos, ... }:
+{ pkgs, pkgs-unstable, ... }:
 
 let
   # Import shell configuration
-  shellConfig = import ./programs/shell.nix { inherit pkgs; };
+  shellConfig = import ./programs/shell.nix { inherit pkgs; inherit pkgs-unstable; };
 in
 {
   # Add the external GUI config (which includes the YouTube Music desktop entry)
@@ -16,7 +16,6 @@ in
     packages =
       shellConfig
       ++ (with pkgs; [
-
         # anki
         # at
         libnotify
@@ -48,10 +47,11 @@ in
         comma
         # nix-index
         # openvpn3
-        teams-for-linux
+        # teams-for-linux
         newsboat
         obs-studio
-        postgresql_17_jit
+        # postgresql_17_jit
+        # archi
       ]) ++ [
       ];
   };
