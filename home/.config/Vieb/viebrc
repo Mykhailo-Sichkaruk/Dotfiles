@@ -50,6 +50,9 @@ set darkreaderblocklist+=https://myaccount.google.com/
 set darkreaderblocklist+=https://myaccount.google.com/
 set darkreaderblocklist+=https://myaccount.google.com
 set darkreaderblocklist+=https://www.bottomupcs.com
+set darkreaderblocklist+=lalitm.com
+set darkreaderblocklist+=help.openai.com
+set darkreaderblocklist+=help.openai.com
 set darkreaderbrightness=150
 set darkreadercontrast=100
 set darkreaderfg=#e8e6e3
@@ -70,17 +73,15 @@ set externalcommand=
 set favicons=session
 set favoritepages=
 set favoritepages+=https://plato.stanford.edu/entries/logic-firstorder-emergence/#toc
-set favoritepages+=https://www.phind.com/
 set favoritepages+=https://github.com/Mykhailo-Sichkaruk
+set favoritepages+=https://www.phind.com/
 set favoritepages+=https://chat.openai.com/
-set favoritepages+=https://en.wikipedia.org/wiki/Entity–attribute–value_model
-set favoritepages+=https://react.dev/learn/adding-interactivity
-set favoritepages+=https://www.profesia.sk/praca/volis-international/O4595739?search_id=b8871301-01dd-40ea-b1e5-e7bf10723a15
-set favoritepages+=https://www.volis-international.com/kariera/junior-node-js-developer/
-set favoritepages+=https://mail.google.com/mail/u/0/#inbox
-set favoritepages+=https://scholar.google.com/
 set favoritepages+=https://is.stuba.sk/auth/student/odevzdavarny.pl
-set favoritepages+=https://127.0.0.1:8384/#
+set favoritepages+=https://www.thenodebook.com/
+set favoritepages+=https://news.ycombinator.com/best
+set favoritepages+=https://www.paulgraham.com/articles.html
+set favoritepages+=https://lobste.rs/top/1w
+set favoritepages+=https://www.hellointerview.com/dashboard
 set followchars=alpha
 set followfallbackaction=filter
 set followlabelposition=outsiderighttop
@@ -197,7 +198,7 @@ set windowfullscreen=restore
 set windowmaximize=restore
 set windowposition=restore
 set windowsize=restore
-set windowtitle=""""'"VIEB"'""""
+set windowtitle="VIEB
 
 " Mappings
 map <A-h> <previousTab>
@@ -231,14 +232,14 @@ nunmap <Esc>
 nmap = <zoomReset>
 nunmap [
 nunmap ]
-nunmap {
-nunmap }
+nmap gt <toCommandMode>buffer<Space>
+nmap gU <openNewTabWithCurrentUrl><CR><toParentUrl>
 nmap J <p.scrollDown>
 nmap K <p.scrollUp>
 nmap O <:tabnew><toExploreMode>
-nmap gU <openNewTabWithCurrentUrl><CR><toParentUrl>
-nmap gt <toCommandMode>buffer<Space>
 nunmap p
+nunmap {
+nunmap }
 nmap <A-1> <:b 0>
 nmap <A-2> <:b 1>
 nmap <A-3> <:b 2>
@@ -278,9 +279,12 @@ nmap sk <toCommandMode>map<Space>
 nmap ss <toCommandMode>set<Space>
 nmap <C-h> <previousTab>
 nmap <A-z> <:buffer #>
+nmap af <:set favoritepages+=<useCurrentUrl>>
+nmap adb <:set darkreaderblocklist+=<useCurrentDomain>>
+nmap sn <:tabnew https://search.nixos.org/packages><gi>
+pmap e <p.moveFastRight>
 pmap H <p.scrollLeft>
 pmap L <p.scrollRight>
-pmap e <p.moveFastRight>
 pmap c <toNormalMode>
 pmap <Space> <p.startVisualSelect>
 smap <C-c> <p.copyText>
@@ -289,9 +293,6 @@ vmap J <scrollDown>
 vmap v <p.start>
 vmap <CR> <p.copyText>
 vmap <C-Space> <toNormalMode><p.start><p.startVisualSelect>
-" add website to favorites
-nmap af <:set favoritepages+=<useCurrentUrl>>
-nmap adb <:set darkreaderblocklist+=<useCurrentDomain>>
 
 " Commands
 colorscheme black

@@ -107,6 +107,7 @@
 
   time.timeZone = "Europe/Bratislava";
   systemd.network.wait-online.enable = false;
+  systemd.coredump.enable = false;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -198,6 +199,20 @@
   security = {
     polkit.enable = true;
     rtkit.enable = true;
+    sudo = {
+      enable = true;
+      wheelNeedsPassword = true;
+      extraConfig = ''
+        Defaults timestamp_timeout=60
+      '';
+    };
+
+    tpm2 = {
+      enable = true;
+      pkcs11.enable = true;
+      tctiEnvironment.enable = true;
+    };
+    doas.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -212,14 +227,19 @@
       "render"
       "transmission"
       "input"
-    ]; # Enable ‘sudo’ for the user.
+      "tss"
+    ];
     packages = [ ];
     shell = pkgs.fish;
   };
   users.defaultUserShell = pkgs.fish;
 
+  documentation.dev.enable = true;
   environment = {
     systemPackages = with pkgs; [
+      man-pages
+      man-pages-posix
+      stdmanpages
       gtk3
       cachix
       pass
@@ -240,11 +260,13 @@
       man-pages
       lenovo-legion
       docker_28
+      openssl
+      tpm2-tools
     ];
     variables = {
       # RM = "safe-rm";
       TERMINAL = "alacritty"; # Set Alacritty as the default terminal
-      GSETTINGS_SCHEMA_DIR="${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/glib-2.0/schemas";
+      GSETTINGS_SCHEMA_DIR = "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/glib-2.0/schemas";
     };
   };
 
@@ -272,6 +294,7 @@
       flake = "/home/ms/newDot/Dotfiles";
     };
     dconf.enable = true;
+    man.enable = true;
   };
   virtualisation.docker.enable = true;
 

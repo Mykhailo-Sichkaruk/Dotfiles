@@ -49,6 +49,7 @@ in
         # openvpn3
         # teams-for-linux
         newsboat
+        libreoffice
         # postgresql_17_jit
         # archi
       ]) ++ [
