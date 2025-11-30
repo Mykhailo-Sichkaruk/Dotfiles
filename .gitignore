@@ -54,6 +54,11 @@ home/.local
 **/Vieb/settings
 **/Vieb/Preferences
 **/Vieb/blocklists
+**/Vieb/DIPS*
+**/Vieb/\.*
+**/.newsboat/history*
+**/.newsboat/cache*
+**/vifm/vifminfo.json*
 # Obsidian
 **/obsidian.log
 **/obsidian-1.7.5.asar

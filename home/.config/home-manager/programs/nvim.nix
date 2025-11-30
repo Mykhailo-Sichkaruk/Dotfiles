@@ -14,7 +14,7 @@ with pkgs;
   # asmfmt
   # clang-tools
   # ccls
-  # typst
+  typst
   # tinymist
   shellcheck
   # go
