@@ -50,6 +50,7 @@ in
         # teams-for-linux
         newsboat
         obs-studio
+        libreoffice
         # postgresql_17_jit
         # archi
       ]) ++ [

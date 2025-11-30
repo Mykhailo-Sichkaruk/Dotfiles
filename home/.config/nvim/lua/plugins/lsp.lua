@@ -50,6 +50,7 @@ return {
       vim.lsp.enable("docker_compose_language_service")
       vim.lsp.enable("buf_ls")
       vim.lsp.enable("jsonls")
+      vim.lsp.enable("eslint")
     end,
   },
 }

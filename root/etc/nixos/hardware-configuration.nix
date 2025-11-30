@@ -19,20 +19,47 @@
     "usb_storage"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.initrd.kernelModules = [
+    "dm-snapshot"
+    "tcp_bbr"
+    "sch_cake"
+  ];
   boot.extraModulePackages = [ ];
   boot.kernel.sysctl = {
     "vm.swappiness" = 100;
+    "kernel.core_pattern" = "|/bin/false";
+    "net.ipv4.tcp_fastopen" = 3;
+    "net.core.default_qdisc" = "cake";
+    "net.ipv4.tcp_congestion_control" = "bbr";
+    "net.ipv4.tcp_mtu_probing" = 1;
   };
+  boot.kernelParams = [
+    "amd_pstate=active"
+    "zswap.enabled=1" # enables zswap
+    "zswap.compressor=lz4" # compression algorithm
+    "zswap.max_pool_percent=30" # maximum percentage of RAM that zswap is allowed to use
+    "zswap.shrinker_enabled=1" # whether to shrink the pool proactively on high memory pressure
+    "transparent_hugepage=madvise"
+  ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/ffb7c1c3-8f4c-4a08-a077-5f5bcc4000bf";
     fsType = "ext4";
+    options = [
+      "discard"
+      "noatime"
+      "nodiratime"
+    ];
   };
 
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/b3c535a1-40bd-4fcc-9d83-e92a62a3e372";
     fsType = "ext4";
+    options = [
+      "discard"
+      "noatime"
+      "nodiratime"
+    ];
   };
 
   swapDevices = [
@@ -84,7 +111,7 @@
       enable32Bit = true;
       extraPackages = with pkgs; [
         ocl-icd
-        vaapiVdpau
+        libva-vdpau-driver
         libvdpau-va-gl
       ];
     };
