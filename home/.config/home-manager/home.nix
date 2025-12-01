@@ -7,12 +7,14 @@ in
 {
   # Add the external GUI config (which includes the YouTube Music desktop entry)
   imports = [ ./programs/gui.nix ];
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
 
   home = {
     username = "ms";
     homeDirectory = "/home/ms";
-    stateVersion = "25.05";
+    stateVersion = "25.11";
     packages =
       shellConfig
       ++ (with pkgs; [
@@ -37,7 +39,7 @@ in
         obsidian
         vimiv-qt
         zathura
-        vieb
+        pkgs.nur.repos."vieb-nix".vieb
         google-chrome
         alacritty
         i3lock
