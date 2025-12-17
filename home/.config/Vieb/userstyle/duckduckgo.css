@@ -1,0 +1,95 @@
+:root {
+  --ddg-bg: #000000;
+  --ddg-fg: #e8e6e3;
+  --ddg-muted: #a0a0a0;
+  --ddg-border: #2a2a2a;
+  --ddg-link: #59d8ff;
+  --ddg-visited: #b59dff;
+  --ddg-accent: #dc5e47;
+  --ddg-focus: #0073ff;
+}
+html,
+body {
+  background: var(--ddg-bg) !important;
+  background-color: var(--ddg-bg) !important;
+  color: var(--ddg-fg) !important;
+}
+
+/* Strip Lite's light backgrounds without changing layout. */
+table,
+tbody,
+tr,
+td,
+th,
+form,
+div,
+p,
+span {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.header {
+  color: var(--ddg-accent) !important;
+}
+
+a {
+  color: var(--ddg-link) !important;
+}
+a:visited {
+  color: var(--ddg-visited) !important;
+}
+
+.link-text,
+.timestamp,
+.results--powered,
+.results--powered a {
+  color: var(--ddg-muted) !important;
+}
+
+.query,
+input[type="text"],
+textarea,
+select,
+option {
+  background: var(--ddg-bg) !important;
+  background-color: var(--ddg-bg) !important;
+  color: var(--ddg-fg) !important;
+  border-color: var(--ddg-border) !important;
+}
+
+.submit,
+input[type="submit"],
+button,
+.navbutton {
+  background: var(--ddg-bg) !important;
+  background-color: var(--ddg-bg) !important;
+  color: var(--ddg-link) !important;
+  border: 1px solid var(--ddg-border) !important;
+}
+
+.result-sponsored {
+  background: var(--ddg-bg) !important;
+  background-color: var(--ddg-bg) !important;
+  border: 1px solid var(--ddg-border) !important;
+}
+.result-sponsored:hover {
+  background-color: #0a0a0a !important;
+}
+
+mark,
+b {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+.did-you-mean {
+  color: #ff5c5c !important;
+}
+
+:focus,
+:focus-visible {
+  outline: 2px solid var(--ddg-focus) !important;
+  outline-offset: 2px !important;
+}

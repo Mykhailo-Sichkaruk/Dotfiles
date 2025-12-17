@@ -17,17 +17,17 @@ vimPackages
   fd
   ripgrep
   vim
-  jq
+  # jq
   docker
   curl
   findutils
   powertop
   neofetch
-  patch
+  # patch
   btop
   offlineimap
   bat
-  texinfo
+  # texinfo
   findutils
   tree
   speedtest-cli
@@ -44,7 +44,7 @@ vimPackages
   oh-my-fish
   syncthing
   nix-du
-  dex
+  # dex
   offlineimap
   ffmpeg
   unzip
