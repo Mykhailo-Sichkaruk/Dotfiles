@@ -7,6 +7,7 @@
   lib,
   nixgl,
   config,
+  pkgs-unstable,
   ...
 }:
 
@@ -155,9 +156,13 @@
     };
     blueman.enable = true;
     logind = {
-      lidSwitch = "hibernate";
-      lidSwitchDocked = "hibernate";
-      lidSwitchExternalPower = "hibernate";
+      settings = {
+        Login = {
+          HandleLidSwitch = "hibernate";
+          HandleLidSwitchDocked = "hibernate";
+          HandleLidSwitchExternalPower = "hibernate";
+        };
+      };
     };
     xserver = {
       videoDrivers = [ "amdgpu" ];
@@ -234,7 +239,10 @@
   };
   users.defaultUserShell = pkgs.fish;
 
-  documentation.dev.enable = true;
+  documentation = {
+    dev.enable = true;
+    man.enable = true;
+  };
   environment = {
     systemPackages = with pkgs; [
       man-pages
@@ -294,7 +302,6 @@
       flake = "/home/ms/newDot/Dotfiles";
     };
     dconf.enable = true;
-    man.enable = true;
   };
   virtualisation.docker.enable = true;
 

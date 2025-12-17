@@ -97,6 +97,7 @@ set historyperpage=100
 set ignorecase
 set incsearch
 set inputfocusalignment=rememberend
+set insertleavetimeout=0
 set keeprecentlyclosed
 set lang=en
 set loadingindicator=spinner
@@ -160,10 +161,16 @@ set restoretabs=all
 set scrollposlocalid=domain
 set scrollpostype=casing
 set searchemptyscope=global
+set searchengine=
+set searchengine+=https://lite.duckduckgo.com/lite/&q=%s
 set searchpointeralignment=left
+set searchreach=visible
+set searchreachinc=same
+set searchreachtraverse=same
 set searchscope=global
 set shell=alacritty
 set showcmd
+set showsearchresults
 set smartcase
 set spell
 set nosplitbelow
@@ -198,7 +205,7 @@ set windowfullscreen=restore
 set windowmaximize=restore
 set windowposition=restore
 set windowsize=restore
-set windowtitle="VIEB
+set windowtitle="%app - %title"
 
 " Mappings
 map <A-h> <previousTab>
@@ -281,7 +288,7 @@ nmap <C-h> <previousTab>
 nmap <A-z> <:buffer #>
 nmap af <:set favoritepages+=<useCurrentUrl>>
 nmap adb <:set darkreaderblocklist+=<useCurrentDomain>>
-nmap sn <:tabnew https://search.nixos.org/packages><gi>
+nmap sn <:tabnew https://search.nixos.org/packages>
 pmap e <p.moveFastRight>
 pmap H <p.scrollLeft>
 pmap L <p.scrollRight>

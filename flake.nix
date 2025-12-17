@@ -25,17 +25,22 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [ nixgl.overlay nur.overlay ];
+        config.allowUnfree = true;
+        overlays = [ nixgl.overlay nur.overlays.default ];
       };
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
+        config.allowUnfree = true;
       };
     in
     {
       nixosConfigurations.MS_NixLaptop = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          { nixpkgs.overlays = [ nixgl.overlay nur.overlay ]; }
+          {
+            nixpkgs.overlays = [ nixgl.overlay nur.overlays.default ];
+            nixpkgs.config.allowUnfree = true;
+          }
           ./root/etc/nixos/configuration.nix
           home-manager.nixosModules.home-manager
           {
