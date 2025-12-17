@@ -1,27 +1,22 @@
 { pkgs, pkgs-unstable, ... }:
 
 let
-  # Import shell configuration
   shellConfig = import ./programs/shell.nix { inherit pkgs; inherit pkgs-unstable; };
 in
 {
-  # Add the external GUI config (which includes the YouTube Music desktop entry)
   imports = [ ./programs/gui.nix ];
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
 
   home = {
     username = "ms";
     homeDirectory = "/home/ms";
     stateVersion = "25.11";
     packages =
-      shellConfig
+      [pkgs-unstable.vscode]
+      ++ shellConfig
       ++ (with pkgs; [
         # anki
         # at
         libnotify
-        vscode
         # nvtopPackages.full
         rofi
         keepassxc
@@ -51,10 +46,14 @@ in
         # openvpn3
         # teams-for-linux
         newsboat
-        obs-studio
-        libreoffice
+        # obs-studio
+        # libreoffice
         # postgresql_17_jit
         # archi
+        pipx
+        whatsapp-electron
+        # spotify
+        postman
       ]) ++ [
       ];
   };

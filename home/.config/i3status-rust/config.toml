@@ -17,16 +17,32 @@ icons = "awesome6"
 # blocking_cmd = false
 
 [[block]]
-block = "net"
-format = "$icon {$signal_strength $ssid $frequency|Wired} $ip $device"
-interval = 10
+block = "sound"
+driver = "pulseaudio"
+device_kind = "source"
 
 [[block]]
-block = "amd_gpu"
-device = "card2"
-format = "AMD $icon $utilization $vram_used"
-interval = 20
+block = "load"
 
+[[block]]
+block = "temperature"
+
+[[block]]
+block = "speedtest"
+interval = 1880
+format = "^icon_ping $ping.eng(unit:s) ^icon_net_down $speed_down ^icon_net_up $speed_up"
+
+[[block]]
+block = "net"
+format = "$icon {$signal_strength $ssid $frequency|Wired} $device"
+interval = 10
+
+# [[block]]
+# block = "amd_gpu"
+# device = "card2"
+# format = "AMD $icon $utilization $vram_used"
+# interval = 20
+#
 # [[block]]
 # block = "nvidia_gpu"
 # interval = 2
@@ -86,15 +102,15 @@ command = "bash ~/.config/i3status-rust/power_mode.sh"
 json = true
 interval = 20
 
-[[block]]
-block = "bluetooth"
-mac = "40:72:18:BD:17:14"
-format = "$icon {$percentage |}"
-disconnected_format = "$icon"
-[block.battery_state]
-"0..20" = "critical"
-"21..65" = "warning"
-"66..100" = "good"
+# [[block]]
+# block = "bluetooth"
+# mac = "40:72:18:BD:17:14"
+# format = "$icon {$percentage |}"
+# disconnected_format = "$icon"
+# [block.battery_state]
+# "0..20" = "critical"
+# "21..65" = "warning"
+# "66..100" = "good"
 
 [[block]]
 block = "time"

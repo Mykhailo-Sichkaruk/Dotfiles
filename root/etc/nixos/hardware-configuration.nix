@@ -80,27 +80,27 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  specialisation = {
-    nvidia.configuration = {
-      system.nixos.tags = [ "nvidia" ];
-      services.xserver.videoDrivers = [ "nvidia" ];
-      hardware = {
-        nvidia = {
-          open = false;
-          package = config.boot.kernelPackages.nvidiaPackages.latest;
-          prime = {
-            offload = {
-              enable = true;
-              enableOffloadCmd = false;
-            };
-            amdgpuBusId = "PCI:0:5:0";
-            nvidiaBusId = "PCI:0:1:0";
-          };
-        };
-      };
-    };
-  };
-
+  # specialisation = {
+  #   nvidia.configuration = {
+  #     system.nixos.tags = [ "nvidia" ];
+  #     services.xserver.videoDrivers = [ "nvidia" ];
+  #     hardware = {
+  #       nvidia = {
+  #         open = false;
+  #         package = config.boot.kernelPackages.nvidiaPackages.latest;
+  #         prime = {
+  #           offload = {
+  #             enable = true;
+  #             enableOffloadCmd = false;
+  #           };
+  #           amdgpuBusId = "PCI:0:5:0";
+  #           nvidiaBusId = "PCI:0:1:0";
+  #         };
+  #       };
+  #     };
+  #   };
+  # };
+  #
   powerManagement = {
     powertop.enable = false;
   };

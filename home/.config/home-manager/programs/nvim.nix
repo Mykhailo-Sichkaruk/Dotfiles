@@ -14,20 +14,20 @@ with pkgs;
   # asmfmt
   # clang-tools
   # ccls
-  typst
+  # typst
   # tinymist
-  shellcheck
+  # shellcheck
   # go
   # cmake
   yamllint
   # hadolint
-  gcc
-  gnumake
+  # gcc
+  # gnumake
   # buf
   # protolint
   # checkmake
   # cppcheck
-  pkg-config
+  # pkg-config
   editorconfig-checker
   gitlint
   statix
