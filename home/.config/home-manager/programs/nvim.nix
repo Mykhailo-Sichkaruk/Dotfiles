@@ -48,7 +48,7 @@ with pkgs;
   # markdownlint-cli
   # bash-language-server
   # dockerfile-language-server-nodejs
-  # glow
+  glow
   yaml-language-server
   # protols
   # buf
@@ -56,6 +56,8 @@ with pkgs;
   emmet-ls
   # helm-ls
   # vue-language-server
+  direnv
+  nix-direnv
 ]
 ++ [
   pkgs-unstable.rustfmt
