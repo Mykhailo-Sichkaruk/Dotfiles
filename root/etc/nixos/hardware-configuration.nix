@@ -27,6 +27,7 @@
   boot.extraModulePackages = [ ];
   boot.kernel.sysctl = {
     "vm.swappiness" = 100;
+    "vm.overcommit_memory" = 0;
     "kernel.core_pattern" = "|/bin/false";
     "net.ipv4.tcp_fastopen" = 3;
     "net.core.default_qdisc" = "cake";
@@ -37,9 +38,16 @@
     "amd_pstate=active"
     "zswap.enabled=1" # enables zswap
     "zswap.compressor=lz4" # compression algorithm
-    "zswap.max_pool_percent=30" # maximum percentage of RAM that zswap is allowed to use
+    "zswap.max_pool_percent=10" # maximum percentage of RAM that zswap is allowed to use
     "zswap.shrinker_enabled=1" # whether to shrink the pool proactively on high memory pressure
     "transparent_hugepage=madvise"
+  ];
+  boot.blacklistedKernelModules = [
+    "nouveau"
+    "nvidia"
+    "nvidia_drm"
+    "nvidia_modeset"
+    "nvidia_uvm"
   ];
 
   fileSystems."/" = {
@@ -109,11 +117,13 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = with pkgs; [
-        ocl-icd
-        libva-vdpau-driver
-        libvdpau-va-gl
-      ];
+      extraPackages = lib.mkForce [ ];
+      #
+      # extraPackages = with pkgs; [
+      #   ocl-icd
+      #   libva-vdpau-driver
+      #   libvdpau-va-gl
+      # ];
     };
     bluetooth = {
       enable = true; # enables support for Bluetooth

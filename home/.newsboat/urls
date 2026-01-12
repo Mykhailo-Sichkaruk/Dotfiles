@@ -47,8 +47,7 @@ https://www.thepolyglotdeveloper.com/blog/index.xml
 https://blog.nelhage.com/atom.xml
 https://os.phil-opp.com/rss.xml
 http://feeds2.feedburner.com/PetrMitrichev
-https://catonmat.net/feed
-https://steipete.me/rss.xml
+https://steipete.me/rss.xml AI-engineering
 http://blog.pamelafox.org/feeds/posts/default
 http://feeds.feedburner.com/rtwilson/blog
 http://blog.cleancoder.com/atom.xml
@@ -68,7 +67,6 @@ https://go.dev/blog/feed.atom
 https://overreacted.io/rss.xml
 https://nesslabs.com/feed
 https://hacks.mozilla.org/feed/
-https://feeds.megaphone.fm/FSMI7575968096
 https://engineering.fb.com/feed/
 https://about.gitlab.com/atom.xml
 http://feeds.feedburner.com/GDBcode
@@ -116,3 +114,6 @@ https://www.joelonsoftware.com/feed/
 https://use-the-index-luke.com/blog/feed
 https://chrisdown.name/feed.xml top systems-programming kerkel linux
 https://augmentedcoding.dev/feed.xml ai
+https://fy.blackhats.net.au/rss.xml top passkeys security fs
+https://lukefleed.xyz/rss.xml top memory
+https://wingolog.org/feed/atom v8 top

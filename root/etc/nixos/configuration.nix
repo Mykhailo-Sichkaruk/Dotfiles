@@ -102,6 +102,7 @@
         80
         443
         22
+        8080
       ];
     };
   };
@@ -199,6 +200,9 @@
     libinput.enable = true;
     openssh.enable = true;
     pcscd.enable = true;
+    udev.extraRules = ''
+      SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{power/control}="auto"
+    '';
   };
 
   security = {
@@ -275,6 +279,10 @@
       # RM = "safe-rm";
       TERMINAL = "alacritty"; # Set Alacritty as the default terminal
       GSETTINGS_SCHEMA_DIR = "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/glib-2.0/schemas";
+    };
+    sessionVariables = {
+      LIBVA_DRIVER_NAME = "radeonsi";
+      VDPAU_DRIVER = "radeonsi";
     };
   };
 

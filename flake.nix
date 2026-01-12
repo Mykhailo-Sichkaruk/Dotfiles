@@ -5,6 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nur.url = "github:nix-community/NUR";
+    nix-auth.url = "github:numtide/nix-auth";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,6 +18,7 @@
       nixpkgs,
       nixpkgs-unstable,
       nur,
+      nix-auth,
       home-manager,
       nixgl,
       ...
@@ -32,6 +34,9 @@
         inherit system;
         config.allowUnfree = true;
       };
+      pkgs-nix-auth = import nix-auth {
+        inherit system;
+      };
     in
     {
       nixosConfigurations.MS_NixLaptop = nixpkgs.lib.nixosSystem {
@@ -44,7 +49,7 @@
           ./root/etc/nixos/configuration.nix
           home-manager.nixosModules.home-manager
           {
-            home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
+            home-manager.extraSpecialArgs = { inherit pkgs-unstable; inherit pkgs-nix-auth; };
             home-manager.users.ms = import ./home/.config/home-manager/home.nix;
           }
         ];

@@ -1,7 +1,10 @@
 { pkgs, pkgs-unstable, ... }:
 
 let
-  shellConfig = import ./programs/shell.nix { inherit pkgs; inherit pkgs-unstable; };
+  shellConfig = import ./programs/shell.nix {
+    inherit pkgs;
+    inherit pkgs-unstable;
+  };
 in
 {
   imports = [ ./programs/gui.nix ];
@@ -10,52 +13,58 @@ in
     username = "ms";
     homeDirectory = "/home/ms";
     stateVersion = "25.11";
-    packages =
-      [pkgs-unstable.vscode]
-      ++ shellConfig
-      ++ (with pkgs; [
-        # anki
-        # at
-        libnotify
-        # nvtopPackages.full
-        rofi
-        keepassxc
-        neomutt
-        sxhkd
-        pulsemixer
-        youtube-music
-        yt-dlp
-        discord
-        # betterdiscordctl
-        pipewire
-        telegram-desktop
-        drawio
-        mpv
-        obsidian
-        vimiv-qt
-        zathura
-        pkgs.nur.repos."vieb-nix".vieb
-        google-chrome
-        alacritty
-        i3lock
-        dunst
-        flameshot
-        playerctl
-        comma
-        # nix-index
-        # openvpn3
-        # teams-for-linux
-        newsboat
-        # obs-studio
-        # libreoffice
-        # postgresql_17_jit
-        # archi
-        pipx
-        whatsapp-electron
-        # spotify
-        postman
-      ]) ++ [
-      ];
+    packages = [
+      pkgs-unstable.vscode
+    ]
+    ++ shellConfig
+    ++ (with pkgs; [
+      # anki
+      # at
+      libnotify
+      # nvtopPackages.full
+      # vscode
+      rofi
+      keepassxc
+      neomutt
+      sxhkd
+      pulsemixer
+      ytmdesktop
+      yt-dlp
+      discord
+      # betterdiscordctl
+      pipewire
+      telegram-desktop
+      drawio
+      mpv
+      obsidian
+      vimiv-qt
+      zathura
+      pkgs.nur.repos."vieb-nix".vieb
+      google-chrome
+      alacritty
+      i3lock
+      dunst
+      flameshot
+      playerctl
+      comma
+      # nix-index
+      # openvpn3
+      # teams-for-linux
+      newsboat
+      # obs-studio
+      libreoffice-fresh
+      # postgresql_17_jit
+      # archi
+      pipx
+      whatsapp-electron
+      # spotify
+      # postman
+      # thunderbird
+      # rquickshare
+      youtube-music
+    ])
+    ++ [
+    ];
   };
 
   xsession = {
@@ -110,6 +119,7 @@ in
         bind ctrl-space -M insert accept-autosuggestion
         bind \cg forget_last_command
         bind --mode insert \cg forget_last_command
+        bind --mode insert \tn nvim .
 
         starship init fish | source
         zoxide init --cmd cd fish | source
@@ -142,7 +152,8 @@ in
       "x-scheme-handler/http" = "vieb.desktop";
       "x-scheme-handler/https" = "vieb.desktop";
       "x-scheme-handler/about" = "vieb.desktop";
-      "x-scheme-handler/unknown" = "vieb.desktop";
+      # "x-scheme-handler/unknown" = "vieb.desktop";
+      "x-scheme-handler/mailto" = "thunderbird.desktop";
     };
   };
 

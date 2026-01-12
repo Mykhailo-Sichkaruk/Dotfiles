@@ -4,7 +4,7 @@ let
 in
 vimPackages
 ++ (with pkgs; [
-  safe-rm
+  # safe-rm
   rsync
   stow
   ncdu
@@ -50,4 +50,6 @@ vimPackages
   unzip
   nix-ld
   uv
+  doxx
+  poppler-utils
 ])
