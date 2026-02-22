@@ -68,7 +68,6 @@ https://overreacted.io/rss.xml
 https://nesslabs.com/feed
 https://hacks.mozilla.org/feed/
 https://engineering.fb.com/feed/
-https://about.gitlab.com/atom.xml
 http://feeds.feedburner.com/GDBcode
 https://engineering.atspotify.com/feed
 https://blog.cloudflare.com/rss/
@@ -86,19 +85,8 @@ https://simonwillison.net/atom/everything/
 https://devenv.sh/feed_rss_created.xml 
 https://discourse.nixos.org/c/announcements/8.rss
 https://waxy.org/feed/ tech art business culture
-https://www.redhat.com/en/rss/blog linux opensource enterprise
-https://fedoramagazine.org/feed/ linux opensource 
-https://ubuntu.com/blog/feed linux opensource enterprise
-https://www.suse.com/c/feed linux opensource enterprise
-https://cloudblog.withgoogle.com/rss cloud google
-https://azure.microsoft.com/en-us/blog/feed/ cloud microsoft
-https://aws.amazon.com/blogs/aws/feed/ cloud amazon
-https://www.cncf.io/feed/ cloud opensource
 https://kubernetes.io/feed.xml cloud opensource
 https://www.linuxfoundation.org/blog/rss.xml linux opensource
-https://feed.infoq.com/Devops cloud devops news
-https://thenewstack.io/feed tech news
-https://news.ycombinator.com/rss tech startup
 https://blog.alexellis.io/rss/ independent devops cloud opensource
 https://www.devroom.io/feed.xml
 http://feeds.feedburner.com/EsnextNews news js
@@ -117,3 +105,4 @@ https://augmentedcoding.dev/feed.xml ai
 https://fy.blackhats.net.au/rss.xml top passkeys security fs
 https://lukefleed.xyz/rss.xml top memory
 https://wingolog.org/feed/atom v8 top
+https://antirez.com/rss

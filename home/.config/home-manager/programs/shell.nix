@@ -50,6 +50,4 @@ vimPackages
   unzip
   nix-ld
   uv
-  doxx
-  poppler-utils
 ])
