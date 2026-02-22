@@ -15,23 +15,18 @@ in
     stateVersion = "25.11";
     packages = [
       pkgs-unstable.vscode
+      pkgs-unstable.google-cloud-sdk
     ]
     ++ shellConfig
     ++ (with pkgs; [
-      # anki
-      # at
       libnotify
-      # nvtopPackages.full
-      # vscode
       rofi
       keepassxc
       neomutt
       sxhkd
       pulsemixer
-      ytmdesktop
       yt-dlp
       discord
-      # betterdiscordctl
       pipewire
       telegram-desktop
       drawio
@@ -47,20 +42,18 @@ in
       flameshot
       playerctl
       comma
-      # nix-index
-      # openvpn3
-      # teams-for-linux
+      nix-index
+      openvpn3
+      teams-for-linux
       newsboat
       libreoffice-fresh
-      # postgresql_17_jit
-      # archi
       pipx
       whatsapp-electron
-      # spotify
-      # postman
-      # thunderbird
-      # rquickshare
       youtube-music
+      mattermost-desktop
+      dbeaver-bin
+      remmina
+      postgresql_15_jit
     ])
     ++ [
     ];
@@ -140,6 +133,10 @@ in
           name = "plugin-git";
           inherit (pkgs.fishPlugins.plugin-git) src;
         }
+        # {
+        #   name = "nvm";
+        #   inherit (pkgs.fishPlugins.nvm) src;
+        # }
       ];
     };
   };
@@ -159,15 +156,12 @@ in
   services = {
     syncthing = {
       enable = true;
-      # Still not in the stable version
-      /*
-        guiAddress = "127.0.0.1:8384";
-        settings.folders = {
-            "/home/ms/Sync" = {
-              id = "laptop_phone";
-            };
-          };
-      */
+      guiAddress = "127.0.0.1:8384";
+      settings.folders = {
+        "/home/ms/Sync" = {
+          id = "laptop_phone";
+        };
+      };
     };
   };
 

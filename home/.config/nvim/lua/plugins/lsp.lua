@@ -36,19 +36,23 @@ return {
         end
       })
 
-      vim.lsp.enable("ts_ls")
+      -- vim.lsp.inlay_hint.enable()
+      vim.lsp.config("tsgo", {})
+      vim.lsp.enable('tsgo')
+      -- vim.lsp.enable("ts_ls")
+      vim.lsp.config("ts_ls", { init_options = { maxTsServerMemory = 8192 } })
       vim.lsp.enable("vue_ls")
       vim.lsp.enable("rust_analyzer")
 
       vim.lsp.config("rust_analyzer", {
-        cmd = {
-          "/nix/store/9xfh661pswmwz5z7warwmhj8chr7bvbf-home-manager-path/bin/rust-analyzer"
-        },
+        -- cmd = {
+        -- "/nix/store/8fn34bn5gawj6bl7v9vvv0rs9hxx60y3-rust-analyzer-2025-05-12/bin/rust-analyzer"
+        -- },
         settings = {
-          ["rust-analyzer"] = {
-            cargo = { target = "xtensa-esp32-espidf" },
-            check = { allTargets = false }
-          }
+          -- ["rust-analyzer"] = {
+          --   cargo = { target = "xtensa-esp32-espidf" },
+          --   check = { allTargets = false }
+          -- }
         }
       })
 
@@ -58,6 +62,7 @@ return {
       vim.lsp.enable("buf_ls")
       vim.lsp.enable("jsonls")
       vim.lsp.enable("eslint")
+      vim.lsp.enable('graphql')
     end
   }
 }

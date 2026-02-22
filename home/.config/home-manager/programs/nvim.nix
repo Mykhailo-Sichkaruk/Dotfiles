@@ -37,6 +37,7 @@ with pkgs;
   lua-language-server
   luajitPackages.luarocks
   nodePackages.typescript-language-server
+  typescript-go
   # deno
   nodejs
   python3
@@ -53,16 +54,22 @@ with pkgs;
   # protols
   # buf
   # docker-compose-language-service
-  emmet-ls
+  # emmet-ls
   # helm-ls
   # vue-language-server
   direnv
   nix-direnv
+  graphql-language-service-cli
+  # prisma
+  go
+  libgcc
+  gccgo
 ]
 ++ [
-  pkgs-unstable.rustfmt
-  pkgs-unstable.rust-analyzer
-  pkgs-unstable.rustc
-  pkgs-unstable.clippy
-  pkgs-unstable.cargo
+  # pkgs-unstable.rustfmt
+  # pkgs-unstable.rust-analyzer
+  # pkgs-unstable.rustc
+  # pkgs-unstable.clippy
+  # pkgs-unstable.cargo
+  # pkgs-unstable.mcp-language-server
 ]

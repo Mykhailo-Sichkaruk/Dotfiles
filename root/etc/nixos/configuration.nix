@@ -272,8 +272,8 @@
       man-pages
       lenovo-legion
       docker_28
-      openssl
-      tpm2-tools
+      # openssl
+      # tpm2-tools
     ];
     variables = {
       # RM = "safe-rm";
@@ -317,7 +317,7 @@
     [ ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   system = {
     autoUpgrade = {
-      enable = true;
+      enable = false;
       allowReboot = false;
     };
     stateVersion = "25.11";

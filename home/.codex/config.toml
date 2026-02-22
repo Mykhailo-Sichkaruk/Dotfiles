@@ -1,0 +1,153 @@
+model = "gpt-5.3-codex"
+model_reasoning_effort = "xhigh"
+personality = "pragmatic"
+web_search = "cached"        # allow the model to request web searches
+sandbox_mode = "workspace-write"
+[features]
+shell_tool = true
+undo = true
+unified_exec = true          # enable unified exec tool for all commands
+streamable_shell = true          # enable the streamable exec tool
+experimental_sandbox_command_assessment = true  # enable experimental sandbox command assessment feature
+shell_snapshot = true
+apps = true
+steer = true
+personality = true
+
+[mcp_servers.postgres]
+enabled = false
+command = "docker"
+args = [
+  "run",
+  "-i",
+  "--network=host",
+  "--rm",
+  "-e",
+  "DATABASE_URI",
+  "crystaldba/postgres-mcp",
+  "--access-mode=unrestricted",
+]
+startup_timeout_sec = 80
+[mcp_servers.postgres.env]
+DATABASE_URI = "postgresql://ms:password@127.0.0.1:5433/postgis"
+[mcp_servers.nixos]
+command = "nix"
+args = ["run", "github:utensils/mcp-nixos", "--"]
+startup_timeout_sec = 120
+[mcp_servers.shadcn]
+enabled = false
+command = "npx"
+args = ["@jpisnice/shadcn-ui-mcp-server"]
+[mcp_servers.duckduckgoSearch]
+command = "uvx"
+args = ["duckduckgo-mcp-server"]
+[mcp_servers.chrome-devtools]
+enabled = false
+command = "npx"
+args = [
+  "-y",
+  "chrome-devtools-mcp@latest",
+  "--headless=false",
+  "--isolated=false",
+  "--browserUrl=http://127.0.0.1:9222",
+]
+[mcp_servers.chrome-devtools-headless]
+command = "npx"
+args = [
+  "-y",
+  "chrome-devtools-mcp@latest",
+  "--headless=true",
+  "--isolated=false",
+  "--executablePath=/nix/store/qkw3a2my1b1mwf5xlaq3jdj7himqgp67-google-chrome-142.0.7444.134/share/google/chrome/chrome"
+]
+[mcp_servers.elasticsearch]
+enabled = false
+command = "uvx"
+args = ["elasticsearch-mcp-server"]
+[mcp_servers.elasticsearch.env]
+ELASTICSEARCH_HOSTS = "https://localhost:9200"
+ELASTICSEARCH_USERNAME = "elastic"
+ELASTICSEARCH_PASSWORD = "password"
+[mcp_servers.prisma]
+enabled = false
+command = "prisma"
+args = [ "mcp" ]
+[mcp_servers.lsp]
+command = "mcp-language-server"
+args = [ "--workspace", ".", "--lsp", "typescript-language-server", "--", "--stdio" ]
+startup_timeout_sec = 80
+tool_timeout_sec = 1800
+[mcp_servers.dbeaver]
+command = "npx"
+args = ["-y", "dbeaver-mcp-server"]
+[mcp_servers.dbeaver.env]
+DBEAVER_DEBUG = "true"
+DBEAVER_READ_ONLY = "true"
+DBEAVER_TIMEOUT = "60000"
+[projects."/home/ms/workspace/diploma/vyskumny-zamer"]
+trust_level = "untrusted"
+
+[projects."/home/ms/workspace/elastic-learn"]
+trust_level = "trusted"
+
+[projects."/home/ms/newDot/Dotfiles"]
+trust_level = "untrusted"
+
+[projects."/home/ms/workspace/SuperClaude_Framework"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/oryx-nix"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/oryx"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/OpenRisk"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/simplicity"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/mts"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/ESP32-EInk-schedule-display"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/cv"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/final/thesis-deploy"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/grabtheword"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/pdt-import"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/node-snippets"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/all-stream"]
+trust_level = "trusted"
+
+[projects."/home/ms"]
+trust_level = "trusted"
+
+[projects."/home/ms/Downloads/archi/Archi"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/unit/tower-finance"]
+trust_level = "trusted"
+
+[notice.model_migrations]
+"gpt-5.2" = "gpt-5.2-codex"
+"gpt-5.1-codex-max" = "gpt-5.2-codex"
+# [mcp_servers_git]
+# "mcpServers": {
+#   "git": {
+#     "command": "uvx",
+#     "args": ["mcp-server-git", "--repository", "path/to/git/repo"]
+#   }
+# }

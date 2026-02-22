@@ -21,12 +21,12 @@ block = "sound"
 driver = "pulseaudio"
 device_kind = "source"
 
-[[block]]
-block = "load"
+# [[block]]
+# block = "load"
 
-[[block]]
-block = "temperature"
-
+# [[block]]
+# block = "temperature"
+#
 [[block]]
 block = "speedtest"
 interval = 1880

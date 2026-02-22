@@ -87,6 +87,8 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.opengl.enable = true;
+  hardware.amdgpu.opencl.enable = true;
 
   # specialisation = {
   #   nvidia.configuration = {
@@ -117,7 +119,7 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = lib.mkForce [ ];
+      # extraPackages = lib.mkForce [ ];
       #
       # extraPackages = with pkgs; [
       #   ocl-icd
