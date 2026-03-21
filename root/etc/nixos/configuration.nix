@@ -61,7 +61,7 @@
     hostName = "mykhailos_nixos"; # Define your hostname.
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
     networkmanager.enable = false; # Easiest to use and most distros use this by default.
-    extraHosts = '''';
+    extraHosts = "";
     nameservers = [
       "1.1.1.1"
       "8.8.8.8"
@@ -127,15 +127,15 @@
       ];
       port = 9993;
     };
-    # postgresql = {
-    #   enable = true;
-    #   ensureDatabases = [ "default" ];
-    #   extensions = [ "postgis" ];
-    #   authentication = pkgs.lib.mkOverride 10 ''
-    #     #type database  DBuser  auth-method
-    #     local all       all     trust
-    #   '';
-    # };
+    postgresql = {
+      enable = true;
+      ensureDatabases = [ "default" ];
+      package = pkgs.postgresql_15_jit;
+      authentication = pkgs.lib.mkOverride 10 ''
+        #type database  DBuser  auth-method
+        local all       all     trust
+      '';
+    };
     openvpn.servers = {
       stubaVPN = {
         autoStart = false;
@@ -168,7 +168,7 @@
     xserver = {
       videoDrivers = [ "amdgpu" ];
       xkb.layout = "us,ua";
-      xkb.options = "caps:escape,grp:alt_shift_toggle";
+      xkb.options = "caps:escape,compose:rctrl,grp:alt_shift_toggle";
       autoRepeatInterval = 50;
       autoRepeatDelay = 250;
       enable = true;
@@ -254,7 +254,6 @@
       stdmanpages
       gtk3
       cachix
-      pass
       gnupg
       i3status-rust
       fish
@@ -267,11 +266,9 @@
       autorandr
       rofi
       pulsemixer
-      nh
       xdotool
       man-pages
       lenovo-legion
-      docker_28
       # openssl
       # tpm2-tools
     ];
@@ -311,10 +308,18 @@
     };
     dconf.enable = true;
   };
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    package = pkgs.docker_29;
+  };
 
-  fonts.packages =
-    [ ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  # fonts.packages =
+  #   [ ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    noto-fonts-color-emoji
+  ];
+
   system = {
     autoUpgrade = {
       enable = false;

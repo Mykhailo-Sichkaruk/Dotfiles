@@ -1,9 +1,11 @@
-model = "gpt-5.3-codex"
+model = "gpt-5.4"
 model_reasoning_effort = "xhigh"
 personality = "pragmatic"
 web_search = "cached"        # allow the model to request web searches
 sandbox_mode = "workspace-write"
+notify = ["tool_execution", "tool_errors", "model_thoughts"]
 [features]
+runtime_metrics = true
 shell_tool = true
 undo = true
 unified_exec = true          # enable unified exec tool for all commands
@@ -15,75 +17,89 @@ steer = true
 personality = true
 
 [mcp_servers.postgres]
-enabled = false
 command = "docker"
-args = [
-  "run",
-  "-i",
-  "--network=host",
-  "--rm",
-  "-e",
-  "DATABASE_URI",
-  "crystaldba/postgres-mcp",
-  "--access-mode=unrestricted",
-]
-startup_timeout_sec = 80
+args = ["run", "-i", "--network=host", "--rm", "-e", "DATABASE_URI", "crystaldba/postgres-mcp", "--access-mode=unrestricted"]
+enabled = false
+startup_timeout_sec = 80.0
+
 [mcp_servers.postgres.env]
 DATABASE_URI = "postgresql://ms:password@127.0.0.1:5433/postgis"
+
 [mcp_servers.nixos]
 command = "nix"
 args = ["run", "github:utensils/mcp-nixos", "--"]
-startup_timeout_sec = 120
+startup_timeout_sec = 120.0
+
 [mcp_servers.shadcn]
-enabled = false
 command = "npx"
 args = ["@jpisnice/shadcn-ui-mcp-server"]
+enabled = false
+
 [mcp_servers.duckduckgoSearch]
+enabled = false
 command = "uvx"
 args = ["duckduckgo-mcp-server"]
-[mcp_servers.chrome-devtools]
-enabled = false
-command = "npx"
-args = [
-  "-y",
-  "chrome-devtools-mcp@latest",
-  "--headless=false",
-  "--isolated=false",
-  "--browserUrl=http://127.0.0.1:9222",
-]
-[mcp_servers.chrome-devtools-headless]
-command = "npx"
-args = [
-  "-y",
-  "chrome-devtools-mcp@latest",
-  "--headless=true",
-  "--isolated=false",
-  "--executablePath=/nix/store/qkw3a2my1b1mwf5xlaq3jdj7himqgp67-google-chrome-142.0.7444.134/share/google/chrome/chrome"
-]
+
 [mcp_servers.elasticsearch]
-enabled = false
 command = "uvx"
 args = ["elasticsearch-mcp-server"]
+enabled = false
+
 [mcp_servers.elasticsearch.env]
 ELASTICSEARCH_HOSTS = "https://localhost:9200"
-ELASTICSEARCH_USERNAME = "elastic"
 ELASTICSEARCH_PASSWORD = "password"
+ELASTICSEARCH_USERNAME = "elastic"
+
 [mcp_servers.prisma]
-enabled = false
 command = "prisma"
-args = [ "mcp" ]
+args = ["mcp"]
+enabled = false
+
 [mcp_servers.lsp]
 command = "mcp-language-server"
-args = [ "--workspace", ".", "--lsp", "typescript-language-server", "--", "--stdio" ]
-startup_timeout_sec = 80
-tool_timeout_sec = 1800
+args = ["--workspace", ".", "--lsp", "typescript-language-server", "--", "--stdio"]
+enabled = false
+startup_timeout_sec = 80.0
+tool_timeout_sec = 1800.0
+
 [mcp_servers.dbeaver]
 command = "npx"
-args = ["-y", "dbeaver-mcp-server"]
+args = ["-y", "dbeaver-mcp-server@latest"]
+
 [mcp_servers.dbeaver.env]
 DBEAVER_DEBUG = "true"
 DBEAVER_READ_ONLY = "true"
-DBEAVER_TIMEOUT = "60000"
+DBEAVER_TIMEOUT = "100"
+
+[mcp_servers.github]
+url = "https://api.githubcopilot.com/mcp/"
+bearer_token_env_var = "GITHUB_PAT_TOKEN"
+enabled = true
+
+[mcp_servers.sentry]
+url = "https://mcp.sentry.dev/mcp"
+
+[mcp_servers.chrome-devtools]
+enabled = true
+command = "/home/ms/.nix-profile/bin/npx"
+args = ["-y", "chrome-devtools-mcp@latest", "--autoConnect"]
+
+[mcp_servers.nvim]
+enabled = false
+command = "nix"
+args = ["run", "github:utensils/mcp-nvim", "--"]
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["@playwright/mcp@latest"]
+[mcp_servers.playwright.env]
+PLAYWRIGHT_MCP_EXTENSION_TOKEN="bI1lSd3m_MlDC4JrUStXzyNYTWjU27u6exdFBTUCMqA"
+PLAYWRIGHT_MCP_EXECUTABLE_PATH="/home/ms/.nix-profile/bin/google-chrome-stable"
+
+[mcp_servers.obsidian]
+command = "npx"
+args = ["-y", "@mauricio.wolff/mcp-obsidian@latest", "/home/ms/Zettelkasten/"]
+
 [projects."/home/ms/workspace/diploma/vyskumny-zamer"]
 trust_level = "untrusted"
 
@@ -141,9 +157,27 @@ trust_level = "trusted"
 [projects."/home/ms/workspace/unit/tower-finance"]
 trust_level = "trusted"
 
+[projects."/home/ms/workspace/docker"]
+trust_level = "trusted"
+
+[projects."/home/ms/Zettelkasten"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/craess"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/oznal"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/capstone"]
+trust_level = "trusted"
+
 [notice.model_migrations]
 "gpt-5.2" = "gpt-5.2-codex"
 "gpt-5.1-codex-max" = "gpt-5.2-codex"
+
+[tui]
+status_line = ["model-with-reasoning", "context-remaining", "current-dir", "context-used", "project-root", "git-branch", "five-hour-limit", "weekly-limit", "codex-version", "context-window-size", "used-tokens", "total-input-tokens", "total-output-tokens", "session-id"]
 # [mcp_servers_git]
 # "mcpServers": {
 #   "git": {

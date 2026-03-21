@@ -37,9 +37,9 @@ return {
       })
 
       -- vim.lsp.inlay_hint.enable()
-      vim.lsp.config("tsgo", {})
-      vim.lsp.enable('tsgo')
-      -- vim.lsp.enable("ts_ls")
+      -- vim.lsp.config("tsgo", {})
+      -- vim.lsp.enable('tsgo')
+      vim.lsp.enable("ts_ls")
       vim.lsp.config("ts_ls", { init_options = { maxTsServerMemory = 8192 } })
       vim.lsp.enable("vue_ls")
       vim.lsp.enable("rust_analyzer")
@@ -57,12 +57,14 @@ return {
       })
 
       vim.lsp.enable("dockerls")
-      vim.lsp.enable("protols")
       vim.lsp.enable("docker_compose_language_service")
-      vim.lsp.enable("buf_ls")
       vim.lsp.enable("jsonls")
       vim.lsp.enable("eslint")
-      vim.lsp.enable('graphql')
+      -- vim.lsp.enable("protols")
+      -- vim.lsp.enable("buf_ls")
+      -- vim.lsp.enable('graphql')
+      -- vim.lsp.enable('dartls')
+      -- vim.lsp.enable('ccls')
     end
   }
 }

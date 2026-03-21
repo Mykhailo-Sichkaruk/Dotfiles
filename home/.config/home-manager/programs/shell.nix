@@ -16,9 +16,10 @@ vimPackages
   tlp
   fd
   ripgrep
-  vim
+  ripgrep-all
+  # vim
   # jq
-  docker
+  # docker
   curl
   findutils
   powertop
@@ -28,7 +29,6 @@ vimPackages
   offlineimap
   bat
   # texinfo
-  findutils
   tree
   speedtest-cli
   tldr
@@ -41,13 +41,14 @@ vimPackages
   fishPlugins.plugin-git
   vifm
   xclip
-  oh-my-fish
+  # oh-my-fish
   syncthing
   nix-du
   # dex
   offlineimap
-  ffmpeg
+  # ffmpeg
   unzip
   nix-ld
-  uv
+  lazydocker
+  lazygit
 ])
