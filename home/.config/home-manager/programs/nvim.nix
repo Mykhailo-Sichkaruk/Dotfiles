@@ -28,14 +28,14 @@ with pkgs;
   # checkmake
   # cppcheck
   # pkg-config
-  editorconfig-checker
-  gitlint
+  # editorconfig-checker
+  # gitlint
   statix
   luaformatter
   nixd
   nixfmt-rfc-style
   lua-language-server
-  luajitPackages.luarocks
+  # luajitPackages.luarocks
   nodePackages.typescript-language-server
   typescript-go
   # deno
@@ -45,12 +45,12 @@ with pkgs;
   tree-sitter
   # mercurial
   vscode-langservers-extracted
-  vimPlugins.wilder-nvim
+  # vimPlugins.wilder-nvim
   # markdownlint-cli
   # bash-language-server
   # dockerfile-language-server-nodejs
-  glow
-  yaml-language-server
+  # glow
+  # yaml-language-server
   # protols
   # buf
   # docker-compose-language-service
@@ -59,11 +59,12 @@ with pkgs;
   # vue-language-server
   direnv
   nix-direnv
-  graphql-language-service-cli
+  # graphql-language-service-cli
   # prisma
-  go
-  libgcc
-  gccgo
+  # go
+  # libgcc
+  # gccgo
+  # dart
 ]
 ++ [
   # pkgs-unstable.rustfmt

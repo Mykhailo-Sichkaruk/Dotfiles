@@ -15,46 +15,51 @@ in
     stateVersion = "25.11";
     packages = [
       pkgs-unstable.vscode
-      pkgs-unstable.google-cloud-sdk
+      # pkgs-unstable.google-cloud-sdk
     ]
     ++ shellConfig
     ++ (with pkgs; [
-      libnotify
-      rofi
-      keepassxc
-      neomutt
-      sxhkd
-      pulsemixer
+      # NOTE: Multimedia
+      libreoffice-fresh
+      playerctl
+      obsidian
       yt-dlp
-      discord
+      neomutt
+      pulsemixer
       pipewire
-      telegram-desktop
       drawio
       mpv
-      obsidian
       vimiv-qt
       zathura
       pkgs.nur.repos."vieb-nix".vieb
       google-chrome
-      alacritty
-      i3lock
-      dunst
       flameshot
-      playerctl
-      comma
-      nix-index
-      openvpn3
-      teams-for-linux
       newsboat
       obs-studio
-      libreoffice-fresh
-      pipx
-      whatsapp-electron
       youtube-music
+      peek
+      # NOTE: Communication
+      discord
+      telegram-desktop
+      teams-for-linux
+      whatsapp-electron
       mattermost-desktop
+      slack
+      # NOTE: Dev
       dbeaver-bin
+      pipx
       remmina
-      postgresql_15_jit
+      # NOTE: Other
+      rofi
+      libnotify
+      keepassxc
+      alacritty
+      openvpn3
+      comma
+      i3lock
+      dunst
+      sxhkd
+      nix-index
     ])
     ++ [
     ];
@@ -145,11 +150,11 @@ in
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "text/html" = "vieb.desktop";
-      "x-scheme-handler/http" = "vieb.desktop";
-      "x-scheme-handler/https" = "vieb.desktop";
-      "x-scheme-handler/about" = "vieb.desktop";
-      # "x-scheme-handler/unknown" = "vieb.desktop";
+      "text/html" = "google-chrome.desktop";
+      "x-scheme-handler/http" = "google-chrome.desktop";
+      "x-scheme-handler/https" = "google-chrome.desktop";
+      "x-scheme-handler/about" = "google-chrome.desktop";
+      "x-scheme-handler/unknown" = "google-chrome.desktop";
       "x-scheme-handler/mailto" = "thunderbird.desktop";
     };
   };
