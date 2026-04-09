@@ -62,6 +62,7 @@ bindsym $mod+n exec --no-startup-id alacritty -e vifm
 bindsym $mod+colon exec --no-startup-id bash ~/.pomodoro/send_notify_about_status.sh
 bindsym $mod+Shift+question exec pomodoro cancel
 bindsym $mod+d exec --no-startup-id rofi -no-lazy-grab -show drun; 
+bindsym $mod+Shift+d exec --no-startup-id ~/.config/scripts/dunst-history-rofi.py
 bindsym $mod+p exec --no-startup-id ~/.config/scripts/pairFreeBuds.sh
 
 # A more modern dmenu replacement is rofi:

@@ -60,6 +60,15 @@ return {
       vim.lsp.enable("docker_compose_language_service")
       vim.lsp.enable("jsonls")
       vim.lsp.enable("eslint")
+      vim.lsp.enable('ruff_lsp')
+      vim.lsp.config('ruff_lsp', {
+        init_options = {
+          settings = {
+            -- Any extra CLI arguments for `ruff` go here.
+            args = {}
+          }
+        }
+      })
       -- vim.lsp.enable("protols")
       -- vim.lsp.enable("buf_ls")
       -- vim.lsp.enable('graphql')

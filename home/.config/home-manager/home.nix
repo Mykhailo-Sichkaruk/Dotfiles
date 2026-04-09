@@ -15,6 +15,7 @@ in
     stateVersion = "25.11";
     packages = [
       pkgs-unstable.vscode
+      pkgs-unstable.claude-code
       # pkgs-unstable.google-cloud-sdk
     ]
     ++ shellConfig

@@ -85,3 +85,10 @@ home/.codex/history.jsonl
 home/.codex/models_cache.json
 home/.codex/update-check.json
 home/.codex/version.json
+home/.codex/.tmp/
+home/.codex/cache/
+home/.codex/plugins/cache
+home/.codex/.credentials.json
+home/.codex/logs*
+home/.codex/state*
+home/.codex/session*

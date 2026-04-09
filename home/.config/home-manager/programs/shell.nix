@@ -51,4 +51,5 @@ vimPackages
   nix-ld
   lazydocker
   lazygit
+  yarn
 ])

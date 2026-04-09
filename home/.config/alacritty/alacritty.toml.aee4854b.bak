@@ -347,8 +347,3 @@ y = 10
 # [terminal.shell]
 # program = "fish"
 # args = ["-l"]
-
-[[keyboard.bindings]]
-key = "Return"
-mods = "Shift"
-chars = "\u001B\r"
