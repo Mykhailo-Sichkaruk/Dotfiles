@@ -59,6 +59,7 @@ with pkgs;
   # vue-language-server
   direnv
   nix-direnv
+  python313Packages.python-lsp-ruff
   # graphql-language-service-cli
   # prisma
   # go

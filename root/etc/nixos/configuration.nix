@@ -127,15 +127,15 @@
       ];
       port = 9993;
     };
-    postgresql = {
-      enable = true;
-      ensureDatabases = [ "default" ];
-      package = pkgs.postgresql_15_jit;
-      authentication = pkgs.lib.mkOverride 10 ''
-        #type database  DBuser  auth-method
-        local all       all     trust
-      '';
-    };
+    # postgresql = {
+    #   enable = true;
+    #   ensureDatabases = [ "default" ];
+    #   package = pkgs.postgresql_15_jit;
+    #   authentication = pkgs.lib.mkOverride 10 ''
+    #     #type database  DBuser  auth-method
+    #     local all       all     trust
+    #   '';
+    # };
     openvpn.servers = {
       stubaVPN = {
         autoStart = false;
@@ -168,7 +168,7 @@
     xserver = {
       videoDrivers = [ "amdgpu" ];
       xkb.layout = "us,ua";
-      xkb.options = "caps:escape,compose:rctrl,grp:alt_shift_toggle";
+      xkb.options = "caps:escape,grp:alt_shift_toggle,rctrl:compose";
       autoRepeatInterval = 50;
       autoRepeatDelay = 250;
       enable = true;
@@ -205,6 +205,11 @@
     '';
   };
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
   security = {
     polkit.enable = true;
     rtkit.enable = true;
@@ -231,8 +236,8 @@
     extraGroups = [
       "dialout"
       "wheel"
-      "docker"
       "video"
+      "docker"
       "render"
       "transmission"
       "input"
@@ -247,6 +252,7 @@
     dev.enable = true;
     man.enable = true;
   };
+  programs.kdeconnect.enable = true;
   environment = {
     systemPackages = with pkgs; [
       man-pages
@@ -278,6 +284,7 @@
       GSETTINGS_SCHEMA_DIR = "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/glib-2.0/schemas";
     };
     sessionVariables = {
+      GTK_THEME = "Adwaita:dark";
       LIBVA_DRIVER_NAME = "radeonsi";
       VDPAU_DRIVER = "radeonsi";
     };
@@ -308,13 +315,15 @@
     };
     dconf.enable = true;
   };
-  virtualisation.docker = {
+  virtualisation.docker.enable = false;
+  virtualisation.docker.rootless = {
     enable = true;
+    setSocketVariable = true;
     package = pkgs.docker_29;
   };
 
   # fonts.packages =
-  #   [ ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+    # [ ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     noto-fonts-color-emoji
