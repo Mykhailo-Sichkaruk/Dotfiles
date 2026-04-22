@@ -46,10 +46,11 @@ vimPackages
   nix-du
   # dex
   offlineimap
-  # ffmpeg
+  ffmpeg
   unzip
   nix-ld
   lazydocker
   lazygit
   yarn
+  esbuild
 ])

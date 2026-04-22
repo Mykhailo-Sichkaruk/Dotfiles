@@ -60,8 +60,7 @@ return {
       vim.lsp.enable("docker_compose_language_service")
       vim.lsp.enable("jsonls")
       vim.lsp.enable("eslint")
-      vim.lsp.enable('ruff_lsp')
-      vim.lsp.config('ruff_lsp', {
+      vim.lsp.config('ruff', {
         init_options = {
           settings = {
             -- Any extra CLI arguments for `ruff` go here.
@@ -69,6 +68,25 @@ return {
           }
         }
       })
+      vim.lsp.enable('ruff')
+      vim.lsp.config('pylsp', {
+        settings = {
+          pylsp = {
+            plugins = {
+              ruff = { enabled = true, formatEnabled = true },
+
+              -- avoid duplicate diagnostics/formatters
+              pycodestyle = { enabled = false },
+              pyflakes = { enabled = false },
+              mccabe = { enabled = false },
+              autopep8 = { enabled = false },
+              yapf = { enabled = false }
+            }
+          }
+        }
+      })
+
+      vim.lsp.enable('pylsp')
       -- vim.lsp.enable("protols")
       -- vim.lsp.enable("buf_ls")
       -- vim.lsp.enable('graphql')

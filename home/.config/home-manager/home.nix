@@ -1,10 +1,55 @@
-{ pkgs, pkgs-unstable, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  localPackages,
+  ...
+}:
 
 let
   shellConfig = import ./programs/shell.nix {
     inherit pkgs;
     inherit pkgs-unstable;
   };
+
+  # Keep Chrome rendering experiments in Nix so they are easy to audit and
+  # toggle instead of being buried in chrome://flags state.
+  chromeEnabledFeatures = [
+    "Vulkan"
+    "DefaultANGLEVulkan"
+    "VulkanFromANGLE"
+  ];
+
+  chromeExtraFlags = [
+    "--enable-gpu-rasterization"
+    "--enable-zero-copy"
+  ]
+  ++ pkgs.lib.optionals (chromeEnabledFeatures != [ ]) [
+    "--enable-features=${pkgs.lib.concatStringsSep "," chromeEnabledFeatures}"
+  ];
+
+  chromeWithFlags =
+    let
+      baseChrome = pkgs.google-chrome;
+      wrapperFlags = pkgs.lib.concatMapStringsSep " " (
+        flag: "--add-flags ${pkgs.lib.escapeShellArg flag}"
+      ) chromeExtraFlags;
+    in
+    pkgs.symlinkJoin {
+      name = "google-chrome-with-flags";
+      paths = [ baseChrome ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        rm "$out/bin/google-chrome-stable"
+        makeWrapper ${baseChrome}/bin/google-chrome-stable "$out/bin/google-chrome-stable" \
+          ${wrapperFlags}
+
+        rm "$out/share/applications/google-chrome.desktop"
+        cp ${baseChrome}/share/applications/google-chrome.desktop \
+          "$out/share/applications/google-chrome.desktop"
+        substituteInPlace "$out/share/applications/google-chrome.desktop" \
+          --replace-fail "${baseChrome}/bin/google-chrome-stable" "$out/bin/google-chrome-stable"
+      '';
+    };
 in
 {
   imports = [ ./programs/gui.nix ];
@@ -16,7 +61,9 @@ in
     packages = [
       pkgs-unstable.vscode
       pkgs-unstable.claude-code
-      # pkgs-unstable.google-cloud-sdk
+      pkgs-unstable.github-copilot-cli
+      localPackages.archi
+      localPackages.playwrightBrowsers1217
     ]
     ++ shellConfig
     ++ (with pkgs; [
@@ -33,6 +80,7 @@ in
       vimiv-qt
       zathura
       pkgs.nur.repos."vieb-nix".vieb
+      # chromeWithFlags
       google-chrome
       flameshot
       newsboat
@@ -50,6 +98,8 @@ in
       dbeaver-bin
       pipx
       remmina
+      antigravity
+      bubblewrap
       # NOTE: Other
       rofi
       libnotify
@@ -60,10 +110,20 @@ in
       i3lock
       dunst
       sxhkd
-      nix-index
     ])
-    ++ [
-    ];
+    ++ (with pkgs-unstable; [
+    ]);
+  };
+
+  home.file.".archi/dropins" = {
+    source = "${localPackages.archiDropins}/share/archi-dropins";
+    recursive = true;
+  };
+
+  home.file."Documents/Archi/scripts/.keep".text = "";
+
+  home.sessionVariables = {
+    PLAYWRIGHT_BROWSERS_PATH = "${localPackages.playwrightBrowsers1217}";
   };
 
   xsession = {
@@ -74,6 +134,24 @@ in
   };
 
   programs = {
+    anki = {
+      enable = true;
+      addons = [
+        (pkgs.ankiAddons.anki-connect.withConfig {
+          config = {
+            port = 8765;
+          };
+        })
+        pkgs.ankiAddons.review-heatmap
+      ];
+      theme = "dark";
+      sync.username = "mykhailo.sichkaruk@gmail.com";
+      sync.keyFile = "/home/ms/.secrets/anki-sync-key";
+      sync.autoSync = true;
+      sync.syncMedia = true;
+
+    };
+    keychain.enable = true;
     neovim = {
       enable = true;
       defaultEditor = true;
@@ -92,6 +170,7 @@ in
     fish = {
       enable = true;
       interactiveShellInit = ''
+        set -gx PLAYWRIGHT_BROWSERS_PATH "${localPackages.playwrightBrowsers1217}";
         set fish_cursor_insert line
         set fish_greeting
         fish_config theme choose "Dracula Official"
@@ -118,7 +197,6 @@ in
         bind ctrl-space -M insert accept-autosuggestion
         bind \cg forget_last_command
         bind --mode insert \cg forget_last_command
-        bind --mode insert \tn nvim .
 
         starship init fish | source
         zoxide init --cmd cd fish | source
@@ -140,10 +218,6 @@ in
           name = "plugin-git";
           inherit (pkgs.fishPlugins.plugin-git) src;
         }
-        # {
-        #   name = "nvm";
-        #   inherit (pkgs.fishPlugins.nvm) src;
-        # }
       ];
     };
   };

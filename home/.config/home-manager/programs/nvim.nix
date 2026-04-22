@@ -21,7 +21,7 @@ with pkgs;
   # cmake
   yamllint
   # hadolint
-  # gcc
+  gcc
   # gnumake
   # buf
   # protolint
@@ -39,7 +39,7 @@ with pkgs;
   nodePackages.typescript-language-server
   typescript-go
   # deno
-  nodejs
+  nodejs_24
   python3
   # ruby
   tree-sitter
@@ -60,10 +60,13 @@ with pkgs;
   direnv
   nix-direnv
   python313Packages.python-lsp-ruff
+  ruff
+  python313Packages.python-lsp-server
+  python313Packages.python-lsp-ruff
   # graphql-language-service-cli
   # prisma
   # go
-  # libgcc
+  libgcc
   # gccgo
   # dart
 ]
