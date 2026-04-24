@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "storybook-testing",
+  "owner": "yonatangross",
+  "repo": "orchestkit",
+  "path": "plugins/ork/skills/storybook-testing",
+  "branch": "main",
+  "sha": "e363d728f493ddc81912f1f05b93144fcbed227d",
+  "source": "manual"
+}

@@ -1,13 +1,13 @@
 **/__pycache__/**
-**/.pomodoro/history
-**/.pomodoro/current
-**/.pomodoro/at_job_id
+.env
+**/.pomodoro/history **/.pomodoro/current **/.pomodoro/at_job_id
 **/btop\.log
 **/lazy-lock.json
 **/usage_data.json
 **/vifminfo.json
 **/betterdiscord.asar
 **/fish_variables
+**/fish_variables.*
 **/*Cache*
 **/Service Worker/
 **/IndexedDB/

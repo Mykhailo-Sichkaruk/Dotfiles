@@ -103,7 +103,7 @@
             nixpkgs.config.allowUnfree = true;
           }
           nix-index-database.nixosModules.default
-          ./root/etc/nixos/configuration.nix
+          ./hosts/MS_NixLaptop/default.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = {
@@ -111,7 +111,7 @@
               inherit pkgs-nix-auth;
               inherit localPackages;
             };
-            home-manager.users.ms = import ./home/.config/home-manager/home.nix;
+            home-manager.users.ms = import ./homes/ms/default.nix;
           }
         ];
       };

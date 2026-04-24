@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "1",
+    "CLAUDE_CODE_EFFORT_LEVEL": "max"
+  },
+  "permissions": {
+    "allow": [
+      "mcp__figma__whoami",
+      "WebSearch",
+      "WebFetch(domain:www.dovera.sk)",
+      "WebFetch(domain:www.udzs-sk.sk)",
+      "WebFetch(domain:www.vszp.sk)",
+      "WebFetch(domain:www.susoft.sk)",
+      "WebFetch(domain:docplayer.cz)",
+      "WebFetch(domain:www.iresoft.cz)",
+      "Bash(nix-shell -p poppler_utils --run \"pdftotext -layout ''/home/ms/workspace/unit/clinic-control-dashboard/data-samples/specs/F-370-8-davka-751b.pdf'' ''/home/ms/workspace/unit/clinic-control-dashboard/data-samples/specs/F-370-8-davka-751b.md''\")",
+      "Bash(nix-shell -p poppler_utils --run \"pdftotext -layout ''/home/ms/workspace/unit/clinic-control-dashboard/data-samples/specs/MU-5_14_2015.pdf'' ''/home/ms/workspace/unit/clinic-control-dashboard/data-samples/specs/MU-5_14_2015.md''\")",
+      "Bash(rga --rga-accurate /home/ms/workspace/unit/clinic-control-dashboard/data-samples/specs/F-370-8-davka-751b.pdf)",
+      "Bash(rga --rga-accurate /home/ms/workspace/unit/clinic-control-dashboard/data-samples/specs/MU-5_14_2015.pdf)",
+      "Bash(grep -i \"751d\\\\|753d\" /home/ms/workspace/unit/clinic-control-dashboard/data-samples/specs/*)",
+      "Bash(tr '|' '\\\\n')",
+      "Bash(rga --rga-accurate MU-04-1-2016_Elektronicke-chybove-protokoly-zo-spracovania-davok-od-poskytovatelov-ZS.pdf)",
+      "Bash(rga --rga-accurate F-370-9_751d_01042026.pdf)",
+      "Bash(rga --rga-accurate ciselnik_chyb_pre_spatne_davky.1RoH.pdf)",
+      "Bash(npx drizzle-kit:*)",
+      "mcp__figma__get_design_context",
+      "mcp__figma__get_screenshot",
+      "mcp__figma__get_metadata",
+      "Bash(npx ts-node:*)",
+      "Bash(npx tsx:*)",
+      "Bash(npm install:*)",
+      "Bash(npx next:*)",
+      "mcp__chrome-devtools__list_pages",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__select_page",
+      "mcp__chrome-devtools__take_screenshot",
+      "mcp__chrome-devtools__list_console_messages",
+      "mcp__chrome-devtools__evaluate_script",
+      "Bash(docker compose:*)",
+      "Bash(PGPASSWORD=postgres psql -h localhost -U postgres -d clinic_control -c \"SELECT 1\")",
+      "Bash(PGPASSWORD=postgres psql -h 127.0.0.1 -U postgres -d clinic_control -c \"SELECT 1\" 2>&1)",
+      "mcp__dbeaver__list_connections",
+      "mcp__dbeaver__list_tables",
+      "mcp__dbeaver__execute_query",
+      "Bash(DATABASE_URL=\"postgresql://postgres:postgres@localhost:5434/clinic_control\" npx drizzle-kit migrate)",
+      "Bash(PGPASSWORD=postgres psql -h 127.0.0.1 -p 5434 -U postgres -d clinic_control -c \"SELECT table_name FROM information_schema.tables WHERE table_schema='public' ORDER BY table_name\" 2>&1)"
+    ],
+    "defaultMode": "plan"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.local/bin/starship-claude",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "ui-ux-pro-max-skill": {
+      "source": {
+        "source": "github",
+        "repo": "nextlevelbuilder/ui-ux-pro-max-skill"
+      }
+    },
+    "starship-claude": {
+      "source": {
+        "source": "github",
+        "repo": "martinemde/starship-claude"
+      }
+    }
+  },
+  "language": "English",
+  "effortLevel": "high",
+  "voiceEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "model": "opus[1m]"
+}

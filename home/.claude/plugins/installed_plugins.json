@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "plugins": {
+    "ui-ux-pro-max@ui-ux-pro-max-skill": [
+      {
+        "scope": "project",
+        "projectPath": "/home/ms/workspace/unit/clinic-control-dashboard/graphql",
+        "installPath": "/home/ms/.claude/plugins/cache/ui-ux-pro-max-skill/ui-ux-pro-max/2.0.1",
+        "version": "2.0.1",
+        "installedAt": "2026-03-23T17:07:17.524Z",
+        "lastUpdated": "2026-03-23T17:07:17.524Z",
+        "gitCommitSha": "07f4ef3ac2568c25a3b0c8ef5165a86abc3e56e4"
+      }
+    ],
+    "typescript-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/home/ms/.claude/plugins/cache/claude-plugins-official/typescript-lsp/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-04-22T20:27:17.458Z",
+        "lastUpdated": "2026-04-22T20:27:17.458Z"
+      }
+    ],
+    "chrome-devtools-mcp@claude-plugins-official": [
+      {
+        "scope": "project",
+        "projectPath": "/home/ms/workspace/unit/clinic-control-dashboard",
+        "installPath": "/home/ms/.claude/plugins/cache/claude-plugins-official/chrome-devtools-mcp/0.22.0",
+        "version": "0.22.0",
+        "installedAt": "2026-03-23T17:51:12.166Z",
+        "lastUpdated": "2026-04-24T09:32:37.613Z",
+        "gitCommitSha": "c2d8009ff75f76bce1ec4cf79c2467b50d81725e"
+      }
+    ],
+    "starship-claude@starship-claude": [
+      {
+        "scope": "project",
+        "projectPath": "/home/ms/workspace/unit/clinic-control-dashboard",
+        "installPath": "/home/ms/.claude/plugins/cache/starship-claude/starship-claude/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-03-26T17:01:03.093Z",
+        "lastUpdated": "2026-03-26T17:01:03.093Z",
+        "gitCommitSha": "9fdada53b4cd91fec86cdadc4fdcb9bd43f10f62"
+      }
+    ]
+  }
+}
