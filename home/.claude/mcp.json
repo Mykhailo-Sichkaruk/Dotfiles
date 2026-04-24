@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "dbeaver": {
+      "command": "npx",
+      "args": ["-y", "dbeaver-mcp-server@latest"],
+      "env": {
+        "DBEAVER_DEBUG": "true",
+        "DBEAVER_TIMEOUT": "60000"
+      }
+    },
+    "shadcn": {
+      "command": "npx",
+      "args": ["shadcn@latest", "mcp"]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest", "--executablePath", "/home/ms/.nix-profile/bin/google-chrome-stable"]
+    }
+  }
+}

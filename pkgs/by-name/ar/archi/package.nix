@@ -15,12 +15,12 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "Archi";
-  version = "5.8.0";
+  version = "5.9.0";
 
   src = {
     "x86_64-linux" = fetchurl {
       url = "https://github.com/archimatetool/archi.io/releases/download/${finalAttrs.version}/Archi-Linux64-${finalAttrs.version}.tgz";
-      hash = "sha256-IZFYZRhby3ojBomX3uUuzDS8wQVDfi+XjM12Rz/iyec=";
+      hash = "sha256-0/3/EZw5upB0dvyhS0sfKqp7C4tc6vGDW+O9WU5iTc8=";
     };
   }.${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
 

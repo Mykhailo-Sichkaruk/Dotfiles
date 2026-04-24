@@ -1,0 +1,22 @@
+volume=80
+volume-max=200
+
+sub-auto=fuzzy
+sub-file-paths=ass:srt:sub:Sub:subs:Subs:subtitles:Subtitles
+slang=ru,en,sk
+no-sub-visibility
+sub-font="MesloLGS NF"
+
+script-opts=ytdl_hook-ytdl_path=yt-dlp
+
+cache=yes
+cache-secs=3600
+demuxer-max-bytes=500MiB
+cache-on-disk=yes
+cache-dir=~/.cache/mpv
+
+# fullscreen
+
+save-position-on-quit
+
+osc=no

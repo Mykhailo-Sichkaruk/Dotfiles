@@ -1,0 +1,25 @@
+{
+  "cachedStatsigGates": {
+    "tengu_prompt_suggestion": true,
+    "tengu_vscode_review_upsell": false
+  },
+  "cachedGrowthBookFeatures": {
+    "tengu_mcp_tool_search": false,
+    "tengu_disable_bypass_permissions_mode": false,
+    "strawberry_granite_flag": "OFF",
+    "persimmon_marble_flag": "OFF",
+    "tengu_tool_pear": false,
+    "tengu_thinkback": false,
+    "tengu_ant_attribution_header_new": true
+  },
+  "userID": "45998c1c34533cf18ffb4cbe6446f09ee19a80399d9b53a973a036ce5168a0c1",
+  "firstStartTime": "2026-01-05T17:31:57.078Z",
+  "sonnet45MigrationComplete": true,
+  "opus45MigrationComplete": true,
+  "thinkingMigrationComplete": true,
+  "githubRepoPaths": {
+    "mykhailo-sichkaruk/esp32-eink-schedule-display": [
+      "/home/ms/workspace/ESP32-EInk-schedule-display"
+    ]
+  }
+}
