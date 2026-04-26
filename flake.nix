@@ -66,7 +66,9 @@
             system
             ;
         };
-        playwrightBrowsers1217 = pkgs.callPackage ./pkgs/by-name/pl/playwright-browsers-1217/package.nix { };
+        playwrightBrowsers1217 =
+          pkgs.callPackage ./pkgs/by-name/pl/playwright-browsers-1217/package.nix
+            { };
       };
     in
     {
