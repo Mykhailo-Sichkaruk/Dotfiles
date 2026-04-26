@@ -6,7 +6,7 @@ let
     extraSpecialArgs = {
       inherit pkgs-unstable;
     };
-    module = import ../../../../home/.config/home-manager/programs/nixvim/minimal.nix;
+    module = import ./module.nix;
   };
 in
 pkgs.writeShellApplication {

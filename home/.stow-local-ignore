@@ -1,0 +1,30 @@
+# Managed by Home Manager modules; keep them in the repo as Nix sources for now,
+# but do not let Stow claim the live targets.
+^\.config/starship\.toml$
+^\.gitconfig$
+^\.ssh/config$
+^\.gtkrc-2\.0$
+^\.config/gtk-3\.0/settings\.ini$
+^gtk-3\.0/settings\.ini$
+^\.config/flameshot/flameshot\.ini$
+^\.config/flameshot($|/)
+^\.config/fish($|/)
+^\.config/alacritty($|/)
+^\.config/alacritty/alacritty\.toml$
+^\.config/alacritty/alacritty\.toml\..*\.bak$
+^\.config/btop($|/)
+^\.config/btop/btop\.conf$
+^\.config/dunst($|/)
+^\.config/dunst/dunstrc$
+^\.config/gtk-3\.0($|/)
+^\.config/mpv($|/)
+^\.config/mpv/mpv\.conf$
+^\.config/mpv/input\.conf$
+^\.config/mpv/script-opts($|/)
+^\.config/rofi($|/)
+^\.config/rofi/config\.rasi$
+^\.config/zathura($|/)
+^\.config/zathura/zathurarc$
+^\.newsboat($|/)
+^\.newsboat/urls$
+.*\.backup$

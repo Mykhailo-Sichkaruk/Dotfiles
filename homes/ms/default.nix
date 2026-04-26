@@ -10,44 +10,6 @@ let
     inherit pkgs;
     inherit pkgs-unstable;
   };
-
-  chromeEnabledFeatures = [
-    "Vulkan"
-    "DefaultANGLEVulkan"
-    "VulkanFromANGLE"
-  ];
-
-  chromeExtraFlags = [
-    "--enable-gpu-rasterization"
-    "--enable-zero-copy"
-  ]
-  ++ pkgs.lib.optionals (chromeEnabledFeatures != [ ]) [
-    "--enable-features=${pkgs.lib.concatStringsSep "," chromeEnabledFeatures}"
-  ];
-
-  chromeWithFlags =
-    let
-      baseChrome = pkgs.google-chrome;
-      wrapperFlags = pkgs.lib.concatMapStringsSep " " (
-        flag: "--add-flags ${pkgs.lib.escapeShellArg flag}"
-      ) chromeExtraFlags;
-    in
-    pkgs.symlinkJoin {
-      name = "google-chrome-with-flags";
-      paths = [ baseChrome ];
-      nativeBuildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        rm "$out/bin/google-chrome-stable"
-        makeWrapper ${baseChrome}/bin/google-chrome-stable "$out/bin/google-chrome-stable" \
-          ${wrapperFlags}
-
-        rm "$out/share/applications/google-chrome.desktop"
-        cp ${baseChrome}/share/applications/google-chrome.desktop \
-          "$out/share/applications/google-chrome.desktop"
-        substituteInPlace "$out/share/applications/google-chrome.desktop" \
-          --replace-fail "${baseChrome}/bin/google-chrome-stable" "$out/bin/google-chrome-stable"
-      '';
-    };
 in
 {
   imports = [
@@ -64,6 +26,8 @@ in
     ../../modules/home-manager/programs/rofi.nix
     ../../modules/home-manager/programs/dunst.nix
     ../../modules/home-manager/programs/flameshot.nix
+    ../../modules/home-manager/programs/fish.nix
+    ../../modules/home-manager/programs/chrome.nix
   ];
 
   home = {
@@ -75,6 +39,7 @@ in
       pkgs-unstable.claude-code
       pkgs-unstable.github-copilot-cli
       localPackages.archi
+      localPackages.nixvimMinimal
       localPackages.playwrightBrowsers1217
     ]
     ++ shellConfig
@@ -89,8 +54,6 @@ in
       drawio
       vimiv-qt
       pkgs.nur.repos."vieb-nix".vieb
-      # chromeWithFlags
-      google-chrome
       obs-studio
       youtube-music
       peek
@@ -157,58 +120,6 @@ in
     };
     i3status-rust.enable = true;
     home-manager.enable = true;
-    fish = {
-      enable = true;
-      interactiveShellInit = ''
-        set -gx PLAYWRIGHT_BROWSERS_PATH "${localPackages.playwrightBrowsers1217}";
-        set fish_cursor_insert line
-        set fish_greeting
-        fish_config theme choose "Dracula Official"
-        function fish_mode_prompt; end
-        alias rm="safe-rm"
-        alias e="eza -ab --group-directories-first --icons"
-        alias ex="eza -ab --group-directories-first --icons -lTL 1 --no-time --git --no-user"
-        alias ls="ls --color -L"
-        alias la="eza"
-        alias l="ex"
-        alias h="history 1 | grep"
-        alias rm="rm -rf"
-        alias cp="cp -r"
-        alias ..="cd .."
-        alias ...="cd ../.."
-        alias ....="cd ../../.."
-        alias .....="cd ../../../.."
-        alias cls="clear"
-        alias gitclown="git clone"
-        abbr --add nd nix develop
-        abbr --add nr sudo nixos-rebuild switch --flake /home/ms/newDot/Dotfiles#MS_NixLaptop
-
-        fish_vi_key_bindings
-        bind ctrl-space -M insert accept-autosuggestion
-        bind \cg forget_last_command
-        bind --mode insert \cg forget_last_command
-
-        zoxide init --cmd cd fish | source
-      '';
-      plugins = [
-        {
-          name = "grc";
-          inherit (pkgs.fishPlugins.grc) src;
-        }
-        {
-          name = "z";
-          inherit (pkgs.fishPlugins.z) src;
-        }
-        {
-          name = "fzf-fish";
-          inherit (pkgs.fishPlugins.fzf-fish) src;
-        }
-        {
-          name = "plugin-git";
-          inherit (pkgs.fishPlugins.plugin-git) src;
-        }
-      ];
-    };
   };
 
   xdg.mimeApps = {

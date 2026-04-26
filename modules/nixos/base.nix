@@ -80,8 +80,6 @@
       allowedTCPPorts = [
         80
         443
-        22
-        8080
       ];
     };
   };
@@ -116,9 +114,17 @@
     };
     blueman.enable = true;
     logind.settings.Login = {
+      HandlePowerKey = "hibernate";
+      HandlePowerKeyLongPress = "poweroff";
+      HandleHibernateKey = "hibernate";
       HandleLidSwitch = "hibernate";
       HandleLidSwitchDocked = "hibernate";
       HandleLidSwitchExternalPower = "hibernate";
+      PowerKeyIgnoreInhibited = "yes";
+      SuspendKeyIgnoreInhibited = "yes";
+      HibernateKeyIgnoreInhibited = "yes";
+      LidSwitchIgnoreInhibited = "yes";
+      RebootKeyIgnoreInhibited = "yes";
     };
     xserver = {
       videoDrivers = [ "amdgpu" ];
@@ -145,7 +151,16 @@
       enable = true;
       pulse.enable = true;
     };
-    libinput.enable = true;
+    libinput = {
+      enable = true;
+      touchpad = {
+        tapping = true;
+        tappingButtonMap = "lrm";
+        additionalOptions = ''
+          Option "ClickMethod" "buttonareas"
+        '';
+      };
+    };
     openssh.enable = true;
     pcscd.enable = true;
     udev.extraRules = ''
@@ -247,8 +262,7 @@
     ];
     variables = {
       TERMINAL = "alacritty";
-      GSETTINGS_SCHEMA_DIR =
-        "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/glib-2.0/schemas";
+      GSETTINGS_SCHEMA_DIR = "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/glib-2.0/schemas";
     };
     sessionVariables = {
       GTK_THEME = "Adwaita:dark";

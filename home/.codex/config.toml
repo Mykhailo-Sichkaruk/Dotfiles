@@ -1,5 +1,5 @@
 model = "gpt-5.5"
-model_reasoning_effort = "xhigh"
+model_reasoning_effort = "high"
 personality = "pragmatic"
 web_search = "cached"
 sandbox_mode = "workspace-write"
@@ -244,4 +244,4 @@ trust_level = "trusted"
 status_line = ["model-with-reasoning", "context-remaining", "context-used", "project-root", "git-branch", "five-hour-limit", "weekly-limit", "context-window-size", "used-tokens", "thread-title"]
 
 [tui.model_availability_nux]
-"gpt-5.5" = 1
+"gpt-5.5" = 2
