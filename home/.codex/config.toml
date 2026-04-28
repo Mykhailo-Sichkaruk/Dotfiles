@@ -1,5 +1,5 @@
 model = "gpt-5.5"
-model_reasoning_effort = "high"
+model_reasoning_effort = "xhigh"
 personality = "pragmatic"
 web_search = "cached"
 sandbox_mode = "workspace-write"
@@ -19,44 +19,61 @@ personality = true
 
 [mcp_servers.anki-mcp]
 command = "npx"
-args = [ "-y", "@ankimcp/anki-mcp-server", "--stdio" ]
-startup_timeout_sec = 80
+args = ["-y", "@ankimcp/anki-mcp-server", "--stdio"]
+startup_timeout_sec = 80.0
+
 [mcp_servers.anki-mcp.env]
 ANKI_CONNECT_URL = "http://localhost:8765"
+
+[mcp_servers.anki-mcp.tools]
 
 [mcp_servers.anki-mcp.tools.sync]
 approval_mode = "approve"
 
-[mcp_servers.postgres]
-command = "docker"
-args = [ "run", "-i", "--network=host", "--rm", "-e", "DATABASE_URI", "crystaldba/postgres-mcp", "--access-mode=unrestricted" ]
-enabled = false
-startup_timeout_sec = 80
+[mcp_servers.archi]
+url = "http://127.0.0.1:8765/mcp"
 
-[mcp_servers.postgres.env]
-DATABASE_URI = "postgresql://ms:password@127.0.0.1:5433/postgis"
+[mcp_servers.archi.tools]
 
-[mcp_servers.nixos]
-command = "nix"
-args = [ "run", "github:utensils/mcp-nixos", "--" ]
-startup_timeout_sec = 120
-
-[mcp_servers.nixos.tools.nix]
+[mcp_servers.archi.tools.folders]
 approval_mode = "approve"
 
-[mcp_servers.shadcn]
+[mcp_servers.archi.tools.list_script_engines]
+approval_mode = "approve"
+
+[mcp_servers.archi.tools.list_views]
+approval_mode = "approve"
+
+[mcp_servers.archi.tools.run_script]
+approval_mode = "approve"
+
+[mcp_servers.archi.tools.search]
+approval_mode = "approve"
+
+[mcp_servers.archi.tools.status]
+approval_mode = "approve"
+
+[mcp_servers.chrome-devtools]
+command = "/home/ms/.nix-profile/bin/npx"
+args = ["-y", "chrome-devtools-mcp@latest", "--autoConnect"]
+
+[mcp_servers.dbeaver]
 command = "npx"
-args = [ "@jpisnice/shadcn-ui-mcp-server" ]
-enabled = false
+args = ["-y", "dbeaver-mcp-server@latest"]
+
+[mcp_servers.dbeaver.env]
+DBEAVER_DEBUG = "true"
+DBEAVER_READ_ONLY = "true"
+DBEAVER_TIMEOUT = "100"
 
 [mcp_servers.duckduckgoSearch]
-enabled = false
 command = "uvx"
-args = [ "duckduckgo-mcp-server" ]
+args = ["duckduckgo-mcp-server"]
+enabled = false
 
 [mcp_servers.elasticsearch]
 command = "uvx"
-args = [ "elasticsearch-mcp-server" ]
+args = ["elasticsearch-mcp-server"]
 enabled = false
 
 [mcp_servers.elasticsearch.env]
@@ -64,84 +81,78 @@ ELASTICSEARCH_HOSTS = "https://localhost:9200"
 ELASTICSEARCH_PASSWORD = "password"
 ELASTICSEARCH_USERNAME = "elastic"
 
-[mcp_servers.prisma]
-command = "prisma"
-args = [ "mcp" ]
-enabled = false
-
-[mcp_servers.lsp]
-command = "mcp-language-server"
-args = [ "--workspace", ".", "--lsp", "typescript-language-server", "--", "--stdio" ]
-enabled = false
-startup_timeout_sec = 80
-tool_timeout_sec = 1800
-
-[mcp_servers.dbeaver]
-command = "npx"
-args = [ "-y", "dbeaver-mcp-server@latest" ]
-
-[mcp_servers.dbeaver.env]
-DBEAVER_DEBUG = "true"
-DBEAVER_READ_ONLY = "true"
-DBEAVER_TIMEOUT = "100"
-
 [mcp_servers.github]
 url = "https://api.githubcopilot.com/mcp/"
 bearer_token_env_var = "GITHUB_PAT_TOKEN"
-enabled = true
 
-[mcp_servers.sentry]
-url = "https://mcp.sentry.dev/mcp"
+[mcp_servers.lsp]
+command = "mcp-language-server"
+args = ["--workspace", ".", "--lsp", "typescript-language-server", "--", "--stdio"]
+enabled = false
+startup_timeout_sec = 80.0
+tool_timeout_sec = 1800.0
 
-[mcp_servers.chrome-devtools]
-enabled = true
-command = "/home/ms/.nix-profile/bin/npx"
-args = [ "-y", "chrome-devtools-mcp@latest", "--autoConnect" ]
+[mcp_servers.nixos]
+command = "nix"
+args = ["run", "github:utensils/mcp-nixos", "--"]
+startup_timeout_sec = 120.0
+
+[mcp_servers.nixos.tools]
+
+[mcp_servers.nixos.tools.nix]
+approval_mode = "approve"
 
 [mcp_servers.nvim]
-enabled = false
 command = "nix"
-args = [ "run", "github:utensils/mcp-nvim", "--" ]
+args = ["run", "github:utensils/mcp-nvim", "--"]
+enabled = false
 
-[mcp_servers.archi]
-url = "http://127.0.0.1:8765/mcp"
+[mcp_servers.obsidian]
+command = "npx"
+args = ["-y", "@mauricio.wolff/mcp-obsidian@latest", "/home/ms/Zettelkasten/"]
 
-[mcp_servers.archi.tools.status]
-approval_mode = "approve"
+[mcp_servers.openaiDeveloperDocs]
+url = "https://developers.openai.com/mcp"
 
-[mcp_servers.archi.tools.list_views]
-approval_mode = "approve"
-
-[mcp_servers.archi.tools.folders]
-approval_mode = "approve"
-
-[mcp_servers.archi.tools.search]
-approval_mode = "approve"
-
-[mcp_servers.archi.tools.list_script_engines]
-approval_mode = "approve"
-
-[mcp_servers.archi.tools.run_script]
+[mcp_servers.openaiDeveloperDocs.tools.fetch_openai_doc]
 approval_mode = "approve"
 
 [mcp_servers.playwright]
 command = "npx"
-args = [ "@playwright/mcp@latest" ]
+args = ["@playwright/mcp@latest"]
 
 [mcp_servers.playwright.env]
-PLAYWRIGHT_MCP_EXTENSION_TOKEN = "bI1lSd3m_MlDC4JrUStXzyNYTWjU27u6exdFBTUCMqA"
 PLAYWRIGHT_MCP_EXECUTABLE_PATH = "/home/ms/.nix-profile/bin/google-chrome-stable"
+PLAYWRIGHT_MCP_EXTENSION_TOKEN = "bI1lSd3m_MlDC4JrUStXzyNYTWjU27u6exdFBTUCMqA"
 
-[mcp_servers.obsidian]
-command = "npx"
-args = [ "-y", "@mauricio.wolff/mcp-obsidian@latest", "/home/ms/Zettelkasten/" ]
+[mcp_servers.postgres]
+command = "docker"
+args = ["run", "-i", "--network=host", "--rm", "-e", "DATABASE_URI", "crystaldba/postgres-mcp", "--access-mode=unrestricted"]
+enabled = false
+startup_timeout_sec = 80.0
 
-[mcp_servers.tauri-mcp-server]
+[mcp_servers.postgres.env]
+DATABASE_URI = "postgresql://ms:password@127.0.0.1:5433/postgis"
+
+[mcp_servers.prisma]
+command = "prisma"
+args = ["mcp"]
+enabled = false
+
+[mcp_servers.sentry]
+url = "https://mcp.sentry.dev/mcp"
+
+[mcp_servers.shadcn]
 command = "npx"
-args = [ "@hypothesi/tauri-mcp-server" ]
+args = ["@jpisnice/shadcn-ui-mcp-server"]
+enabled = false
 
 [mcp_servers.storybook-mcp]
 url = "http://localhost:6006/mcp"
+
+[mcp_servers.tauri-mcp-server]
+command = "npx"
+args = ["@hypothesi/tauri-mcp-server"]
 
 [projects."/home/ms/workspace/diploma/vyskumny-zamer"]
 trust_level = "untrusted"
@@ -237,11 +248,11 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [notice.model_migrations]
-"gpt-5.2" = "gpt-5.4"
+"gpt-5.2" = "gpt-5.5"
 "gpt-5.1-codex-max" = "gpt-5.2-codex"
 
 [tui]
 status_line = ["model-with-reasoning", "context-remaining", "context-used", "project-root", "git-branch", "five-hour-limit", "weekly-limit", "context-window-size", "used-tokens", "thread-title"]
 
 [tui.model_availability_nux]
-"gpt-5.5" = 2
+"gpt-5.5" = 4

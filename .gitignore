@@ -92,3 +92,5 @@ home/.codex/.credentials.json
 home/.codex/logs*
 home/.codex/state*
 home/.codex/session*
+home/.claude/plugins/
+home/.claude/skills/

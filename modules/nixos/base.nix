@@ -194,11 +194,11 @@
   users.users.ms = {
     home = "/home/ms";
     isNormalUser = true;
+    linger = true;
     extraGroups = [
       "dialout"
       "wheel"
       "video"
-      "docker"
       "render"
       "transmission"
       "input"

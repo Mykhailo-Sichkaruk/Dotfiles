@@ -15,7 +15,8 @@
       cache-secs = 3600;
       demuxer-max-bytes = "500MiB";
       cache-on-disk = true;
-      cache-dir = "~/.cache/mpv";
+      # demuxer-cache-dir = "~/.cache/mpv";
+      # cache-default = 4000000;
       save-position-on-quit = true;
       osc = false;
     };
