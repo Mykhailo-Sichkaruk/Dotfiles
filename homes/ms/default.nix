@@ -44,6 +44,7 @@ in
     ]
     ++ shellConfig
     ++ (with pkgs; [
+      audacity
       libreoffice-fresh
       playerctl
       obsidian

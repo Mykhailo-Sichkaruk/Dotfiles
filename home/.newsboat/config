@@ -32,5 +32,4 @@ feed-sort-order latestunread
 auto-reload yes
 reload-time 60
 save-path "~/News"
-browser vieb
 macro v pipe-to "urlview"

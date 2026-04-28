@@ -1,4 +1,10 @@
+{ pkgs, ... }:
+
 let
+  openBrowser = pkgs.writeShellScriptBin "newsboat-open-browser" ''
+    ${pkgs.util-linux}/bin/setsid -f vieb "$@" >/dev/null 2>&1
+  '';
+
   plainFeeds = [
     "https://bcantrill.dtrace.org/index.xml"
     "https://nullprogram.com/feed/"
@@ -102,7 +108,7 @@ in
 {
   programs.newsboat = {
     enable = true;
-    browser = "vieb";
+    browser = "${openBrowser}/bin/newsboat-open-browser";
     autoReload = true;
     reloadTime = 60;
     extraConfig = builtins.readFile ../../../home/.newsboat/config;
@@ -111,7 +117,7 @@ in
       onCalendar = "daily";
     };
 
-    urls = [
+    urls = map (url: { inherit url; }) plainFeeds ++ [
       {
         url = "https://nodejs.org/en/feed/blog.xml";
         title = "Node.js Official blog";
@@ -131,9 +137,6 @@ in
         title = "v8";
         tags = [ "js" ];
       }
-    ]
-    ++ map (url: { inherit url; }) plainFeeds
-    ++ [
       {
         url = "https://steipete.me/rss.xml";
         tags = [ "AI-engineering" ];
