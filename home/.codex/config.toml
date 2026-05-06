@@ -16,6 +16,9 @@ shell_snapshot = true
 apps = true
 steer = true
 personality = true
+terminal_resize_reflow = true
+memories = true
+prevent_idle_sleep = true
 
 [mcp_servers.anki-mcp]
 command = "npx"
@@ -31,7 +34,7 @@ ANKI_CONNECT_URL = "http://localhost:8765"
 approval_mode = "approve"
 
 [mcp_servers.archi]
-url = "http://127.0.0.1:8765/mcp"
+url = "http://127.0.0.1:8766/mcp"
 
 [mcp_servers.archi.tools]
 
@@ -110,6 +113,15 @@ enabled = false
 [mcp_servers.obsidian]
 command = "npx"
 args = ["-y", "@mauricio.wolff/mcp-obsidian@latest", "/home/ms/Zettelkasten/"]
+
+[mcp_servers.obsidian.tools.get_vault_stats]
+approval_mode = "approve"
+
+[mcp_servers.obsidian.tools.read_multiple_notes]
+approval_mode = "approve"
+
+[mcp_servers.obsidian.tools.list_directory]
+approval_mode = "approve"
 
 [mcp_servers.openaiDeveloperDocs]
 url = "https://developers.openai.com/mcp"
@@ -247,6 +259,15 @@ trust_level = "trusted"
 [projects."/home/ms/workspace/plugins"]
 trust_level = "trusted"
 
+[projects."/home/ms/workspace/plugin-sdk"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/math_prepare"]
+trust_level = "trusted"
+
+[notice]
+fast_default_opt_out = true
+
 [notice.model_migrations]
 "gpt-5.2" = "gpt-5.5"
 "gpt-5.1-codex-max" = "gpt-5.2-codex"
@@ -256,3 +277,12 @@ status_line = ["model-with-reasoning", "context-remaining", "context-used", "pro
 
 [tui.model_availability_nux]
 "gpt-5.5" = 4
+
+[plugins."expo@openai-curated"]
+enabled = true
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[plugins."superpowers@openai-curated"]
+enabled = true

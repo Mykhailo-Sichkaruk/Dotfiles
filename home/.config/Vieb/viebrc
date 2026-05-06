@@ -122,7 +122,7 @@ set nativenotification=always
 set nativetheme=dark
 set newtaburl=
 set notificationduration=6000
-set notificationforpermissions=all
+set notificationforpermissions=none
 set notificationforsystemcommands=errors
 set notificationlimitsmall=3
 set notificationposition=bottomright
@@ -200,6 +200,7 @@ set translateapi=auto
 set translatekey=
 set translatelang=en-us
 set translateurl=https://api-free.deepl.com/v2/
+set useragentsys=auto
 set userscript
 set userstyle
 set vimcommand=nvim
@@ -237,18 +238,12 @@ imap <C-e> <editWithVim>
 mmap <C-c> <p.copyText>
 nmap <C-l> <nextTab>
 nmap <C-p> <:pin>
-nunmap <Esc>
 nmap = <zoomReset>
-nunmap [
-nunmap ]
 nmap gt <toCommandMode>buffer<Space>
 nmap gU <openNewTabWithCurrentUrl><CR><toParentUrl>
 nmap J <p.scrollDown>
 nmap K <p.scrollUp>
 nmap O <:tabnew><toExploreMode>
-nunmap p
-nunmap {
-nunmap }
 nmap <A-1> <:b 0>
 nmap <A-2> <:b 1>
 nmap <A-3> <:b 2>
@@ -291,6 +286,12 @@ nmap <A-z> <:buffer #>
 nmap af <:set favoritepages+=<useCurrentUrl>>
 nmap adb <:set darkreaderblocklist+=<useCurrentDomain>>
 nmap sn <:tabnew https://search.nixos.org/packages>
+nunmap <Esc>
+nunmap [
+nunmap ]
+nunmap p
+nunmap {
+nunmap }
 pmap e <p.moveFastRight>
 pmap H <p.scrollLeft>
 pmap L <p.scrollRight>

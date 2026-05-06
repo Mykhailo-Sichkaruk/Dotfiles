@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-cuda.url = "github:nixos/nixpkgs/nixos-25.11-small";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nur.url = "github:nix-community/NUR";
     nix-auth.url = "github:numtide/nix-auth";
@@ -16,9 +17,17 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  nixConfig = {
+    extra-substituters = [ "https://nix-community.cachix.org" ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
+
   outputs =
     {
       nixpkgs,
+      nixpkgs-cuda,
       nixpkgs-unstable,
       nur,
       nix-auth,
@@ -42,15 +51,32 @@
         inherit system;
         config.allowUnfree = true;
       };
+      pkgs-cuda = import nixpkgs-cuda {
+        inherit system;
+        config = {
+          allowUnfree = true;
+          cudaSupport = true;
+          cudaCapabilities = [ "8.6" ];
+        };
+      };
       pkgs-nix-auth = import nix-auth {
         inherit system;
       };
+      cudaRuntimeLibraryPath = pkgs.lib.makeLibraryPath [
+        pkgs-cuda.cudaPackages.cuda_cudart
+        pkgs-cuda.cudaPackages.libcublas
+      ];
+      archiMcpPort = 8766;
       localPackages = rec {
-        archi = pkgs.callPackage ./pkgs/by-name/ar/archi/package.nix { };
+        archi = pkgs.callPackage ./pkgs/by-name/ar/archi/package.nix {
+          inherit archiMcpPort;
+        };
         jarchi = pkgs.callPackage ./pkgs/by-name/ja/jarchi/package.nix {
           inherit archi;
         };
-        archiMcpPlugin = pkgs.callPackage ./pkgs/by-name/ar/archi-mcp-plugin/package.nix { };
+        archiMcpPlugin = pkgs.callPackage ./pkgs/by-name/ar/archi-mcp-plugin/package.nix {
+          port = archiMcpPort;
+        };
         archiDropins = pkgs.symlinkJoin {
           name = "archi-dropins";
           paths = [
@@ -77,21 +103,27 @@
         playwright-browsers-1217 = localPackages.playwrightBrowsers1217;
       };
 
-      devShells.${system}.playwright-1217 = pkgs.mkShell {
-        packages = [
-          pkgs.nodejs
-          pkgs.yarn
-          localPackages.playwrightBrowsers1217
-        ];
+      devShells.${system} = {
+        playwright-1217 = pkgs.mkShell {
+          packages = [
+            pkgs.nodejs
+            pkgs.yarn
+            localPackages.playwrightBrowsers1217
+          ];
 
-        shellHook = ''
-          export PLAYWRIGHT_BROWSERS_PATH=${localPackages.playwrightBrowsers1217}
-        '';
+          shellHook = ''
+            export PLAYWRIGHT_BROWSERS_PATH=${localPackages.playwrightBrowsers1217}
+          '';
+        };
+
       };
 
-      apps.${system}.nixvim-minimal = {
-        type = "app";
-        program = "${localPackages.nixvimMinimal}/bin/nixvim-minimal";
+      apps.${system} = {
+        nixvim-minimal = {
+          type = "app";
+          program = "${localPackages.nixvimMinimal}/bin/nixvim-minimal";
+        };
+
       };
 
       nixosConfigurations.MS_NixLaptop = nixpkgs.lib.nixosSystem {
