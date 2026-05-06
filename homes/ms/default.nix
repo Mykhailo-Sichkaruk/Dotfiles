@@ -66,9 +66,6 @@ in
       slack
       dbeaver-bin
       pipx
-      remmina
-      antigravity
-      bubblewrap
       libnotify
       keepassxc
       openvpn3

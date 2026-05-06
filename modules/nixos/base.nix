@@ -4,12 +4,27 @@
   ...
 }:
 
+let
+  speechPython = pkgs.python312.withPackages (
+    ps: with ps; [
+      faster-whisper
+      noisereduce
+    ]
+  );
+in
 {
-  nixpkgs.config.allowUnfree = true;
   nix = {
     optimise.automatic = true;
     settings = {
+      extra-substituters = [ "https://nix-community.cachix.org" ];
+      extra-trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+      download-buffer-size = 6710886400;
+      preallocate-contents = true;
+      max-jobs = "auto";
       cores = 7;
+      trusted-users = [ "ms" ];
       experimental-features = [
         "nix-command"
         "flakes"
@@ -240,6 +255,8 @@
 
   environment = {
     systemPackages = with pkgs; [
+      cargo
+      deepfilternet
       man-pages
       man-pages-posix
       stdmanpages
@@ -259,6 +276,12 @@
       pulsemixer
       xdotool
       lenovo-legion
+      audacity
+      ffmpeg
+      noisetorch
+      openai-whisper
+      speechPython
+      whisper-cpp
     ];
     variables = {
       TERMINAL = "alacritty";

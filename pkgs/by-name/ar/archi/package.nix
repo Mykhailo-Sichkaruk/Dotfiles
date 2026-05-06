@@ -11,6 +11,7 @@
   wrapGAppsHook3,
   copyDesktopItems,
   makeDesktopItem,
+  archiMcpPort ? null,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -52,6 +53,7 @@ stdenv.mkDerivation (finalAttrs: {
         ]
       } \
       --set WEBKIT_DISABLE_DMABUF_RENDERER 1 \
+      ${lib.optionalString (archiMcpPort != null) "--set ARCHI_MCP_PORT ${toString archiMcpPort} \\"}
       --prefix PATH : ${jdk}/bin
 
     install -Dm444 icon.xpm "$out/share/icons/hicolor/256x256/apps/archi.xpm"
