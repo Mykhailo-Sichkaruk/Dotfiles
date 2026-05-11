@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Version=1.0
-Name=RQuickShare
-Comment=RQuickSharestartup script
-Exec=/nix/store/8x9b084s6jmfa8i22l5akk6vpv06z6lz-rquickshare-0.11.5/bin/.rquickshare-wrapped 
-StartupNotify=false
-Terminal=false

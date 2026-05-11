@@ -3,6 +3,6 @@ Type=Application
 Version=1.0
 Name=electron
 Comment=electronstartup script
-Exec=/nix/store/rch0lw6p27vdhdayrjs60ldvf90gdgln-electron-unwrapped-40.9.2/libexec/electron/electron
+Exec=/nix/store/6cqqqv02xh3by3fify5x846wx75iiib8-electron-unwrapped-40.9.2/libexec/electron/electron
 StartupNotify=false
 Terminal=false

@@ -30,6 +30,14 @@
         "installedAt": "2026-03-23T17:51:12.166Z",
         "lastUpdated": "2026-04-24T09:32:37.613Z",
         "gitCommitSha": "c2d8009ff75f76bce1ec4cf79c2467b50d81725e"
+      },
+      {
+        "scope": "user",
+        "installPath": "/home/ms/.claude/plugins/cache/claude-plugins-official/chrome-devtools-mcp/0.22.0",
+        "version": "0.22.0",
+        "installedAt": "2026-05-11T08:02:54.360Z",
+        "lastUpdated": "2026-05-11T08:02:54.360Z",
+        "gitCommitSha": "a1612be8e01401cf1711c64bc2ef5da5763ba956"
       }
     ],
     "starship-claude@starship-claude": [
@@ -41,6 +49,44 @@
         "installedAt": "2026-03-26T17:01:03.093Z",
         "lastUpdated": "2026-03-26T17:01:03.093Z",
         "gitCommitSha": "9fdada53b4cd91fec86cdadc4fdcb9bd43f10f62"
+      }
+    ],
+    "superpowers@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/home/ms/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0",
+        "version": "5.1.0",
+        "installedAt": "2026-05-11T08:02:52.799Z",
+        "lastUpdated": "2026-05-11T08:02:52.799Z",
+        "gitCommitSha": "f2cbfbefebbfef77321e4c9abc9e949826bea9d7"
+      }
+    ],
+    "code-review@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/home/ms/.claude/plugins/cache/claude-plugins-official/code-review/unknown",
+        "version": "unknown",
+        "installedAt": "2026-05-11T08:02:52.843Z",
+        "lastUpdated": "2026-05-11T08:02:52.843Z"
+      }
+    ],
+    "security-guidance@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/home/ms/.claude/plugins/cache/claude-plugins-official/security-guidance/unknown",
+        "version": "unknown",
+        "installedAt": "2026-05-11T08:02:52.889Z",
+        "lastUpdated": "2026-05-11T08:02:52.889Z"
+      }
+    ],
+    "agent-skills@addy-agent-skills": [
+      {
+        "scope": "user",
+        "installPath": "/home/ms/.claude/plugins/cache/addy-agent-skills/agent-skills/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-05-11T08:13:04.921Z",
+        "lastUpdated": "2026-05-11T08:13:04.921Z",
+        "gitCommitSha": "3ff4b518b3cd3077ca27cf883aa21d21faf53802"
       }
     ]
   }
