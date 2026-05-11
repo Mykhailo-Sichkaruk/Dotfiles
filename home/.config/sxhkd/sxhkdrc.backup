@@ -1,0 +1,34 @@
+# brightness control
+XF86MonBrightness{Up,Down}
+  light -{A,U} 10 
+ 
+# volume control
+XF86Audio{Raise,Lower}Volume
+  pulsemixer --change-volume {+,-}5 --max-volume 100
+
+# volume toggle mute
+XF86AudioMute
+  pulsemixer --toggle-mute 
+
+XF86Audio{Next,Prev}
+  playerctl --all-players {next,previous}
+
+XF86AudioPlay
+  playerctl --all-players play-pause
+
+XF86AudioStop
+  playerctl --all-players stop
+
+XF86AudioRewind
+  playerctl --all-players play
+
+XF86AudioPause
+  playerctl --all-players play-pause
+
+# screenshot
+Print
+  flameshot gui
+
+ctrl + Print
+   flameshot full
+

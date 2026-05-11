@@ -34,6 +34,7 @@ ANKI_CONNECT_URL = "http://localhost:8765"
 approval_mode = "approve"
 
 [mcp_servers.archi]
+enabled = false
 url = "http://127.0.0.1:8766/mcp"
 
 [mcp_servers.archi.tools]
@@ -152,6 +153,7 @@ args = ["mcp"]
 enabled = false
 
 [mcp_servers.sentry]
+enabled = false
 url = "https://mcp.sentry.dev/mcp"
 
 [mcp_servers.shadcn]
@@ -160,6 +162,7 @@ args = ["@jpisnice/shadcn-ui-mcp-server"]
 enabled = false
 
 [mcp_servers.storybook-mcp]
+enabled = false
 url = "http://localhost:6006/mcp"
 
 [mcp_servers.tauri-mcp-server]
