@@ -5,44 +5,31 @@
   ...
 }:
 
-let
-  shellConfig = import ./programs/home/shell.nix {
-    inherit pkgs;
-    inherit pkgs-unstable;
-  };
-in
 {
   imports = [
+    ./home-portable.nix
     ./programs/home/gui.nix
-    ./programs/home/starship.nix
-    ./programs/home/git.nix
-    ./programs/home/ssh.nix
     ./programs/home/gtk.nix
     ./programs/home/newsboat.nix
     ./programs/home/alacritty.nix
     ./programs/home/mpv.nix
     ./programs/home/zathura.nix
-    ./programs/home/btop.nix
     ./programs/home/rofi.nix
     ./programs/home/dunst.nix
     ./programs/home/flameshot.nix
-    ./programs/home/fish.nix
     ./programs/home/chrome.nix
   ];
 
   home = {
     username = "ms";
     homeDirectory = "/home/ms";
-    stateVersion = "25.11";
     packages = [
       pkgs-unstable.vscode
       pkgs-unstable.claude-code
       pkgs-unstable.github-copilot-cli
       localPackages.archi
-      localPackages.nixvimMinimal
       localPackages.playwrightBrowsers1217
     ]
-    ++ shellConfig
     ++ (with pkgs; [
       audacity
       libreoffice-fresh
@@ -108,15 +95,7 @@ in
       sync.syncMedia = true;
     };
     keychain.enable = true;
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-    };
     i3status-rust.enable = true;
-    home-manager.enable = true;
   };
 
   xdg.mimeApps = {

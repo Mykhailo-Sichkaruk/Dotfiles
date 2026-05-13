@@ -70,8 +70,29 @@
           system
           ;
       };
+
+      homeSpecialArgs = {
+        inherit pkgs-unstable localPackages;
+        playwrightBrowsers = null;
+      };
+
+      laptopHomeSpecialArgs = homeSpecialArgs // {
+        playwrightBrowsers = localPackages.playwrightBrowsers1217;
+      };
     in
     {
+      homeConfigurations.portable = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = homeSpecialArgs;
+        modules = [
+          ./home-portable.nix
+          {
+            home.username = "ms";
+            home.homeDirectory = "/home/ms";
+          }
+        ];
+      };
+
       nixosConfigurations.MS_NixLaptop = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
@@ -86,9 +107,7 @@
           ./nixos.nix
           home-manager.nixosModules.home-manager
           {
-            home-manager.extraSpecialArgs = {
-              inherit pkgs-unstable localPackages;
-            };
+            home-manager.extraSpecialArgs = laptopHomeSpecialArgs;
             home-manager.users.ms = import ./home-manager.nix;
           }
         ];

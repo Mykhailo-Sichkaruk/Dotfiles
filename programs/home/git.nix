@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.git = {
@@ -10,11 +10,11 @@
     settings = {
       credential."https://github.com".helper = [
         ""
-        "!/home/ms/.nix-profile/bin/gh auth git-credential"
+        "!${pkgs.gh}/bin/gh auth git-credential"
       ];
       credential."https://gist.github.com".helper = [
         ""
-        "!/home/ms/.nix-profile/bin/gh auth git-credential"
+        "!${pkgs.gh}/bin/gh auth git-credential"
       ];
       user = {
         name = "Mykhailo Sichkaruk";

@@ -1,9 +1,15 @@
 {
+  lib,
   pkgs,
-  localPackages,
+  playwrightBrowsers ? null,
   ...
 }:
 
+let
+  playwrightBrowsersPath = lib.optionalString (playwrightBrowsers != null) ''
+    set -gx PLAYWRIGHT_BROWSERS_PATH "${playwrightBrowsers}"
+  '';
+in
 {
   programs.fish = {
     enable = true;
@@ -44,7 +50,7 @@
     };
 
     interactiveShellInit = ''
-      set -gx PLAYWRIGHT_BROWSERS_PATH "${localPackages.playwrightBrowsers1217}"
+      ${playwrightBrowsersPath}
       set fish_cursor_insert line
       set fish_greeting
 
