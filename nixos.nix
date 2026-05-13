@@ -153,7 +153,7 @@ in
         "nvidia"
       ];
       xkb.layout = "us,ua";
-      xkb.options = "caps:escape,grp:alt_shift_toggle,rctrl:compose";
+      xkb.options = "caps:escape,grp:alt_shift_toggle,compose:rctrl";
       autoRepeatInterval = 50;
       autoRepeatDelay = 250;
       enable = true;
