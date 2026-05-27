@@ -96,8 +96,11 @@
       sync.autoSync = true;
       sync.syncMedia = true;
     };
-    keychain.enable = true;
     i3status-rust.enable = true;
+    keychain = {
+      enable = true;
+      keys = [ "bos_class_vm" ];
+    };
   };
 
   xdg.mimeApps = {
