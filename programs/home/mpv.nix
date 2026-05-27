@@ -54,45 +54,6 @@
       CTRL+p script-message osc-playlist
 
 
-      # ru
-
-      р seek -5
-      Р seek -60
-      д seek 5
-      Д seek 60
-      о add volume -2
-      О add volume -10
-      л add volume 2
-      Л add volume 10
-
-      Alt+о cycle sub
-      Alt+О cycle sub down
-      Alt+д ab-loop                              # Set/clear A-B loop points
-      Alt+Д cycle-values loop-file "inf" "no"    # toggle infinite looping
-
-      а cycle fullscreen                     # toggle fullscreen
-
-      й quit
-      Й quit-watch-later
-      й {encode} quit 4
-
-      Ю playlist-next
-      Б playlist-prev
-
-      з cycle pause                          # toggle pause/playback mode
-      Щ no-osd cycle-values osd-level 3 1    # cycle through OSD mode
-      щ show-progress
-      З show-progress
-      ш script-binding stats/display-stats
-      Ш script-binding stats/display-stats-toggle
-
-      х multiply speed 1/1.1                 # scale playback speed
-      ъ multiply speed 1.1
-      Х multiply speed 0.5
-      Ъ multiply speed 2.0
-
-
-
       WHEEL_UP      ignore
       WHEEL_DOWN    ignore
       WHEEL_LEFT    ignore

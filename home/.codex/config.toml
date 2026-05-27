@@ -268,6 +268,9 @@ trust_level = "trusted"
 [projects."/home/ms/workspace/math_prepare"]
 trust_level = "trusted"
 
+[projects."/home/ms/workspace/school/bos_i"]
+trust_level = "trusted"
+
 [notice]
 fast_default_opt_out = true
 
@@ -288,4 +291,7 @@ enabled = true
 enabled = true
 
 [plugins."superpowers@openai-curated"]
+enabled = true
+
+[plugins."codex-security@openai-curated"]
 enabled = true

@@ -25,18 +25,18 @@
       {
         "scope": "project",
         "projectPath": "/home/ms/workspace/unit/clinic-control-dashboard",
-        "installPath": "/home/ms/.claude/plugins/cache/claude-plugins-official/chrome-devtools-mcp/0.22.0",
-        "version": "0.22.0",
+        "installPath": "/home/ms/.claude/plugins/cache/claude-plugins-official/chrome-devtools-mcp/1.0.1",
+        "version": "1.0.1",
         "installedAt": "2026-03-23T17:51:12.166Z",
-        "lastUpdated": "2026-04-24T09:32:37.613Z",
+        "lastUpdated": "2026-05-21T00:58:19.283Z",
         "gitCommitSha": "c2d8009ff75f76bce1ec4cf79c2467b50d81725e"
       },
       {
         "scope": "user",
-        "installPath": "/home/ms/.claude/plugins/cache/claude-plugins-official/chrome-devtools-mcp/0.22.0",
-        "version": "0.22.0",
+        "installPath": "/home/ms/.claude/plugins/cache/claude-plugins-official/chrome-devtools-mcp/1.0.1",
+        "version": "1.0.1",
         "installedAt": "2026-05-11T08:02:54.360Z",
-        "lastUpdated": "2026-05-11T08:02:54.360Z",
+        "lastUpdated": "2026-05-21T00:58:21.002Z",
         "gitCommitSha": "a1612be8e01401cf1711c64bc2ef5da5763ba956"
       }
     ],

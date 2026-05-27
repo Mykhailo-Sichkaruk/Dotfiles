@@ -151,6 +151,21 @@ in
     };
 
     urls = map (url: { inherit url; }) plainFeeds ++ [
+      { 
+        url = "https://joyeecheung.github.io/blog/atom.xml";
+        title = "Joyee Cheung";
+        tags = [ "nodejs" "v8" ];
+      }
+      {
+        url = "https://fosstodon.org/@rauschma.rss";
+        title = "Dr Axel";
+        tags = [ "js" ];
+      }
+      {
+        url = "https://www.jasnell.me/atom.xml";
+        title = "Jasnell's blog";
+        tags = [ "nodejs" ];
+      }
       {
         url = "https://addyosmani.com/rss.xml";
         title = "Addy Osmani";
