@@ -5,7 +5,7 @@ with pkgs;
   dotenv-linter
   lua
   prettierd
-  nodePackages_latest.prettier
+  prettier
   yamllint
   gcc
   statix
@@ -13,7 +13,7 @@ with pkgs;
   nixd
   nixfmt-rfc-style
   lua-language-server
-  nodePackages.typescript-language-server
+  typescript-language-server
   typescript-go
   nodejs_24
   python3

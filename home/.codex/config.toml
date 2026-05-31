@@ -19,6 +19,7 @@ personality = true
 terminal_resize_reflow = true
 memories = true
 prevent_idle_sleep = true
+mentions_v2 = true
 
 [mcp_servers.anki-mcp]
 command = "npx"
@@ -269,6 +270,12 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/home/ms/workspace/school/bos_i"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/school/diploma/vyskumny-zamer"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/school/diploma"]
 trust_level = "trusted"
 
 [notice]

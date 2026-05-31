@@ -42,7 +42,7 @@
       drawio
       vimiv-qt
       pkgs.nur.repos."vieb-nix".vieb
-      youtube-music
+      pear-desktop
       peek
       discord
       telegram-desktop

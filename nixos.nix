@@ -268,7 +268,6 @@ in
     nix-ld.enable = true;
     openvpn3.enable = true;
     fish.enable = true;
-    light.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
@@ -342,6 +341,6 @@ in
       enable = false;
       allowReboot = false;
     };
-    stateVersion = "25.11";
+    stateVersion = "26.05";
   };
 }

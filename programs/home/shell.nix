@@ -21,7 +21,6 @@ vimPackages
   curl
   findutils
   powertop
-  neofetch
   offlineimap
   bat
   tree

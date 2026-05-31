@@ -219,6 +219,7 @@ set windowtitle="%app - %title"
 
 " Mappings
 map <A-h> <previousTab>
+map <C-c> <p.copyText>
 map <A-l> <nextTab>
 cmap <C-j> <commandHistoryPrevious>
 cmap <C-k> <commandHistoryNext>
