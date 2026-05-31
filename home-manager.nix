@@ -44,7 +44,7 @@
       vimiv-qt
       pkgs.nur.repos."vieb-nix".vieb
       obs-studio
-      youtube-music
+      pear-desktop
       peek
       discord
       telegram-desktop

@@ -44,7 +44,7 @@
     luaformatter
     nixfmt-rfc-style
     nodejs
-    nodePackages_latest.prettier
+    prettier
     prettierd
     ripgrep
     ruff

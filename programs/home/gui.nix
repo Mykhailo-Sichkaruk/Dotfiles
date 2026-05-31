@@ -182,8 +182,7 @@ in
     enable = true;
     extraConfig = ''
       # brightness control
-      XF86MonBrightness{Up,Down}
-        ${pkgs.light}/bin/light -{A,U} 10
+      # XF86MonBrightness{Up,Down}
 
       # volume control
       XF86Audio{Raise,Lower}Volume
