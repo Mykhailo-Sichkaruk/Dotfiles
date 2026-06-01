@@ -307,14 +307,14 @@ in
       pulsemixer
       xdotool
       lenovo-legion
-      audacity
       ffmpeg
-      noisetorch
+      # noisetorch
       openai-whisper
-      speechPython
-      whisper-cpp
-      nvtopPackages.full
+      # speechPython
+      # whisper-cpp
+      # nvtopPackages.full
       pciutils
+      brightnessctl
     ];
     variables = {
       TERMINAL = "alacritty";

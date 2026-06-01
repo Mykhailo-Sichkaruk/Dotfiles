@@ -2,6 +2,7 @@
   alsa-lib,
   at-spi2-atk,
   autoPatchelfHook,
+  expat,
   fetchzip,
   glib,
   libXcomposite,
@@ -37,6 +38,7 @@ stdenv.mkDerivation {
   buildInputs = [
     alsa-lib
     at-spi2-atk
+    expat
     glib
     libXcomposite
     libXdamage
