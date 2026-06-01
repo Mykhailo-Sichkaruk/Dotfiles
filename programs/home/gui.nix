@@ -8,6 +8,7 @@
     extraConfig = ''
       # brightness control
       # XF86MonBrightness{Up,Down}
+        ${pkgs.brightnessctl}/bin/brightnessctl set {+5%,-5%}
 
       # volume control
       XF86Audio{Raise,Lower}Volume

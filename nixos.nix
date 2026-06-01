@@ -306,12 +306,12 @@ in
       pulsemixer
       xdotool
       lenovo-legion
-      audacity
       ffmpeg
-      noisetorch
-      speechPython
-      nvtopPackages.full
+      # noisetorch
+      # speechPython
+      # nvtopPackages.full
       pciutils
+      brightnessctl
     ];
     variables = {
       TERMINAL = "alacritty";

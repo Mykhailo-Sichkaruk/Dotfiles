@@ -26,13 +26,10 @@
     packages = [
       pkgs-unstable.vscode
       pkgs-unstable.claude-code
-      pkgs-unstable.github-copilot-cli
       localPackages.archi
       localPackages.playwrightBrowsers1217
     ]
     ++ (with pkgs; [
-      audacity
-      libreoffice-fresh
       playerctl
       obsidian
       yt-dlp
@@ -51,7 +48,14 @@
       mattermost-desktop
       slack
       dbeaver-bin
-      pipx
+      # packaging 26.1 changed PEP 508 URL formatting; pipx 1.8.0 still asserts the old spacing.
+      # pipx
+      (pipx.overridePythonAttrs (old: {
+        disabledTests = (old.disabledTests or [ ]) ++ [
+          "test_fix_package_name"
+          "test_parse_specifier_for_metadata"
+        ];
+      }))
       libnotify
       keepassxc
       openvpn3
