@@ -17,7 +17,23 @@
 
     cmp-nvim-lsp.enable = true;
     cmp-path.enable = true;
-    comment.enable = true;
+    comment = {
+      enable = true;
+      settings = {
+        toggler = {
+          line = "<C-/>";
+          block = "<C-;>";
+        };
+        opleader = {
+          line = "<C-/>";
+          block = "<C-;>";
+        };
+        mappings = {
+          basic = true;
+          extra = false;
+        };
+      };
+    };
 
     copilot-lua = {
       enable = true;
@@ -53,6 +69,7 @@
     };
 
     diffview.enable = true;
+    mini-bufremove.enable = true;
 
     gitsigns = {
       enable = true;

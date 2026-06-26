@@ -41,12 +41,12 @@
     fd
     gh
     git
-    luaformatter
-    nixfmt-rfc-style
+    nixfmt
     nodejs
     prettier
     prettierd
     ripgrep
     ruff
+    stylua
   ];
 }

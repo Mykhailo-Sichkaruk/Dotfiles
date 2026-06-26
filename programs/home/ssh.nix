@@ -5,32 +5,32 @@
     enable = true;
     enableDefaultConfig = false;
 
-    matchBlocks = {
+    settings = {
       "bos-jump" = {
-        hostname = "bos-2025.ipsec.info";
-        user = "xsichkaruk";
-        identityFile = "~/.ssh/bos_class_vm";
-        identitiesOnly = true;
-        addKeysToAgent = "yes";
-        forwardAgent = false;
+        HostName = "bos-2025.ipsec.info";
+        User = "xsichkaruk";
+        IdentityFile = "~/.ssh/bos_class_vm";
+        IdentitiesOnly = true;
+        AddKeysToAgent = "yes";
+        ForwardAgent = false;
       };
 
       "bos-vm" = {
-        hostname = "bos-xsichkaruk.local";
-        user = "user";
-        proxyJump = "bos-jump";
-        identityFile = "~/.ssh/bos_class_vm";
-        identitiesOnly = true;
-        addKeysToAgent = "yes";
-        forwardAgent = false;
+        HostName = "bos-xsichkaruk.local";
+        User = "user";
+        ProxyJump = "bos-jump";
+        IdentityFile = "~/.ssh/bos_class_vm";
+        IdentitiesOnly = true;
+        AddKeysToAgent = "yes";
+        ForwardAgent = false;
 
-        controlMaster = "auto";
-        controlPath = "~/.ssh/master-%r@%n:%p";
-        controlPersist = "4h";
+        ControlMaster = "auto";
+        ControlPath = "~/.ssh/master-%r@%n:%p";
+        ControlPersist = "4h";
       };
 
       "*" = {
-        forwardAgent = false;
+        ForwardAgent = false;
       };
     };
   };

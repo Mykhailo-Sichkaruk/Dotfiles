@@ -6,6 +6,7 @@
       bash
       css
       diff
+      graphql
       html
       javascript
       jsdoc

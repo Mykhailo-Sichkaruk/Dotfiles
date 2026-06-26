@@ -21,7 +21,11 @@
     {
       mode = "n";
       key = "<leader>x";
-      action = "<cmd>bdelete<CR>";
+      action.__raw = ''
+        function()
+          require("mini.bufremove").delete(0, false)
+        end
+      '';
       options.desc = "Close buffer";
     }
     {
@@ -90,13 +94,13 @@
     }
     {
       mode = "n";
-      key = "<leader>gq";
-      action = "<cmd>DiffviewClose<CR>";
-      options.desc = "Close diff view";
+      key = "<leader>dm";
+      action = "<cmd>DiffviewOpen origin/main...HEAD<CR>";
+      options.desc = "Review branch against origin/main";
     }
     {
       mode = "n";
-      key = "<leader>c";
+      key = "<leader>gq";
       action = "<cmd>DiffviewClose<CR>";
       options.desc = "Close diff view";
     }
@@ -117,6 +121,12 @@
       key = "<leader>op";
       action = "<cmd>Octo pr list<CR>";
       options.desc = "Octo pull requests";
+    }
+    {
+      mode = "n";
+      key = "<leader>or";
+      action = "<cmd>Octo review<CR>";
+      options.desc = "Octo review current PR";
     }
     {
       mode = "n";
@@ -188,6 +198,24 @@
     }
     {
       mode = "n";
+      key = "<C-_>";
+      action = "<Plug>(comment_toggle_linewise_current)";
+      options = {
+        desc = "Toggle line comment";
+        remap = true;
+      };
+    }
+    {
+      mode = "v";
+      key = "<C-_>";
+      action = "<Plug>(comment_toggle_linewise_visual)";
+      options = {
+        desc = "Toggle selection comment";
+        remap = true;
+      };
+    }
+    {
+      mode = "n";
       key = "<leader>s";
       action.__raw = ''
         function()
@@ -205,7 +233,11 @@
     {
       mode = "n";
       key = "<A-w>";
-      action = "<cmd>bdelete<CR>";
+      action.__raw = ''
+        function()
+          require("mini.bufremove").delete(0, false)
+        end
+      '';
       options.desc = "Close current buffer";
     }
     {

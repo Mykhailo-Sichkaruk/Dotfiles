@@ -6,12 +6,34 @@
 }:
 
 let
-  speechPython = pkgs.python312.withPackages (
-    ps: with ps; [
-      faster-whisper
-      noisereduce
-    ]
-  );
+  laptopDisplayLayout = pkgs.writeShellApplication {
+    name = "laptop-display-layout";
+    runtimeInputs = with pkgs; [
+      gnugrep
+      xrandr
+    ];
+    text = ''
+      set -euo pipefail
+
+      dpi=96
+
+      if xrandr --query | grep -q '^HDMI-A-1-0 connected'; then
+        xrandr \
+          --output eDP-1-0 --primary \
+          --output HDMI-A-1-0 --mode 2560x1440 --rate 143.99 --above eDP-1-0 \
+          --dpi "$dpi"
+      elif xrandr --query | grep -q '^HDMI-A-0 connected'; then
+        xrandr \
+          --output eDP --primary \
+          --output HDMI-A-0 --mode 2560x1440 --rate 143.99 --above eDP \
+          --dpi "$dpi"
+      elif xrandr --query | grep -q '^eDP-1-0 connected'; then
+        xrandr --output eDP-1-0 --primary --auto --dpi "$dpi"
+      else
+        xrandr --output eDP --primary --auto --dpi "$dpi" || xrandr --dpi "$dpi"
+      fi
+    '';
+  };
 in
 {
   imports = [
@@ -21,6 +43,9 @@ in
 
   nix = {
     optimise.automatic = true;
+    daemonCPUSchedPolicy = "batch";
+    daemonIOSchedClass = "idle";
+    daemonIOSchedPriority = 7;
     settings = {
       extra-substituters = [ "https://nix-community.cachix.org" ];
       extra-trusted-public-keys = [
@@ -28,8 +53,11 @@ in
       ];
       download-buffer-size = 6710886400;
       preallocate-contents = true;
-      max-jobs = "auto";
-      cores = 7;
+      min-free = 3 * 1024 * 1024 * 1024;
+      max-free = 4 * 1024 * 1024 * 1024;
+      max-jobs = 2;
+      cores = 3;
+      max-substitution-jobs = 4;
       trusted-users = [ "ms" ];
       experimental-features = [
         "nix-command"
@@ -65,18 +93,65 @@ in
 
   networking = {
     hostName = "mykhailos_nixos";
-    wireless.enable = false;
+    wireless = {
+      enable = true;
+      interfaces = [ "wlo1" ];
+      userControlled = true;
+      allowAuxiliaryImperativeNetworks = true;
+      secretsFile = "/etc/wpa_supplicant-secrets.conf";
+      networks = {
+        eduroam = {
+          authProtocols = [ "WPA-EAP" ];
+          auth = ''
+            proto=RSN
+            pairwise=CCMP
+            auth_alg=OPEN
+            eap=PEAP
+            identity="xsichkaruk@stuba.sk"
+            password=ext:password_eduroam
+            phase2="auth=MSCHAPV2"
+            mesh_fwding=1
+            disabled=0
+          '';
+          priority = 5;
+        };
+        Ynet = {
+          authProtocols = [ "WPA-EAP" ];
+          auth = ''
+            proto=RSN
+            pairwise=CCMP
+            auth_alg=OPEN
+            eap=PEAP
+            identity="misha0510@ynet.sk"
+            password=ext:password_ynet
+            phase2="auth=MSCHAPV2"
+            mesh_fwding=1
+            disabled=0
+          '';
+          priority = 11;
+        };
+        visitors = {
+          pskRaw = "ext:psk_visitors";
+          extraConfig = ''
+            mesh_fwding=1
+          '';
+        };
+        Uniit = {
+          pskRaw = "ext:psk_uniit";
+          extraConfig = ''
+            mesh_fwding=1
+            disabled=0
+          '';
+          priority = 6;
+        };
+      };
+    };
     networkmanager.enable = false;
     extraHosts = "";
     nameservers = [
       "1.1.1.1"
       "8.8.8.8"
     ];
-    supplicant.wlo1 = {
-      configFile.path = "/etc/wpa_supplicant/wpa_supplicant.conf";
-      configFile.writable = true;
-      userControlled.enable = true;
-    };
     useDHCP = false;
     dhcpcd = {
       enable = true;
@@ -108,6 +183,15 @@ in
   time.timeZone = "Europe/Bratislava";
   systemd.network.wait-online.enable = false;
   systemd.coredump.enable = false;
+  systemd.services.touchpad-off-at-boot = {
+    description = "Turn off the laptop touchpad at boot";
+    wantedBy = [ "multi-user.target" ];
+    unitConfig.ConditionPathExists = "/sys/bus/platform/devices/PNP0C09:00/touchpad";
+    serviceConfig.Type = "oneshot";
+    script = ''
+      echo 0 > /sys/bus/platform/devices/PNP0C09:00/touchpad
+    '';
+  };
 
   i18n.defaultLocale = "en_US.UTF-8";
   console.useXkbConfig = true;
@@ -149,9 +233,9 @@ in
     };
     xserver = {
       videoDrivers = lib.mkForce [
-        "amdgpu"
         "nvidia"
       ];
+      dpi = 96;
       xkb.layout = "us,ua";
       xkb.options = "caps:escape,grp:alt_shift_toggle,compose:rctrl";
       autoRepeatInterval = 50;
@@ -160,6 +244,7 @@ in
       desktopManager.xterm.enable = false;
       windowManager.i3.enable = true;
       displayManager.sessionCommands = ''
+        ${laptopDisplayLayout}/bin/laptop-display-layout || true
         xset r rate 250 50
         xset b off
       '';
@@ -200,13 +285,15 @@ in
 
     powerManagement = {
       enable = true;
-      finegrained = true;
+      finegrained = false;
     };
 
     prime = {
+      sync.enable = true;
+      reverseSync.enable = false;
       offload = {
-        enable = true;
-        enableOffloadCmd = true;
+        enable = false;
+        enableOffloadCmd = false;
       };
 
       amdgpuBusId = "PCI:5:0:0";
@@ -217,6 +304,7 @@ in
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "gtk";
   };
 
   security = {
@@ -249,6 +337,7 @@ in
       "transmission"
       "input"
       "tss"
+      "wpa_supplicant"
     ];
     packages = [ ];
     shell = pkgs.fish;
@@ -261,6 +350,12 @@ in
   };
 
   programs = {
+    steam = {
+      enable = false;
+      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+    };
     kdeconnect.enable = true;
     appimage = {
       enable = true;
@@ -273,7 +368,6 @@ in
       enable = true;
       enableSSHSupport = true;
     };
-    steam.enable = false;
     nh = {
       enable = true;
       clean.enable = true;
@@ -303,16 +397,15 @@ in
       gh
       alacritty
       autorandr
+      laptopDisplayLayout
       rofi
       pulsemixer
       xdotool
       lenovo-legion
       ffmpeg
-      # noisetorch
       openai-whisper
-      # speechPython
-      # whisper-cpp
-      # nvtopPackages.full
+      whisper-cpp
+      nvtopPackages.full
       pciutils
       brightnessctl
     ];
@@ -338,6 +431,34 @@ in
     nerd-fonts.fira-code
     noto-fonts-color-emoji
   ];
+
+  specialisation."amd-power-saving".configuration = {
+    boot.blacklistedKernelModules = lib.mkAfter [
+      "nvidia"
+      "nvidia_drm"
+      "nvidia_modeset"
+      "nvidia_uvm"
+    ];
+
+    services.xserver.videoDrivers = lib.mkForce [ "amdgpu" ];
+
+    hardware.nvidia = {
+      modesetting.enable = lib.mkForce false;
+      nvidiaSettings = lib.mkForce false;
+      powerManagement = {
+        enable = lib.mkForce false;
+        finegrained = lib.mkForce false;
+      };
+      prime = {
+        sync.enable = lib.mkForce false;
+        reverseSync.enable = lib.mkForce false;
+        offload = {
+          enable = lib.mkForce false;
+          enableOffloadCmd = lib.mkForce false;
+        };
+      };
+    };
+  };
 
   system = {
     autoUpgrade = {
