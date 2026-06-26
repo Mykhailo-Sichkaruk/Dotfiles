@@ -11,7 +11,7 @@ with pkgs;
   statix
   luaformatter
   nixd
-  nixfmt-rfc-style
+  nixfmt
   lua-language-server
   typescript-language-server
   typescript-go

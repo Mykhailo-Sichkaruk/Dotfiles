@@ -14,7 +14,14 @@
   libGL,
   libgbm,
   libgcc,
+  libx11,
+  libxcb,
+  libxcomposite,
+  libxdamage,
+  libxext,
+  libxfixes,
   libxkbcommon,
+  libxrandr,
   makeWrapper,
   nspr,
   nss,
@@ -26,7 +33,6 @@
   stdenv,
   systemd,
   vulkan-loader,
-  xorg,
 }:
 
 stdenv.mkDerivation {
@@ -62,13 +68,13 @@ stdenv.mkDerivation {
     pango
     stdenv.cc.cc.lib
     systemd
-    xorg.libX11
-    xorg.libXcomposite
-    xorg.libXdamage
-    xorg.libXext
-    xorg.libXfixes
-    xorg.libXrandr
-    xorg.libxcb
+    libx11
+    libxcomposite
+    libxdamage
+    libxext
+    libxfixes
+    libxrandr
+    libxcb
   ];
 
   installPhase = ''

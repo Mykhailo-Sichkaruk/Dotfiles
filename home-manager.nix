@@ -50,18 +50,22 @@
       dbeaver-bin
       # packaging 26.1 changed PEP 508 URL formatting; pipx 1.8.0 still asserts the old spacing.
       # pipx
-      (pipx.overridePythonAttrs (old: {
-        disabledTests = (old.disabledTests or [ ]) ++ [
-          "test_fix_package_name"
-          "test_parse_specifier_for_metadata"
-        ];
-      }))
+      # (pipx.overridePythonAttrs (old: {
+      #   disabledTests = (old.disabledTests or [ ]) ++ [
+      #     "test_fix_package_name"
+      #     "test_parse_specifier_for_metadata"
+      #   ];
+      # }))
       libnotify
       keepassxc
       openvpn3
       comma
       i3lock
       sxhkd
+      smem
+      atop
+      pagemon
+      swapview
     ]);
   };
 
@@ -76,12 +80,17 @@
     PLAYWRIGHT_BROWSERS_PATH = "${localPackages.playwrightBrowsers1217}";
   };
 
-  xsession = {
-    numlock.enable = true;
-    profileExtra = ''
-      xdotool key XF86TouchpadOff
-    '';
+  xresources.properties = {
+    "Xft.dpi" = 96;
+    "Xft.antialias" = 1;
+    "Xft.autohint" = 0;
+    "Xft.hinting" = 1;
+    "Xft.hintstyle" = "slight";
+    "Xft.lcdfilter" = "lcddefault";
+    "Xft.rgba" = "none";
   };
+
+  xsession.numlock.enable = true;
 
   programs = {
     anki = {
@@ -93,10 +102,12 @@
         pkgs.ankiAddons.review-heatmap
       ];
       theme = "dark";
-      sync.username = "mykhailo.sichkaruk@gmail.com";
-      sync.keyFile = "/home/ms/.secrets/anki-sync-key";
-      sync.autoSync = true;
-      sync.syncMedia = true;
+      profiles."User 1".sync = {
+        username = "mykhailo.sichkaruk@gmail.com";
+        keyFile = "/home/ms/.secrets/anki-sync-key";
+        autoSync = true;
+        syncMedia = true;
+      };
     };
     i3status-rust.enable = true;
     keychain = {
@@ -113,7 +124,6 @@
       "x-scheme-handler/https" = "google-chrome.desktop";
       "x-scheme-handler/about" = "google-chrome.desktop";
       "x-scheme-handler/unknown" = "google-chrome.desktop";
-      "x-scheme-handler/mailto" = "thunderbird.desktop";
     };
   };
 

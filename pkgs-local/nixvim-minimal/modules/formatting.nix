@@ -39,7 +39,7 @@
           __unkeyed-2 = "prettier";
           stop_after_first = true;
         };
-        lua = [ "lua_format" ];
+        lua = [ "stylua" ];
         markdown = {
           __unkeyed-1 = "prettierd";
           __unkeyed-2 = "prettier";

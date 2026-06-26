@@ -29,18 +29,26 @@
     "net.core.default_qdisc" = "cake";
     "net.ipv4.tcp_congestion_control" = "bbr";
     "net.ipv4.tcp_mtu_probing" = 1;
+    "vm.page-cluster" = 0;
+    "vm.watermark_scale_factor" = 125;
   };
+
   boot.kernelParams = [
     "amd_pstate=active"
-    "zswap.enabled=1"
-    "zswap.compressor=lz4"
-    "zswap.max_pool_percent=10"
-    "zswap.shrinker_enabled=1"
     "transparent_hugepage=madvise"
   ];
   boot.blacklistedKernelModules = [
     "nouveau"
   ];
+
+  boot.zswap = {
+    enable = true;
+    maxPoolPercent = 30;
+    compressor = "zstd";
+    shrinkerEnabled = true;
+    acceptThresholdPercent = 90;
+    zpool = "zsmalloc";
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/ffb7c1c3-8f4c-4a08-a077-5f5bcc4000bf";

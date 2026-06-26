@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   plugins.lsp = {
     enable = true;
@@ -18,13 +19,15 @@
       map("gd", vim.lsp.buf.definition, "Go to definition")
       map("gI", vim.lsp.buf.implementation, "Go to implementation")
       map("gr", vim.lsp.buf.references, "List references")
-      map("K", vim.lsp.buf.hover, "Hover documentation")
+      map("K", function()
+        vim.lsp.buf.hover({ border = "rounded" })
+      end, "Hover documentation")
       map("<F2>", vim.lsp.buf.rename, "Rename symbol")
       map("<leader>a", vim.lsp.buf.code_action, "Code action")
       map("<leader>e", vim.diagnostic.open_float, "Line diagnostics")
       map("[d", vim.diagnostic.goto_prev, "Previous diagnostic")
       map("]d", vim.diagnostic.goto_next, "Next diagnostic")
-      map("<leader>lq", vim.diagnostic.setloclist, "Diagnostics to loclist")
+      map("<leader>dq", vim.diagnostic.setloclist, "Diagnostics to loclist")
     '';
 
     servers = {
@@ -37,6 +40,11 @@
         enable = true;
         packageFallback = true;
         settings.workingDirectory.mode = "auto";
+      };
+
+      graphql = {
+        enable = true;
+        packageFallback = true;
       };
 
       lua_ls = {
@@ -70,6 +78,12 @@
       ts_ls = {
         enable = true;
         packageFallback = true;
+        filetypes = lib.mkForce [
+          "javascript"
+          "javascriptreact"
+          "typescript"
+          "typescriptreact"
+        ];
         extraOptions.init_options.maxTsServerMemory = 8192;
       };
     };

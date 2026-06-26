@@ -191,7 +191,7 @@ set suggestcommands=9000000000000000
 set suggesttopsites=0
 set suspendbackgroundtab
 set suspendonrestore=regular
-set suspendtimeout=3000000
+set suspendtimeout=120000
 set suspendtimeoutignore=
 set suspendtimeoutignore+=ga//
 set tabclosefocus=left
@@ -219,7 +219,6 @@ set windowtitle="%app - %title"
 
 " Mappings
 map <A-h> <previousTab>
-map <C-c> <p.copyText>
 map <A-l> <nextTab>
 cmap <C-j> <commandHistoryPrevious>
 cmap <C-k> <commandHistoryNext>
