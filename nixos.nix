@@ -6,33 +6,9 @@
 }:
 
 let
-  laptopDisplayLayout = pkgs.writeShellApplication {
-    name = "laptop-display-layout";
-    runtimeInputs = with pkgs; [
-      gnugrep
-      xrandr
-    ];
-    text = ''
-      set -euo pipefail
-
-      dpi=96
-
-      if xrandr --query | grep -q '^HDMI-A-1-0 connected'; then
-        xrandr \
-          --output eDP-1-0 --primary \
-          --output HDMI-A-1-0 --mode 2560x1440 --rate 143.99 --above eDP-1-0 \
-          --dpi "$dpi"
-      elif xrandr --query | grep -q '^HDMI-A-0 connected'; then
-        xrandr \
-          --output eDP --primary \
-          --output HDMI-A-0 --mode 2560x1440 --rate 143.99 --above eDP \
-          --dpi "$dpi"
-      elif xrandr --query | grep -q '^eDP-1-0 connected'; then
-        xrandr --output eDP-1-0 --primary --auto --dpi "$dpi"
-      else
-        xrandr --output eDP --primary --auto --dpi "$dpi" || xrandr --dpi "$dpi"
-      fi
-    '';
+  displayDpi = 112;
+  laptopDisplayLayout = pkgs.callPackage ./pkgs-local/laptop-display-layout/package.nix {
+    dpi = displayDpi;
   };
 in
 {
@@ -47,8 +23,12 @@ in
     daemonIOSchedClass = "idle";
     daemonIOSchedPriority = 7;
     settings = {
-      extra-substituters = [ "https://nix-community.cachix.org" ];
+      extra-substituters = [
+        "https://comfyui.cachix.org"
+        "https://nix-community.cachix.org"
+      ];
       extra-trusted-public-keys = [
+        "comfyui.cachix.org-1:33mf9VzoIjzVbp0zwj+fT51HG0y31ZTK3nzYZAX0rec="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
       download-buffer-size = 6710886400;
@@ -81,6 +61,7 @@ in
       };
     };
     initrd.luks.devices.root = {
+      allowDiscards = true;
       device = "/dev/disk/by-uuid/210151fe-69d0-4635-982d-ea2d6cdf907a";
       preLVM = true;
     };
@@ -235,7 +216,7 @@ in
       videoDrivers = lib.mkForce [
         "nvidia"
       ];
-      dpi = 96;
+      dpi = displayDpi;
       xkb.layout = "us,ua";
       xkb.options = "caps:escape,grp:alt_shift_toggle,compose:rctrl";
       autoRepeatInterval = 50;
@@ -289,11 +270,11 @@ in
     };
 
     prime = {
-      sync.enable = true;
+      sync.enable = false;
       reverseSync.enable = false;
       offload = {
-        enable = false;
-        enableOffloadCmd = false;
+        enable = true;
+        enableOffloadCmd = true;
       };
 
       amdgpuBusId = "PCI:5:0:0";
@@ -379,11 +360,8 @@ in
 
   environment = {
     systemPackages = with pkgs; [
-      cargo
-      deepfilternet
       man-pages
       man-pages-posix
-      mesa-demos
       stdmanpages
       gtk3
       cachix
@@ -392,7 +370,6 @@ in
       fish
       wget
       vim
-      neovim
       git
       gh
       alacritty
@@ -403,8 +380,6 @@ in
       xdotool
       lenovo-legion
       ffmpeg
-      openai-whisper
-      whisper-cpp
       nvtopPackages.full
       pciutils
       brightnessctl
@@ -432,33 +407,33 @@ in
     noto-fonts-color-emoji
   ];
 
-  specialisation."amd-power-saving".configuration = {
-    boot.blacklistedKernelModules = lib.mkAfter [
-      "nvidia"
-      "nvidia_drm"
-      "nvidia_modeset"
-      "nvidia_uvm"
-    ];
-
-    services.xserver.videoDrivers = lib.mkForce [ "amdgpu" ];
-
-    hardware.nvidia = {
-      modesetting.enable = lib.mkForce false;
-      nvidiaSettings = lib.mkForce false;
-      powerManagement = {
-        enable = lib.mkForce false;
-        finegrained = lib.mkForce false;
-      };
-      prime = {
-        sync.enable = lib.mkForce false;
-        reverseSync.enable = lib.mkForce false;
-        offload = {
-          enable = lib.mkForce false;
-          enableOffloadCmd = lib.mkForce false;
-        };
-      };
-    };
-  };
+  # specialisation."amd-power-saving".configuration = {
+  #   boot.blacklistedKernelModules = lib.mkAfter [
+  #     "nvidia"
+  #     "nvidia_drm"
+  #     "nvidia_modeset"
+  #     "nvidia_uvm"
+  #   ];
+  #
+  #   services.xserver.videoDrivers = lib.mkForce [ "amdgpu" ];
+  #
+  #   hardware.nvidia = {
+  #     modesetting.enable = lib.mkForce false;
+  #     nvidiaSettings = lib.mkForce false;
+  #     powerManagement = {
+  #       enable = lib.mkForce false;
+  #       finegrained = lib.mkForce false;
+  #     };
+  #     prime = {
+  #       sync.enable = lib.mkForce false;
+  #       reverseSync.enable = lib.mkForce false;
+  #       offload = {
+  #         enable = lib.mkForce false;
+  #         enableOffloadCmd = lib.mkForce false;
+  #       };
+  #     };
+  #   };
+  # };
 
   system = {
     autoUpgrade = {

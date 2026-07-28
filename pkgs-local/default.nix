@@ -1,4 +1,5 @@
 {
+  comfyui-nix,
   nixvim,
   pkgs,
   pkgs-cuda,
@@ -10,6 +11,10 @@ let
   archiMcpPort = 8766;
 in
 rec {
+  comfyui = pkgs.callPackage ./comfyui/package.nix {
+    comfyuiPackage = comfyui-nix.packages.${system}.cuda;
+  };
+
   archi = pkgs.callPackage ./archi/package.nix {
     inherit archiMcpPort;
   };
@@ -40,6 +45,8 @@ rec {
   };
 
   playwrightBrowsers1217 = pkgs.callPackage ./playwright-browsers-1217/package.nix { };
+
+  ripgrepZnver3 = pkgs.callPackage ./ripgrep-znver3/package.nix { };
 
   whisperCppCuda = pkgs.callPackage ./whisper-cpp-cuda/package.nix {
     inherit pkgs-cuda;

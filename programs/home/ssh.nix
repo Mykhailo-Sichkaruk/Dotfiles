@@ -29,6 +29,13 @@
         ControlPersist = "4h";
       };
 
+      "*.render.com" = {
+        IdentityFile = "~/.ssh/uniit_render_id_ed25519";
+        IdentitiesOnly = true;
+        AddKeysToAgent = "yes";
+        ForwardAgent = false;
+      };
+
       "*" = {
         ForwardAgent = false;
       };

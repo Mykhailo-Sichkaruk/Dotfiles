@@ -1,4 +1,4 @@
-model = "gpt-5.5"
+model = "gpt-5.6-sol"
 model_reasoning_effort = "xhigh"
 personality = "pragmatic"
 web_search = "cached"
@@ -6,7 +6,6 @@ sandbox_mode = "workspace-write"
 notify = [ "tool_execution", "tool_errors", "model_thoughts" ]
 
 [features]
-runtime_metrics = true
 shell_tool = true
 undo = true
 unified_exec = true
@@ -20,6 +19,21 @@ terminal_resize_reflow = true
 memories = true
 prevent_idle_sleep = true
 mentions_v2 = true
+
+[mcp_servers.comfyui]
+command = "/home/ms/.nix-profile/bin/npx"
+args = ["-y", "comfyui-mcp@0.43.1"]
+startup_timeout_sec = 60
+tool_timeout_sec = 1800
+default_tools_approval_mode = "writes"
+
+[mcp_servers.comfyui.env]
+COMFYUI_URL = "http://127.0.0.1:8188"
+COMFYUI_PATH = "/home/ms/AI/comfyui"
+
+[mcp_servers.drawio]
+command = "npx"
+args = ["-y", "@drawio/mcp"]
 
 [mcp_servers.anki-mcp]
 command = "npx"
@@ -291,9 +305,11 @@ fast_default_opt_out = true
 [tui]
 status_line = ["model-with-reasoning", "context-remaining", "context-used", "project-root", "git-branch", "five-hour-limit", "weekly-limit", "context-window-size", "used-tokens", "thread-title"]
 vim_mode_default = true
+session_picker_view = "dense"
 
 [tui.model_availability_nux]
 "gpt-5.5" = 4
+"gpt-5.6-sol" = 4
 
 [plugins."expo@openai-curated"]
 enabled = true
