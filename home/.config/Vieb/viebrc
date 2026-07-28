@@ -61,6 +61,7 @@ set darkreaderblocklist+=help.openai.com
 set darkreaderblocklist+=help.openai.com
 set darkreaderblocklist+=graphql.org
 set darkreaderblocklist+=graphql.org
+set darkreaderblocklist+=nodeweekly.com
 set darkreaderbrightness=150
 set darkreadercontrast=100
 set darkreaderfg=#e8e6e3
@@ -191,9 +192,7 @@ set suggestcommands=9000000000000000
 set suggesttopsites=0
 set suspendbackgroundtab
 set suspendonrestore=regular
-set suspendtimeout=120000
-set suspendtimeoutignore=
-set suspendtimeoutignore+=ga//
+set suspendtimeout=0
 set tabclosefocus=left
 set tabcycle
 set tabnewposition=right
@@ -207,6 +206,8 @@ set translateapi=auto
 set translatekey=
 set translatelang=en-us
 set translateurl=https://api-free.deepl.com/v2/
+set useragent=
+set useragent+=firefox
 set useragentsys=auto
 set userscript
 set userstyle

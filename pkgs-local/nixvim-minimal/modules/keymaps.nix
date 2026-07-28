@@ -36,6 +36,33 @@
     }
     {
       mode = "n";
+      key = "<leader>ce";
+      action.__raw = ''
+        function()
+          vim.cmd("Copilot! attach")
+          vim.b.copilot_suggestion_auto_trigger = true
+          vim.notify("Copilot enabled for this buffer", vim.log.levels.INFO)
+        end
+      '';
+      options.desc = "Enable Copilot";
+    }
+    {
+      mode = "n";
+      key = "<leader>cd";
+      action.__raw = ''
+        function()
+          vim.b.copilot_suggestion_auto_trigger = false
+          pcall(function()
+            require("copilot.suggestion").clear_preview()
+          end)
+          vim.cmd("Copilot detach")
+          vim.notify("Copilot disabled for this buffer", vim.log.levels.INFO)
+        end
+      '';
+      options.desc = "Disable Copilot";
+    }
+    {
+      mode = "n";
       key = "<leader>tf";
       action = "<cmd>Telescope find_files<CR>";
       options.desc = "Find files";

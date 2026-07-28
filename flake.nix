@@ -2,6 +2,7 @@
   description = "A flake that manages the NixOS and Home Manager configuration";
 
   inputs = {
+    comfyui-nix.url = "github:utensils/comfyui-nix";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-cuda.url = "github:nixos/nixpkgs/nixos-26.05-small";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -17,14 +18,19 @@
   };
 
   nixConfig = {
-    extra-substituters = [ "https://nix-community.cachix.org" ];
+    extra-substituters = [
+      "https://comfyui.cachix.org"
+      "https://nix-community.cachix.org"
+    ];
     extra-trusted-public-keys = [
+      "comfyui.cachix.org-1:33mf9VzoIjzVbp0zwj+fT51HG0y31ZTK3nzYZAX0rec="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
   };
 
   outputs =
     {
+      comfyui-nix,
       home-manager,
       nix-index-database,
       nixgl,
@@ -63,6 +69,7 @@
 
       localPackages = import ./pkgs-local {
         inherit
+          comfyui-nix
           nixvim
           pkgs
           pkgs-cuda
@@ -77,10 +84,15 @@
       };
 
       laptopHomeSpecialArgs = homeSpecialArgs // {
-        playwrightBrowsers = localPackages.playwrightBrowsers1217;
+        playwrightBrowsers = "/home/ms/.local/share/playwright-browsers";
       };
     in
     {
+      packages.${system} = {
+        comfyui = localPackages.comfyui;
+        ripgrepZnver3 = localPackages.ripgrepZnver3;
+      };
+
       homeConfigurations.portable = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = homeSpecialArgs;

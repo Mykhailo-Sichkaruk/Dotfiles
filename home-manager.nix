@@ -24,14 +24,16 @@
     username = "ms";
     homeDirectory = "/home/ms";
     packages = [
-      pkgs-unstable.vscode
       pkgs-unstable.claude-code
       localPackages.archi
+      localPackages.comfyui
       localPackages.playwrightBrowsers1217
     ]
     ++ (with pkgs; [
+      vscode
       playerctl
       obsidian
+      # languagetool
       yt-dlp
       neomutt
       pulsemixer
@@ -46,7 +48,7 @@
       teams-for-linux
       whatsapp-electron
       mattermost-desktop
-      slack
+      # slack
       dbeaver-bin
       # packaging 26.1 changed PEP 508 URL formatting; pipx 1.8.0 still asserts the old spacing.
       # pipx
@@ -76,12 +78,17 @@
 
   home.file."Documents/Archi/scripts/.keep".text = "";
 
+  xdg.dataFile."playwright-browsers".source = localPackages.playwrightBrowsers1217;
+
   home.sessionVariables = {
-    PLAYWRIGHT_BROWSERS_PATH = "${localPackages.playwrightBrowsers1217}";
+    COMFYUI_DATA_DIR = "/home/ms/AI/comfyui";
+    COMFYUI_PATH = "/home/ms/AI/comfyui";
+    COMFYUI_URL = "http://127.0.0.1:8188";
+    PLAYWRIGHT_BROWSERS_PATH = "/home/ms/.local/share/playwright-browsers";
   };
 
   xresources.properties = {
-    "Xft.dpi" = 96;
+    "Xft.dpi" = 112;
     "Xft.antialias" = 1;
     "Xft.autohint" = 0;
     "Xft.hinting" = 1;
@@ -127,9 +134,33 @@
     };
   };
 
+  xdg.desktopEntries.comfyui = {
+    name = "ComfyUI";
+    comment = "Local node-based generative media interface";
+    exec = "${localPackages.comfyui}/bin/comfyui";
+    categories = [ "Graphics" ];
+    terminal = false;
+  };
+
   services.syncthing = {
     enable = true;
     guiAddress = "127.0.0.1:8384";
     settings.folders."/home/ms/Sync".id = "laptop_phone";
+  };
+
+  systemd.user.services.languagetool = {
+    Unit = {
+      Description = "LanguageTool HTTP server";
+      Documentation = [ "https://dev.languagetool.org/http-server.html" ];
+    };
+
+    Service = {
+      ExecStart = "${pkgs.languagetool}/bin/languagetool-http-server --port 8081";
+      Environment = [ "JAVA_TOOL_OPTIONS=-Xmx2G" ];
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+
+    Install.WantedBy = [ "default.target" ];
   };
 }

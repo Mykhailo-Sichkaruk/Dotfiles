@@ -18,7 +18,7 @@
   boot.initrd.kernelModules = [
     "dm-snapshot"
     "tcp_bbr"
-    "sch_cake"
+    "sch_fq"
   ];
   boot.extraModulePackages = [ ];
   boot.kernel.sysctl = {
@@ -26,7 +26,7 @@
     "vm.overcommit_memory" = 0;
     "kernel.core_pattern" = "|/bin/false";
     "net.ipv4.tcp_fastopen" = 3;
-    "net.core.default_qdisc" = "cake";
+    "net.core.default_qdisc" = "fq";
     "net.ipv4.tcp_congestion_control" = "bbr";
     "net.ipv4.tcp_mtu_probing" = 1;
     "vm.page-cluster" = 0;
@@ -54,7 +54,6 @@
     device = "/dev/disk/by-uuid/ffb7c1c3-8f4c-4a08-a077-5f5bcc4000bf";
     fsType = "ext4";
     options = [
-      "discard"
       "noatime"
       "nodiratime"
     ];
@@ -64,7 +63,6 @@
     device = "/dev/disk/by-uuid/b3c535a1-40bd-4fcc-9d83-e92a62a3e372";
     fsType = "ext4";
     options = [
-      "discard"
       "noatime"
       "nodiratime"
     ];
@@ -73,7 +71,6 @@
   swapDevices = [
     {
       device = "/dev/disk/by-uuid/41fefdac-c7a1-429f-8ee9-76d29f0c61ed";
-      options = [ "discard" ];
     }
   ];
 

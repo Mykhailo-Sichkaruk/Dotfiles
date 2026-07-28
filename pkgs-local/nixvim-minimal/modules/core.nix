@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 {
-  env.NVIM_APPNAME = "nixvim-minimal";
+  env.NVIM_APPNAME = "vix";
 
   viAlias = true;
   vimAlias = true;
@@ -37,16 +37,21 @@
     wrap = false;
   };
 
-  extraPackages = with pkgs; [
-    fd
-    gh
-    git
-    nixfmt
-    nodejs
-    prettier
-    prettierd
-    ripgrep
-    ruff
-    stylua
-  ];
+  extraPackages =
+    with pkgs;
+    [
+      fd
+      gh
+      git
+      nixfmt
+      nodejs
+      prettier
+      prettierd
+      ripgrep
+      ruff
+      stylua
+    ]
+    ++ [
+      pkgs-unstable.typescript-go
+    ];
 }

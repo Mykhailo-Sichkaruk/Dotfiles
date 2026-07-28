@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs-unstable, ... }:
 {
   plugins.lsp = {
     enable = true;
@@ -7,7 +7,7 @@
       capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
     '';
     onAttach = ''
-      if client.name == "ts_ls" then
+      if client.name == "ts_ls" or client.name == "tsgo" then
         client.server_capabilities.documentFormattingProvider = false
       end
 
@@ -31,6 +31,13 @@
     '';
 
     servers = {
+      rust_analyzer = {
+        enable = true;
+        installCargo = true;
+        installRustc = true;
+        packageFallback = true;
+      };
+
       jsonls = {
         enable = true;
         packageFallback = true;
@@ -75,16 +82,15 @@
         ];
       };
 
-      ts_ls = {
+      tsgo = {
         enable = true;
-        packageFallback = true;
+        package = pkgs-unstable.typescript-go;
         filetypes = lib.mkForce [
           "javascript"
           "javascriptreact"
           "typescript"
           "typescriptreact"
         ];
-        extraOptions.init_options.maxTsServerMemory = 8192;
       };
     };
   };

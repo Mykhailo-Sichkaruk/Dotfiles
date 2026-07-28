@@ -80,11 +80,11 @@
   },
   "language": "English",
   "effortLevel": "xhigh",
+  "tui": "default",
   "skipDangerousModePermissionPrompt": true,
   "editorMode": "vim",
   "verbose": false,
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": false,
-  "voiceEnabled": true,
-  "tui": "fullscreen"
+  "voiceEnabled": true
 }
