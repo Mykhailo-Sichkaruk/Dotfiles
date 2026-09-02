@@ -5,6 +5,46 @@
   ...
 }:
 
+let
+  peekWithoutFfmpegPipeDeadlock = pkgs.peek.overrideAttrs (oldAttrs: {
+    # Peek waits for FFmpeg to exit before reading its redirected output. Once
+    # that pipe fills, FFmpeg cannot exit and Peek remains on "Rendering"
+    # forever. Keep only the recording control pipe and inherit FFmpeg output.
+    postPatch = (oldAttrs.postPatch or "") + ''
+      substituteInPlace src/recording/cli-screen-recorder.vala \
+        --replace-fail \
+          'SubprocessFlags.STDIN_PIPE | SubprocessFlags.STDOUT_PIPE | SubprocessFlags.STDERR_MERGE' \
+          'SubprocessFlags.STDIN_PIPE'
+
+      substituteInPlace src/post-processing/cli-post-processor.vala \
+        --replace-fail \
+          'SubprocessFlags.STDOUT_PIPE | SubprocessFlags.STDERR_MERGE' \
+          'SubprocessFlags.NONE'
+    '';
+  });
+
+  dbeaverWithMetalLaf = pkgs.dbeaver-bin.overrideAttrs (oldAttrs: {
+    postInstall = (oldAttrs.postInstall or "") + ''
+      dbeaverIni="$out/opt/dbeaver/dbeaver.ini"
+      grep -qx -- '-vmargs' "$dbeaverIni"
+      sed -i '/^-vmargs$/a-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel' "$dbeaverIni"
+      grep -qx -- '-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel' "$dbeaverIni"
+    '';
+  });
+
+  vimivWithModernFormats = pkgs.vimiv-qt.overrideAttrs (oldAttrs: {
+    # Provide Qt's WebP (and other extended image-format) plugins to Vimiv's wrapper.
+    buildInputs = (oldAttrs.buildInputs or [ ]) ++ [ pkgs.qt5.qtimageformats ];
+
+    # Backport https://github.com/karlch/vimiv-qt/commit/b0507ff9688b621c916ae3886ba5d5974530f5d5
+    postPatch = (oldAttrs.postPatch or "") + ''
+      substituteInPlace vimiv/utils/imageheader.py \
+        --replace-fail \
+          'return h[:2] == b"\x3C\x3F" and (h[2:5] in [b"\x78\x6D\x6C", b"\x73\x76\x67"])' \
+          'return h[:4] == b"\x3C\x73\x76\x67" or (h[:2] == b"\x3C\x3F" and h[2:5] in [b"\x78\x6D\x6C", b"\x73\x76\x67"])'
+    '';
+  });
+in
 {
   imports = [
     ./home-portable.nix
@@ -18,19 +58,26 @@
     ./programs/home/dunst.nix
     ./programs/home/flameshot.nix
     ./programs/home/chrome.nix
+    ./programs/home/local-apps.nix
   ];
+
+  my.apps = {
+    archi.enable = true;
+    comfyui.enable = false;
+    whisperCuda.enable = false;
+  };
 
   home = {
     username = "ms";
     homeDirectory = "/home/ms";
     packages = [
       pkgs-unstable.claude-code
-      localPackages.archi
-      localPackages.comfyui
-      localPackages.playwrightBrowsers1217
-      # localPackages.whisperCppCuda
     ]
     ++ (with pkgs; [
+      moonlight
+      moonlight-qt
+      sunshine
+      calibre
       vscode
       playerctl
       obsidian
@@ -40,18 +87,17 @@
       pulsemixer
       pipewire
       drawio
-      vimiv-qt
+      vimivWithModernFormats
       pkgs.nur.repos."vieb-nix".vieb
-      # obs-studio
       pear-desktop
-      peek
+      peekWithoutFfmpegPipeDeadlock
       discord
       telegram-desktop
       teams-for-linux
       whatsapp-electron
-      mattermost-desktop
+      # mattermost-desktop
       # slack
-      dbeaver-bin
+      dbeaverWithMetalLaf
       # packaging 26.1 changed PEP 508 URL formatting; pipx 1.8.0 still asserts the old spacing.
       # pipx
       # (pipx.overridePythonAttrs (old: {
@@ -70,23 +116,8 @@
       atop
       pagemon
       swapview
+      # figma-linux
     ]);
-  };
-
-  home.file.".archi/dropins" = {
-    source = "${localPackages.archiDropins}/share/archi-dropins";
-    recursive = true;
-  };
-
-  home.file."Documents/Archi/scripts/.keep".text = "";
-
-  xdg.dataFile."playwright-browsers".source = localPackages.playwrightBrowsers1217;
-
-  home.sessionVariables = {
-    COMFYUI_DATA_DIR = "/home/ms/AI/comfyui";
-    COMFYUI_PATH = "/home/ms/AI/comfyui";
-    COMFYUI_URL = "http://127.0.0.1:8188";
-    PLAYWRIGHT_BROWSERS_PATH = "/home/ms/.local/share/playwright-browsers";
   };
 
   xresources.properties = {
@@ -127,21 +158,20 @@
 
   xdg.mimeApps = {
     enable = true;
+
+    associations.added = {
+      "x-scheme-handler/figma" = "figma-linux.desktop";
+    };
+
     defaultApplications = {
       "text/html" = "google-chrome.desktop";
       "x-scheme-handler/http" = "google-chrome.desktop";
       "x-scheme-handler/https" = "google-chrome.desktop";
       "x-scheme-handler/about" = "google-chrome.desktop";
       "x-scheme-handler/unknown" = "google-chrome.desktop";
-    };
-  };
 
-  xdg.desktopEntries.comfyui = {
-    name = "ComfyUI";
-    comment = "Local node-based generative media interface";
-    exec = "${localPackages.comfyui}/bin/comfyui";
-    categories = [ "Graphics" ];
-    terminal = false;
+      "x-scheme-handler/figma" = "figma-linux.desktop";
+    };
   };
 
   services.syncthing = {

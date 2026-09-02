@@ -14,6 +14,10 @@ in
   programs.fish = {
     enable = true;
 
+    completions.task = ''
+      source ${pkgs.go-task}/share/fish/vendor_completions.d/task.fish
+    '';
+
     shellAliases = {
       rm = "rm -rf";
       e = "eza -ab --group-directories-first --icons";
@@ -34,6 +38,8 @@ in
     shellAbbrs = {
       nd = "nix develop";
       nr = "sudo nixos-rebuild switch --flake /home/ms/newDot/Dotfiles#MS_NixLaptop";
+      nu = "sudo nix flake update";
+      "gco-" = "git checkout -";
     };
 
     functions = {

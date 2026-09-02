@@ -1,12 +1,9 @@
-{ pkgs, pkgs-unstable }:
-let
-  vimPackages = import ./nvim.nix {
-    inherit pkgs;
-    inherit pkgs-unstable;
-  };
-in
-vimPackages
-++ (with pkgs; [
+{ pkgs }:
+with pkgs;
+[
+  render-cli
+  gnumake
+  python314Packages.huggingface-hub
   rsync
   stow
   ncdu
@@ -21,7 +18,7 @@ vimPackages
   curl
   findutils
   powertop
-  offlineimap
+  # offlineimap
   bat
   tree
   speedtest-cli
@@ -35,8 +32,10 @@ vimPackages
   ffmpeg
   unzip
   nix-ld
-  lazydocker
-  lazygit
+  nodejs_26
+  # lazydocker
+  # lazygit
   yarn
-  esbuild
-])
+  # esbuild
+  vitejs
+]

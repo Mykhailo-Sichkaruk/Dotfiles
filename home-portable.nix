@@ -1,17 +1,18 @@
 {
   lib,
   pkgs,
-  pkgs-unstable,
   localPackages ? null,
   ...
 }:
 
 let
   shellPackages = import ./programs/home/shell.nix {
-    inherit pkgs pkgs-unstable;
+    inherit pkgs;
   };
 
-  localShellPackages = lib.optionals (localPackages != null && localPackages ? nixvimMinimal) [
+  hasNixvim = localPackages != null && localPackages ? nixvimMinimal;
+
+  localShellPackages = lib.optionals hasNixvim [
     localPackages.nixvimMinimal
   ];
 in
@@ -27,17 +28,11 @@ in
   home = {
     stateVersion = "26.05";
     packages = localShellPackages ++ shellPackages;
-  };
-
-  programs = {
-    home-manager.enable = true;
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      sideloadInitLua = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
+    sessionVariables = lib.mkIf hasNixvim {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
     };
   };
+
+  programs.home-manager.enable = true;
 }

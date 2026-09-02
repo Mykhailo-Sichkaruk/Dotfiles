@@ -83,9 +83,7 @@
         playwrightBrowsers = null;
       };
 
-      laptopHomeSpecialArgs = homeSpecialArgs // {
-        playwrightBrowsers = "/home/ms/.local/share/playwright-browsers";
-      };
+      laptopHomeSpecialArgs = homeSpecialArgs;
     in
     {
       packages.${system} = {

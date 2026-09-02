@@ -1,19 +1,12 @@
-{ pkgs, ... }:
-
-let
-  enabledFeatures = [
-    "Vulkan"
-    "DefaultANGLEVulkan"
-    "VulkanFromANGLE"
-  ];
-in
+{ ... }:
 {
   programs.google-chrome = {
     enable = true;
     commandLineArgs = [
+      # Vulkan/ANGLE and zero-copy repeatedly crash Chrome's GPU process on this laptop.
       "--enable-gpu-rasterization"
-      "--enable-zero-copy"
-      "--enable-features=${pkgs.lib.concatStringsSep "," enabledFeatures}"
+      "--disable-features=Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
+      "--disable-zero-copy"
     ];
   };
 }

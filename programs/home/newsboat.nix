@@ -151,10 +151,22 @@ in
     };
 
     urls = map (url: { inherit url; }) plainFeeds ++ [
-      { 
+      {
+        url = "https://benhoyt.com/writings/rss.xml";
+        title = "Ben Hoyt";
+        tags = [
+          "go"
+          "python"
+          "io not bottleneck before bun article"
+        ];
+      }
+      {
         url = "https://joyeecheung.github.io/blog/atom.xml";
         title = "Joyee Cheung";
-        tags = [ "nodejs" "v8" ];
+        tags = [
+          "nodejs"
+          "v8"
+        ];
       }
       {
         url = "https://fosstodon.org/@rauschma.rss";

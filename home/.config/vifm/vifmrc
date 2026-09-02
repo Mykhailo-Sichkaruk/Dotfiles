@@ -260,7 +260,14 @@ filetype {*.[1-8]},<text/troff> man ./%c
 fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
 
 " Images
-filextype {*.svg,*.svgz},<image/svg+xml>
+filextype {*.svg}
+        \ {View in Vimiv}
+        \ vimiv %f,
+        \ {Edit in Inkscape}
+        \ inkscape %f,
+        \ {View in Inkview}
+        \ inkview %f,
+filextype {*.svgz}
         \ {Edit in Inkscape}
         \ inkscape %f,
         \ {View in Inkview}
@@ -279,8 +286,8 @@ filextype {.kra}
 filextype {.blend}
         \ {Open in Blender}
         \ blender %c,
-filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
-        \ {View in sxiv}
+filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm,*.webp},<image/*>
+        \ {View in Vimiv}
         \ vimiv %f,
         \ {View in gpicview}
         \ gpicview %c,

@@ -5,7 +5,7 @@
     enable = true;
     settings.General = {
       contrastOpacity = 188;
-      drawColor = "#0000ff";
+      drawColor = "#ff0000";
       drawThickness = 6;
       saveLastRegion = true;
       savePath = "/home/ms/recording";
