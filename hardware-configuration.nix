@@ -84,6 +84,7 @@
   powerManagement.powertop.enable = false;
 
   hardware = {
+    i2c.group = "i2c";
     graphics = {
       enable = true;
       enable32Bit = true;

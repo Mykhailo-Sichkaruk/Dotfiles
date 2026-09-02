@@ -14,10 +14,11 @@ let
     module = import ./module.nix;
   };
 in
-pkgs.writeShellApplication {
+pkgs.symlinkJoin {
   name = "nixvim-minimal";
-  runtimeInputs = [ nixvimPackage ];
-  text = ''
-    exec ${nixvimPackage}/bin/nvim "$@"
+  paths = [ nixvimPackage ];
+  postBuild = ''
+    ln -s nvim "$out/bin/vimdiff"
   '';
+  meta.mainProgram = "nvim";
 }

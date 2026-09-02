@@ -28,36 +28,39 @@ device_kind = "source"
 # block = "temperature"
 #
 [[block]]
+block = "net"
+format = "{$signal_strength $ssid $frequency|Eth}"
+interval = 10
+merge_with_next = true
+
+[[block]]
 block = "speedtest"
 interval = 1880
-format = "^icon_ping $ping.eng(unit:s) ^icon_net_down $speed_down ^icon_net_up $speed_up"
+format = " $ping.eng(w:2,prefix:m,force_prefix:true,hide_prefix:true,hide_unit:true,pad_with:'') $speed_down.eng(w:3,p:Gi,force_prefix:true,hide_prefix:true,hide_unit:true,pad_with:'') $speed_up.eng(w:3,p:Gi,force_prefix:true,hide_prefix:true,hide_unit:true,pad_with:'')"
 
 [[block]]
-block = "net"
-format = "$icon {$signal_strength $ssid $frequency|Wired} $device"
+block = "amd_gpu"
+format = "A:$vram_used.eng(w:3,p:Gi,force_prefix:true,hide_prefix:true,hide_unit:true,pad_with:'')"
+interval = 5
+merge_with_next = true
+
+[[block]]
+block = "nvidia_gpu"
+gpu_id = 0
+format = " N:$memory.eng(w:3,p:Gi,force_prefix:true,hide_prefix:true,hide_unit:true,pad_with:'')"
 interval = 10
-
-# [[block]]
-# block = "amd_gpu"
-# device = "card2"
-# format = "AMD $icon $utilization $vram_used"
-# interval = 20
-#
-# [[block]]
-# block = "nvidia_gpu"
-# interval = 2
-# gpu_id = 0
-# format = "NVIDIA { $icon $memory $utilization $temperature $clocks |}"
-
-[[block]]
-block = "uptime"
-format = "$icon $text"
-interval = 300
 
 [[block]]
 interval = 20
 block = "cpu"
-format = "$icon $barchart $utilization" 
+merge_with_next = true
+format = "$barchart $utilization"
+
+[[block]]
+block = "custom"
+interval = 5
+format = " $text"
+command = '''awk '$1 == "some" { split($2, value, "="); printf "%.2f%%", value[2] }' /proc/pressure/cpu'''
 
 [[block]]
 block = "disk_space"
@@ -67,7 +70,8 @@ alert_unit = "GB"
 interval = 3600 
 warning = 20.0
 alert = 10.0
-format = "/$icon $available"
+merge_with_next = true
+format = "/$icon $available.eng(w:3,p:Gi,force_prefix:true,hide_prefix:true,hide_unit:true,pad_with:'')"
 
 [[block]]
 block = "disk_space"
@@ -77,24 +81,53 @@ alert_unit = "GB"
 interval = 3600 
 warning = 20.0
 alert = 10.0
-format = "$icon $available"
+merge_with_next = true
+format = " $icon $available.eng(w:3,p:Gi,force_prefix:true,hide_prefix:true,hide_unit:true,pad_with:'')"
 
 [[block]]
-interval = 20
+block = "custom"
+interval = 5
+format = " $text"
+command = '''awk '$1 == "full" { split($2, value, "="); printf "%.2f%%", value[2] }' /proc/pressure/io'''
+
+[[block]]
 block = "memory"
-format = "$icon $mem_free"
-format_alt = "$icon_swap $swap_used_percents.eng(w:2)"
+interval = 5
+merge_with_next = true
+format = "$mem_free.eng(w:3,p:Gi,force_prefix:true,hide_prefix:true,hide_unit:true,pad_with:'') $mem_used.eng(w:3,p:Gi,force_prefix:true,hide_prefix:true,hide_unit:true,pad_with:'') $cached.eng(w:3,p:Gi,force_prefix:true,hide_prefix:true,hide_unit:true,pad_with:'') $zswap_compressed.eng(w:3,p:Gi,force_prefix:true,hide_prefix:true,hide_unit:true,pad_with:'') $swap_used.eng(w:3,p:Gi,force_prefix:true,hide_prefix:true,hide_unit:true,pad_with:'')"
+
+[[block]]
+block = "custom"
+interval = 5
+format = " $text"
+command = '''awk '
+$1 == "Committed_AS:" { committed = $2 / 1048576 }
+$1 == "full" {
+    for (i = 2; i <= NF; i++) {
+        if ($i ~ /^avg10=/) {
+            split($i, value, "=")
+            psi = value[2]
+        }
+    }
+}
+END { printf "%.1f %.2f%%", committed, psi }
+' /proc/meminfo /proc/pressure/memory'''
+
+[[block]]
+block = "uptime"
+format = "$icon $text"
+interval = 300
 
 [[block]]
 interval = 20
 block = "battery"
 driver = "sysfs"
-format = "$power $percentage{ $time|}"
-full_format = "$icon $power $percentage{ $time|}"
-empty_format = "$icon $power $percentage{ $time|}"
-missing_format = "$icon $power $percentage{ $time|}"
-charging_format = "$icon $power $percentage{ $time|}"
-not_charging_format = "$icon $percentage{ $time|}"
+format = "$icon {$power |}$percentage{ $time_remaining.dur(hms:true,min_unit:m) |}"
+full_format = "$icon $percentage"
+empty_format = "$icon {$power |}$percentage"
+missing_format = "$icon"
+charging_format = "$icon {$power |}$percentage{ $time_remaining.dur(hms:true,min_unit:m) |}"
+not_charging_format = "$icon $percentage"
  
 [[block]]
 block = "custom"

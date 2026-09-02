@@ -178,9 +178,17 @@ in
   console.useXkbConfig = true;
 
   services = {
+    sysstat = {
+      enable = true;
+      collect-frequency = "minutely";
+    };
+    ddccontrol.enable = true;
     zerotierone = {
       enable = true;
-      joinNetworks = [ "65228d8d6d070ea3" ];
+      joinNetworks = [
+        "65228d8d6d070ea3"
+        "9f77fc393eb4037d"
+      ];
       port = 9993;
     };
     openvpn.servers.stubaVPN = {
@@ -270,11 +278,11 @@ in
     };
 
     prime = {
-      sync.enable = false;
+      sync.enable = true;
       reverseSync.enable = false;
       offload = {
-        enable = true;
-        enableOffloadCmd = true;
+        enable = false;
+        enableOffloadCmd = false;
       };
 
       amdgpuBusId = "PCI:5:0:0";
@@ -311,6 +319,7 @@ in
     isNormalUser = true;
     linger = true;
     extraGroups = [
+      "i2c"
       "dialout"
       "wheel"
       "video"
@@ -331,13 +340,14 @@ in
   };
 
   programs = {
+    direnv.enable = true;
     steam = {
       enable = false;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     };
-    kdeconnect.enable = true;
+    kdeconnect.enable = false;
     appimage = {
       enable = true;
       binfmt = true;
@@ -350,7 +360,7 @@ in
       enableSSHSupport = true;
     };
     nh = {
-      enable = true;
+      enable = false;
       clean.enable = true;
       clean.extraArgs = "--keep-since 4d --keep 3";
       flake = "/home/ms/newDot/Dotfiles";
@@ -360,6 +370,7 @@ in
 
   environment = {
     systemPackages = with pkgs; [
+      ddcutil
       man-pages
       man-pages-posix
       stdmanpages
@@ -406,34 +417,6 @@ in
     nerd-fonts.fira-code
     noto-fonts-color-emoji
   ];
-
-  # specialisation."amd-power-saving".configuration = {
-  #   boot.blacklistedKernelModules = lib.mkAfter [
-  #     "nvidia"
-  #     "nvidia_drm"
-  #     "nvidia_modeset"
-  #     "nvidia_uvm"
-  #   ];
-  #
-  #   services.xserver.videoDrivers = lib.mkForce [ "amdgpu" ];
-  #
-  #   hardware.nvidia = {
-  #     modesetting.enable = lib.mkForce false;
-  #     nvidiaSettings = lib.mkForce false;
-  #     powerManagement = {
-  #       enable = lib.mkForce false;
-  #       finegrained = lib.mkForce false;
-  #     };
-  #     prime = {
-  #       sync.enable = lib.mkForce false;
-  #       reverseSync.enable = lib.mkForce false;
-  #       offload = {
-  #         enable = lib.mkForce false;
-  #         enableOffloadCmd = lib.mkForce false;
-  #       };
-  #     };
-  #   };
-  # };
 
   system = {
     autoUpgrade = {
