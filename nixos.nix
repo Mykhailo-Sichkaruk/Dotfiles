@@ -7,9 +7,6 @@
 
 let
   displayDpi = 112;
-  laptopDisplayLayout = pkgs.callPackage ./pkgs-local/laptop-display-layout/package.nix {
-    dpi = displayDpi;
-  };
   obsStudioNvenc = pkgs.callPackage ./pkgs-local/obs-studio-nvenc/package.nix { };
 in
 {
@@ -51,6 +48,11 @@ in
   home-manager.backupFileExtension = "backup";
 
   boot = {
+    kernel.sysctl = {
+      "kernel.hung_task_timeout_secs" = 60;
+      "kernel.hung_task_warnings" = 20;
+      "kernel.hung_task_all_cpu_backtrace" = 1;
+    };
     extraModulePackages = [ config.boot.kernelPackages.lenovo-legion-module ];
     loader = {
       efi.canTouchEfiVariables = true;
@@ -179,6 +181,95 @@ in
   console.useXkbConfig = true;
 
   services = {
+    autorandr =
+      let
+        laptopEdid = "00ffffffffffff0030ae5990000000001f1f0104a52213780754a5a7544c9b260f50540000000101010101010101010101010101010147798018713860403020360058c21000001a000000000000000000000000000000000000000000fd003ca5c1c128010a202020202020000000fe004c454e313536464844202020200056";
+
+        samsungEdid = builtins.concatStringsSep "" [
+          "00ffffffffffff004c2d107643344130ffff0103803c22782a94e5a6574da326"
+          "0a5054254b00714f810081c081809500a9c0b3000101565e00a0a0a029503020"
+          "350055512100001a000000fd0032641e973c000a202020202020000000fc004c"
+          "53323744363078550a202020000000ff00484b32593730303939350a20200171"
+          "020332f14790401f041303122309070783010000e2004fe305c00067030c0010"
+          "00b84467d85dc401788000e60605015a5a005aa000a0a0a04650302035005551"
+          "2100001a023a801871382d40582c450055512100001e00000000000000000000"
+          "00000000000000000000000000000000000000000000000000000000000000f0"
+        ];
+
+        lgEdid = builtins.concatStringsSep "" [
+          "00ffffffffffff001e6d965ca0bf07000c230103803c2278ea8cb5af4f43ab26"
+          "0e5054210800d1c06140010101010101010101010101efe700a0a0a04c503020"
+          "350055502100001a000000fd0030901ee63c000a202020202020000000fc004c"
+          "4720554c545241474541520a000000ff003531324e544c4545583830380a0154"
+          "020350f1230907074d100403011f13123f5d5e5f6061830100006d030c001000"
+          "b83c20006001020367d85dc401788003e30f00186d1a0000020130900004614c"
+          "614ce2006ae305c000e606050161614f6fc200a0a0a055503020350055502100"
+          "001a565e00a0a0a029503020350055502100001a0000000000000000000000a1"
+        ];
+
+        laptop = {
+          enable = true;
+          primary = true;
+          mode = "1920x1080";
+          rate = "120.00";
+        };
+      in
+      {
+        enable = true;
+        matchEdid = true;
+
+        profiles = {
+          laptop-internal = {
+            fingerprint."eDP-1-0" = laptopEdid;
+
+            config."eDP-1-0" = laptop // {
+              position = "0x0";
+            };
+          };
+
+          home-ls-ultragear = {
+            fingerprint = {
+              "eDP-1-0" = laptopEdid;
+              "HDMI-A-1-0" = lgEdid;
+            };
+
+            config = {
+              "eDP-1-0" = laptop // {
+                position = "0x1440";
+              };
+
+              "HDMI-A-1-0" = {
+                enable = true;
+                primary = false;
+                mode = "2560x1440";
+                rate = "143.99";
+                position = "0x0";
+              };
+            };
+          };
+
+          ynet-samsung-2 = {
+            fingerprint = {
+              "eDP-1-0" = laptopEdid;
+              "HDMI-A-1-0" = samsungEdid;
+            };
+
+            config = {
+              "eDP-1-0" = laptop // {
+                position = "0x1440";
+              };
+
+              "HDMI-A-1-0" = {
+                enable = true;
+                primary = false;
+                mode = "2560x1440";
+                rate = "99.95";
+                position = "0x0";
+              };
+            };
+          };
+        };
+      };
     sysstat = {
       enable = true;
       collect-frequency = "minutely";
@@ -234,7 +325,7 @@ in
       desktopManager.xterm.enable = false;
       windowManager.i3.enable = true;
       displayManager.sessionCommands = ''
-        ${laptopDisplayLayout}/bin/laptop-display-layout || true
+        ${pkgs.autorandr}/bin/autorandr --change --match-edid || true
         xset r rate 250 50
         xset b off
       '';
@@ -270,7 +361,7 @@ in
   hardware.nvidia = {
     modesetting.enable = true;
     nvidiaSettings = true;
-    open = true;
+    open = false;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
     powerManagement = {
@@ -281,6 +372,7 @@ in
     prime = {
       sync.enable = true;
       reverseSync.enable = false;
+      allowExternalGpu = true;
       offload = {
         enable = false;
         enableOffloadCmd = false;
@@ -391,7 +483,6 @@ in
       gh
       alacritty
       autorandr
-      laptopDisplayLayout
       rofi
       pulsemixer
       xdotool
