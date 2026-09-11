@@ -84,7 +84,14 @@
 
       tsgo = {
         enable = true;
-        package = pkgs-unstable.typescript-go;
+        package = pkgs-unstable.typescript;
+        settings.typescript.inlayHints = {
+          variableTypes.enabled = false;
+          parameterTypes.enabled = false;
+          propertyDeclarationTypes.enabled = false;
+          functionLikeReturnTypes.enabled = false;
+        };
+
         filetypes = lib.mkForce [
           "javascript"
           "javascriptreact"

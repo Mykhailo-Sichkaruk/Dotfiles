@@ -22,7 +22,7 @@
   ];
   boot.extraModulePackages = [ ];
   boot.kernel.sysctl = {
-    "vm.swappiness" = 100;
+    "vm.swappiness" = 50;
     "vm.overcommit_memory" = 0;
     "kernel.core_pattern" = "|/bin/false";
     "net.ipv4.tcp_fastopen" = 3;
