@@ -58,12 +58,20 @@ in
     ./programs/home/dunst.nix
     ./programs/home/flameshot.nix
     ./programs/home/chrome.nix
+    ./programs/home/pear-desktop.nix
     ./programs/home/local-apps.nix
   ];
 
   my.apps = {
     archi.enable = true;
     comfyui.enable = false;
+    pear = {
+      enable = true;
+      plugins = {
+        "performance-improvement".enable = true;
+        crossfade.enable = false;
+      };
+    };
   };
 
   home = {
@@ -71,40 +79,28 @@ in
     homeDirectory = "/home/ms";
     packages = [
       pkgs-unstable.claude-code
+      pkgs-unstable.codex
+      pkgs-unstable.pipx
     ]
     ++ (with pkgs; [
-      moonlight
-      moonlight-qt
-      sunshine
-      calibre
+      # calibre
       vscode
       playerctl
       obsidian
-      # languagetool
       yt-dlp
       neomutt
       pulsemixer
       pipewire
-      drawio
+      # drawio
       vimivWithModernFormats
       pkgs.nur.repos."vieb-nix".vieb
-      pear-desktop
       peekWithoutFfmpegPipeDeadlock
       discord
       telegram-desktop
       teams-for-linux
       whatsapp-electron
-      # mattermost-desktop
       # slack
       dbeaverWithMetalLaf
-      # packaging 26.1 changed PEP 508 URL formatting; pipx 1.8.0 still asserts the old spacing.
-      # pipx
-      # (pipx.overridePythonAttrs (old: {
-      #   disabledTests = (old.disabledTests or [ ]) ++ [
-      #     "test_fix_package_name"
-      #     "test_parse_specifier_for_metadata"
-      #   ];
-      # }))
       libnotify
       keepassxc
       openvpn3
@@ -115,7 +111,6 @@ in
       atop
       pagemon
       swapview
-      # figma-linux
     ]);
   };
 
@@ -172,6 +167,8 @@ in
       "x-scheme-handler/figma" = "figma-linux.desktop";
     };
   };
+
+  services.easyeffects.enable = true;
 
   services.syncthing = {
     enable = true;

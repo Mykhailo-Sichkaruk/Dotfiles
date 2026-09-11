@@ -44,6 +44,8 @@ rec {
       ;
   };
 
+  mkPearDesktop = pkgs.callPackage ./pear-desktop/package.nix { };
+
   playwrightBrowsers1217 = pkgs.callPackage ./playwright-browsers-1217/package.nix { };
 
   ripgrepZnver3 = pkgs.callPackage ./ripgrep-znver3/package.nix { };

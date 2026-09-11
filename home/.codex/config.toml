@@ -1,9 +1,10 @@
-model = "gpt-5.6-sol"
-model_reasoning_effort = "xhigh"
+model = "gpt-6-astra"
+model_reasoning_effort = "high"
 personality = "pragmatic"
 web_search = "cached"
 sandbox_mode = "workspace-write"
 notify = [ "tool_execution", "tool_errors", "model_thoughts" ]
+approvals_reviewer = "user"
 
 [features]
 shell_tool = true
@@ -325,6 +326,7 @@ session_picker_view = "dense"
 [tui.model_availability_nux]
 "gpt-5.5" = 4
 "gpt-5.6-sol" = 4
+gpt-6-astra = 4
 
 [plugins."expo@openai-curated"]
 enabled = true

@@ -40,6 +40,7 @@ in
       nr = "sudo nixos-rebuild switch --flake /home/ms/newDot/Dotfiles#MS_NixLaptop";
       nu = "sudo nix flake update";
       "gco-" = "git checkout -";
+      gpf = "git push --force-with-lease --force-if-includes";
     };
 
     functions = {

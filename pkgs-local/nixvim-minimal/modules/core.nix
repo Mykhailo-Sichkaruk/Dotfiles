@@ -52,6 +52,6 @@
       stylua
     ]
     ++ [
-      pkgs-unstable.typescript-go
+      pkgs-unstable.typescript
     ];
 }
