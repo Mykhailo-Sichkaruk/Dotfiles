@@ -16,13 +16,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "Archi";
-  version = "5.9.0";
+  version = "5.10.0";
 
   src =
     {
       "x86_64-linux" = fetchurl {
-        url = "https://github.com/archimatetool/archi.io/releases/download/${finalAttrs.version}/Archi-Linux64-${finalAttrs.version}.tgz";
-        hash = "sha256-0/3/EZw5upB0dvyhS0sfKqp7C4tc6vGDW+O9WU5iTc8=";
+        url = "https://github.com/archimatetool/archi.io/releases/download/5_10_0/Archi-Linux64-${finalAttrs.version}.tgz";
+        hash = "sha256-+UIkVaAKIvU0DcKGks6v4K1yDIzeg56q+w+rHOpXKH8=";
       };
     }
     .${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
@@ -37,6 +37,9 @@ stdenv.mkDerivation (finalAttrs: {
     makeWrapper
     wrapGAppsHook3
   ];
+
+  # JNA bundles a DragonFlyBSD x86_64 library that is not used on Linux.
+  autoPatchelfIgnoreMissingDeps = [ "libc.so.8" ];
 
   installPhase = ''
     runHook preInstall
