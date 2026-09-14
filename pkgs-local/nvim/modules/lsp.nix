@@ -85,6 +85,11 @@
       tsgo = {
         enable = true;
         package = pkgs-unstable.typescript;
+        cmd = [
+          "${pkgs-unstable.typescript}/bin/tsc"
+          "--lsp"
+          "--stdio"
+        ];
         settings.typescript.inlayHints = {
           variableTypes.enabled = false;
           parameterTypes.enabled = false;
