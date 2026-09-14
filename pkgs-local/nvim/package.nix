@@ -15,7 +15,7 @@ let
   };
 in
 pkgs.symlinkJoin {
-  name = "nixvim-minimal";
+  name = "nvim";
   paths = [ nixvimPackage ];
   postBuild = ''
     ln -s nvim "$out/bin/vimdiff"

@@ -10,10 +10,10 @@ let
     inherit pkgs;
   };
 
-  hasNixvim = localPackages != null && localPackages ? nixvimMinimal;
+  hasNvim = localPackages != null && localPackages ? nvim;
 
-  localShellPackages = lib.optionals hasNixvim [
-    localPackages.nixvimMinimal
+  localShellPackages = lib.optionals hasNvim [
+    localPackages.nvim
   ];
 in
 {
@@ -28,7 +28,7 @@ in
   home = {
     stateVersion = "26.05";
     packages = localShellPackages ++ shellPackages;
-    sessionVariables = lib.mkIf hasNixvim {
+    sessionVariables = lib.mkIf hasNvim {
       EDITOR = "nvim";
       VISUAL = "nvim";
     };
