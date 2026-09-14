@@ -35,7 +35,7 @@ rec {
     ];
   };
 
-  nixvimMinimal = import ./nixvim-minimal/package.nix {
+  nvim = import ./nvim/package.nix {
     inherit
       nixvim
       pkgs
