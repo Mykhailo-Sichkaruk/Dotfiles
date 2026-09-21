@@ -49,9 +49,11 @@ in
 
   boot = {
     kernel.sysctl = {
-      "kernel.hung_task_timeout_secs" = 60;
-      "kernel.hung_task_warnings" = 20;
+      "kernel.hung_task_timeout_secs" = 30;
+      "kernel.hung_task_warnings" = 2;
       "kernel.hung_task_all_cpu_backtrace" = 1;
+      "kernel.nmi_watchdog" = 1;
+      "kernel.softlockup_all_cpu_backtrace" = 1;
     };
     extraModulePackages = [ config.boot.kernelPackages.lenovo-legion-module ];
     loader = {
