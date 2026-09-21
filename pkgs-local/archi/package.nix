@@ -21,7 +21,7 @@ stdenv.mkDerivation (finalAttrs: {
   src =
     {
       "x86_64-linux" = fetchurl {
-        url = "https://github.com/archimatetool/archi.io/releases/download/5_10_0/Archi-Linux64-${finalAttrs.version}.tgz";
+        url = "https://github.com/archimatetool/archi.io/releases/download/5.10_0/Archi-Linux64-${finalAttrs.version}.tgz";
         hash = "sha256-+UIkVaAKIvU0DcKGks6v4K1yDIzeg56q+w+rHOpXKH8=";
       };
     }
