@@ -62,6 +62,23 @@
       })
     end)
 
+    pcall(function()
+      local transient = false
+      for _, arg in ipairs(vim.fn.argv()) do
+        if arg:match("COMMIT_EDITMSG$")
+          or arg:match("MERGE_MSG$")
+          or arg:match("git%-rebase%-todo$")
+          or arg:match("TAG_EDITMSG$")
+        then
+          transient = true
+        end
+      end
+
+      if not transient then
+        require("nvim-mcp").setup({})
+      end
+    end)
+
     local cmp = require("cmp")
 
     cmp.setup({

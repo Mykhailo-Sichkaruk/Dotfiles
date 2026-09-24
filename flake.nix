@@ -15,6 +15,10 @@
     nixgl.url = "github:nix-community/nixGL";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    nvim-mcp = {
+      url = "github:linw1995/nvim-mcp";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   nixConfig = {
@@ -38,6 +42,7 @@
       nixpkgs-cuda,
       nixpkgs-unstable,
       nixvim,
+      nvim-mcp,
       nur,
       ...
     }:
@@ -71,6 +76,7 @@
         inherit
           comfyui-nix
           nixvim
+          nvim-mcp
           pkgs
           pkgs-cuda
           pkgs-unstable
