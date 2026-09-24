@@ -1,13 +1,15 @@
-{ pkgs, ... }:
+{ nvimMcpPlugin, pkgs, ... }:
 {
-  extraPlugins = with pkgs.vimPlugins; [
-    git-conflict-nvim
-    hop-nvim
-    nvim-surround
-    octo-nvim
-    outline-nvim
-    todo-comments-nvim
-  ];
+  extraPlugins =
+    (with pkgs.vimPlugins; [
+      git-conflict-nvim
+      hop-nvim
+      nvim-surround
+      octo-nvim
+      outline-nvim
+      todo-comments-nvim
+    ])
+    ++ [ nvimMcpPlugin ];
 
   plugins = {
     cmp = {

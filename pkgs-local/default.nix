@@ -1,6 +1,7 @@
 {
   comfyui-nix,
   nixvim,
+  nvim-mcp,
   pkgs,
   pkgs-cuda,
   pkgs-unstable,
@@ -38,6 +39,7 @@ rec {
   nvim = import ./nvim/package.nix {
     inherit
       nixvim
+      nvim-mcp
       pkgs
       pkgs-unstable
       system
