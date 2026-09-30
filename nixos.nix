@@ -372,12 +372,12 @@ in
     };
 
     prime = {
-      sync.enable = true;
+      sync.enable = false;
       reverseSync.enable = false;
       allowExternalGpu = true;
       offload = {
-        enable = false;
-        enableOffloadCmd = false;
+        enable = true;
+        enableOffloadCmd = true;
       };
 
       amdgpuBusId = "PCI:5:0:0";

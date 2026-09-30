@@ -2,8 +2,6 @@
 with pkgs;
 [
   render-cli
-  gnumake
-  python314Packages.huggingface-hub
   rsync
   stow
   ncdu
@@ -33,9 +31,4 @@ with pkgs;
   unzip
   nix-ld
   nodejs_26
-  # lazydocker
-  # lazygit
-  yarn
-  # esbuild
-  vitejs
 ]

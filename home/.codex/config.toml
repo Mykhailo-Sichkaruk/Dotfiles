@@ -20,39 +20,47 @@ terminal_resize_reflow = true
 memories = true
 prevent_idle_sleep = true
 mentions_v2 = true
+analytics_plan_history = true
 
-[mcp_servers.comfyui]
-enabled = false
-command = "/home/ms/.nix-profile/bin/npx"
-args = ["-y", "comfyui-mcp@0.43.1"]
+[mcp_server.nvim-mcp] 
+enabled = true
+command = "nvim-mcp"
+args = ["--connect", "auto"]
 startup_timeout_sec = 60
 tool_timeout_sec = 1800
+
+[mcp_servers.comfyui]
+command = "/home/ms/.nix-profile/bin/npx"
+args = ["-y", "comfyui-mcp@0.43.1"]
+enabled = false
+startup_timeout_sec = 60.0
+tool_timeout_sec = 1800.0
 default_tools_approval_mode = "writes"
 
 [mcp_servers.comfyui.env]
-COMFYUI_URL = "http://127.0.0.1:8188"
 COMFYUI_PATH = "/home/ms/AI/comfyui"
+COMFYUI_URL = "http://127.0.0.1:8188"
 
 [mcp_servers.drawio]
-enabled = false
 command = "npx"
 args = ["-y", "@drawio/mcp"]
+enabled = false
 
 [mcp_servers.anki-mcp]
-enabled = false
 command = "npx"
 args = ["-y", "@ankimcp/anki-mcp-server", "--stdio"]
+enabled = false
 startup_timeout_sec = 80.0
 
 [mcp_servers.anki-mcp.env]
 ANKI_CONNECT_URL = "http://localhost:8765"
 
-[mcp_servers.anki-mcp.tools]
-
 [mcp_servers.anki-mcp.tools.sync]
 approval_mode = "approve"
 
-[mcp_servers.archi.tools]
+[mcp_servers.archi]
+url = "http://127.0.0.1:8766/mcp"
+enabled = false
 
 [mcp_servers.archi.tools.folders]
 approval_mode = "approve"
@@ -70,18 +78,13 @@ approval_mode = "approve"
 approval_mode = "approve"
 
 [mcp_servers.archi.tools.status]
-
 approval_mode = "approve"
-[mcp_servers.archi]
-enabled = true
-url = "http://127.0.0.1:8766/mcp"
 
 [mcp_servers.chrome-devtools]
 command = "/home/ms/.nix-profile/bin/npx"
 args = ["-y", "chrome-devtools-mcp@latest", "--autoConnect"]
 
 [mcp_servers.dbeaver]
-enabled = true
 command = "npx"
 args = ["-y", "dbeaver-mcp-server@latest"]
 
@@ -91,14 +94,14 @@ DBEAVER_READ_ONLY = "true"
 DBEAVER_TIMEOUT = "100"
 
 [mcp_servers.duckduckgoSearch]
-enabled = false
 command = "uvx"
 args = ["duckduckgo-mcp-server"]
+enabled = false
 
 [mcp_servers.elasticsearch]
-enabled = false
 command = "uvx"
 args = ["elasticsearch-mcp-server"]
+enabled = false
 
 [mcp_servers.elasticsearch.env]
 ELASTICSEARCH_HOSTS = "https://localhost:9200"
@@ -106,45 +109,40 @@ ELASTICSEARCH_PASSWORD = "password"
 ELASTICSEARCH_USERNAME = "elastic"
 
 [mcp_servers.github]
-enabled = true
 url = "https://api.githubcopilot.com/mcp/"
 bearer_token_env_var = "GITHUB_PAT_TOKEN"
 
 [mcp_servers.lsp]
-enabled = true
 command = "mcp-language-server"
 args = ["--workspace", ".", "--lsp", "typescript-language-server", "--", "--stdio"]
+enabled = false
 startup_timeout_sec = 80.0
 tool_timeout_sec = 1800.0
 
 [mcp_servers.nixos]
-enabled = true
 command = "nix"
 args = ["run", "github:utensils/mcp-nixos", "--"]
 startup_timeout_sec = 120.0
-
-[mcp_servers.nixos.tools]
 
 [mcp_servers.nixos.tools.nix]
 approval_mode = "approve"
 
 [mcp_servers.nvim]
-enabled = false
-command = "nix"
-args = ["run", "github:utensils/mcp-nvim", "--"]
+command = "/home/ms/.nix-profile/bin/nvim-mcp"
+args = ["--connect", "auto"]
 
 [mcp_servers.obsidian]
-enabled = false
 command = "npx"
 args = ["-y", "@mauricio.wolff/mcp-obsidian@latest", "/home/ms/Zettelkasten/"]
+enabled = false
 
 [mcp_servers.obsidian.tools.get_vault_stats]
 approval_mode = "approve"
 
-[mcp_servers.obsidian.tools.read_multiple_notes]
+[mcp_servers.obsidian.tools.list_directory]
 approval_mode = "approve"
 
-[mcp_servers.obsidian.tools.list_directory]
+[mcp_servers.obsidian.tools.read_multiple_notes]
 approval_mode = "approve"
 
 [mcp_servers.openaiDeveloperDocs]
@@ -154,7 +152,6 @@ url = "https://developers.openai.com/mcp"
 approval_mode = "approve"
 
 [mcp_servers.playwright]
-enabled = true
 command = "npx"
 args = ["@playwright/mcp@latest"]
 
@@ -163,36 +160,43 @@ PLAYWRIGHT_MCP_EXECUTABLE_PATH = "/home/ms/.nix-profile/bin/google-chrome-stable
 PLAYWRIGHT_MCP_EXTENSION_TOKEN = "bI1lSd3m_MlDC4JrUStXzyNYTWjU27u6exdFBTUCMqA"
 
 [mcp_servers.postgres]
-enabled = false
 command = "docker"
 args = ["run", "-i", "--network=host", "--rm", "-e", "DATABASE_URI", "crystaldba/postgres-mcp", "--access-mode=unrestricted"]
+enabled = false
 startup_timeout_sec = 80.0
 
 [mcp_servers.postgres.env]
 DATABASE_URI = "postgresql://ms:password@127.0.0.1:5433/postgis"
 
 [mcp_servers.prisma]
-enabled = false
 command = "prisma"
 args = ["mcp"]
+enabled = false
 
 [mcp_servers.sentry]
-enabled = false
 url = "https://mcp.sentry.dev/mcp"
+enabled = false
 
 [mcp_servers.shadcn]
-enabled = false
 command = "npx"
 args = ["@jpisnice/shadcn-ui-mcp-server"]
+enabled = false
 
 [mcp_servers.storybook-mcp]
-enabled = true
 url = "http://localhost:6006/mcp"
+enabled = false
 
 [mcp_servers.tauri-mcp-server]
-enabled = false
 command = "npx"
 args = ["@hypothesi/tauri-mcp-server"]
+enabled = false
+
+[mcp_servers.render]
+url = "https://mcp.render.com/mcp"
+
+[mcp_servers.render.oauth]
+client_id = "codex"
+callback_url = "http://127.0.0.1/callback/LdY6BDj4kW-U"
 
 [projects."/home/ms/workspace/diploma/vyskumny-zamer"]
 trust_level = "untrusted"
@@ -311,6 +315,12 @@ trust_level = "trusted"
 [projects."/home/ms/workspace/unit/clinic-control-dashboard/local"]
 trust_level = "trusted"
 
+[projects."/home/ms/workspace/school/zkgra"]
+trust_level = "trusted"
+
+[projects."/home/ms/workspace/school/smvit"]
+trust_level = "trusted"
+
 [notice]
 fast_default_opt_out = true
 
@@ -322,6 +332,8 @@ fast_default_opt_out = true
 status_line = ["model-with-reasoning", "context-remaining", "project-root", "git-branch", "five-hour-limit", "weekly-limit", "context-window-size", "used-tokens", "thread-title"]
 vim_mode_default = true
 session_picker_view = "dense"
+screen_reader_detection_done = true
+fullscreen_transcript = false
 
 [tui.model_availability_nux]
 "gpt-5.5" = 4

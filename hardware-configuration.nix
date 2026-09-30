@@ -31,10 +31,12 @@
     "net.ipv4.tcp_mtu_probing" = 1;
     "vm.page-cluster" = 0;
     "vm.watermark_scale_factor" = 125;
+    "kernel.sysrq" = 1;
   };
 
   boot.kernelParams = [
     "amd_pstate=active"
+    "log_buf_len=16M"
     "transparent_hugepage=madvise"
   ];
   boot.blacklistedKernelModules = [

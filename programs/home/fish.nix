@@ -41,6 +41,7 @@ in
       nu = "sudo nix flake update";
       "gco-" = "git checkout -";
       gpf = "git push --force-with-lease --force-if-includes";
+      yci = "yarn install --frozen-lockfile --force";
     };
 
     functions = {

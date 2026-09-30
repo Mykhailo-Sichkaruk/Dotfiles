@@ -63,7 +63,7 @@ in
   ];
 
   my.apps = {
-    archi.enable = true;
+    archi.enable = false;
     comfyui.enable = false;
     pear = {
       enable = true;
@@ -85,14 +85,14 @@ in
     ]
     ++ (with pkgs; [
       # calibre
-      vscode
+      # vscode
       playerctl
       obsidian
       yt-dlp
-      neomutt
+      # neomutt
       pulsemixer
       pipewire
-      # drawio
+      drawio
       vimivWithModernFormats
       pkgs.nur.repos."vieb-nix".vieb
       peekWithoutFfmpegPipeDeadlock
@@ -128,6 +128,12 @@ in
   xsession.numlock.enable = true;
 
   programs = {
+    codex = {
+      enable = true;
+      package = pkgs-unstable.codex;
+      enableMcpIntegration = true;
+    };
+    yarn.enable = true;
     anki = {
       enable = true;
       addons = [
