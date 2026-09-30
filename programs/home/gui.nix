@@ -7,7 +7,7 @@
     enable = true;
     extraConfig = ''
       # brightness control
-      # XF86MonBrightness{Up,Down}
+      XF86MonBrightness{Up,Down}
         ${pkgs.brightnessctl}/bin/brightnessctl set {10%+, 10%-}
 
       # volume control

@@ -1,5 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "attribution": {
+    "sessionUrl": false
+  },
   "permissions": {
     "allow": [
       "mcp__figma__whoami",
@@ -45,9 +48,6 @@
     "defaultMode": "plan"
   },
   "model": "opus[1m]",
-  "attribution": {
-    "sessionUrl": false
-  },
   "statusLine": {
     "type": "command",
     "command": "~/.local/bin/starship-claude",
@@ -89,6 +89,11 @@
   "verbose": false,
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": false,
+  "agentPushNotifEnabled": true,
   "voiceEnabled": true,
-  "agentPushNotifEnabled": true
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  }
 }
