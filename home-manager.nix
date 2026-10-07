@@ -48,6 +48,7 @@ in
 {
   imports = [
     ./home-portable.nix
+    ./programs/home/claude.nix
     ./programs/home/gui.nix
     ./programs/home/gtk.nix
     ./programs/home/newsboat.nix
@@ -80,7 +81,7 @@ in
     homeDirectory = "/home/ms";
     packages = [
       pkgs-unstable.claude-code
-      pkgs-unstable.codex
+      # pkgs-unstable.codex
       pkgs-unstable.pipx
     ]
     ++ (with pkgs; [
@@ -128,6 +129,7 @@ in
   xsession.numlock.enable = true;
 
   programs = {
+
     codex = {
       enable = true;
       package = pkgs-unstable.codex;

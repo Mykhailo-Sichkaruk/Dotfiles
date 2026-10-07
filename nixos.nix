@@ -86,6 +86,11 @@ in
       allowAuxiliaryImperativeNetworks = true;
       secretsFile = "/etc/wpa_supplicant-secrets.conf";
       networks = {
+        DL4i = {
+          # authProtocols = [ "WPA3-Personal" ];
+          pskRaw = "ext:psk_dl4i";
+          priority = 10;
+        };
         eduroam = {
           authProtocols = [ "WPA-EAP" ];
           auth = ''
@@ -183,6 +188,12 @@ in
   console.useXkbConfig = true;
 
   services = {
+    sunshine = {
+      enable = false;
+      autoStart = true;
+      openFirewall = true;
+      settings.port = 47989;
+    };
     autorandr =
       let
         laptopEdid = "00ffffffffffff0030ae5990000000001f1f0104a52213780754a5a7544c9b260f50540000000101010101010101010101010101010147798018713860403020360058c21000001a000000000000000000000000000000000000000000fd003ca5c1c128010a202020202020000000fe004c454e313536464844202020200056";
