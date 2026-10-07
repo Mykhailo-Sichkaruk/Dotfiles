@@ -64,20 +64,21 @@
     "code-review@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/home/ms/.claude/plugins/cache/claude-plugins-official/code-review/2a8ad9f74633",
-        "version": "2a8ad9f74633",
+        "installPath": "/home/ms/.claude-uniit/plugins/cache/claude-plugins-official/code-review/d4226d062928",
+        "version": "d4226d062928",
         "installedAt": "2026-05-11T08:02:52.843Z",
-        "lastUpdated": "2026-09-30T14:39:10.127Z",
-        "gitCommitSha": "2a8ad9f74633d10e3d9bb0660a03bfc6e50584b1"
+        "lastUpdated": "2026-10-06T11:09:59.695Z",
+        "gitCommitSha": "d4226d062928f8d9505dbdeadd10217d23361052"
       }
     ],
     "security-guidance@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/home/ms/.claude/plugins/cache/claude-plugins-official/security-guidance/2.0.8",
-        "version": "2.0.8",
+        "installPath": "/home/ms/.claude-uniit/plugins/cache/claude-plugins-official/security-guidance/2.0.10",
+        "version": "2.0.10",
         "installedAt": "2026-05-11T08:02:52.889Z",
-        "lastUpdated": "2026-09-10T08:54:48.853Z"
+        "lastUpdated": "2026-10-06T11:09:59.686Z",
+        "gitCommitSha": "d4226d062928f8d9505dbdeadd10217d23361052"
       }
     ],
     "agent-skills@addy-agent-skills": [
