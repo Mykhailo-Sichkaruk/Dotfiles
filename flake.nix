@@ -4,7 +4,6 @@
   inputs = {
     comfyui-nix.url = "github:utensils/comfyui-nix";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
-    nixpkgs-cuda.url = "github:nixos/nixpkgs/nixos-26.05-small";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nur.url = "github:nix-community/NUR";
     nixvim.url = "github:nix-community/nixvim/nixos-26.05";
@@ -39,7 +38,6 @@
       nix-index-database,
       nixgl,
       nixpkgs,
-      nixpkgs-cuda,
       nixpkgs-unstable,
       nixvim,
       nvim-mcp,
@@ -63,14 +61,6 @@
         config.allowUnfree = true;
       };
 
-      pkgs-cuda = import nixpkgs-cuda {
-        inherit system;
-        config = {
-          allowUnfree = true;
-          cudaSupport = true;
-          cudaCapabilities = [ "8.6" ];
-        };
-      };
 
       localPackages = import ./pkgs-local {
         inherit
@@ -78,7 +68,6 @@
           nixvim
           nvim-mcp
           pkgs
-          pkgs-cuda
           pkgs-unstable
           system
           ;

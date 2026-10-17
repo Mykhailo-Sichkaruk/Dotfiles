@@ -3,7 +3,6 @@
   nixvim,
   nvim-mcp,
   pkgs,
-  pkgs-cuda,
   pkgs-unstable,
   system,
 }:
